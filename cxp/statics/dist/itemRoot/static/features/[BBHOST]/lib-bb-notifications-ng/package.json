@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-notifications-ng@1.0.55",
+        "scope": null,
+        "escapedName": "lib-bb-notifications-ng",
+        "name": "lib-bb-notifications-ng",
+        "rawSpec": "1.0.55",
+        "spec": "1.0.55",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-notifications-ng@1.0.55",
+  "_id": "lib-bb-notifications-ng@1.0.55",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-notifications-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-notifications-ng@1.0.55",
+    "scope": null,
+    "escapedName": "lib-bb-notifications-ng",
+    "name": "lib-bb-notifications-ng",
+    "rawSpec": "1.0.55",
+    "spec": "1.0.55",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-extension-events-ng",
+    "/lib-bb-extension-helpers-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-notifications-ng/-/lib-bb-notifications-ng-1.0.55.tgz",
+  "_shasum": "3cf87c6caddf73948a324eaf96109d3341eeac4b",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-notifications-ng@1.0.55",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-notifications-ng/-/lib-bb-notifications-ng-1.0.55.tgz",
+    "shasum": "3cf87c6caddf73948a324eaf96109d3341eeac4b"
+  },
+  "main": "scripts/lib-bb-notifications-ng.js",
+  "name": "lib-bb-notifications-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.55"
+}

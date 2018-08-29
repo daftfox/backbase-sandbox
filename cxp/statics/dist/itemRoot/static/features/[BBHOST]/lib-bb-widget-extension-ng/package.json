@@ -1,0 +1,57 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-widget-extension-ng@1.1.51",
+        "scope": null,
+        "escapedName": "lib-bb-widget-extension-ng",
+        "name": "lib-bb-widget-extension-ng",
+        "rawSpec": "1.1.51",
+        "spec": "1.1.51",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-widget-extension-ng@1.1.51",
+  "_id": "lib-bb-widget-extension-ng@1.1.51",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-widget-extension-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-widget-extension-ng@1.1.51",
+    "scope": null,
+    "escapedName": "lib-bb-widget-extension-ng",
+    "name": "lib-bb-widget-extension-ng",
+    "rawSpec": "1.1.51",
+    "spec": "1.1.51",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-extension-events-ng",
+    "/lib-bb-extension-helpers-ng",
+    "/lib-bb-extension-intents-ng",
+    "/lib-bb-start-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-widget-extension-ng/-/lib-bb-widget-extension-ng-1.1.51.tgz",
+  "_shasum": "c334f0258219f68808c70776b89dd4e1223ff417",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-widget-extension-ng@1.1.51",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-widget-extension-ng/-/lib-bb-widget-extension-ng-1.1.51.tgz",
+    "shasum": "c334f0258219f68808c70776b89dd4e1223ff417"
+  },
+  "main": "scripts/lib-bb-widget-extension-ng.js",
+  "name": "lib-bb-widget-extension-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.51"
+}

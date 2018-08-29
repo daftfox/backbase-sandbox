@@ -1,0 +1,58 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "model-bb-payment-orders-ng@^1.119.20",
+        "scope": null,
+        "escapedName": "model-bb-payment-orders-ng",
+        "name": "model-bb-payment-orders-ng",
+        "rawSpec": "^1.119.20",
+        "spec": ">=1.119.20 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-initiate-payment-ng"
+    ]
+  ],
+  "_from": "model-bb-payment-orders-ng@>=1.119.20 <2.0.0",
+  "_id": "model-bb-payment-orders-ng@1.120.9",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/model-bb-payment-orders-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "model-bb-payment-orders-ng@^1.119.20",
+    "scope": null,
+    "escapedName": "model-bb-payment-orders-ng",
+    "name": "model-bb-payment-orders-ng",
+    "rawSpec": "^1.119.20",
+    "spec": ">=1.119.20 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-initiate-payment-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-payment-orders-ng/-/model-bb-payment-orders-ng-1.120.9.tgz",
+  "_shasum": "f95a15fcd8b8eb5e8a7e714c00e2edc90d68a5e1",
+  "_shrinkwrap": null,
+  "_spec": "model-bb-payment-orders-ng@^1.119.20",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-initiate-payment-ng",
+  "dependencies": {
+    "data-bb-contact-http-ng": "^1.8.0",
+    "data-bb-payment-orders-http-ng": "^1.6.3",
+    "data-bb-product-summary-http-ng": "^1.6.3",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-storage-ng": "^1.0.98",
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-payment-orders-ng/-/model-bb-payment-orders-ng-1.120.9.tgz",
+    "shasum": "f95a15fcd8b8eb5e8a7e714c00e2edc90d68a5e1"
+  },
+  "main": "scripts/model-bb-payment-orders-ng.js",
+  "name": "model-bb-payment-orders-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.120.9"
+}

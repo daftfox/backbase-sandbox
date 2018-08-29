@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-fx-navigation-back-ng@^1.5.0",
+        "scope": null,
+        "escapedName": "ext-fx-navigation-back-ng",
+        "name": "ext-fx-navigation-back-ng",
+        "rawSpec": "^1.5.0",
+        "spec": ">=1.5.0 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-fx-navigation-back-ng"
+    ]
+  ],
+  "_from": "ext-fx-navigation-back-ng@>=1.5.0 <2.0.0",
+  "_id": "ext-fx-navigation-back-ng@1.5.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-fx-navigation-back-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-fx-navigation-back-ng@^1.5.0",
+    "scope": null,
+    "escapedName": "ext-fx-navigation-back-ng",
+    "name": "ext-fx-navigation-back-ng",
+    "rawSpec": "^1.5.0",
+    "spec": ">=1.5.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-fx-navigation-back-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-fx-navigation-back-ng/-/ext-fx-navigation-back-ng-1.5.0.tgz",
+  "_shasum": "019f28f4f7cebda0c11c079ab03031b4342f08d8",
+  "_shrinkwrap": null,
+  "_spec": "ext-fx-navigation-back-ng@^1.5.0",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-fx-navigation-back-ng",
+  "dependencies": {
+    "ui-bb-i18n-ng": "^1.0.34",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-fx-navigation-back-ng/-/ext-fx-navigation-back-ng-1.5.0.tgz",
+    "shasum": "019f28f4f7cebda0c11c079ab03031b4342f08d8"
+  },
+  "main": "scripts/ext-fx-navigation-back-ng.js",
+  "name": "ext-fx-navigation-back-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.5.0"
+}

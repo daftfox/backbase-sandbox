@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "mock.data-bb-payment-orders-http-ng@~1.6.3",
+        "scope": null,
+        "escapedName": "mock.data-bb-payment-orders-http-ng",
+        "name": "mock.data-bb-payment-orders-http-ng",
+        "rawSpec": "~1.6.3",
+        "spec": ">=1.6.3 <1.7.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-mocks-release/workspace/dist"
+    ]
+  ],
+  "_from": "mock.data-bb-payment-orders-http-ng@>=1.6.3 <1.7.0",
+  "_id": "mock.data-bb-payment-orders-http-ng@1.6.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/mock.data-bb-payment-orders-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "mock.data-bb-payment-orders-http-ng@~1.6.3",
+    "scope": null,
+    "escapedName": "mock.data-bb-payment-orders-http-ng",
+    "name": "mock.data-bb-payment-orders-http-ng",
+    "rawSpec": "~1.6.3",
+    "spec": ">=1.6.3 <1.7.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/mock.data-bb-payment-orders-http-ng/-/mock.data-bb-payment-orders-http-ng-1.6.3.tgz",
+  "_shasum": "fd579a64e5352f962c2982d186be8c663e923125",
+  "_shrinkwrap": null,
+  "_spec": "mock.data-bb-payment-orders-http-ng@~1.6.3",
+  "_where": "/opt/jobs/collection-retail-banking-mocks-release/workspace/dist",
+  "dependencies": {
+    "lib-bb-storage-ng": "^1.0.98",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/mock.data-bb-payment-orders-http-ng/-/mock.data-bb-payment-orders-http-ng-1.6.3.tgz",
+    "shasum": "fd579a64e5352f962c2982d186be8c663e923125"
+  },
+  "main": "scripts/mock.data-bb-payment-orders-http-ng.js",
+  "name": "mock.data-bb-payment-orders-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.6.3"
+}

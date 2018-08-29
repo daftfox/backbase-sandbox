@@ -1,0 +1,67 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "container-lightbox@~3.0.1",
+        "scope": null,
+        "escapedName": "container-lightbox",
+        "name": "container-lightbox",
+        "rawSpec": "~3.0.1",
+        "spec": ">=3.0.1 <3.1.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist"
+    ]
+  ],
+  "_from": "container-lightbox@>=3.0.1 <3.1.0",
+  "_id": "container-lightbox@3.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-lightbox",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "container-lightbox@~3.0.1",
+    "scope": null,
+    "escapedName": "container-lightbox",
+    "name": "container-lightbox",
+    "rawSpec": "~3.0.1",
+    "spec": ">=3.0.1 <3.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/container-lightbox/-/container-lightbox-3.0.1.tgz",
+  "_shasum": "84bb895ca48fa520607eb8135c6e354ab5fb4715",
+  "_shrinkwrap": null,
+  "_spec": "container-lightbox@~3.0.1",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist",
+  "author": "",
+  "dependencies": {
+    "template-lightbox": "^3.0.0"
+  },
+  "description": "Container that lays over the page and dims the background. Used to guide the user into a sub-flow without leaving the page.",
+  "devDependencies": {},
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/container-lightbox/-/container-lightbox-3.0.1.tgz",
+    "shasum": "84bb895ca48fa520607eb8135c6e354ab5fb4715"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "container-lightbox",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/container-lightbox.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "3.0.1"
+}

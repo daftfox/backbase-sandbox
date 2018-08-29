@@ -1,0 +1,134 @@
+<div class="ext-bb-billpay-pending-payments-ng">
+  <ui-bb-substitute-error-ng data-message="ext.helpers.getLoadingErrorMessageKey(state) | i18n">
+    <h2 data-i18n-key="label.title"></h2>
+    <ng-include src="ext.helpers.template"></ng-include>
+  </ui-bb-substitute-error-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pending-payments-ng/table.ng.html" >
+  <div data-ng-controller="BillpayViewPaymentsController as $ctrl">
+    <div class="notifications">
+      <ui-bb-notification-stripe-ng
+        data-ng-if="state.showSuccessMessage"
+        data-message="{{'notifications.changes-saved' | i18n}}"
+        data-on-close="state.showSuccessMessage = false"
+        data-type="bg-success"
+        data-icon-classes="fa fa-check-circle text-right"
+        data-timeout-second="5"
+        data-role="billpay-pending-payments-success-notification">
+      </ui-bb-notification-stripe-ng>
+    </div>
+
+    <ui-bb-modal-ng
+      data-is-open="$ctrl.isDeleteDialogOpen"
+      data-animation="true"
+      data-backdrop="'static'"
+      data-keyboard="true">
+
+      <div class="modal-header text-center">
+        <h3 class="modal-title" data-i18n-key="delete-dialog.button.heading"></h3>
+      </div>
+
+      <div class="modal-body text-center break-word" data-i18n-key="delete-dialog.button.bodyText"></div>
+
+      <div class="modal-footer" data-ng-class="$ctrl.footerClass">
+        <button type="button"
+          class="btn btn-secondary"
+          data-i18n-key="delete-dialog.button.cancel"
+          data-ng-click="$ctrl.isDeleteDialogOpen = false"
+          data-role="billpay-pending-payments-delete-modal-cancel-button">
+        </button>
+        <button type="button"
+          class="btn btn-danger"
+          data-ng-click="$ctrl.deletePayment()"
+          data-role="billpay-pending-payments-delete-modal-delete-button">
+          <i class="fa fa-spinner fa-spin" data-ng-if="state.isRemovingPayment"></i>
+            {{ ::'delete-dialog.button.confirm' | i18n }}
+        </button>
+      </div>
+    </ui-bb-modal-ng>
+
+    <ui-bb-loading-overlay-ng data-is-loading="state.isLoadingPayments">
+      <div class="card">
+        <div class="table-responsive-md">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th data-i18n-key="{{ label }}" data-ng-repeat="label in ext.helpers.paymentsTableHeader track by $index"></th>
+                <th><!-- Extra th for the editing column --></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="payment in state.payments | orderBy:'paymentDate' track by payment.id"
+                data-role="billpay-pending-payments-payments">
+                <td data-ng-bind="payment.paymentDate | date"
+                  data-label="{{ ext.helpers.paymentsTableHeader[0] | i18n }}"
+                  data-role="billpay-pending-payments-payment-date"></td>
+                <td data-label="{{ ext.helpers.paymentsTableHeader[1] | i18n }}" data-role="billpay-pending-payments-payment-amount">
+                  <ui-bb-format-amount-ng
+                    data-wrap
+                    data-amount="payment.paymentAmount"
+                    data-currency="ext.helpers.getCurrencyCode()"
+                    class="amount-regular-color">
+                  </ui-bb-format-amount-ng>
+                </td>
+                <td data-label="{{ ext.helpers.paymentsTableHeader[2] | i18n }}" data-role="billpay-pending-payments-payment-type">
+                  <span><i data-ng-class="ext.helpers.recurringClass(payment)" aria-hidden="true"></i> {{ payment.paymentType | i18n }}<span>
+                </td>
+                <td data-label="{{ ext.helpers.paymentsTableHeader[3] | i18n }}" data-role="billpay-pending-payments-payment-details">
+                  <div class="float-left">
+                    <span data-role="billpay-pending-payments-payment-details-payee-name">{{ payment.paymentDetails.payee }}</span>
+                    <br />
+                    {{ 'payment.payment-details.from' | i18n }}
+                    <span data-role="billpay-pending-payments-payment-details-payment-account">
+                      {{ payment.paymentDetails.paymentAccount }}
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  <div class="float-right" uib-dropdown data-role="billpay-pending-payments-dropdown-button">
+                    <button type="button" class="btn btn-secondary" uib-dropdown-toggle aria-label="{{ 'table.aria-label.menu' | i18n }}">
+                      <i class="fa fa-ellipsis-v"></i>
+                    </button>
+                    <div uib-dropdown-menu class="dropdown-menu dropdown-menu-small dropdown-menu-right" role="menu">
+                      <button role="menuitem"
+                        type="button"
+                        class="dropdown-item"
+                        data-i18n-key="table.link.edit"
+                        data-ng-click="ext.helpers.editPayment(intents, payment)"
+                        data-ng-class="{'disabled': ext.helpers.isEditPaymentDisabled(payment)}"
+                        data-uib-tooltip="{{ext.helpers.editPaymentTooltip(payment) | i18n}}"
+                        data-tooltip-enable="ext.helpers.isEditPaymentDisabled(payment)"
+                        data-tooltip-append-to-body="true"
+                        data-tooltip-placement="left"
+                        data-tooltip-trigger="mouseenter focus"
+                        data-role="billpay-pending-payments-dropdown-edit-button">
+                      </button>
+                      <button
+                        type="button"
+                        role="menuitem"
+                        class="dropdown-item"
+                        data-ng-class="{'disabled': ext.helpers.isDeletePaymentDisabled(payment)}"
+                        data-i18n-key="table.link.delete"
+                        data-ng-click="ext.helpers.deletePayment($ctrl, payment)"
+                        data-uib-tooltip="{{ext.helpers.deletePaymentTooltip(payment) | i18n}}"
+                        data-tooltip-enable="ext.helpers.isDeletePaymentDisabled(payment)"
+                        data-tooltip-append-to-body="true"
+                        data-tooltip-placement="left"
+                        data-tooltip-trigger="mouseenter focus"
+                        data-role="billpay-pending-payments-dropdown-delete-button">
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Fix to stop the dropdown menu creating scrolling issues with the table-responsive-md table -->
+                  <div data-ng-if="$index === state.payments.length - 1"
+                    class="mt-5 py-4 mt-md-0 py-md-0"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ui-bb-loading-overlay-ng>
+  </div>
+</script>

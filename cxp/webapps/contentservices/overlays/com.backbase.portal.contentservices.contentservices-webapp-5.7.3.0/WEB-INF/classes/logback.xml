@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <conversionRule conversionWord="smsg"
+                    converterClass="com.backbase.portal.commons.api.logging.SecureMessageConverter"/>
+    <conversionRule conversionWord="smdc"
+                    converterClass="com.backbase.portal.commons.api.logging.SecureMDCConverter"/>
+
+    <jmxConfigurator/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %smsg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- asynch Appender -->
+    <appender name="ASYNCHSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="STDOUT" />
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <logger name="com.backbase.portal.contentservices.importexport" level="INFO"/>
+    <logger name="com.backbase.portal.contentservices.versioning" level="INFO"/>
+    <logger name="com.backbase.portal.contentservices.repository.service" level="INFO"/>
+    <logger name="com.backbase.portal.contentservices.bootstrap.ModelDescriptorBootstrap" level="INFO"/>
+    <logger name="com.backbase.portal.contentservices.repository.dao.hibernate.impl" level="INFO" />
+            
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.scheduling.quartz" level="ERROR"/>
+    <logger name="com.mchange.v2" level="ERROR"/>
+    <logger name="httpclient.wire.header" level="OFF"/>
+    <logger name="httpclient.wire.content" level="OFF"/>
+
+
+    <root level="info">
+        <appender-ref ref="ASYNCHSTDOUT"/>
+    </root>
+    
+    <!-- Include the following section and comment out the root element above to enable before and after logging
+         of CMIS Service invocations to a separate file. Ensure the file location is set appropriately. -->
+	<!--
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>target/CmisServerInvocations.trace.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <logger name="com.backbase.portal.contentservices.repository.protocol.cmis.impl.LoggingCmisServiceWrapper" 
+            level="DEBUG"/>
+    <logger name="com.backbase.portal.contentservices.structuredcontent.stream.impl.StructuredContentStreamBuilderImpl"
+            level="DEBUG"/>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+    -->
+</configuration>

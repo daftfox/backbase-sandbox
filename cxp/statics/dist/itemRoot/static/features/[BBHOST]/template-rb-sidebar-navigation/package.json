@@ -1,0 +1,71 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "template-rb-sidebar-navigation@~2.1.0",
+        "scope": null,
+        "escapedName": "template-rb-sidebar-navigation",
+        "name": "template-rb-sidebar-navigation",
+        "rawSpec": "~2.1.0",
+        "spec": ">=2.1.0 <2.2.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-demo-release/workspace/dist"
+    ]
+  ],
+  "_from": "template-rb-sidebar-navigation@>=2.1.0 <2.2.0",
+  "_id": "template-rb-sidebar-navigation@2.1.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/template-rb-sidebar-navigation",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "template-rb-sidebar-navigation@~2.1.0",
+    "scope": null,
+    "escapedName": "template-rb-sidebar-navigation",
+    "name": "template-rb-sidebar-navigation",
+    "rawSpec": "~2.1.0",
+    "spec": ">=2.1.0 <2.2.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/template-rb-sidebar-navigation/-/template-rb-sidebar-navigation-2.1.0.tgz",
+  "_shasum": "42c7e9cc879b6c2abd97b74a16305cfe86f50efe",
+  "_shrinkwrap": null,
+  "_spec": "template-rb-sidebar-navigation@~2.1.0",
+  "_where": "/opt/jobs/collection-retail-banking-demo-release/workspace/dist",
+  "author": {
+    "name": "Ilya Mikhailov",
+    "url": "ilya@backbase.com"
+  },
+  "dependencies": {},
+  "description": "CX5.6 Navigation Widget template",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/template-rb-sidebar-navigation/-/template-rb-sidebar-navigation-2.1.0.tgz",
+    "shasum": "42c7e9cc879b6c2abd97b74a16305cfe86f50efe"
+  },
+  "keywords": [
+    "template",
+    "retail",
+    "banking",
+    "navigation",
+    "demo"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "template-rb-sidebar-navigation",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/rb/rb-demo-page-template.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.1.0"
+}

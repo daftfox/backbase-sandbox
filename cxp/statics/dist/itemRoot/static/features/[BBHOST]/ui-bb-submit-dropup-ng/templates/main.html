@@ -1,0 +1,38 @@
+<div class="btn-dropup-group navbar-expand {{ $ctrl.cssClasses }}">
+  <div class="btn-group col-12 p-0 dropup" data-uib-dropdown>
+    <button
+      data-ng-repeat="button in $ctrl.submitButtonTypes"
+      data-ng-if="button.selected"
+      type="button"
+      class="btn btn-primary btn-dropup-main col-12"
+      data-ui-bb-add-spinner-ng
+      data-spinner-loading="$ctrl.config.spinnerLoading"
+      data-spinner-position="{{ $ctrl.config.spinnerPosition }}"
+      data-spinner-classes="{{ $ctrl.config.spinnerClasses }}"
+      data-spinner-placeholder="{{ $ctrl.config.spinnerPlaceholder }}"
+      data-ng-click="$ctrl.onSelect({ button }); $ctrl.submitClicked = true;"
+      data-role="ext-bus-initiate-payment-ng-review-submit-button">
+      {{ button.text }}
+    </button>
+    <button
+      type="button"
+      data-uib-tooltip="{{ $ctrl.tooltipMessage }}"
+      data-tooltip-is-open="!$ctrl.submitClicked"
+      data-tooltip-placement="top-right"
+      data-tooltip-popup-delay="50"
+      data-tooltip-trigger="mouseenter click"
+      data-tooltip-append-to-body="true"
+      class="btn btn-primary btn-dropup-menu-button text-center"
+      data-uib-dropdown-toggle>
+    </button>
+    <ul class="dropdown-menu col-12" data-uib-dropdown-menu>
+      <li
+        class="dropdown-item p-2"
+        data-ng-class="{'active': type.selected}"
+        data-ng-click="$ctrl.submitButtonTypeSelect(type.id)"
+        data-ng-repeat="type in $ctrl.submitButtonTypes">
+        <div>{{ type.text }}</div>
+      </li>
+    </ul>
+  </div>
+</div>

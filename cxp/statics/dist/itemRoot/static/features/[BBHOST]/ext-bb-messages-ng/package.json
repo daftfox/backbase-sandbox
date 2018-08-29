@@ -1,0 +1,64 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-messages-ng@^2.4.7",
+        "scope": null,
+        "escapedName": "ext-bb-messages-ng",
+        "name": "ext-bb-messages-ng",
+        "rawSpec": "^2.4.7",
+        "spec": ">=2.4.7 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-messages-ng"
+    ]
+  ],
+  "_from": "ext-bb-messages-ng@>=2.4.7 <3.0.0",
+  "_id": "ext-bb-messages-ng@2.4.7",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-messages-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-messages-ng@^2.4.7",
+    "scope": null,
+    "escapedName": "ext-bb-messages-ng",
+    "name": "ext-bb-messages-ng",
+    "rawSpec": "^2.4.7",
+    "spec": ">=2.4.7 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-messages-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-messages-ng/-/ext-bb-messages-ng-2.4.7.tgz",
+  "_shasum": "50a6092af143a04f6d4aaf36662056879bff58e7",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-messages-ng@^2.4.7",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-messages-ng",
+  "dependencies": {
+    "ui-bb-confirm-ng": "^3.0.56",
+    "ui-bb-draft-edit-ng": "^3.4.7",
+    "ui-bb-empty-state-ng": "^2.0.56",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-indeterminate-ng": "^2.0.56",
+    "ui-bb-load-more-ng": "^2.0.56",
+    "ui-bb-loading-overlay-ng": "^2.0.55",
+    "ui-bb-notification-stripe-ng": "^2.0.56",
+    "ui-bb-substitute-error-ng": "^2.0.56",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-accordion": "1.3.3-bb.4",
+    "vendor-bb-uib-dropdown": "1.3.3-bb.4",
+    "vendor-bb-uib-tabs": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-messages-ng/-/ext-bb-messages-ng-2.4.7.tgz",
+    "shasum": "50a6092af143a04f6d4aaf36662056879bff58e7"
+  },
+  "main": "scripts/ext-bb-messages-ng.js",
+  "name": "ext-bb-messages-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.4.7"
+}

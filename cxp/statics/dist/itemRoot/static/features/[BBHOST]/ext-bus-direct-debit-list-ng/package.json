@@ -1,0 +1,65 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-direct-debit-list-ng@~2.0.4",
+        "scope": null,
+        "escapedName": "ext-bus-direct-debit-list-ng",
+        "name": "ext-bus-direct-debit-list-ng",
+        "rawSpec": "~2.0.4",
+        "spec": ">=2.0.4 <2.1.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-direct-debit-list-ng@>=2.0.4 <2.1.0",
+  "_id": "ext-bus-direct-debit-list-ng@2.0.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-direct-debit-list-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-direct-debit-list-ng@~2.0.4",
+    "scope": null,
+    "escapedName": "ext-bus-direct-debit-list-ng",
+    "name": "ext-bus-direct-debit-list-ng",
+    "rawSpec": "~2.0.4",
+    "spec": ">=2.0.4 <2.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-direct-debit-list-ng/-/ext-bus-direct-debit-list-ng-2.0.4.tgz",
+  "_shasum": "74ddbe9d9b3d916b2bbeb568aa89cfae301defa8",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-direct-debit-list-ng@~2.0.4",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-confirm-ng": "^3.0.50",
+    "ui-bb-ellipsis-tooltip-ng": "^2.0.50",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-inline-status-ng": "^2.0.50",
+    "ui-bb-load-more-ng": "^2.0.50",
+    "ui-bb-loading-indicator-ng": "^2.0.50",
+    "ui-bb-notification-stripe-ng": "^2.0.50",
+    "ui-bb-paginator-ng": "^2.0.50",
+    "ui-bb-sortable-column-ng": "^2.0.50",
+    "ui-bb-substitute-error-ng": "^2.0.50",
+    "ui-bus-payment-order-details-ng": "^4.19.21",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-dropdown": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-direct-debit-list-ng/-/ext-bus-direct-debit-list-ng-2.0.4.tgz",
+    "shasum": "74ddbe9d9b3d916b2bbeb568aa89cfae301defa8"
+  },
+  "main": "scripts/ext-bus-direct-debit-list-ng.js",
+  "name": "ext-bus-direct-debit-list-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.0.4"
+}

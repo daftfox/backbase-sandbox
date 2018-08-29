@@ -1,0 +1,62 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-standing-payment-orders-ng@~1.107.20",
+        "scope": null,
+        "escapedName": "widget-bb-standing-payment-orders-ng",
+        "name": "widget-bb-standing-payment-orders-ng",
+        "rawSpec": "~1.107.20",
+        "spec": ">=1.107.20 <1.108.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-standing-payment-orders-ng@>=1.107.20 <1.108.0",
+  "_id": "widget-bb-standing-payment-orders-ng@1.107.20",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-standing-payment-orders-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-standing-payment-orders-ng@~1.107.20",
+    "scope": null,
+    "escapedName": "widget-bb-standing-payment-orders-ng",
+    "name": "widget-bb-standing-payment-orders-ng",
+    "rawSpec": "~1.107.20",
+    "spec": ">=1.107.20 <1.108.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-standing-payment-orders-ng/-/widget-bb-standing-payment-orders-ng-1.107.20.tgz",
+  "_shasum": "704b818317698efc14c81434d59d94294526d4d3",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-standing-payment-orders-ng@~1.107.20",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bus-standing-payment-orders-list-ng": "^2.36.20",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-permissions-ng": "^2.20.0",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "model-bb-payment-orders-ng": "^1.119.20",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-standing-payment-orders-ng/-/widget-bb-standing-payment-orders-ng-1.107.20.tgz",
+    "shasum": "704b818317698efc14c81434d59d94294526d4d3"
+  },
+  "main": "scripts/widget-bb-standing-payment-orders-ng.js",
+  "name": "widget-bb-standing-payment-orders-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.107.20"
+}

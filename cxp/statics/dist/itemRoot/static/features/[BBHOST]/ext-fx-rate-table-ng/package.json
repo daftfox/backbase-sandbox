@@ -1,0 +1,59 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-fx-rate-table-ng@~1.18.0",
+        "scope": null,
+        "escapedName": "ext-fx-rate-table-ng",
+        "name": "ext-fx-rate-table-ng",
+        "rawSpec": "~1.18.0",
+        "spec": ">=1.18.0 <1.19.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-fx-rate-table-ng@>=1.18.0 <1.19.0",
+  "_id": "ext-fx-rate-table-ng@1.18.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-fx-rate-table-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-fx-rate-table-ng@~1.18.0",
+    "scope": null,
+    "escapedName": "ext-fx-rate-table-ng",
+    "name": "ext-fx-rate-table-ng",
+    "rawSpec": "~1.18.0",
+    "spec": ">=1.18.0 <1.19.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-fx-rate-table-ng/-/ext-fx-rate-table-ng-1.18.0.tgz",
+  "_shasum": "27664522fcb4c1400f17a008ebc35ebe85a9b5ff",
+  "_shrinkwrap": null,
+  "_spec": "ext-fx-rate-table-ng@~1.18.0",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "lib-bb-model-errors": "^1.0.122",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-paginator-ng": "^2.5.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-fx-rate-table-ng/-/ext-fx-rate-table-ng-1.18.0.tgz",
+    "shasum": "27664522fcb4c1400f17a008ebc35ebe85a9b5ff"
+  },
+  "main": "scripts/ext-fx-rate-table-ng.js",
+  "name": "ext-fx-rate-table-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.18.0"
+}

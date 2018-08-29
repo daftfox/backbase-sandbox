@@ -1,0 +1,35 @@
+{namespace templates_NavigationContainer}
+/**
+ * Columns Container
+ * @param item Item in context
+ */
+{template .HorizontalNavigationContainer}
+
+<nav class="navbar navbar-light bg-white navbar-expand-md bp-container bp-NavigationContainer bp-ui-dragRoot" data-pid="{$item.name}">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#rbNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="{$item.preferences.homePageUrl.value}"><img src="{$item.preferences.logoUrl.value}"/></a>
+    </div>
+    <div class="collapse navbar-collapse" id="rbNavbar">
+      <g:model objectType="link" renderer="advancedNav">
+        <g:param name="depth" value="1"/>
+        <g:param name="showParent" value="{$item.preferences.showParent.value}"/>
+        <g:param name="uuid" value="{$item.preferences.navRoot.value}"/>
+        <g:param name="useGeneratedUrl" value="false"/>  <!-- 'true' to use generated url -->
+        <g:template value="{$item.preferences.navTemplate.value}"/>
+      </g:model>
+      <ul class="user-container user-container--area nav navbar-nav navbar-right bp-area">
+        {if not($item.preferences.loadChildren and $item.preferences.loadChildren.value == 'false') and $item.children}
+          {foreach $child in $item.children}
+            <li>{include($child) |noAutoescape}</li>
+          {/foreach}
+        {/if}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{/template}

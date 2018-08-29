@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-saving-goals-ng@^2.5.0",
+        "scope": null,
+        "escapedName": "ext-bb-saving-goals-ng",
+        "name": "ext-bb-saving-goals-ng",
+        "rawSpec": "^2.5.0",
+        "spec": ">=2.5.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-saving-goals-ng"
+    ]
+  ],
+  "_from": "ext-bb-saving-goals-ng@>=2.5.0 <3.0.0",
+  "_id": "ext-bb-saving-goals-ng@2.6.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-saving-goals-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-saving-goals-ng@^2.5.0",
+    "scope": null,
+    "escapedName": "ext-bb-saving-goals-ng",
+    "name": "ext-bb-saving-goals-ng",
+    "rawSpec": "^2.5.0",
+    "spec": ">=2.5.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-saving-goals-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-saving-goals-ng/-/ext-bb-saving-goals-ng-2.6.0.tgz",
+  "_shasum": "3fa930a052f19d1a507001a63fc7eaee348392d6",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-saving-goals-ng@^2.5.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-saving-goals-ng",
+  "dependencies": {
+    "ui-bb-currency-input-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-modal-ng": "^3.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-progressbar": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-saving-goals-ng/-/ext-bb-saving-goals-ng-2.6.0.tgz",
+    "shasum": "3fa930a052f19d1a507001a63fc7eaee348392d6"
+  },
+  "main": "scripts/ext-bb-saving-goals-ng.js",
+  "name": "ext-bb-saving-goals-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.6.0"
+}

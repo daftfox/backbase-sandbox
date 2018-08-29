@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <!--  dynamic loading of spring configuration which are found in classpath:/META-INF/spring/optional/*.xml -->
+    <!--  this is used for rules engines, persistence  and user management specific implementations -->
+    <import resource="classpath*:/META-INF/spring/optional/*.xml"/>
+
+        <!-- Load mandatory spring configuration -->
+    <import resource="classpath:/META-INF/spring/backbase-portal-business-config.xml"/>
+    <import resource="classpath:/META-INF/spring/backbase-portal-business-acl-security.xml"/>
+    <import resource="classpath:/META-INF/spring/backbase-portal-propertiesDefaults-config.xml"/>
+    <import resource="classpath:/META-INF/spring/backbase-portal-proxy-config.xml"/>
+
+</beans>

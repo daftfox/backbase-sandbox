@@ -1,0 +1,15 @@
+<div id="language-switch" class="btn-group" uib-dropdown="" data-ng-controller="LanguageSwitchController as $ctrl">
+  <ui-bb-dropdown-select-ng
+    data-ng-model="$ctrl.locale"
+    data-selected-as="$option.label"
+    data-ng-change="$ctrl.switchLanguageTo($ctrl.locale)"
+  >
+    <ui-bb-dropdown-option-ng
+      data-option="item"
+      data-role="custom-list-item"
+      data-ng-repeat="item in $ctrl.locales"
+    >
+      <a href="javascript:void(0)">{{::$option.label}}</a>
+    </ui-bb-dropdown-option-ng>
+  </ui-bb-dropdown-select-ng>
+</div>

@@ -1,0 +1,14 @@
+---
+### Live profile
+logging:
+  config: ${backbase.config.dir}/account-integration-service/logback.xml
+
+
+# Account integration uses account-mock to retrieve random balances. make sure it points to the right port.
+
+backbase:
+  client:
+    bank:
+      rest:
+        url:
+          balance: ${CLIENT_BANK_URL:http://localhost:8083/account-mock/rest/balance}

@@ -1,0 +1,86 @@
+{
+    "en-US": {
+        "title": "Edit payment",
+
+        "review.title": "Schedule 1 payment from",
+        "review.rush-notice": "Rush delivery selected *",
+        "review.label.rush": "* Rush delivery charge",
+        "review.label.amount": "Amount",
+        "review.label.delivery-date": "Delivered by",
+        "review.label.charged-date": "Charged",
+        "review.label.memo": "Memo",
+        "review.label.total-amount": "Total amount",
+
+        "error.no-payment": "No payment has been selected",
+
+        "steps.payment-details": "Payment details",
+        "steps.review": "Review",
+
+        "buttons.cancel": "Discard changes",
+        "buttons.next": "Next",
+        "buttons.previous": "Previous",
+        "buttons.finish": "Save changes",
+
+        "heading.label.pay-from": "Pay from",
+        "heading.label.amount": "Amount",
+        "heading.label.delivery-date": "Delivery date",
+        "heading.label.memo": "Memo",
+        "aria-label.memo": "Memo",
+
+        "datepicker.today-prefix": "Today is",
+        "datepicker.error.date-in-past": "Sorry, you can't choose a date in the past.",
+        "datepicker.error.format": "Please format your date mm/dd/yy.",
+        "datepicker.error.wrong-date": "Sorry, that date is unavailable.",
+        "datepicker.label.open": "Open",
+        "datepicker.aria-label.date-input": "Enter date",
+
+        "accounts.error.no-items": "Sorry, you don't appear to have any accounts",
+
+        "rush.message.available": "Rush Available",
+        "rush.message.selected": "Rush Selected",
+        "rush.price.title": "Rush Delivery",
+        "rush.price.prefix": "Additional",
+        "rush.price.suffix": "fee",
+        "rush.price.suffix-full": "fee added",
+
+        "cancel-dialog.button.confirm": "Yes",
+        "cancel-dialog.button.cancel": "Cancel",
+        "cancel-dialog.button.heading": "Are you sure?",
+        "cancel-dialog.button.bodyText": "Are you sure you want to leave this page? If you leave before saving, your changes will be lost.",
+
+        "billpay.model.error.auth": "Sorry, the request could not be completed at this time",
+        "billpay.model.error.connectivity": "Sorry, the request could not be completed at this time",
+        "billpay.model.error.user": "Sorry, the request could not be completed at this time",
+        "billpay.model.error.unexpected": "Sorry, the request could not be completed at this time",
+        "billpay.model.error.default": "Sorry, some of the information you entered doesn't look quite right for this payment.",
+        "billpay.model.error.default.step-2": "An error has occurred and the payment has not been updated. Please return to the payment details step to correct the payment.",
+
+        "error.account.required": "Please enter an account",
+        "error.amount.required": "Please enter an amount",
+        "error.amount.invalidAmount": "Please enter a valid amount",
+        "error.date.required": "Please enter a date",
+
+        "billpay.api.internalError": "We're sorry. It looks like something went wrong. We'd like to help, please give us a call.",
+        "billpay.api.invalidRequest": "We're sorry. It looks like something went wrong. We'd like to help, please give us a call.",
+        "billpay.api.invalidNextPaymentDate": "Invalid next payment date",
+        "billpay.api.paymentTooFarInAdvance": "Payment is too far in advance",
+        "billpay.api.invalidPaymentDate": "Invalid payment date",
+        "billpay.api.invalidPaymentAmount": "Invalid payment amount",
+        "billpay.api.paymentAmountTooLarge": "Payment amount too large",
+        "billpay.api.paymentAmountTooSmall": "Payment amount is too small",
+        "billpay.api.invalidBankAccount": "Invalid bank account",
+        "billpay.api.paymentAlreadyExists": "Payment already exists",
+        "billpay.api.missingPaymentInformation": "Missing payment information",
+        "billpay.api.invalidEBillID": "Invalid Ebill ID",
+        "billpay.api.dailyLimitExceeded": "The daily limit has been exceeded",
+        "billpay.api.riskCheckFailed": "Payments could not be taken.",
+        "billpay.api.failedToChangePaymentState": "Sorry, the request could not be completed at this time.",
+        "billpay.api.fraudCheckFailed": "Payments could not be taken.",
+        "billpay.api.inactivePayee": "The payee is inactive",
+        "billpay.api.invalidPayee": "The payee is invalid",
+
+        "currency.aria-label.input.currency": "Currency",
+        "currency.aria-label.input.amount": "Amount Integer",
+        "currency.aria-label.input.decimals": "Amount Decimal"
+    }
+}

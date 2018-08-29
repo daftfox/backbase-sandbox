@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-accessgroups-http-ng@^3.3.1",
+        "scope": null,
+        "escapedName": "data-bb-accessgroups-http-ng",
+        "name": "data-bb-accessgroups-http-ng",
+        "rawSpec": "^3.3.1",
+        "spec": ">=3.3.1 <4.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/lib-bb-permissions-ng"
+    ]
+  ],
+  "_from": "data-bb-accessgroups-http-ng@>=3.3.1 <4.0.0",
+  "_id": "data-bb-accessgroups-http-ng@3.3.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-accessgroups-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-accessgroups-http-ng@^3.3.1",
+    "scope": null,
+    "escapedName": "data-bb-accessgroups-http-ng",
+    "name": "data-bb-accessgroups-http-ng",
+    "rawSpec": "^3.3.1",
+    "spec": ">=3.3.1 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/lib-bb-permissions-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-accessgroups-http-ng/-/data-bb-accessgroups-http-ng-3.3.1.tgz",
+  "_shasum": "549575889dd2518a3074dff8e06e98cfea75ac8c",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-accessgroups-http-ng@^3.3.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/lib-bb-permissions-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-accessgroups-http-ng/-/data-bb-accessgroups-http-ng-3.3.1.tgz",
+    "shasum": "549575889dd2518a3074dff8e06e98cfea75ac8c"
+  },
+  "main": "scripts/data-bb-accessgroups-http-ng.js",
+  "name": "data-bb-accessgroups-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.3.1"
+}

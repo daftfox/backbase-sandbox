@@ -1,0 +1,30 @@
+version: "3.1"
+# https://docs.docker.com/compose/compose-file/
+
+services:
+
+  activemq:
+    image: rmohr/activemq:5.14.0
+    container_name: demo_activemq
+    privileged: true
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+      - "5672:5672"
+      - "61613:61613"
+      - "1883:1883"
+      - "61614:61614"
+
+  mysql:
+    image: mysql:5.7.18
+    container_name: demo_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+     - "3306:3306"
+    volumes:
+      - ./mysql/config:/etc/mysql/conf.d
+      - demo_mysql_data:/var/lib/mysql
+
+volumes:
+  demo_mysql_data:

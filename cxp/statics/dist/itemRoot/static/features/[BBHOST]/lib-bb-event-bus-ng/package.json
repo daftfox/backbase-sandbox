@@ -1,0 +1,58 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-event-bus-ng@1.1.77",
+        "scope": null,
+        "escapedName": "lib-bb-event-bus-ng",
+        "name": "lib-bb-event-bus-ng",
+        "rawSpec": "1.1.77",
+        "spec": "1.1.77",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-event-bus-ng@1.1.77",
+  "_id": "lib-bb-event-bus-ng@1.1.77",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-event-bus-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-event-bus-ng@1.1.77",
+    "scope": null,
+    "escapedName": "lib-bb-event-bus-ng",
+    "name": "lib-bb-event-bus-ng",
+    "rawSpec": "1.1.77",
+    "spec": "1.1.77",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-extension-events-ng",
+    "/lib-bb-extension-helpers-ng",
+    "/lib-bb-intent-ng",
+    "/lib-bb-notifications-ng",
+    "/lib-bb-start-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-event-bus-ng/-/lib-bb-event-bus-ng-1.1.77.tgz",
+  "_shasum": "810a86b8ac27f1c3c8f3460d978af06eecc58546",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-event-bus-ng@1.1.77",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "lib-bb-event-bus": "^1.1.77",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-event-bus-ng/-/lib-bb-event-bus-ng-1.1.77.tgz",
+    "shasum": "810a86b8ac27f1c3c8f3460d978af06eecc58546"
+  },
+  "main": "scripts/lib-bb-event-bus-ng.js",
+  "name": "lib-bb-event-bus-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.77"
+}

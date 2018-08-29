@@ -1,0 +1,10 @@
+{
+  "en-US": {
+    "accountSelect.placeholder": "Select account",
+    "accountSelect.searchPlaceholder": "Search",
+    "accountSelect.label.allAccounts": "All Accounts",
+    "accountSelect.label.accounts": "accounts",
+    "accountSelect.label.account": "account",
+    "accountSelect.label.noAccounts": "No accounts found"
+  }
+}

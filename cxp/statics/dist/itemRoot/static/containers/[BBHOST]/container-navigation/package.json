@@ -1,0 +1,63 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "container-navigation@~4.0.0",
+        "scope": null,
+        "escapedName": "container-navigation",
+        "name": "container-navigation",
+        "rawSpec": "~4.0.0",
+        "spec": ">=4.0.0 <4.1.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist"
+    ]
+  ],
+  "_from": "container-navigation@>=4.0.0 <4.1.0",
+  "_id": "container-navigation@4.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-navigation",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "container-navigation@~4.0.0",
+    "scope": null,
+    "escapedName": "container-navigation",
+    "name": "container-navigation",
+    "rawSpec": "~4.0.0",
+    "spec": ">=4.0.0 <4.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/container-navigation/-/container-navigation-4.0.0.tgz",
+  "_shasum": "82c836fa1fcea6c8f07ca6bd6e95c131e450ec49",
+  "_shrinkwrap": null,
+  "_spec": "container-navigation@~4.0.0",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist",
+  "author": "",
+  "dependencies": {
+    "template-navigation": "^4.0.0"
+  },
+  "description": "",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/container-navigation/-/container-navigation-4.0.0.tgz",
+    "shasum": "82c836fa1fcea6c8f07ca6bd6e95c131e450ec49"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "container-navigation",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/container-navigation.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "4.0.0"
+}

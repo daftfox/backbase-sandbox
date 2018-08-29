@@ -1,0 +1,1049 @@
+<div data-ng-controller="ContactController as $ctrl" class="ext-bus-contact-list-ng">
+  <div class="empty-element-placeholder-relative"
+    data-ng-if="$ctrl.state.initialLoading"
+    data-role="spinner">
+  </div>
+
+  <div class="notifications col-lg-4">
+    <ui-bb-notification-stripe-ng
+      data-ng-if="$ctrl.state.status"
+      data-message="{{ $ctrl.state.status.i18n | i18n }}"
+      data-on-close="$ctrl.state.status = null;"
+      data-timeout-second="{{ $ctrl.dismissTime }}"
+      data-type="bg-{{ $ctrl.state.status.isError ? 'danger' : 'success' }}">
+    </ui-bb-notification-stripe-ng>
+  </div>
+
+  <ui-bb-substitute-error-ng data-message="$ctrl.state.error.message | i18n">
+    <div data-ng-if="!$ctrl.state.initialLoading">
+      <header class="border-bottom" data-ng-class="{ 'd-none d-lg-block': $ctrl.state.page !== 'list' }">
+        <div class="px-3 py-2">
+          <button
+            class="new-contact-btn btn btn-primary float-right"
+            data-ng-click="ext.helpers.showNewContactForm(ext, $ctrl)"
+            data-ng-disabled="$ctrl.state.page === 'new'"
+            data-bb-is-permitted-ng="'Contacts.Contacts.create'"
+            data-role="new-contact"
+            data-i18n-key="label.newContact">
+          </button>
+
+          <ui-bb-search-box-ng
+            class="col-6 col-sm-8 col-xl-4 pl-0 d-block"
+            data-config="{
+              labels: {
+                title: ('label.searchForContacts' | i18n),
+                placeholder: ('label.searchForContacts' | i18n),
+                clear: ('label.clearSearch' | i18n),
+                submit: ('label.submitSearch' | i18n),
+              }
+            }"
+            data-ng-model="$ctrl.state.contactsSearch.query"
+            data-on-submit="ext.helpers.searchContact($ctrl)"
+            data-on-clear="ext.helpers.searchContact($ctrl)"
+            data-disabled="!$ctrl.state.contacts.loading && !$ctrl.hasContacts()">
+          </ui-bb-search-box-ng>
+        </div>
+      </header>
+
+      <ui-bb-loading-overlay-ng data-is-loading="ext.helpers.isLoading($ctrl)">
+        <ui-bb-empty-state-ng
+          data-icon-classes="{{ ext.helpers.getEmptyIconClasses($ctrl) }}"
+          data-title="{{ ext.helpers.getEmptyTitle($ctrl) }}"
+          data-subtitle="{{ ext.helpers.getEmptyDescription($ctrl) }}"
+          data-is-empty="ext.helpers.isContactListEmpty($ctrl) && !ext.helpers.isCreating($ctrl)">
+          <div class="row">
+            <div class="col-lg-6 col-12 pr-0 border-right">
+              <ui-bb-empty-state-ng
+                data-ng-class="{ 'd-none d-lg-block': $ctrl.state.page !== 'list' }"
+                data-icon-classes="{{ ext.helpers.getEmptyIconClasses($ctrl) }}"
+                data-title="{{ ext.helpers.getEmptyTitle($ctrl) }}"
+                data-subtitle="{{ ext.helpers.getEmptyDescription($ctrl) }}"
+                data-is-empty="ext.helpers.isContactListEmpty($ctrl) && ext.helpers.isCreating($ctrl)">
+                <ui-bb-loading-overlay-ng data-is-loading="ext.helpers.isSearching($ctrl)">
+                  <div data-ng-include="'#ext-bus-contact-list-ng/contact-list.ng.html'"></div>
+                </ui-bb-loading-overlay-ng>
+              </ui-bb-empty-state-ng>
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <div class="pr-3" data-ng-switch="$ctrl.state.page">
+                <div class="d-none d-lg-block" data-ng-switch-when="list">
+                  <div data-ng-include="'#ext-bus-contact-list-ng/contact-details.ng.html'"></div>
+                </div>
+                <div data-ng-switch-when="details">
+                  <div data-ng-include="'#ext-bus-contact-list-ng/contact-details.ng.html'"></div>
+                </div>
+                <div data-ng-switch-when="edit">
+                  <div data-ng-include="'#ext-bus-contact-list-ng/contact-form.ng.html'"></div>
+                </div>
+                <div data-ng-switch-when="new">
+                  <div data-ng-include="'#ext-bus-contact-list-ng/contact-form.ng.html'"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ui-bb-empty-state-ng>
+      </ui-bb-loading-overlay-ng>
+    </div>
+
+  </ui-bb-substitute-error-ng>
+
+  <ui-bb-modal-ng data-is-open="ext.open">
+    <div data-ng-include="'#ext-bus-contact-list-ng/account-details.ng.html'"></div>
+  </ui-bb-modal-ng>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.cancelFormConfirmOpened"
+    data-on-confirm="ext.helpers.cancelEditForm(ext, $ctrl)"
+    data-labels="{
+      heading: ('dialog.cancelForm.titleCreate' | i18n),
+      bodyText: ('dialog.cancelForm.body' | i18n),
+      confirm: ('dialog.cancelForm.yes' | i18n),
+      cancel: ('label.cancel' | i18n)
+    }">
+  </ui-bb-confirm-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bus-contact-list-ng/account-details.ng.html">
+  <div class="modal-header">
+    <h3 class="modal-title" data-i18n-key="label.addAccount"></h3>
+  </div>
+
+  <form name="accountForm"
+    data-role="account-form"
+    data-ui-bb-track-changes-ng="ext.account"
+    data-ui-bb-form-navigate-away-ng
+    data-form-navigate-away-msg="{{'form.navigate.away.message' | i18n}}"
+    data-ng-submit="ext.helpers.submitAccountForm(ext.account, ext.accountIndex, accountForm)"
+    novalidate>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12">
+              <h4 class="modal-title modal-subtitle" data-i18n-key="label.account.details"></h4>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label aria-hidden="true" data-i18n-key="label.account.name"></label>
+              <span class="text-muted" data-i18n-key="label.required"></span>
+              <input type="text"
+                autofocus
+                class="form-control"
+                data-role="account-name"
+                name="name"
+                data-ng-model="ext.account.name"
+                placeholder="{{ ::'placeholder.name' | i18n }}"
+                aria-label="{{ ::'label.account.name' | i18n }}"
+                maxlength="140"
+                data-ng-class="{ 'is-invalid': ext.helpers.isInvalid(accountForm, 'name') }"
+                required />
+              <span class="invalid-feedback" data-i18n-key="errors.required"></span>
+            </div>
+            <div class="col-md-6">
+              <label data-i18n-key="label.alias" aria-hidden="true"></label>
+              <input type="text"
+                class="form-control"
+                data-role="account-alias"
+                name="alias"
+                maxlength="34"
+                data-ng-model="ext.account.alias"
+                placeholder="{{ ::'placeholder.alias' | i18n }}"
+                aria-label="{{ ::'label.account.alias' | i18n }}" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <p class="text-muted" aria-hidden="true" data-i18n-key="label.account.enterIBANorBBAN"></p>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label aria-hidden="true" data-i18n-key="label.iban"></label>
+              <input type="text"
+                class="form-control"
+                data-role="account-iban"
+                name="IBAN"
+                data-ng-model="ext.account.IBAN"
+                data-ng-model-options="{ allowInvalid: true }"
+                placeholder="{{ ::'placeholder.iban' | i18n }}"
+                aria-label="{{ ::'label.account.accountNumber' | i18n }}"
+                data-ng-required="!ext.account.accountNumber.length"
+                data-ng-class="{ 'is-invalid': ext.helpers.isInvalid(accountForm, 'IBAN') }"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                data-ui-bb-iban-ng />
+              <span data-ng-messages
+                data-for="accountForm.IBAN.$error"
+                class="invalid-feedback">
+                <ng-message data-when="required" data-i18n-key="errors.required"></ng-message>
+                <ng-message data-when="uiBbIban" data-i18n-key="errors.invalidIBAN"></ng-message>
+              </span>
+            </div>
+            <div class="col-md-6">
+              <label aria-hidden="true" data-i18n-key="label.account.accountNumber"></label>
+              <input type="text"
+                class="form-control"
+                data-role="account-bban"
+                name="accountNumber"
+                maxlength="34"
+                data-ng-model="ext.account.accountNumber"
+                placeholder="{{ ::'placeholder.bban' | i18n }}"
+                aria-label="{{ ::'label.account.accountNumber' | i18n }}"
+                data-ng-required="!ext.account.IBAN.length"
+                data-ng-class="{ 'is-invalid': ext.helpers.isInvalid(accountForm, 'accountNumber') }"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off" />
+              <span class="invalid-feedback" data-i18n-key="errors.required"></span>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label data-i18n-key="label.bank.name" aria-hidden="true"></label>
+              <input type="text"
+                class="form-control"
+                data-role="account-bankName"
+                name="bankName"
+                maxlength="140"
+                data-ng-model="ext.account.bankName"
+                placeholder="{{ ::'placeholder.bankName' | i18n }}"
+                aria-label="{{ ::'label.bank.name' | i18n }}" />
+            </div>
+            <div class="col-md-6">
+              <label aria-hidden="true" data-i18n-key="label.bank.code"></label>
+              <input type="text"
+                class="form-control"
+                data-role="account-bankCode"
+                name="code"
+                maxlength="11"
+                data-ng-model="ext.account.bankCode"
+                placeholder="{{ ::'placeholder.bankCode' | i18n }}"
+                aria-label="{{ ::'label.bank.code' | i18n }}" />
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-6">
+              <label data-i18n-key="label.bic" aria-hidden="true"></label>
+              <input type="text"
+                class="form-control"
+                data-role="account-bic"
+                name="BIC"
+                data-ng-model="ext.account.BIC"
+                data-ng-class="{ 'is-invalid': ext.helpers.isInvalid(accountForm, 'BIC') }"
+                placeholder="{{ ::'placeholder.bic' | i18n }}"
+                aria-label="{{ ::'label.bic' | i18n }}"
+                data-ng-pattern="/^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$/"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off" />
+              <span data-ng-messages
+                data-for="accountForm.BIC.$error"
+                class="invalid-feedback">
+                <ng-message data-when="pattern" data-i18n-key="errors.bicPattern"></ng-message>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <uib-accordion
+          data-close-others="false"
+          data-template-url="#ext-bus-contact-list-ng/accordion-template.html">
+          <uib-accordion-group
+            data-ng-init="isBankOpen = ext.helpers.showBankBlock(ext.account, ['address'])"
+            data-is-open="isBankOpen"
+            data-template-url="#ext-bus-contact-list-ng/group-template.html"
+            data-heading="{{'label.form.bank.branchAddress' | i18n}}" >
+            <div class="row form-group">
+              <div class="col-12">
+                <label aria-hidden="true" data-i18n-key="label.address"></label>
+                <input type="text"
+                  class="form-control"
+                  data-role="account-bankAddressLine1"
+                  name="bankAddressLine1"
+                  data-ng-model="ext.account.bankAddressLine1"
+                  placeholder="{{ ::'placeholder.addressLine1' | i18n }}"
+                  aria-label="{{ ::'placeholder.addressLine1' | i18n }}"
+                  maxlength="70" />
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-12">
+                <input type="text"
+                  class="form-control"
+                  data-role="account-bankAddressLine2"
+                  name="bankAddressLine2"
+                  data-ng-model="ext.account.bankAddressLine2"
+                  placeholder="{{ ::'placeholder.addressLine2' | i18n }}"
+                  aria-label="{{ ::'placeholder.addressLine2' | i18n }}"
+                  maxlength="70" />
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-12">
+                <input type="text"
+                  class="form-control"
+                  data-role="account-bankStreetName"
+                  name="bankStreetName"
+                  data-ng-model="ext.account.bankStreetName"
+                  placeholder="{{ ::'placeholder.street' | i18n }}"
+                  aria-label="{{ ::'placeholder.street' | i18n }}"
+                  maxlength="70" />
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-6">
+                <label data-i18n-key="label.city" aria-hidden="true"></label>
+                <input type="text"
+                  class="form-control"
+                  data-role="account-bankTown"
+                  name="bankTown"
+                  data-ng-model="ext.account.bankTown"
+                  placeholder="{{ ::'placeholder.city' | i18n }}"
+                  aria-label="{{ ::'label.city' | i18n }}"
+                  maxlength="35" />
+              </div>
+              <div class="col-md-6">
+                <label data-i18n-key="label.postCode" aria-hidden="true"></label>
+                <input type="text"
+                  class="form-control"
+                  data-role="account-bankPostCode"
+                  name="bankPostCode"
+                  maxlength="16"
+                  data-ng-model="ext.account.bankPostCode"
+                  placeholder="{{ ::'placeholder.postCode' | i18n }}"
+                  aria-label="{{ ::'label.postCode' | i18n }}" />
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-6">
+                <label data-i18n-key="label.state" aria-hidden="true"></label>
+                <input type="text"
+                  class="form-control"
+                  data-role="account-bankCountrySubDivision"
+                  name="bankCountrySubDivision"
+                  maxlength="35"
+                  data-ng-model="ext.account.bankCountrySubDivision"
+                  placeholder="{{ ::'placeholder.state' | i18n }}"
+                  aria-label="{{ ::'label.state' | i18n }}" />
+              </div>
+              <div class="col-md-6">
+                <label data-i18n-key="label.country" aria-hidden="true"></label>
+                <select name="bankCountry"
+                  class="form-control"
+                  data-role="account-bankCountry"
+                  data-ng-model="ext.account.bankCountry"
+                  aria-label="{{ ::'label.country' | i18n }}">
+                  <option data-role="account-bankCountry-none" value="" disabled>{{ ::'label.selectCountry' | i18n }}</option>
+                  <option
+                    data-ng-repeat="country in ext.helpers.getSupportedCountries()"
+                    data-role="account-bankCountry-{{country}}"
+                    value="{{country.toUpperCase()}}"
+                    data-i18n-key="country.{{country}}">
+                  </option>
+                </select>
+              </div>
+            </div>
+          </uib-accordion-group>
+
+          <uib-accordion-group
+            data-ng-init="isHolderOpen = ext.helpers.showHolderBlock(ext.account, ['address'])"
+            data-is-open="isHolderOpen"
+            data-template-url="#ext-bus-contact-list-ng/group-template.html"
+            data-heading="{{'label.form.bank.accountAddress' | i18n}}"
+            class="form-group">
+            <div class="row">
+              <div class="form-group col-12">
+                <label aria-hidden="true" data-i18n-key="label.address"></label>
+                <input type="text"
+                  class="form-control"
+                  data-role="account-accountHolderAddressLine1"
+                  name="accountHolderAddressLine1"
+                  data-ng-model="ext.account.accountHolderAddressLine1"
+                  placeholder="{{ ::'placeholder.addressLine1' | i18n }}"
+                  aria-label="{{ ::'placeholder.addressLine1' | i18n }}"
+                  maxlength="70" />
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-12">
+                <input type="text"
+                  class="form-control"
+                  data-role="account-accountHolderAddressLine2"
+                  name="accountHolderAddressLine2"
+                  data-ng-model="ext.account.accountHolderAddressLine2"
+                  placeholder="{{ ::'placeholder.addressLine2' | i18n }}"
+                  aria-label="{{ ::'placeholder.addressLine2' | i18n }}"
+                  maxlength="70" />
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-12">
+                <input type="text"
+                  class="form-control"
+                  data-role="account-accountHolderStreetName"
+                  name="accountHolderStreetName"
+                  data-ng-model="ext.account.accountHolderStreetName"
+                  placeholder="{{ ::'placeholder.street' | i18n }}"
+                  aria-label="{{ ::'placeholder.street' | i18n }}"
+                  maxlength="70" />
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-6">
+                <label data-i18n-key="label.city" aria-hidden="true"></label>
+                <input type="text"
+                  class="form-control"
+                  data-role="account-accountHolderTown"
+                  name="accountHolderTown"
+                  data-ng-model="ext.account.accountHolderTown"
+                  placeholder="{{ ::'placeholder.city' | i18n }}"
+                  aria-label="{{ ::'label.city' | i18n }}"
+                  maxlength="35" />
+              </div>
+              <div class="col-md-6">
+                <label data-i18n-key="label.postCode" aria-hidden="true"></label>
+                <input type="text"
+                  class="form-control"
+                  name="accountHolderPostCode"
+                  maxlength="16"
+                  data-role="account-accountHolderPostCode"
+                  data-ng-model="ext.account.accountHolderPostCode"
+                  placeholder="{{ ::'placeholder.postCode' | i18n }}"
+                  aria-label="{{ ::'label.postCode' | i18n }}" />
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-6">
+                <label data-i18n-key="label.state" aria-hidden="true"></label>
+                <input type="text"
+                  class="form-control"
+                  name="accountHolderCountrySubDivision"
+                  maxlength="35"
+                  data-role="account-accountHolderCountrySubDivision"
+                  data-ng-model="ext.account.accountHolderCountrySubDivision"
+                  placeholder="{{ ::'placeholder.state' | i18n }}"
+                  aria-label="{{ ::'label.state' | i18n }}" />
+              </div>
+              <div class="col-md-6">
+                <label data-i18n-key="label.country" aria-hidden="true"></label>
+                <select name="accountHolderCountry"
+                  class="form-control"
+                  data-role="account-accountHolderCountry"
+                  data-ng-model="ext.account.accountHolderCountry"
+                  aria-label="{{ ::'label.country' | i18n }}">
+                  <option data-role="account-country-none" value="" disabled>{{:: 'label.selectCountry' | i18n }}</option>
+                  <option
+                    data-ng-repeat="country in ext.helpers.getSupportedCountries()"
+                    data-role="account-bankCountry-{{country}}"
+                    value="{{country.toUpperCase()}}"
+                    data-i18n-key="country.{{country}}">
+                  </option>
+                </select>
+              </div>
+            </div>
+          </uib-accordion-group>
+        </uib-accordion>
+      </div>
+
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-link"
+              type="button"
+              data-role="account-cancel"
+              data-ng-click="ext.helpers.dismissAccount()">
+              <span data-i18n-key="label.cancel"></span>
+            </button>
+            <button type="submit"
+              class="btn btn-primary"
+              data-role="account-save"
+              data-ng-disabled="ext.accountIndex >= 0 && accountForm.$pristine || state.updating">
+              <span data-i18n-key="label.add"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+</script>
+
+<script type="text/ng-template" id="#ext-bus-contact-list-ng/contact-details.ng.html">
+  <div data-ng-if="ext.helpers.showContactBlock($ctrl, ['name'])">
+    <div class="row d-block d-lg-none contact-details-row">
+      <div class="col-12">
+        <span data-ng-click="$ctrl.closeContactDetails()" data-i18n-key="label.back" data-role="close-contact-details"></span>
+      </div>
+    </div>
+
+    <div class="contact-details-separator d-block d-lg-none"></div>
+    <div class="row contact-details-row">
+      <div class="col-12 contact-details-col">
+        <div class="contact-buttons">
+          <button class="btn btn-outline-secondary contacts-delete-btn"
+            aria-label="{{ 'label.delete' | i18n }}"
+            data-ng-click="ext.deleteConfirmOpened = true"
+            data-bb-is-permitted-ng="'Contacts.Contacts.delete'"
+            data-role="delete-contact">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+          <button
+            data-bb-is-permitted-ng="'Contacts.Contacts.edit'"
+            class="btn btn-outline-secondary contacts-edit-btn"
+            aria-label="{{ 'label.edit' | i18n }}"
+            data-ng-click="$ctrl.showEditContactForm()"
+            data-role="edit-contact">
+            <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+          </button>
+        </div>
+        <h4 data-ng-bind="$ctrl.state.contact.data.name"
+          class="text-truncate contact-name"
+          title="{{$ctrl.state.contact.data.name}}"
+          data-role="contact-name"></h4>
+        <div class="text-muted text-truncate">
+          <span data-ng-bind="$ctrl.state.contact.data.alias"
+            title="{{$ctrl.state.contact.data.alias}}"
+            data-role="contact-alias"></span>
+          <span data-ng-if="$ctrl.state.contact.data.alias && $ctrl.state.contact.data.category">&sdot;</span>
+          <span data-ng-bind="$ctrl.state.contact.data.category"
+            title="{{$ctrl.state.contact.data.category}}"
+            data-role="contact-category"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-details-separator"
+      data-ng-if="ext.helpers.showContactBlock($ctrl, ['phoneNumber', 'emailId', 'contactPerson'])"></div>
+    <div class="row contact-details-row"
+      data-ng-if="ext.helpers.showContactBlock($ctrl, ['phoneNumber', 'emailId', 'contactPerson'])">
+      <div class="col-6 contact-details-col" data-ng-if="$ctrl.state.contact.data.phoneNumber">
+        <strong data-i18n-key="label.phoneNumber" data-role="label-phone-number"></strong>
+        <div data-ng-bind="$ctrl.state.contact.data.phoneNumber"
+         class="text-truncate"
+         title="{{$ctrl.state.contact.data.phoneNumber}}"
+         data-role="phone-number"></div>
+      </div>
+      <div class="col-6 contact-details-col" data-ng-if="$ctrl.state.contact.data.emailId">
+        <strong data-i18n-key="label.emailAddress"  data-role="label-email-address"></strong>
+        <div data-ng-bind="$ctrl.state.contact.data.emailId"
+          class="text-truncate"
+          title="{{$ctrl.state.contact.data.emailId}}"
+          data-role="email-address"></div>
+      </div>
+      <div class="col-6 contact-details-col" data-ng-if="$ctrl.state.contact.data.contactPerson">
+        <strong data-i18n-key="label.contactPerson"  data-role="label-contact-person-name"></strong>
+        <div data-ng-bind="$ctrl.state.contact.data.contactPerson"
+          class="text-truncate"
+          title="{{$ctrl.state.contact.data.contactPerson}}"
+          data-role="contact-person-name"></div>
+      </div>
+    </div>
+
+    <div class="contact-details-separator"
+      data-ng-if="ext.helpers.showContactBlock($ctrl, ['country', 'address'])"></div>
+    <div class="row contact-details-row"
+      data-ng-if="ext.helpers.showContactBlock($ctrl, ['country', 'address'])">
+      <div class="col-12 contact-details-col"
+        data-ng-if="ext.helpers.showContactBlock($ctrl, ['address'])">
+        <strong data-i18n-key="label.address" data-role="label-address"></strong>
+        <div class="text-truncate"
+          data-ng-bind="ext.helpers.getContactAddress($ctrl.state.contact.data)"
+          title="{{ext.helpers.getContactAddress($ctrl.state.contact.data)}}"
+          data-role="contact-address">
+        </div>
+      </div>
+      <div class="col-6 contact-details-col"
+        data-ng-if="$ctrl.state.contact.data.country" data-role="label-country">
+        <strong data-i18n-key="label.country"></strong>
+        <div data-ng-bind="$ctrl.state.contact.data.country | country" class="text-truncate"
+          title="{{$ctrl.state.contact.data.country | country}}"
+          data-role="contact-country"></div>
+      </div>
+    </div>
+
+    <div class="contact-details-separator"></div>
+    <div class="row contact-details-row">
+      <div class="col-12">
+        <h4 class="float-left" data-role="label-accounts" data-i18n-key="label.accounts"></h4>
+        <span class="float-right text-muted contact-accounts-count">
+          <span data-ng-if="$ctrl.state.contact.data.accounts.length === 1"
+            data-i18n-key="label.oneAccount"
+            data-role="one-account"></span>
+          <span data-ng-if="$ctrl.state.contact.data.accounts.length !== 1"
+            data-i18n-key="label.multipleAccounts"
+            data-i18n-data="{ count: $ctrl.state.contact.data.accounts.length || 0 }"
+            data-role="multiple-accounts">
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row contact-account-block text-truncate"
+      data-ng-repeat="account in $ctrl.state.contact.data.accounts track by $index">
+      <div data-ng-include="'#ext-bus-contact-list-ng/account-details-block.ng.html'" class="col-12 p-0"></div>
+    </div>
+  </div>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.deleteConfirmOpened"
+    data-on-confirm="$ctrl.deleteContact()"
+    data-labels="{
+      heading: ('dialog.delete.title' | i18n),
+      bodyText: ('dialog.delete.body' | i18n: { username: $ctrl.state.contact.data.name || '' }),
+      confirm: ('dialog.delete.yes' | i18n),
+      cancel: ('label.cancel' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+</script>
+
+<script type="text/ng-template" id="#ext-bus-contact-list-ng/contact-list.ng.html">
+  <div class="list-group" data-ng-click="ext.helpers.tryToCancelEditForm(ext, $ctrl)">
+    <div class="list-group-item contact-list-item contacts-search-count text-muted"
+      data-ng-if="$ctrl.state.searching && $ctrl.hasSearchContacts()"
+      data-ng-click="ext.selectedContact = null">
+      <div class="row">
+        <div class="col-12">
+          <ng-pluralize data-count="$ctrl.state.contactsSearch.totalCount"
+            data-when="{
+              'one': ('label.resultFound' | i18n),
+              'other': ('label.resultsFound' | i18n: { count: $ctrl.state.contactsSearch.totalCount })
+            }"
+            data-role="results-found">
+          </ng-pluralize>
+        </div>
+      </div>
+    </div>
+    <div class="list-group-item contact-list-item contact-group-char py-1 rounded-0 border-right-0"
+      tabindex="-1"
+      data-ng-repeat-start="group in ext.helpers.getListData($ctrl) track by group.char"
+      data-ng-click="ext.selectedContact = null">
+      <div class="row">
+        <div class="col-12" data-ng-bind="group.char"></div>
+      </div>
+    </div>
+    <div class="list-group-item contact-list-item border-right-0"
+      data-ng-class="{ striped: ($index + 1) % 2, 'contact-list-item-selected': $ctrl.state.contact.data.id === contact.id }"
+      data-ng-repeat="contact in group.contacts track by contact.id"
+      data-ng-repeat-end
+      data-ng-click="ext.selectedContact = contact">
+      <div class="row list-group-item-row">
+        <div class="col-4 text-truncate"
+          data-ui-bb-highlight-text-ng="$ctrl.state.searching && $ctrl.state.contactsSearch.query"
+          title="{{contact.name}}"
+          data-role="selected-contact-name">
+          {{contact.name}}
+        </div>
+        <div class="col-4 text-truncate text-muted"
+          data-ng-bind="contact.alias"
+          title="{{contact.alias}}"
+          data-role="selected-contact-alias"></div>
+        <div class="col-4 text-truncate"
+          data-ng-bind="contact.category"
+          title="{{contact.category}}"
+          data-role="selected-contact-catagory"></div>
+      </div>
+    </div>
+
+    <ui-bb-load-more-ng
+      class="bb-load-more"
+      data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+      data-ng-show="$ctrl.state.searching ? $ctrl.state.contactsSearch.hasMore : $ctrl.state.contacts.hasMore"
+      data-label="{{ 'label.loadMore' | i18n }}"
+      data-on-load-more="$ctrl.state.searching ? $ctrl.searchMore(done) : $ctrl.loadMore(done)">
+    </ui-bb-load-more-ng>
+
+    <ui-bb-paginator-ng
+      class="bb-pagination"
+      data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'pagination')"
+      data-page-navigation-text="{{ 'pagination.label.page_navigation' | i18n }}"
+      data-first-text="{{ 'pagination.label.first' | i18n }}"
+      data-last-text="{{ 'pagination.label.last' | i18n }}"
+      data-previous-text="{{ 'pagination.label.prev' | i18n }}"
+      data-next-text="{{ 'pagination.label.next' | i18n }}"
+      data-total-items="{{ $ctrl.state.pageParams.totalItems }}"
+      data-items-per-page="{{ $ctrl.state.pageParams.size }}"
+      data-max-nav-pages="{{ $ctrl.state.pageParams.maxNavPages }}"
+      data-current-page="{{ $ctrl.state.pageParams.currentPage }}"
+      data-ng-disabled="$ctrl.state.contacts.loading"
+      data-change-page="$ctrl.changePage(params)">
+    </ui-bb-paginator-ng>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bus-contact-list-ng/contact-form.ng.html">
+  <div class="row d-block d-lg-none contact-details-row">
+    <div class="col-12">
+      <span data-i18n-key="label.back"
+        data-ng-click="ext.helpers.tryToCancelEditForm(ext, $ctrl)"
+        data-role="back">
+      </span>
+    </div>
+  </div>
+
+  <div class="contact-details-separator d-block d-lg-none"></div>
+  <form class="form-horizontal"
+    name="contactForm"
+    data-role="contact-form"
+    data-ng-submit="ext.helpers.saveContact($ctrl, contactForm)"
+    data-ui-bb-track-changes-ng="$ctrl.state.contact.data"
+    data-ui-bb-form-navigate-away-ng="contactForm.$pristine && !$ctrl.state.contact.accountsChanged"
+    data-form-navigate-away-msg="{{'form.navigate.away.message' | i18n}}"
+    novalidate>
+
+  <div class="row contact-details-row">
+    <div class="col-12 contact-details-col" data-ng-init="ext.contactForm = contactForm">
+      <button type="submit"
+        class="btn btn-primary float-right contacts-form-save-btn"
+        data-ng-disabled="$ctrl.state.page === 'edit' && contactForm.$pristine && !$ctrl.state.contact.accountsChanged || $ctrl.state.contact.updating"
+        data-role="submit">
+        <span data-i18n-key="label.create" data-ng-if="$ctrl.state.page === 'new'" data-role="create-contact"></span>
+        <span data-i18n-key="label.save" data-ng-if="$ctrl.state.page === 'edit'" data-role="edit-contact"></span>
+      </button>
+      <button class="btn btn-link float-right"
+        type="button"
+        data-i18n-key="label.cancel"
+        data-ng-click="ext.helpers.tryToCancelEditForm(ext, $ctrl)"
+        data-ng-disabled="$ctrl.state.contact.updating"
+        data-role="cancel-create-contact">
+      </button>
+      <h4 data-i18n-key="label.createContact"
+        data-ng-if="$ctrl.state.page === 'new'"
+        data-role="create-contact-label"></h4>
+      <h4 data-i18n-key="label.editContact"
+        data-ng-if="$ctrl.state.page === 'edit'"
+        data-role="edit-contact-label"></h4>
+    </div>
+  </div>
+
+  <div class="row contact-details-row">
+    <div class="col-6 contact-details-col">
+      <label aria-hidden="true" data-i18n-key="label.name" data-role="label-name"></label>
+      <span class="text-muted" data-i18n-key="label.required" data-role="label-required"></span>
+      <input type="text"
+        class="form-control"
+        name="name"
+        data-ui-bb-focus-ng="$ctrl.state.page === 'new' || $ctrl.state.page === 'edit'"
+        data-ng-model="$ctrl.state.contact.data.name"
+        data-ng-class="{ 'is-invalid': ext.helpers.isInvalid(contactForm, 'name') }"
+        required
+        maxlength="140"
+        data-ng-pattern="/^[ \w-+!@#$%^&()';:\[\]\.\,|]+$/"
+        aria-label="{{:: 'label.name' | i18n }}"
+        placeholder="{{:: 'placeholder.name' | i18n }}"
+        data-role="enter-name">
+      <span data-ng-messages
+        data-for="contactForm.name.$error"
+        class="invalid-feedback"
+        data-role="error-message-name">
+        <ng-message data-when="required" data-i18n-key="errors.required"></ng-message>
+        <ng-message data-when="pattern" data-i18n-key="errors.namePattern"></ng-message>
+      </span>
+    </div>
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.alias" aria-hidden="true" data-role="label-alias"></label>
+      <input type="text"
+        class="form-control"
+        name="alias"
+        maxlength="70"
+        data-ng-pattern="/^[ \w-+!@#$%^&()';:\[\]\.\,|]+$/"
+        data-ng-model="$ctrl.state.contact.data.alias"
+        data-ng-class="{ 'is-invalid': ext.helpers.isInvalid(contactForm, 'alias') }"
+        aria-label="{{:: 'label.alias' | i18n }}"
+        placeholder="{{:: 'placeholder.alias' | i18n }}"
+        data-role="enter-alias">
+      <span class="invalid-feedback"
+        data-i18n-key="errors.aliasPattern"
+        data-role="error-message-alias">
+      </span>
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.category" aria-hidden="true" data-role="label-catagory"></label>
+      <input type="text"
+        class="form-control"
+        name="category"
+        maxlength="70"
+        data-ng-model="$ctrl.state.contact.data.category"
+        aria-label="{{:: 'label.category' | i18n }}"
+        placeholder="{{:: 'placeholder.category' | i18n }}"
+        data-role="enter-category">
+    </div>
+  </div>
+
+  <div class="contact-details-separator"></div>
+  <div class="row contact-details-row">
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.phoneNumber" aria-hidden="true" data-role="label-phonenumber"></label>
+      <input type="tel"
+        class="form-control"
+        name="phoneNumber"
+        maxlength="30"
+        data-ng-model="$ctrl.state.contact.data.phoneNumber"
+        aria-label="{{:: 'label.phoneNumber' | i18n }}"
+        placeholder="{{:: 'placeholder.phoneNumber' | i18n }}"
+        data-role="enter-phonenumber">
+      </span>
+    </div>
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.emailAddress" aria-hidden="true" data-role="label-email-address"></label>
+      <input type="email"
+        class="form-control"
+        name="emailId"
+        data-ng-model="$ctrl.state.contact.data.emailId"
+        data-ng-class="{ 'is-invalid': ext.helpers.isInvalid(contactForm, 'emailId') }"
+        aria-label="{{:: 'label.emailAddress' | i18n }}"
+        placeholder="{{:: 'placeholder.emailAddress' | i18n }}"
+        data-role="enter-email-address"
+        data-ui-bb-email-ng>
+      <span class="invalid-feedback"
+        data-i18n-key="errors.emailPattern"
+        data-role="error-message-email-address">
+      </span>
+      </span>
+    </div>
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.contactPerson" aria-hidden="true" data-role="label-contact-person"></label>
+      <input type="text"
+        class="form-control"
+        name="contactPerson"
+        maxlength="70"
+        data-ng-model="$ctrl.state.contact.data.contactPerson"
+        aria-label="{{:: 'label.contactPerson' | i18n }}"
+        placeholder="{{:: 'placeholder.name' | i18n }}"
+        data-role="enter-contact-person">
+    </div>
+  </div>
+
+  <div class="contact-details-separator"></div>
+  <div class="row contact-details-row">
+    <div class="col-12 contact-details-col">
+      <label data-i18n-key="label.address" aria-hidden="true" data-role="label-address"></label>
+      <input type="text"
+        class="form-control"
+        name="addressLine1"
+        data-ng-model="$ctrl.state.contact.data.addressLine1"
+        aria-label="{{:: 'placeholder.addressLine1' | i18n }}"
+        placeholder="{{:: 'placeholder.addressLine1' | i18n }}"
+        data-role="enter-addressLine1"
+        maxlength="70">
+    </div>
+    <div class="col-12 contact-details-col">
+      <input type="text"
+        class="form-control"
+        name="addressLine2"
+        data-ng-model="$ctrl.state.contact.data.addressLine2"
+        aria-label="{{:: 'placeholder.addressLine2' | i18n }}"
+        placeholder="{{:: 'placeholder.addressLine2' | i18n }}"
+        data-role="enter-addressLine2"
+        maxlength="70">
+    </div>
+    <div class="col-12 contact-details-col">
+      <input type="text"
+        class="form-control"
+        name="streetName"
+        data-ng-model="$ctrl.state.contact.data.streetName"
+        aria-label="{{:: 'placeholder.street' | i18n }}"
+        placeholder="{{:: 'placeholder.street' | i18n }}"
+        data-role="enter-address"
+        maxlength="70">
+    </div>
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.city" aria-hidden="true" data-role="label-city"></label>
+      <input type="text"
+        class="form-control"
+        name="town"
+        data-ng-model="$ctrl.state.contact.data.town"
+        aria-label="{{:: 'placeholder.city' | i18n }}"
+        placeholder="{{:: 'label.city' | i18n }}"
+        data-label="enter-city"
+        maxlength="35">
+    </div>
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.postCode" aria-hidden="true" data-role="label-zip-code"></label>
+      <input type="text"
+        class="form-control"
+        name="postCode"
+        maxlength="16"
+        data-ng-model="$ctrl.state.contact.data.postCode"
+        aria-label="{{:: 'placeholder.postCode' | i18n }}"
+        placeholder="{{:: 'placeholder.postCode' | i18n }}"
+        data-role="enter-zip-code">
+    </div>
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.state" aria-hidden="true" data-role="label-state"></label>
+      <input type="text"
+        class="form-control"
+        name="countrySubDivision"
+        maxlength="35"
+        data-ng-model="$ctrl.state.contact.data.countrySubDivision"
+        aria-label="{{:: 'placeholder.state' | i18n }}"
+        placeholder="{{:: 'label.state' | i18n }}"
+        data-role="enter-state">
+    </div>
+    <div class="col-6 contact-details-col">
+      <label data-i18n-key="label.country" aria-hidden="true" data-role="label-country"></label>
+      <select name="country"
+        class="form-control"
+        data-ng-model="$ctrl.state.contact.data.country"
+        aria-label="{{:: 'label.country' | i18n }}"
+        data-role="select-country">
+        <option value="" disabled="">{{:: 'label.selectCountry' | i18n }}</option>
+        <option
+          data-ng-repeat="country in ext.helpers.getSupportedCountries()"
+          data-role="account-bankCountry-{{country}}"
+          value="{{country.toUpperCase()}}"
+          data-i18n-key="country.{{country}}">
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="contact-details-separator"></div>
+  <div class="row contact-details-row">
+    <div class="col-12 contact-details-col">
+      <h4 class="float-left">
+        <span data-role="label-accounts" data-i18n-key="label.accounts"></span>
+        <span class="small text-muted" data-i18n-key="label.required"></span>
+      </h4>
+      <input type="number"
+        class="ng-hide"
+        ng-model="::$ctrl.state.contact.data.accounts.length"
+        name="accountsSize"
+        min="1" />
+      <button type="button"
+        class="btn btn-outline-secondary"
+        data-ng-class="{
+          'float-right': $ctrl.state.contact.data.accounts.length,
+          'btn-lg btn-block': !$ctrl.state.contact.data.accounts.length,
+          'btn-outline-danger': ext.helpers.isInvalid(contactForm, 'accountsSize')
+        }"
+        data-role="add-accounts"
+        data-ng-click="ext.helpers.openAccountForm($ctrl, ext)">
+        <i aria-hidden="true" class="fa fa-plus"></i>
+        <span data-ng-if="$ctrl.state.contact.data.accounts.length" data-i18n-key="label.addAccount"></span>
+        <span data-ng-if="!$ctrl.state.contact.data.accounts.length" data-i18n-key="label.addAccountToThisContact"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card card-default"
+    data-ng-repeat="account in $ctrl.state.contact.data.accounts track by $index">
+    <div class="card-header text-right">
+      <div class="btn-group">
+        <button type="button"
+          data-role="account-delete"
+          class="btn btn-outline-secondary contacts-delete-btn"
+          aria-label="{{ 'label.delete' | i18n }}"
+          data-ng-click="ext.helpers.showAccountDeleteConfirmation(ext, $index, account)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+
+        <button
+          type="button"
+          data-role="account-edit"
+          class="btn btn-outline-secondary contacts-edit-btn"
+          aria-label="{{ 'label.edit' | i18n }}"
+          data-ng-click="ext.helpers.openAccountForm($ctrl, ext, $index)">
+          <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div data-ng-include="'#ext-bus-contact-list-ng/account-details-block.ng.html'"></div>
+    </div>
+  </div>
+
+  </form>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.deleteAccConfirmOpened"
+    data-on-confirm="ext.helpers.deleteContactAccount($ctrl, ext.accIndexToDelete)"
+    data-labels="{
+      heading: ('dialog.deleteAcc.title' | i18n),
+      bodyText: ('dialog.deleteAcc.body' | i18n: { accName: ext.accNameToDelete }),
+      confirm: ('dialog.deleteAcc.yes' | i18n),
+      cancel: ('label.cancel' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+</script>
+
+<script type="text/ng-template" id="#ext-bus-contact-list-ng/account-details-block.ng.html">
+  <h5 data-ng-if="account.alias || account.name">
+    <strong data-ng-bind="account.alias || account.name" class="d-block text-truncate" title="{{account.alias || account.name}}"></strong>
+  </h5>
+  <div data-ng-if="account.IBAN"
+    data-ng-bind="ext.helpers.formatIBAN(account.IBAN)"
+    class="text-truncate"
+    title="{{ ext.helpers.formatIBAN(account.IBAN) }}"
+    data-role="contact-request-account-iban">
+  </div>
+  <div data-ng-if="account.accountNumber"
+    data-ng-bind="account.accountNumber"
+    class="text-truncate"
+    title="{{account.accountNumber}}"
+    data-role="contact-request-account-bban">
+  </div>
+  <div class="small text-muted">
+    <span data-ng-if="account.bankName"
+      data-ng-bind="account.bankName"
+      class="d-block text-truncate"
+      data-role="bank-name"></span>
+    <span data-ng-if="account.bankName && (account.BIC || account.bankCode)">&bull;</span>
+    <span data-ng-if="account.BIC"
+      data-ng-bind="account.BIC"
+      data-role="account-bic"></span>
+    <span data-ng-if="account.BIC && account.bankCode">&bull;</span>
+    <span data-ng-if="account.bankCode"
+      data-ng-bind="account.bankCode"
+      data-role="bank-code"></span>
+  </div>
+
+  <div data-ng-if="ext.helpers.showBankBlock(account, ['address'])" class="mt-2">
+    <h6 data-i18n-key="label.bank.branchAddress"></h6>
+    <div data-ng-bind="ext.helpers.getBankAddress(account)" class="text-truncate" title="{{ext.helpers.getBankAddress(account)}}"></div>
+  </div>
+
+  <div data-ng-if="ext.helpers.showHolderBlock(account, ['address'])" class="mt-2">
+    <h6 data-i18n-key="label.bank.accountAddress"></h6>
+    <div data-ng-bind="ext.helpers.getHolderAddress(account)"
+      class="text-truncate"
+      title="{{ext.helpers.getHolderAddress(account)}}"
+      data-role="bank-address">
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bus-contact-list-ng/accordion-template.html">
+  <div data-ng-transclude></div>
+</script>
+
+<script type="text/ng-template" id="#ext-bus-contact-list-ng/group-template.html">
+  <div>
+    <div class="row" data-ng-click="toggleOpen()">
+      <div class="col-12 pl-0" data-uib-accordion-transclude="heading">
+        <uib-accordion-header class="h4 col-12 clearfix">
+          {{heading}}
+          <i class="fa text-muted float-right"
+            data-ng-class="isOpen ? 'fa-chevron-up' : 'fa-chevron-down'">
+          </i>
+        </uib-accordion-header>
+      </div>
+    </div>
+    <div uib-collapse="!isOpen">
+      <div data-ng-transclude></div>
+    </div>
+  </div>
+</script>

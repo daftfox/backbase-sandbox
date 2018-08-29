@@ -1,0 +1,58 @@
+<div data-ng-controller="MessagesController as $ctrl"
+  class="ext-bb-messages-controls-ng ng-cloak"
+  data-ng-class="{ 'd-print-none' : ext.showModal }"
+>
+
+  <div data-ng-controller="DraftController as $draftCtrl">
+  
+    <ui-bb-modal-ng
+      data-size="lg"
+      data-is-open="ext.showModal"
+      data-animation="true"
+      data-on-close="ext.helpers.closeModalWindow(ext);$draftCtrl.dismiss();"
+    >
+      <ui-bb-draft-edit-ng
+        data-topics="$ctrl.topics"
+        data-config="$draftCtrl.config"
+        data-on-close="ext.helpers.setConfirmationState(ext, $draftCtrl, $isEmpty)"
+        data-on-send="ext.helpers.closeModalWindow(ext);$draftCtrl.send(draft)"
+        data-select-topic-placeholder="{{ ('form.select.topic.placeholder' | i18n) }}"
+        data-message-placeholder="{{ ('form.message.placeholder' | i18n) }}"
+        data-messages="{
+          labelClose: ('ui-bb-draft-ng.label.close' | i18n),
+          labelSend: ('ui-bb-draft-ng.label.send' | i18n),
+          labelRemove: ('ui-bb-draft-ng.label.remove' | i18n),
+          labelToggleImportance: ('ui-bb-draft-ng.label.toggleImportance' | i18n),
+          formHeader: ('ui-bb-draft-ng.form.header' | i18n),
+          formSubject: ('ui-bb-draft-ng.form.subject' | i18n),
+          formTopic: ('ui-bb-draft-ng.form.topic' | i18n),
+          formMessage: ('ui-bb-draft-ng.form.message' | i18n),
+          formCancel: ('ui-bb-draft-ng.form.cancel' | i18n),
+          formSend: ('ui-bb-draft-ng.form.send' | i18n),
+          errorSend: ('ui-bb-draft-ng.error.send' | i18n),
+          formSubjectPlaceholder: ('form.subject.placeholder' | i18n),
+        }">
+      </ui-bb-draft-edit-ng>
+    </ui-bb-modal-ng>
+
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary"
+          aria-label="{{ 'label.openNewDraft' | i18n }}"
+          data-ng-click="ext.helpers.openModalWindow(ext);$draftCtrl.open();"
+          data-i18n-key="label.compose"
+        ></button>
+    </div>
+
+    <ui-bb-confirm-ng
+      data-is-open="ext.cancelConfirmOpened"
+      data-on-confirm="ext.helpers.closeModalWindow(ext);$draftCtrl.dismiss();"
+      data-labels="{
+        heading: ('dialog.cancel.title' | i18n),
+        bodyText: ('dialog.cancel.body' | i18n),
+        confirm: ('dialog.cancel.yes' | i18n),
+        cancel: ('dialog.cancel.no' | i18n)
+      }"
+      data-confirm-btn-class="'btn-danger'">
+    </ui-bb-confirm-ng>
+  </div>
+</div>

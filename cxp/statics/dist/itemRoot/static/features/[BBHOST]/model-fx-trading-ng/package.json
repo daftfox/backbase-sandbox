@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "model-fx-trading-ng@^1.20.0",
+        "scope": null,
+        "escapedName": "model-fx-trading-ng",
+        "name": "model-fx-trading-ng",
+        "rawSpec": "^1.20.0",
+        "spec": ">=1.20.0 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-fx-rate-table-details-ng"
+    ]
+  ],
+  "_from": "model-fx-trading-ng@>=1.20.0 <2.0.0",
+  "_id": "model-fx-trading-ng@1.20.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/model-fx-trading-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "model-fx-trading-ng@^1.20.0",
+    "scope": null,
+    "escapedName": "model-fx-trading-ng",
+    "name": "model-fx-trading-ng",
+    "rawSpec": "^1.20.0",
+    "spec": ">=1.20.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-fx-rate-table-details-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/model-fx-trading-ng/-/model-fx-trading-ng-1.20.0.tgz",
+  "_shasum": "9b660b92feb3967348adfa38894a379adf384fb6",
+  "_shrinkwrap": null,
+  "_spec": "model-fx-trading-ng@^1.20.0",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-fx-rate-table-details-ng",
+  "dependencies": {
+    "data-bb-trading-http-ng": "^0.0.0",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-storage-ng": "^1.0.98",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/model-fx-trading-ng/-/model-fx-trading-ng-1.20.0.tgz",
+    "shasum": "9b660b92feb3967348adfa38894a379adf384fb6"
+  },
+  "main": "scripts/model-fx-trading-ng.js",
+  "name": "model-fx-trading-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.20.0"
+}

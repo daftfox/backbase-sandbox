@@ -1,0 +1,214 @@
+<div
+  class="ext-bbm-product-details-view-ng"
+  data-ng-controller="ProductDetailsViewController as $ctrl">
+  <div class="bbm-layout bbm-layout-scroll">
+    <div
+      class="bbm-form-view"
+      data-ng-if="ext.helpers.hasProductDetails()">
+      <div class="bbm-form-view-group">
+        <ul class="bbm-form-view-group-items">
+          <!-- Product name -->
+          <li class="bbm-form-view-item">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.productName">
+                </div>
+                <div
+                  class="bbm-data-value"
+                  data-role="product-name"
+                  data-ng-if="ext.helpers.getProductDetails().alias || ext.helpers.getProductDetails().name"
+                  data-ng-bind="ext.helpers.getProductDetails().alias || ext.helpers.getProductDetails().name">
+                </div>
+              </div>
+              <div class="bbm-data-actions">
+                <div class="bbm-data-action bbm-data-action-edit">
+                  <button
+                    class="btn btn-icon"
+                    data-ng-click="intents.showProductAliasForm()">
+                    <span
+                      class="bbm-icon bbm-icon-edit fa fa-pencil"
+                      aria-hidden="true">
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Account number -->
+          <li
+            class="bbm-form-view-group-item"
+            data-ng-if="ext.helpers.getProductDetails().identifier">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.accountNumber">
+                </div>
+                <div
+                  class="bbm-data-value"
+                  data-role="product-name"
+                  data-ng-if="ext.helpers.getProductDetails().identifier"
+                  data-ng-bind="ext.helpers.getProductDetails().identifier">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Product Balances -->
+      <div
+        class="bbm-form-view-group"
+        data-role="product-balances"
+        data-ng-if="ext.helpers.getProductDetails().productBalances">
+        <div class="bbm-form-view-group-header">
+          <h2
+            class="bbm-form-view-group-title"
+            data-i18n-key="heading.productBalances">
+          </h2>
+        </div>
+        <ul class="bbm-form-view-group-items">
+          <!-- Primary -->
+          <li class="bbm-form-view-item" data-ng-if="ext.helpers.getProductDetails().productBalances.primary">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="{{ ext.helpers.getProductDetails().productBalances.primary.label }}">
+                </div>
+                <div class="bbm-data-value">
+                  <ui-bb-format-amount-ng
+                    data-amount="ext.helpers.getProductDetails().productBalances.primary.value"
+                    data-currency="ext.helpers.getProductDetails().currency">
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Secondary -->
+          <li
+            class="bbm-form-view-item"
+            data-ng-if="ext.helpers.getProductDetails().productBalances.secondary">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="{{ ext.helpers.getProductDetails().productBalances.secondary.label }}">
+                </div>
+                <div class="bbm-data-value">
+                  <ui-bb-format-amount-ng
+                    data-amount="ext.helpers.getProductDetails().productBalances.secondary.value"
+                    data-currency="ext.helpers.getProductDetails().currency">
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Tertiary -->
+          <li
+            class="bbm-form-view-item"
+            data-ng-if="ext.helpers.getProductDetails().productBalances.tertiary">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="{{ ext.helpers.getProductDetails().productBalances.tertiary.label }}">
+                </div>
+                <div class="bbm-data-value">
+                  <ui-bb-format-amount-ng
+                    data-amount="ext.helpers.getProductDetails().productBalances.tertiary.value"
+                    data-currency="ext.helpers.getProductDetails().currency">
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Additional Details -->
+      <div
+        class="bbm-form-view-group"
+        data-role="additional-details"
+        data-ng-if="ext.helpers.getProductDetails().additionalDetails">
+        <div class="bbm-form-view-group-header">
+          <h2
+            class="bbm-form-view-group-title"
+            data-i18n-key="heading.additionalDetails">
+          </h2>
+        </div>
+        <ul class="bbm-form-view-group-items">
+          <!-- Account opening date -->
+          <li
+            class="bbm-form-view-item"
+            data-ng-if="ext.helpers.getProductDetails().additionalDetails.accountOpeningDate">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.accountOpeningDate">
+                </div>
+                <div
+                  class="bbm-data-value"
+                  data-ng-bind="ext.helpers.getProductDetails().additionalDetails.accountOpeningDate | date : 'd MMMM yyyy'">
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- External transfer allowed -->
+          <li class="bbm-form-view-item">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.externalTransferAllowed">
+                </div>
+                <div
+                  class="bbm-data-value"
+                  data-i18n-key="{{ $ctrl.state.product.additionalDetails.externalTransferAllowed
+                    ? 'value.externalTransferAllowed.true'
+                    : 'value.externalTransferAllowed.false' }}">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div
+      class="bbm-error-state"
+      data-ng-if="ext.helpers.showErrorState()">
+      <div class="bbm-error-state-icon">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+      </div>
+      <h2
+        class="bbm-error-state-title"
+        data-i18n-key="message.loading.failed.title">
+      </h2>
+      <p
+        class="bbm-error-state-message"
+        data-i18n-key="message.loading.failed.body">
+      </p>
+    </div>
+
+    <!-- Loading state -->
+    <div
+      class="bbm-loading-state"
+      data-ng-if="ext.helpers.showLoadingState()">
+      <div class="bbm-loading-state-spinner">
+      </div>
+      <p
+        class="bbm-loading-state-message"
+        data-i18n-key="message.loading">
+      </p>
+    </div>
+  </div>
+</div>

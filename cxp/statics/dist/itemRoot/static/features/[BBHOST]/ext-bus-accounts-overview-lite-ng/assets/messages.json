@@ -1,0 +1,19 @@
+{
+  "en-US": {
+    "header.accounts": "Accounts",
+
+    "accounts.label.empty.accounts.title": "No Accounts",
+    "accounts.label.empty.accounts.subtitle": "There are no accounts to display.",
+
+    "label.allAccounts": "View all accounts",
+
+    "accounts.header.name": "Account name",
+    "accounts.header.currency": "Ccy",
+    "accounts.header.availableBalance": "Available balance",
+    "accounts.header.viewTransactions": "View transactions",
+    "accounts.header.newPayment": "New payment",
+    "accounts.header.noPermissions": "(no permissions)",
+
+    "message.loading": "Loading"
+  }
+}

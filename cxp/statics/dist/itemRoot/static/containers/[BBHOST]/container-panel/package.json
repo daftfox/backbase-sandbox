@@ -1,0 +1,65 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "container-panel@^2.0.0",
+        "scope": null,
+        "escapedName": "container-panel",
+        "name": "container-panel",
+        "rawSpec": "^2.0.0",
+        "spec": ">=2.0.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist/node_modules/container-deck"
+    ]
+  ],
+  "_from": "container-panel@>=2.0.0 <3.0.0",
+  "_id": "container-panel@2.0.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-deck/container-panel",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "container-panel@^2.0.0",
+    "scope": null,
+    "escapedName": "container-panel",
+    "name": "container-panel",
+    "rawSpec": "^2.0.0",
+    "spec": ">=2.0.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/container-deck"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/container-panel/-/container-panel-2.0.4.tgz",
+  "_shasum": "2b0294edd8b19ffd46cf89454e29fa9e517d2cdf",
+  "_shrinkwrap": null,
+  "_spec": "container-panel@^2.0.0",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist/node_modules/container-deck",
+  "author": "",
+  "dependencies": {
+    "template-panel": "^2.0.0"
+  },
+  "description": "Generic empty panel which can be added to a Deck Container as a child.",
+  "devDependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/container-panel/-/container-panel-2.0.4.tgz",
+    "shasum": "2b0294edd8b19ffd46cf89454e29fa9e517d2cdf"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "container-panel",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/container-panel.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.0.4"
+}

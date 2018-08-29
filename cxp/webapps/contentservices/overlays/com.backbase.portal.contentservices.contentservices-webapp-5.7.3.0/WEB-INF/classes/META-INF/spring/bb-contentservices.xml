@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Import resource from external dependencies. -->
+    <import resource="classpath:META-INF/spring/bb-contentservices-repository-context.xml"/>
+
+    <!-- Import internal configuration files -->
+    <import resource="bb-contentservices-service.xml"/>
+    <import resource="bb-contentservices-jmx.xml"/>
+    <import resource="bb-contentservices-security.xml"/>
+    <import resource="bb-contentservices-filters.xml"/>
+    <import resource="bb-contentservices-distributed-cache-flush.xml"/>
+
+
+</beans>

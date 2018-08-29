@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bbm-product-details-view-ng@^3.17.0",
+        "scope": null,
+        "escapedName": "ext-bbm-product-details-view-ng",
+        "name": "ext-bbm-product-details-view-ng",
+        "rawSpec": "^3.17.0",
+        "spec": ">=3.17.0 <4.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bbm-product-details-ng"
+    ]
+  ],
+  "_from": "ext-bbm-product-details-view-ng@>=3.17.0 <4.0.0",
+  "_id": "ext-bbm-product-details-view-ng@3.18.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bbm-product-details-view-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bbm-product-details-view-ng@^3.17.0",
+    "scope": null,
+    "escapedName": "ext-bbm-product-details-view-ng",
+    "name": "ext-bbm-product-details-view-ng",
+    "rawSpec": "^3.17.0",
+    "spec": ">=3.17.0 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bbm-product-details-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-product-details-view-ng/-/ext-bbm-product-details-view-ng-3.18.0.tgz",
+  "_shasum": "784a4a277011aacc4f0a89d97b6a49809ea6c520",
+  "_shrinkwrap": null,
+  "_spec": "ext-bbm-product-details-view-ng@^3.17.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bbm-product-details-ng",
+  "dependencies": {
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-product-details-view-ng/-/ext-bbm-product-details-view-ng-3.18.0.tgz",
+    "shasum": "784a4a277011aacc4f0a89d97b6a49809ea6c520"
+  },
+  "main": "scripts/ext-bbm-product-details-view-ng.js",
+  "name": "ext-bbm-product-details-view-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.18.0"
+}

@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bbm-initiate-payment-form-ng@^3.36.20",
+        "scope": null,
+        "escapedName": "ext-bbm-initiate-payment-form-ng",
+        "name": "ext-bbm-initiate-payment-form-ng",
+        "rawSpec": "^3.36.20",
+        "spec": ">=3.36.20 <4.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bbm-initiate-payment-ng"
+    ]
+  ],
+  "_from": "ext-bbm-initiate-payment-form-ng@>=3.36.20 <4.0.0",
+  "_id": "ext-bbm-initiate-payment-form-ng@3.37.9",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bbm-initiate-payment-form-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bbm-initiate-payment-form-ng@^3.36.20",
+    "scope": null,
+    "escapedName": "ext-bbm-initiate-payment-form-ng",
+    "name": "ext-bbm-initiate-payment-form-ng",
+    "rawSpec": "^3.36.20",
+    "spec": ">=3.36.20 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bbm-initiate-payment-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-initiate-payment-form-ng/-/ext-bbm-initiate-payment-form-ng-3.37.9.tgz",
+  "_shasum": "1f519063572300df5ca3adee21ebdaf8dadb73f0",
+  "_shrinkwrap": null,
+  "_spec": "ext-bbm-initiate-payment-form-ng@^3.36.20",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bbm-initiate-payment-ng",
+  "dependencies": {
+    "lib-bbm-plugins": "^1.0.122",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-iban-ng": "^2.7.1",
+    "ui-bbm-amount-field-ng": "^1.1.0",
+    "ui-bbm-beneficiary-select-ng": "^2.37.9",
+    "ui-bbm-switch-ng": "^1.2.0",
+    "ui-bbm-textfield-ng": "^1.1.0",
+    "vendor-bb-angular-ng-messages": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-initiate-payment-form-ng/-/ext-bbm-initiate-payment-form-ng-3.37.9.tgz",
+    "shasum": "1f519063572300df5ca3adee21ebdaf8dadb73f0"
+  },
+  "main": "scripts/ext-bbm-initiate-payment-form-ng.js",
+  "name": "ext-bbm-initiate-payment-form-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.37.9"
+}

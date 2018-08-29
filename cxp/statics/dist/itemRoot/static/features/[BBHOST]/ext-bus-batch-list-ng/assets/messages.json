@@ -1,0 +1,52 @@
+{
+  "en-US": {
+    "value.unauthorized": "Entered",
+    "value.partiallyAuthorized": "Partially Authorized",
+    "value.authorized": "Authorized",
+    "value.rejected.user": "Rejected by user",
+
+    "value.U": "E",
+    "value.PA": "PA",
+    "value.A": "A",
+    "value.R": "R",
+
+    "label.type": "Type",
+    "label.status": "Status",
+    "label.paymentOrders": "Payment orders",
+    "label.amount": "Amount",
+    "label.currency": "Ccy",
+    "label.executionDate": "Exec. date",
+    "label.uploadedBy": "Uploaded by",
+    "label.uploadedOn": "Uploaded on",
+    "label.loading": "Loading...",
+    "label.emptyList": "There are no batches to display. Start managing your batches by uploading a new batch.",
+    "label.loadMore": "Load more",
+
+    "pagination.label.first": "First",
+    "pagination.label.last": "Last",
+    "pagination.label.next": "Next",
+    "pagination.label.prev": "Previous",
+    "pagination.label.page_navigation": "Page navigation",
+
+    "actions.authorize": "Authorize",
+    "actions.reject": "Reject",
+    "error.auth": "You are not authorised to perform this action.",
+    "error.user": "There is a problem with the action you are trying to perform.",
+    "error.connectivity": "Connection Error",
+    "error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later.",
+    "dialog.reject.title": "Reject Batch",
+    "dialog.reject.multiple.title": "Reject Batches",
+    "dialog.reject.body": "You are about to reject a batch. This action cannot be undone.",
+    "dialog.reject.multiple.body": "You are about to reject {number} batch(es). This action cannot be undone.",
+    "dialog.reject.yes": "Reject",
+    "dialog.reject.no": "Cancel",
+    "notification.auth.success": "Successfully authorized a batch",
+    "notification.auth.fail": "Unable to authorize a batch",
+    "notification.auth.multiple.success": "Successfully authorized {number} batch(es)",
+    "notification.auth.multiple.fail": "Unable to authorize {number} batch(es)",
+    "notification.reject.success": "Successfully rejected a batch",
+    "notification.reject.fail": "Unable to reject a batch",
+    "notification.reject.multiple.success": "Successfully rejected {number} batch(es)",
+    "notification.reject.multiple.fail": "Unable to reject {number} batch(es)"
+  }
+}

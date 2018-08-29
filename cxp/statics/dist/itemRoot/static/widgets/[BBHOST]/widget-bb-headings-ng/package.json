@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-headings-ng@~1.5.2",
+        "scope": null,
+        "escapedName": "widget-bb-headings-ng",
+        "name": "widget-bb-headings-ng",
+        "rawSpec": "~1.5.2",
+        "spec": ">=1.5.2 <1.6.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-headings-ng@>=1.5.2 <1.6.0",
+  "_id": "widget-bb-headings-ng@1.5.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-headings-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-headings-ng@~1.5.2",
+    "scope": null,
+    "escapedName": "widget-bb-headings-ng",
+    "name": "widget-bb-headings-ng",
+    "rawSpec": "~1.5.2",
+    "spec": ">=1.5.2 <1.6.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-headings-ng/-/widget-bb-headings-ng-1.5.2.tgz",
+  "_shasum": "cb6ab34cbe5e1a1cc72dda9e7baa1fd79e99ca15",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-headings-ng@~1.5.2",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bus-headings-ng": "^2.4.2",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-headings-ng/-/widget-bb-headings-ng-1.5.2.tgz",
+    "shasum": "cb6ab34cbe5e1a1cc72dda9e7baa1fd79e99ca15"
+  },
+  "main": "scripts/widget-bb-headings-ng.js",
+  "name": "widget-bb-headings-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.5.2"
+}

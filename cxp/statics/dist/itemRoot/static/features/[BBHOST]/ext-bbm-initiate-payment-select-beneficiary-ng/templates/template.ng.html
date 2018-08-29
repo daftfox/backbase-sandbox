@@ -1,0 +1,77 @@
+<div class="ext-bbm-initiate-payment-select-account-ng">
+  <div class="bbm-layout bbm-layout-scroll">
+    <div class="bbm-list">
+      <!-- Accounts -->
+      <div class="bbm-list-group">
+        <ul class="bbm-list-group-items">
+          <!-- Credit accounts -->
+          <li
+            class="bbm-list-item"
+            data-ng-repeat="account in ext.helpers.getCreditAccounts() track by $index"
+            data-ng-click="ext.helpers.selectBeneficiary(account)">
+            <div class="bbm-account bbm-account-compact">
+              <div class="bbm-account-compact-primary-information">
+                <h3
+                  class="bbm-account-compact-name"
+                  data-ng-bind="ext.helpers.getAccountDisplayName(account)">
+                </h3>
+                <div class="bbm-account-compact-primary-amount">
+                  <ui-bb-format-amount-ng
+                    data-amount="account.amount"
+                    data-currency="account.currency"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+              <div class="bbm-account-compact-secondary-information">
+                <div class="bbm-account-compact-identifier">
+                  <span
+                    class="prevent-ios-click"
+                    data-role="product-id" data-ng-bind="account.identifier">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contacts -->
+      <div
+         class="bbm-list-group"
+         data-ng-repeat="group in ext.helpers.getContacts() track by $index">
+        <div class="bbm-list-group-header">
+          <h3
+            class="bbm-list-group-title"
+            data-ng-bind="group.char"></h3>
+        </div>
+        <ul class="bbm-list-group-items">
+          <li
+            class="bbm-list-item bbm-list-item-has-media"
+            data-ng-repeat="contact in group.contacts track by $index"
+            data-ng-click="ext.helpers.selectBeneficiary(contact)">
+            <div class="bbm-contact">
+              <div class="bbm-contact-avatar">
+                <ui-bb-avatar-ng
+                  class="bbm-avatar bbm-avatar-sm bbm-avatar-circle"
+                  data-name="contact.name"
+                  data-image="contact.imageAvatar">
+                </ui-bb-avatar-ng>
+              </div>
+              <div class="bbm-contact-information">
+                <div class="bbm-contact-name" data-ng-bind="contact.name"></div>
+                <div class="bbm-contact-identifier">
+                  <span
+                    class="prevent-ios-click"
+                    data-role="contact-id"
+                    data-ng-bind="contact.identifier">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

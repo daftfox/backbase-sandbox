@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-wm-valuation-ng@^3.12.2",
+        "scope": null,
+        "escapedName": "ext-wm-valuation-ng",
+        "name": "ext-wm-valuation-ng",
+        "rawSpec": "^3.12.2",
+        "spec": ">=3.12.2 <4.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-wm-valuation-ng"
+    ]
+  ],
+  "_from": "ext-wm-valuation-ng@>=3.12.2 <4.0.0",
+  "_id": "ext-wm-valuation-ng@3.12.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-wm-valuation-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-wm-valuation-ng@^3.12.2",
+    "scope": null,
+    "escapedName": "ext-wm-valuation-ng",
+    "name": "ext-wm-valuation-ng",
+    "rawSpec": "^3.12.2",
+    "spec": ">=3.12.2 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-wm-valuation-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-wm-valuation-ng/-/ext-wm-valuation-ng-3.12.2.tgz",
+  "_shasum": "487d21625be35266cf5126f7e64b4448f58ae5c6",
+  "_shrinkwrap": null,
+  "_spec": "ext-wm-valuation-ng@^3.12.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-wm-valuation-ng",
+  "dependencies": {
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-styles": "^1.15.0",
+    "lib-wm-compose-selectors": "^1.15.2",
+    "ui-bb-chartjs-chart-bar-ng": "^2.5.1",
+    "ui-bb-dropdown-select-ng": "^2.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-wm-valuation-ng/-/ext-wm-valuation-ng-3.12.2.tgz",
+    "shasum": "487d21625be35266cf5126f7e64b4448f58ae5c6"
+  },
+  "main": "scripts/ext-wm-valuation-ng.js",
+  "name": "ext-wm-valuation-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.12.2"
+}

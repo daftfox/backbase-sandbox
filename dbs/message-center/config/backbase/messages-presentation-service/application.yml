@@ -1,0 +1,8 @@
+---
+logging:
+  config: ${backbase.config.dir}/messages-presentation-service/logback.xml
+
+backbase:
+  persistence:
+    enabled: false
+

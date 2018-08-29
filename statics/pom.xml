@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.weirdscience</groupId>
+    <artifactId>statics</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>Backbase 5 :: Statics</name>
+
+    <modules>
+        <module>collection-cxp-universal</module>
+        <module>collection-wealth-management-demo</module>
+        <module>collection-business-banking-demo</module>
+        <module>collection-retail-demo</module>
+        <module>collection-demo</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.backbase.maven.plugins</groupId>
+                    <artifactId>bb-maven-plugin</artifactId>
+                    <version>1.0.47</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <version>${portal.version}</version>
+                        <host>${portal.host}</host>
+                        <port>${portal.port}</port>
+                        <username>${portal.username}</username>
+                        <password>${portal.password}</password>
+                        <!-- You can upgrade bb-cli version independently -->
+                        <bbCliVersion>2.7.15</bbCliVersion>
+                        <!-- Or choose to use your globally available bb-cli -->
+                        <useGlobalBBCli>false</useGlobalBBCli>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <portal.version>5</portal.version>
+                <portal.host>localhost</portal.host>
+                <portal.port>7777</portal.port>
+                <portal.username>admin</portal.username>
+                <portal.password>admin</portal.password>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>remote</id>
+            <properties>
+                <portal.host>remote</portal.host>
+                <portal.port>8080</portal.port>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
+

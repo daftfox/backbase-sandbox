@@ -1,0 +1,56 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "model-bb-saving-goals-ng@^1.5.0",
+        "scope": null,
+        "escapedName": "model-bb-saving-goals-ng",
+        "name": "model-bb-saving-goals-ng",
+        "rawSpec": "^1.5.0",
+        "spec": ">=1.5.0 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-saving-goals-ng"
+    ]
+  ],
+  "_from": "model-bb-saving-goals-ng@>=1.5.0 <2.0.0",
+  "_id": "model-bb-saving-goals-ng@1.6.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/model-bb-saving-goals-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "model-bb-saving-goals-ng@^1.5.0",
+    "scope": null,
+    "escapedName": "model-bb-saving-goals-ng",
+    "name": "model-bb-saving-goals-ng",
+    "rawSpec": "^1.5.0",
+    "spec": ">=1.5.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-saving-goals-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-saving-goals-ng/-/model-bb-saving-goals-ng-1.6.0.tgz",
+  "_shasum": "3edc43ec7b32ba59005d12c36b28fefc2f3bc43b",
+  "_shrinkwrap": null,
+  "_spec": "model-bb-saving-goals-ng@^1.5.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-saving-goals-ng",
+  "dependencies": {
+    "data-bb-product-summary-http-ng": "^1.6.3",
+    "data-bb-saving-goals-http-ng": "^1.1.4",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-storage-ng": "^1.0.98",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-saving-goals-ng/-/model-bb-saving-goals-ng-1.6.0.tgz",
+    "shasum": "3edc43ec7b32ba59005d12c36b28fefc2f3bc43b"
+  },
+  "main": "scripts/model-bb-saving-goals-ng.js",
+  "name": "model-bb-saving-goals-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.6.0"
+}

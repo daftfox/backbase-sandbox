@@ -1,0 +1,185 @@
+/* design mode styles */
+
+html.bd-designMode-true .lp-lightbox-container {
+    position: relative;
+    margin: 0 10px 10px 0;
+    display: inline-block!important;
+    min-width: 150px;
+}
+
+html.bd-designMode-true .lp-lightbox-container.lp-lightbox-on {
+    position: absolute;
+}
+
+.bd-designMode-true .lp-aligner {
+  display: inline-block;
+}
+
+.lp-lightbox-preview {
+  color: #ccc;
+  padding: 10px;
+  padding-left: 40px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #333 .7em 45% no-repeat;
+
+}
+.lp-lightbox-preview:hover {
+  color: #fff;
+}
+.lp-lightbox-on > .lp-lightbox-preview {
+  display: none;
+}
+.lp-lightbox-area.pm-design-showArea {
+  min-height: 100%;
+}
+
+.bd-designMode-true .lp-overlay {
+    position: absolute;
+    outline: 9999px solid rgba(0,0,0,.5);
+}
+.bd-designMode-true .lp-lc {
+    overflow: visible;
+}
+.bd-designMode-true .lp-lc.lp-lc-refresh:after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: rgba(100, 100, 100, 0.2);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    border-radius: 2px;
+}
+.bd-designMode-true .lp-lc.deck-controls-enabled {
+    padding-bottom: 80px;
+}
+.bd-designMode-true .deck-controls {
+    z-index: 1;
+}
+.bd-designMode-true .deck-controls .bd-dm-buttons {
+    box-shadow: 0 0 0px 1px white;
+}
+.bd-designMode-true .lp-lc--content .lp-panel-mainarea {
+    min-height: 100px;
+    padding-bottom: 10px;
+}
+
+
+/* design mode styles end */
+
+.bp-container,
+.bp-widget {
+    clear: both;
+}
+
+.lp-lightbox-inner {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0,0,0,.2);
+    display: none;
+}
+.lp-lightbox-inner .bd-dm-edit-bar{
+    top: 0;
+    z-index: 1000;
+}
+.lp-lightbox-inner .bd-dm-clicked .bp-widget-body, .lp-lightbox-inner .bd-dm-hovered .bp-widget-body {
+    padding-top: 22px;
+}
+.lp-aligner {
+    display: none;
+}
+.lp-aligner.lp-lightbox-on {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flexbox;
+    display: flex;
+    position: fixed;
+
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+html.ie9 .lp-aligner.lp-lightbox-on,
+html.ie8 .lp-aligner.lp-lightbox-on {
+    top: 100px; /* hack for ie8 and ie9 */
+    text-align: center;
+}
+html.ie9 .lp-aligner.lp-lightbox-on .lp-lightbox-container,
+html.ie8 .lp-aligner.lp-lightbox-on .lp-lightbox-container {
+    margin: 0 auto;
+    display: inline;
+    display: inline-block;
+    text-align: left;
+}
+
+.lp-lightbox-overlay {
+    display: none;
+}
+.lp-lightbox-container {
+    display: none;
+}
+.lp-lightbox-on>.lp-lightbox-container {
+    display: block;
+}
+.lp-lightbox-on>.lp-lightbox-container>.lp-lightbox-inner {
+    z-index: 6;
+    display: block;
+}
+.lp-lightbox-on>.lp-lightbox-container .lp-lightbox-area {
+  padding: 0;
+}
+.lp-lightbox-on>div>.lp-lightbox-preview {
+    display: none;
+}
+.lp-lightbox-container .lp-springboard-widget {
+    height: 99%;
+}
+.lp-lightbox-container .lp-springboard-btn {
+    display: none;
+}
+.lp-lightbox-container .lp-springboard-btn-minimize {
+    display: block;
+}
+.lp-lightbox-container .lp-springboard-widget-head {
+    cursor: auto;
+}
+.lp-lightbox-container .lp-springboard-icon {
+    display: none;
+}
+.lp-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: url("../media/overlay-bg.png") repeat;
+}

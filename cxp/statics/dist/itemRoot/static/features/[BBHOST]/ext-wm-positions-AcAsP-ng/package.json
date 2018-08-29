@@ -1,0 +1,65 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-wm-positions-AcAsP-ng@~3.12.2",
+        "scope": null,
+        "escapedName": "ext-wm-positions-AcAsP-ng",
+        "name": "ext-wm-positions-AcAsP-ng",
+        "rawSpec": "~3.12.2",
+        "spec": ">=3.12.2 <3.13.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist"
+    ]
+  ],
+  "_from": "ext-wm-positions-AcAsP-ng@>=3.12.2 <3.13.0",
+  "_id": "ext-wm-positions-AcAsP-ng@3.12.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-wm-positions-AcAsP-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-wm-positions-AcAsP-ng@~3.12.2",
+    "scope": null,
+    "escapedName": "ext-wm-positions-AcAsP-ng",
+    "name": "ext-wm-positions-AcAsP-ng",
+    "rawSpec": "~3.12.2",
+    "spec": ">=3.12.2 <3.13.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-wm-positions-AcAsP-ng/-/ext-wm-positions-AcAsP-ng-3.12.2.tgz",
+  "_shasum": "dd78c0abcd06c4e146c302c75e3dad155289914d",
+  "_shrinkwrap": null,
+  "_spec": "ext-wm-positions-AcAsP-ng@~3.12.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist",
+  "dependencies": {
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-wm-portfolio-positions-builder-ng": "^1.15.2",
+    "ui-bb-ellipsis-tooltip-ng": "^2.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-scroll-to-view-ng": "^1.15.2",
+    "ui-wm-portfolio-collapse-expand-all-ng": "^1.15.2",
+    "ui-wm-portfolio-positions-ng": "^2.11.2",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-accordion": "1.3.3-bb.4",
+    "vendor-bb-uib-tooltip": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-wm-positions-AcAsP-ng/-/ext-wm-positions-AcAsP-ng-3.12.2.tgz",
+    "shasum": "dd78c0abcd06c4e146c302c75e3dad155289914d"
+  },
+  "main": "scripts/ext-wm-positions-AcAsP-ng.js",
+  "name": "ext-wm-positions-AcAsP-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.12.2"
+}

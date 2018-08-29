@@ -1,0 +1,24 @@
+{namespace templates_ColumnsContainer}
+/**
+ * Columns Container
+ * @param item Item in context
+ */
+{template .ColumnsContainer}
+    <div class="bp-container bp-ColumnsContainer bp-ui-dragRoot" data-pid="{$item.name}" style="{if strContains($item.preferences.marginTop.value, 'px')}margin-top:{$item.preferences.marginTop.value}{/if}">
+    	{let $aColumnWidths: split($item.preferences.columnWidths.value, ',') /}
+    	{let $gutterMargins: split($item.preferences.gutterMargins.value, ',') /}
+
+		{for $i in range(parseInt($item.preferences.numberOfColumns.value))}
+			<div class="bp-ColumnsContainer-column" style="width:{$aColumnWidths[$i]}">
+				<div class="bp-ColumnsContainer-column--area bp-area" style="margin-left:{$gutterMargins[$i*2]}px;margin-right:{$gutterMargins[($i*2)+1]}px">
+					{foreach $child in $item.children}
+						{if parseInt($child.preferences.area.value) == $i}
+							{include($child) |noAutoescape}
+						{/if}
+					{/foreach}
+				</div>
+			</div>
+		{/for}
+		<div style="clear:both"/>
+	</div>
+{/template}

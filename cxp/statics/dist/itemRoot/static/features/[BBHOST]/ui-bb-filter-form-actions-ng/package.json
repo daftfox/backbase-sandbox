@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-filter-form-actions-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-filter-form-actions-ng",
+        "name": "ui-bb-filter-form-actions-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-filter-form-actions-ng@2.5.1",
+  "_id": "ui-bb-filter-form-actions-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-filter-form-actions-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-filter-form-actions-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-filter-form-actions-ng",
+    "name": "ui-bb-filter-form-actions-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-filter-form-actions-ng/-/ui-bb-filter-form-actions-ng-2.5.1.tgz",
+  "_shasum": "687e3fbe0cb712435330b53008243da8d7f65b19",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-filter-form-actions-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-filter-form-actions-ng/-/ui-bb-filter-form-actions-ng-2.5.1.tgz",
+    "shasum": "687e3fbe0cb712435330b53008243da8d7f65b19"
+  },
+  "main": "scripts/ui-bb-filter-form-actions-ng.js",
+  "name": "ui-bb-filter-form-actions-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

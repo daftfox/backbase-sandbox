@@ -1,0 +1,8 @@
+---
+### Live profile
+logging:
+  config: ${backbase.config.dir}/limits-presentation-service/logback.xml
+
+backbase:
+  persistence:
+    enabled: false

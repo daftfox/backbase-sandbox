@@ -1,0 +1,15 @@
+{namespace templates_TCont autoescape="true"}
+
+/**
+ * Target Container Template
+ * @param item Item in context
+ */
+{template .TCont}
+  <div class="bp-container bp-tCont bp-tContFn-main bp-ui-dragRoot" data-pid="{$item.name}">
+  	<div class="bp-tCont-body bp-area bp-tContFn-body">
+  		{foreach $child in $item.children}
+        {include($child) |noAutoescape}
+      {/foreach}
+  	</div>
+  </div>
+{/template}

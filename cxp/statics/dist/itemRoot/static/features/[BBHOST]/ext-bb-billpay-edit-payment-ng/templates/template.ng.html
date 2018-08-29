@@ -1,0 +1,395 @@
+<div class="ext-bb-billpay-edit-payment-ng" data-ng-controller="EditPaymentController as $ctrl">
+  <ui-bb-substitute-error-ng data-message="ext.helpers.getLoadingErrorMessageKey(state) | i18n">
+    <ng-include src="state.template"></ng-include>
+  </ui-bb-substitute-error-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bb-billpay-edit-payment-ng/main.ng.html">
+  <form name="billpayEditPaymentForm">
+    <h2>
+      <span data-i18n-key="title"></span>
+      <div class="mt-3 small">{{$ctrl.payee.displayName}}</div>
+    </h2>
+
+    <ui-bb-substitute-error-ng
+      message="'error.no-payment' | i18n"
+      data-ng-if="!ext.helpers.paymentSelected(state)">
+    </ui-bb-substitute-error-ng>
+
+    <ui-bb-confirm-ng
+      data-is-open="$ctrl.payee.cancelConfirm.isOpen"
+      data-labels="{
+        heading: ('cancel-dialog.button.heading' | i18n),
+        bodyText: ('cancel-dialog.button.bodyText' | i18n),
+        cancel: ('cancel-dialog.button.cancel' | i18n),
+        confirm: ('cancel-dialog.button.confirm' | i18n),
+      }"
+      data-size="'lg'"
+      data-animation="false"
+      data-on-confirm="ext.helpers.navigateForCancel($ctrl.returnToPreviousScreen)"
+      data-is-dismissible="false"
+      data-role="billpay-edit-payment-cancel-dialog"
+      data-footer-class="'mt-5'">
+    </ui-bb-confirm-ng>
+
+    <ui-bb-loading-overlay-ng
+      data-ng-if="ext.helpers.paymentSelected(state)"
+      data-is-loading="ext.helpers.isLoading(state)">
+      <div class="card">
+        <ui-bb-stepper-ng
+          data-labels="ext.helpers.stepperLabels"
+          data-on-cancel="ext.helpers.openCancelConfirmationModal($ctrl.payee)"
+          data-allow-back="ext.helpers.allowPreviousStep(state)"
+          data-allow-next="ext.helpers.allowNextStep($ctrl, state)"
+          data-allow-cancel="true"
+          data-on-finish="ext.helpers.onFinish($ctrl)">
+          <ui-bb-stepper-step-ng title="{{'steps.payment-details' | i18n}}">
+            <ng-include src="'#ext-bb-billpay-edit-payment-ng/step-1.ng.html'"></ng-include>
+          </ui-bb-stepper-step-ng>
+          <ui-bb-stepper-step-ng title="{{'steps.review' | i18n}}">
+            <ng-include src="'#ext-bb-billpay-edit-payment-ng/step-2.ng.html'"></ng-include>
+          </ui-bb-stepper-step-ng>
+        </ui-bb-stepper-ng>
+      </div>
+    </ui-bb-loading-overlay-ng>
+  </form>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-edit-payment-ng/step-1.ng.html">
+  <div class="card border-0">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-12">
+          <div data-ng-include="'#ext-bb-billpay-edit-payment-ng/pay-from.ng.html'"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-2 col-lg-3 col-md-6 col-12">
+          <div data-ng-include="'#ext-bb-billpay-edit-payment-ng/amount.ng.html'"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-lg-5 col-md-7 col-12">
+          <div
+            data-ng-include="'#ext-bb-billpay-edit-payment-ng/date.ng.html'"
+            data-role="billpay-edit-payment-date">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-12">
+          <div class="form-group">
+            <label data-i18n-key="heading.label.memo"></label>
+            <div data-ng-include="'#ext-bb-billpay-edit-payment-ng/memo.ng.html'"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- errors -->
+      <div class="row">
+        <div class="col-12">
+          <div data-ng-repeat="errorKey in ext.helpers.generalErrorMessages track by $index">
+            <div class="invalid-feedback d-flex">
+              {{ ext.helpers.getError(errorKey, state) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-edit-payment-ng/step-2.ng.html">
+  <div class="card border-0">
+    <div class="card-body">
+      <h4 class="mt-0 mt-md-4">{{::ext.helpers.reviewTitle($ctrl.payee)}}</h4>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <strong data-ng-bind="$ctrl.payee.displayName"></strong>
+          <div class="my-1" data-i18n-key="review.rush-notice"
+            data-ng-if="ext.helpers.showRushNoticeForPayment($ctrl.payee)"></div>
+        </div>
+        <div class="col-12 col-md-8">
+          <div class="row mb-1">
+            <div class="col-sm-6 col-md-3">
+              <strong  data-i18n-key="review.label.amount"></strong>
+            </div>
+            <div class="col-sm-6 col-md-9">
+              <ui-bb-format-amount-ng
+                data-wrap
+                data-currency="ext.helpers.getCurrencyCode()"
+                data-amount="$ctrl.payee.newPayment.paymentAmount.value"
+                class="amount-regular-color">
+              </ui-bb-format-amount-ng>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-sm-6 col-md-3">
+              <strong data-i18n-key="review.label.delivery-date"></strong>
+            </div>
+            <div class="col-sm-6 col-md-9">
+              <span data-ng-bind="$ctrl.payee.newPayment.paymentDate | date"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-3">
+              <strong data-i18n-key="review.label.memo"></strong>
+            </div>
+            <div class="col-sm-6 col-md-9">
+              <span data-ng-bind="$ctrl.payee.newPayment.paymentMemo"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-ng-if="ext.helpers.showRushNoticeForPayment($ctrl.payee)">
+        <hr>
+        <div class="row">
+          <div class="col-12 col-md-4 mb-1">
+            <strong data-i18n-key="review.label.rush"></strong>
+          </div>
+          <div class="col-12 col-md-8">
+            <div class="row mb-1">
+              <div class="col-sm-6 col-md-3">
+                <strong data-i18n-key="review.label.amount"></strong>
+              </div>
+              <div class="col-sm-6 col-md-9">
+                <ui-bb-format-amount-ng
+                  data-wrap
+                  data-amount="ext.helpers.rushFee($ctrl.payee)"
+                  data-currency="ext.helpers.getCurrencyCode()"
+                  class="amount-regular-color">
+                </ui-bb-format-amount-ng>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-sm-6 col-md-3">
+                <strong data-i18n-key="review.label.charged-date"></strong>
+              </div>
+              <div class="col-sm-6 col-md-9" data-ng-bind="$ctrl.payee.newPayment.paymentDate | date"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <hr>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-4"></div>
+        <div class="col-12 col-md-8">
+          <div class="row">
+            <div class="col-sm-6 col-md-3">
+              <strong data-i18n-key="review.label.total-amount"></strong>
+            </div>
+            <div class="col-sm-6 col-md-9">
+              <span class="lead">
+                <ui-bb-format-amount-ng
+                  data-wrap
+                  data-amount="ext.helpers.totalPaymentAmount($ctrl.payee)"
+                  data-currency="ext.helpers.getCurrencyCode()"
+                  class="amount-regular-color">
+                </ui-bb-format-amount-ng>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- errors -->
+      <div class="row" data-ng-if="ext.helpers.errorsExist(state)">
+        <div class="col-12">
+          <!-- If there is an unrecoverable page error -->
+          <div class="has-danger mt-4" data-ng-if="ext.helpers.unrecoverablePageErrorExists(state)">
+            <div class="invalid-feedback d-flex">
+              {{ ext.helpers.getError('billpay_page_error', state) }}
+            </div>
+          </div>
+
+          <!--  Unrecoverable other errors -->
+          <div class="has-danger mt-4"
+            data-ng-if="ext.helpers.unrecoverableErrorsExist(state)"
+            data-ng-repeat="errorKey in ext.helpers.unrecoverableErrorMessages track by $index">
+            <div class="invalid-feedback d-flex">
+              {{ ext.helpers.getError(errorKey, state) }}
+            </div>
+          </div>
+
+          <!-- Show the page error when there are recoverable errors -->
+          <div class="has-danger mt-4"
+            data-ng-if="ext.helpers.errorsExist(state) && !ext.helpers.unrecoverableErrorsExist(state)">
+            <div class="invalid-feedback d-flex">
+              {{ 'billpay.model.error.default.step-2' | i18n }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-edit-payment-ng/pay-from.ng.html">
+  <div class="form-group" data-ng-class="ext.helpers.hasErrorClass('billpay_payment_account', state, billpayEditPaymentForm)">
+    <label data-i18n-key="heading.label.pay-from"></label>
+    <div data-ng-class="ext.helpers.getLoadingErrorClass(state)">
+      <!-- dropdown control requires a class -->
+      <ui-bb-dropdown-select-ng
+        class=""
+        name="billpay_payment_account"
+        data-has-error="ext.helpers.hasError('billpay_payment_account', state, billpayEditPaymentForm)"
+        data-selected-as="$option.displayName"
+        data-ng-model="$ctrl.payee.newPayment.paymentAccount"
+        data-role="billpay-edit-payment-account"
+        data-ng-change="ext.helpers.clearBackendErrorAccountField($ctrl, 'billpay_payment_account', state)">
+        <ui-bb-dropdown-option-ng
+          data-option="account"
+          data-ng-repeat="account in state.accounts track by account.accountNumber">
+          <a tabindex="0" role="button">
+            {{$option.displayName}}
+          </a>
+        </ui-bb-dropdown-option-ng>
+      </ui-bb-dropdown-select-ng>
+
+      <small class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasLoadingError(state)">
+        {{ ext.helpers.getLoadingErrorKey('accounts') | i18n }}
+      </small>
+
+      <div class="invalid-feedback d-flex"  data-ng-if="ext.helpers.hasError('billpay_payment_account', state, billpayEditPaymentForm)">
+        {{ ext.helpers.getError('billpay_payment_account', state, billpayEditPaymentForm) }}
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-edit-payment-ng/amount.ng.html">
+  <div class="form-group" data-ng-class="ext.helpers.hasErrorClass('billpay_payment_amount', state, billpayEditPaymentForm)">
+    <label data-i18n-key="heading.label.amount"></label>
+    <ui-bb-currency-input-ng
+      name="billpay_payment_amount"
+      class="currency-input"
+      data-ng-model="$ctrl.payee.newPayment.paymentAmount"
+      data-max-length="5"
+      data-decimal-max-length="2"
+      data-placeholder="0,000"
+      data-messages="ext.helpers.currencyInputLabels"
+      data-role="billpay-edit-payment-amount"
+      data-ng-required="true"
+      data-ng-change="ext.helpers.clearBackendErrorAmountField($ctrl, 'billpay_payment_amount', state)">
+    </ui-bb-currency-input-ng>
+    <div class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasError('billpay_payment_amount', state, billpayEditPaymentForm)">
+      {{ ext.helpers.getError('billpay_payment_amount', state, billpayEditPaymentForm) }}
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-edit-payment-ng/date.ng.html">
+  <div class="form-group" data-ng-class="ext.helpers.hasErrorClass('billpay_payment_date', state, billpayEditPaymentForm)">
+    <label data-i18n-key="heading.label.delivery-date"></label>
+    <!-- Workaround field as the datepicker has a set name inside a different form -->
+    <input type="hidden" data-ng-model="$ctrl.payee.newPayment.paymentDate" name="billpay_payment_date"/>
+    <div
+      data-ng-if="$ctrl.payee.paymentServicesObj"
+      data-ng-controller="DatepickerController as $datepicker"
+      data-ng-form="datepickerForm"
+      ng-init="$datepicker.setOptions($datepicker.rushDatepickerOptions($ctrl.payee))">
+      <div class="input-group">
+        <input type="text" class="form-control"
+          name="datepicker"
+          data-ng-model-options="{ allowInvalid: true }"
+          data-ng-model="$ctrl.payee.newPayment.paymentDate"
+          data-datepicker-options="$datepicker.options"
+          data-show-button-bar="false"
+          data-on-open-focus="false"
+          data-is-open="$ctrl.payee.datepicker.isOpen"
+          data-uib-datepicker-popup="{{$datepicker.datepickerDateFormat}}"
+          data-datepicker-template-url="#ext-bb-billpay-edit-payment-ng/datepicker-template.ng.html"
+          data-ng-focus="$datepicker.openDatepicker($ctrl.payee)"
+          data-ng-keydown="$datepicker.datepickerKeyDown($event)"
+          data-role="billpay-edit-payment-date-text-input"
+          data-ng-change="!$datepicker.datepickerHasError($ctrl.payee, datepickerForm) && ext.helpers.clearBackendError($ctrl, 'billpay_payment_date', state)"
+          aria-label="{{ 'datepicker.aria-label.date-input' | i18n }}"
+        />
+        <span class="input-group-append">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-ng-click="$datepicker.openDatepicker($ctrl.payee)"
+            aria-label="{{'datepicker.label.open' | i18n}}"
+            data-role="billpay-edit-payment-date-open-date-picker">
+            <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+          </button>
+        </span>
+      </div>
+      <small data-ng-if="ext.helpers.showRushNoticeForPayee($ctrl.payee)">
+        <div data-ng-if="$datepicker.rushHasBeenChosen($ctrl.payee)" data-role="billpay-edit-payment-date-rush-selected">
+          <span data-i18n-key="rush.message.selected"></span> -
+          <ui-bb-format-amount-ng
+            data-wrap
+            data-amount="$datepicker.options.rush.fee"
+            data-currency="$datepicker.options.currencyCode"
+            data-role="billpay-edit-payment-date-rush-fee"
+            class="amount-regular-color">
+          </ui-bb-format-amount-ng>
+          <span data-i18n-key="rush.price.suffix-full"></span>
+        </div>
+        <span data-ng-if="$datepicker.rushIsAvailable($ctrl.payee)" data-i18n-key="rush.message.available"
+          data-role="billpay-edit-payment-date-rush-available"></span>
+      </small>
+
+      <div class="input-group" data-ng-class="$datepicker.datepickerErrorClass($ctrl.payee, datepickerForm)">
+        <small class="invalid-feedback d-flex" data-ng-if="$datepicker.datepickerHasError($ctrl.payee, datepickerForm)"
+          data-role="billpay-edit-payment-date-error">
+          {{ $datepicker.datepickerError($ctrl.payee, datepickerForm) | i18n }}
+        </small>
+      </div>
+
+      <div class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasError('billpay_payment_date', state, billpayEditPaymentForm)">
+        {{ ext.helpers.getError('billpay_payment_date', state, billpayEditPaymentForm) }}
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-edit-payment-ng/memo.ng.html">
+  <textarea
+    cols="40"
+    rows="5"
+    maxlength="255"
+    data-ng-model="$ctrl.payee.newPayment.paymentMemo"
+    class="form-control"
+    aria-label="{{ 'aria-label.memo' | i18n }}"
+    data-role="billpay-edit-payment-memo">
+  </textarea>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-edit-payment-ng/datepicker-template.ng.html">
+  <div data-role="billpay-edit-payment-datepicker">
+    <div class="text-center mt-2">
+      <span data-i18n-key="datepicker.today-prefix"></span>
+      <span data-ng-bind="datepickerOptions.todaysDate | date"></span>
+    </div>
+
+    <ng-include src="'uib/template/datepicker/datepicker.html'"></ng-include>
+
+    <div class="text-center mb-2"
+      data-ng-if="datepickerOptions.rush.available()"
+      data-role="billpay-edit-payment-datepicker-rush-available">
+      <hr>
+      <span data-i18n-key="rush.price.title"></span> -
+      <span data-i18n-key="rush.price.prefix"></span>
+      <ui-bb-format-amount-ng
+        data-wrap
+        data-amount="datepickerOptions.rush.fee"
+        data-currency="datepickerOptions.currencyCode"
+        data-role="billpay-edit-payment-datepicker-rush-fee"
+        class="amount-regular-color">
+      </ui-bb-format-amount-ng>
+      <span data-i18n-key="rush.price.suffix"></span>
+    </div>
+  </div>
+</script>
+

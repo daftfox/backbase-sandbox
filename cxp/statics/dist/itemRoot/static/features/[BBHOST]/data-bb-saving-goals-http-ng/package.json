@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-saving-goals-http-ng@^1.1.4",
+        "scope": null,
+        "escapedName": "data-bb-saving-goals-http-ng",
+        "name": "data-bb-saving-goals-http-ng",
+        "rawSpec": "^1.1.4",
+        "spec": ">=1.1.4 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-saving-goals-ng"
+    ]
+  ],
+  "_from": "data-bb-saving-goals-http-ng@>=1.1.4 <2.0.0",
+  "_id": "data-bb-saving-goals-http-ng@1.1.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-saving-goals-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-saving-goals-http-ng@^1.1.4",
+    "scope": null,
+    "escapedName": "data-bb-saving-goals-http-ng",
+    "name": "data-bb-saving-goals-http-ng",
+    "rawSpec": "^1.1.4",
+    "spec": ">=1.1.4 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-bb-saving-goals-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-saving-goals-http-ng/-/data-bb-saving-goals-http-ng-1.1.4.tgz",
+  "_shasum": "b1587cc9127dd5e1de8b705aff33549bbafb300c",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-saving-goals-http-ng@^1.1.4",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-saving-goals-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-saving-goals-http-ng/-/data-bb-saving-goals-http-ng-1.1.4.tgz",
+    "shasum": "b1587cc9127dd5e1de8b705aff33549bbafb300c"
+  },
+  "main": "scripts/data-bb-saving-goals-http-ng.js",
+  "name": "data-bb-saving-goals-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.4"
+}

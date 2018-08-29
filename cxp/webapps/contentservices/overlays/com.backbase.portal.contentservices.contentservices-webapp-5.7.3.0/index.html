@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<!-- Copyright © 2011 Backbase B.V. -->
+<head>
+    <title>Backbase Content Services</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.bd-tabLabels .bd-tabLabel').click(function() {
+                $('.bd-tabLabels .bd-tabLabel').removeClass('bd-activeTab');
+                $(this).addClass('bd-activeTab');
+
+                $('.bd-tabs .bd-tab').removeClass('bd-activeTab').hide();
+                $('.bd-tabs .' + this.title).addClass('bd-activeTab').show();
+            });
+        });
+    </script>
+</head>
+<body class="dashboard">
+<div class="bd-header"></div>
+
+<div class="bd-portalManagement bd-popupForm">
+    <div class="bd-mainTitle"><span>Backbase Content Services</span></div>
+    <div class="bd-columnHeader bd-tabLabels">
+        <div title="bd-tab1" class="bd-tabLabel bd-tab1 bd-activeTab">AtomPub Binding</div>
+        <div title="bd-tab2" class="bd-tabLabel bd-tab2">Web Services Binding</div>
+    </div>
+
+    <div class="bd-tabs">
+        <div class="bd-tab bd-tab1 bd-users bd-activeTab">
+            <div><a href="atom">AtomPub service document</a></div>
+        </div>
+        <div class="bd-tab bd-tab2 bd-users">
+            <div><a href="services/RepositoryService">Web Services overview</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="bd-footer">
+    <span class="bd-leftInline">Support@backbase.com | 5.7.3.0 - ${timestamp}-${buildNumber}</span>
+</div>
+</body>
+</html>

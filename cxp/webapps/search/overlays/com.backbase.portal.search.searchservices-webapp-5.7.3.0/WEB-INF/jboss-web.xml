@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jboss-web>
+    <resource-env-ref>
+        <resource-env-ref-name>backbase/config</resource-env-ref-name>
+        <jndi-name>java:/backbase/config</jndi-name>
+    </resource-env-ref>
+</jboss-web>

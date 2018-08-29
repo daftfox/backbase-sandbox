@@ -1,0 +1,65 @@
+{
+  "en-US": {
+    "label.loading": "Loading...",
+    "label.title": "Actions",
+    "label.new-action": "Set new action",
+    "label.notify-me": "Notify me when",
+
+    "label.list.recipe.type.newTransaction": "new incoming transaction",
+    "label.list.recipe.type.accountBalance": "account balance",
+
+    "label.list.empty": "You currently have no actions",
+
+    "label.list.recipe.condition.less": "is less than",
+    "label.list.recipe.condition.more": "is more than",
+    "label.list.recipe.condition.lessOrEqual": "is equal or less than",
+    "label.list.recipe.condition.moreOrEqual": "is equal or more than",
+    "label.list.recipe.condition.equal": "is",
+
+    "label.recipe.choose-action": "Choose action type",
+    "label.recipe.cancel": "Cancel",
+    "label.recipe.new-action": "Set new action",
+    "label.recipe.new-action.close.aria-label": "Close",
+    "label.recipe.edit-action": "Edit action",
+    "label.recipe.edit-action.close.aria-label": "Close",
+    "label.recipe.saveAndEnable": "Save & Enable",
+    "label.recipe.save": "Save changes",
+    "label.recipe.notify-me": "Notify me",
+    "label.recipe.notify.browser": "in browser",
+    "label.recipe.notify.sms": "by SMS",
+    "label.recipe.notify.email": "by email",
+    "label.recipe.select-account": "Select account",
+    "label.recipe.activation.aria-label": "Action activation",
+
+    "label.recipe.confirm.remove-header": "Delete Action",
+    "label.recipe.confirm.remove-text": "You are about to delete an action. This cannot be undone. Do you wish to continue?",
+    "label.recipe.confirm.remove-btn": "Delete",
+    "label.recipe.confirm.cancel-btn": "Cancel",
+
+    "label.recipe.newTransaction.gte": "Transaction amount is equal or more than",
+    "label.recipe.lowBalance.lt": "Account balance is less than",
+
+    "label.edit.delete": "Delete Action",
+    "label.load.more": "Load more",
+
+    "ui-bb-currency-input-ng.label.currency": "Currency",
+    "ui-bb-currency-input-ng.label.amount": "Amount integer",
+    "ui-bb-currency-input-ng.label.decimals": "Amount decimal",
+
+    "newTransaction": "Notification on incoming transactions",
+    "accountLowBalance": "Notification on low balance",
+
+    "currentAccounts": "Current Accounts",
+    "savingsAccounts": "Savings",
+
+    "error.auth": "You are not authorised to perform this action.",
+    "error.connection": "Connection error",
+    "error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later.",
+    "error.user": "An unexpected error occurred, we apologise for the inconvenience. Please try again later.",
+    "error.recipe.activation.failed": "Recipe activation failed.",
+    "error.recipe.deactivation.failed": "Recipe deactivation failed.",
+    "error.permission.title": "No permissions",
+    "error.permission.subtitle": "You don’t have permission to access these records.<br/>Contact your system administrator for details."
+
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bbm-maxlength-ng@^1.1.0",
+        "scope": null,
+        "escapedName": "ui-bbm-maxlength-ng",
+        "name": "ui-bbm-maxlength-ng",
+        "rawSpec": "^1.1.0",
+        "spec": ">=1.1.0 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ui-bbm-textfield-ng"
+    ]
+  ],
+  "_from": "ui-bbm-maxlength-ng@>=1.1.0 <2.0.0",
+  "_id": "ui-bbm-maxlength-ng@1.1.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bbm-maxlength-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bbm-maxlength-ng@^1.1.0",
+    "scope": null,
+    "escapedName": "ui-bbm-maxlength-ng",
+    "name": "ui-bbm-maxlength-ng",
+    "rawSpec": "^1.1.0",
+    "spec": ">=1.1.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ui-bbm-textfield-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bbm-maxlength-ng/-/ui-bbm-maxlength-ng-1.1.0.tgz",
+  "_shasum": "609365db37e1dee1a7887fc22c190eea47ec07e6",
+  "_shrinkwrap": null,
+  "_spec": "ui-bbm-maxlength-ng@^1.1.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ui-bbm-textfield-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bbm-maxlength-ng/-/ui-bbm-maxlength-ng-1.1.0.tgz",
+    "shasum": "609365db37e1dee1a7887fc22c190eea47ec07e6"
+  },
+  "main": "scripts/ui-bbm-maxlength-ng.js",
+  "name": "ui-bbm-maxlength-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.0"
+}

@@ -1,0 +1,51 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-pell@0.11.7",
+        "scope": null,
+        "escapedName": "vendor-bb-pell",
+        "name": "vendor-bb-pell",
+        "rawSpec": "0.11.7",
+        "spec": "0.11.7",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ui-bb-rich-text-editor-ng"
+    ]
+  ],
+  "_from": "vendor-bb-pell@0.11.7",
+  "_id": "vendor-bb-pell@0.11.7",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-pell",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-pell@0.11.7",
+    "scope": null,
+    "escapedName": "vendor-bb-pell",
+    "name": "vendor-bb-pell",
+    "rawSpec": "0.11.7",
+    "spec": "0.11.7",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/ui-bb-rich-text-editor-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-pell/-/vendor-bb-pell-0.11.7.tgz",
+  "_shasum": "d1202b74125598bfdfe03f665f1fbe5799ac8db0",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-pell@0.11.7",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ui-bb-rich-text-editor-ng",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-pell/-/vendor-bb-pell-0.11.7.tgz",
+    "shasum": "d1202b74125598bfdfe03f665f1fbe5799ac8db0"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "scripts/vendor-bb-pell.js",
+  "name": "vendor-bb-pell",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "0.11.7"
+}

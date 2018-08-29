@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.weirdscience</groupId>
+    <artifactId>dbs</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Backbase DBS :: Parent</name>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <registry.host>localhost</registry.host>
+        <registry.port>8080</registry.port>
+        <registry.client.url>http://${registry.host}:${registry.port}/registry/eureka</registry.client.url>
+        <sig.secret.key>JWTSecretKeyDontUseInProduction!</sig.secret.key>
+        <ext.sig.secret.key>JWTSecretKeyDontUseInProduction!</ext.sig.secret.key>
+        <ext.enc.secret.key>JWTEncKeyDontUseInProduction666!</ext.enc.secret.key>
+        <user.context.key>JWTSecretKeyDontUseInProduction!</user.context.key>
+        <spring.activemq.broker-url>tcp://localhost:61616</spring.activemq.broker-url>
+        <messaging.password>password</messaging.password>
+
+
+        <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+        <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+        <jdbc.driver.version>5.1.41</jdbc.driver.version>
+        <spring.datasource.driver-class-name>com.mysql.jdbc.Driver</spring.datasource.driver-class-name>
+        <spring.datasource.username>root</spring.datasource.username>
+        <spring.datasource.password>root</spring.datasource.password>
+        <port/> <!-- Port is defined in the submodules -->
+    </properties>
+
+    <modules>
+        <module>message-center</module>
+        <module>product-summary</module>
+        <module>approvals</module>
+        <module>transactions</module>
+        <module>limits</module>
+        <module>payments</module>
+        <module>contact-manager</module>
+        <module>actions</module>
+        <module>portfolio-summary</module>
+        <module>notifications</module>
+        <module>billpay</module>
+        <module>access-control</module>
+        <module>audit</module>
+        <module>dist</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.backbase.maven.plugins</groupId>
+                    <artifactId>blade-maven-plugin</artifactId>
+                    <version>2.0.80</version>
+                    <configuration>
+                        <multiThreaded>true</multiThreaded>
+
+                        <!-- Generic System Properties for all services -->
+                        <systemProperties>
+                            <BACKBASE_ENVROLE>live</BACKBASE_ENVROLE>
+                            <SIG_SECRET_KEY>${sig.secret.key}</SIG_SECRET_KEY>
+                            <EXTERNAL_SIG_SECRET_KEY>${ext.sig.secret.key}</EXTERNAL_SIG_SECRET_KEY>
+                            <EXTERNAL_ENC_SECRET_KEY>${ext.enc.secret.key}</EXTERNAL_ENC_SECRET_KEY>
+                            <AUTH_REGISTRY_HOST>${registry.host}</AUTH_REGISTRY_HOST>
+                            <USERCTX_KEY>${user.context.key}</USERCTX_KEY>
+                            <MESSAGING_PASSWORD>${messaging.password}</MESSAGING_PASSWORD>
+                            <registry.client.serviceUrl>defaultZone=${registry.client.url}</registry.client.serviceUrl>
+                            <registry.instance.hostname>${registry.host}</registry.instance.hostname>
+                            <registry.instance.preferIpAddress>false</registry.instance.preferIpAddress>
+                            <registry.instance.nonSecurePort>${port}</registry.instance.nonSecurePort>
+                            <eureka.client.serviceUrl.defaultZone>${registry.client.url}</eureka.client.serviceUrl.defaultZone>
+                            <spring.activemq.broker-url>${spring.activemq.broker-url}</spring.activemq.broker-url>
+
+                            <!-- Disable logging encoding -->
+                            <logging.secured.enabled>false</logging.secured.enabled>
+
+                            <!-- Limit sizing of consumers -->
+                            <backbase.communication.consumer-options.maxConcurrentConsumers>5</backbase.communication.consumer-options.maxConcurrentConsumers>
+                            <backbase.communication.consumer-options.concurrentConsumers>1</backbase.communication.consumer-options.concurrentConsumers>
+                            <backbase.communication.consumer-options.maxMessagesPerTask>100</backbase.communication.consumer-options.maxMessagesPerTask>
+
+                            <!-- Turning off commands and events storage for all capabilities -->
+                            <backbase.eventsourcing.commands-and-events-storage-enabled>false</backbase.eventsourcing.commands-and-events-storage-enabled>
+                            <!-- Turning off liquibase for all capabilities -->
+                            <liquibase.enabled>false</liquibase.enabled>
+
+                            <spring.datasource.driver-class-name>${spring.datasource.driver-class-name}</spring.datasource.driver-class-name>
+                            <spring.datasource.username>${spring.datasource.username}</spring.datasource.username>
+                            <spring.datasource.password>${spring.datasource.password}</spring.datasource.password>
+
+                        </systemProperties>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>${jdbc.driver.groupId}</groupId>
+                            <artifactId>${jdbc.driver.artifactId}</artifactId>
+                            <version>${jdbc.driver.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+    <profiles>
+        <profile>
+            <id>dist</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>copy-war-files</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>../dist/target</outputDirectory>
+                                    <overWriteReleases>false</overWriteReleases>
+                                    <overWriteSnapshots>false</overWriteSnapshots>
+                                    <overWriteIfNewer>true</overWriteIfNewer>
+                                    <stripVersion>true</stripVersion>
+                                    <includeTypes>war</includeTypes>
+                                    <excludeScope>provided</excludeScope>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>mssql</id>
+            <properties>
+                <jdbc.driver.groupId>com.microsoft.sqlserver</jdbc.driver.groupId>
+                <jdbc.driver.artifactId>mssql-jdbc</jdbc.driver.artifactId>
+                <jdbc.driver.version>6.4.0.jre8</jdbc.driver.version>
+                <spring.datasource.driver-class-name>com.microsoft.sqlserver.jdbc.SQLServerDriver</spring.datasource.driver-class-name>
+                <spring.datasource.username>backbase</spring.datasource.username>
+                <spring.datasource.password>password</spring.datasource.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>oracle</id>
+            <properties>
+                <jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
+                <jdbc.driver.artifactId>ojdbc6</jdbc.driver.artifactId>
+                <jdbc.driver.version>11.2.0.3</jdbc.driver.version>
+                <spring.datasource.driver-class-name>oracle.jdbc.driver.OracleDriver</spring.datasource.driver-class-name>
+                <spring.datasource.username>backbase</spring.datasource.username>
+                <spring.datasource.password>password</spring.datasource.password>
+            </properties>
+        </profile>
+    </profiles>
+</project>

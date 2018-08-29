@@ -1,0 +1,64 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-contact-ng@~2.15.0",
+        "scope": null,
+        "escapedName": "widget-bb-contact-ng",
+        "name": "widget-bb-contact-ng",
+        "rawSpec": "~2.15.0",
+        "spec": ">=2.15.0 <2.16.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-contact-ng@>=2.15.0 <2.16.0",
+  "_id": "widget-bb-contact-ng@2.15.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-contact-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-contact-ng@~2.15.0",
+    "scope": null,
+    "escapedName": "widget-bb-contact-ng",
+    "name": "widget-bb-contact-ng",
+    "rawSpec": "~2.15.0",
+    "spec": ">=2.15.0 <2.16.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-contact-ng/-/widget-bb-contact-ng-2.15.1.tgz",
+  "_shasum": "cbc48fe9718521f86373c73840e0bf66b0032dad",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-contact-ng@~2.15.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-contact-list-ng": "^2.6.1",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-permissions-ng": "^2.20.0",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-contact-ng": "^4.13.1",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-contact-ng/-/widget-bb-contact-ng-2.15.1.tgz",
+    "shasum": "cbc48fe9718521f86373c73840e0bf66b0032dad"
+  },
+  "main": "scripts/widget-bb-contact-ng.js",
+  "name": "widget-bb-contact-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.15.1"
+}

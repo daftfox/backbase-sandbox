@@ -1,0 +1,213 @@
+<div class="ext-bus-direct-debit-list-ng"
+  data-ng-controller="DirectDebitController as $ctrl">
+
+    <div class="notifications">
+      <ui-bb-notification-stripe-ng
+        data-ng-repeat="notification in $ctrl.state.notifications"
+        data-timeout-second="{{ $ctrl.dismissTime }}"
+        data-message="{{ notification.message }}"
+        data-on-close="$ctrl.state.notifications = ext.helpers.removeNotification(notification, $ctrl.state.notifications);"
+        data-type="{{ ext.helpers.getNotificationClass(notification.level); }}">
+      </ui-bb-notification-stripe-ng>
+    </div>
+  
+    <ui-bb-substitute-error-ng data-error="$ctrl.state.error"
+      data-message="$ctrl.state.error.message | i18n">
+
+      <div class="card" x-ms-format-detection="none">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+              <tr>
+                <th data-ng-repeat="header in ext.helpers.headers"
+                    class="{{ header.class }}"
+                    data-ui-bb-sortable-column-ng
+                    data-options="header.sortable"
+                    data-active="ext.helpers.isSortableActive(header.sortable, $ctrl)"
+                    data-on-sort="$ctrl.onSort(key, direction)"
+                >
+                  <span data-i18n-key="{{ ::header.label }}"></span>
+                </th>
+                <th><!-- Action buttons group --></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-class-odd="'table-row-odd'" ng-class-even="'table-row-even'"
+                data-ng-if="$ctrl.hasDirectDebits()"
+                data-ng-repeat-start="directDebit in $ctrl.state.directDebits.data track by directDebit.id"
+                data-ng-click="ext.helpers.toggleDetails(directDebit.id, $event)">
+
+                <td data-label="{{ 'header.status' | i18n }}" class="payment-status {{ directDebit.status.toLowerCase() }}">
+                  <span uib-tooltip="{{ ext.helpers.getStatusLabel(directDebit.status) | i18n }}" tooltip-placement="top-left">
+                    <span class="label label-{{ ext.helpers.getStatusClass(directDebit.status) }}" data-label="{{ ext.helpers.getStatusLabel(directDebit.status, 'large') | i18n }}">
+                      <span class="label-content" data-ng-bind="ext.helpers.getStatusLabel(directDebit.status, 'small') | i18n" data-role="status"></span>
+                    </span>
+                  </span>
+                </td>
+                <td
+                  data-label="{{ ext.helpers.headers[1].label | i18n }}"
+                  data-ng-bind="::directDebit.type"
+                  data-role="type">
+                </td>
+                <td data-label="{{ ext.helpers.headers[2].label | i18n }}">
+                  <div class="table-small" data-role="debit-counter-party-name">{{ directDebit.debitAccountIdentification.counterpartyName }}</div>
+                  <div class="table-small break-word" data-ng-class="{'small text-muted': directDebit.debitAccountIdentification.counterpartyName}" data-role="debit-counter-party-identification">
+                    {{ ::directDebit.debitAccountIdentification.identification }}
+                  </div>
+                </td>
+                <td data-label="{{ ext.helpers.headers[3].label | i18n }}">
+                  <div class="table-small" data-role="credit-counter-party-name">{{ directDebit.creditAccountIdentification.counterpartyName }}</div>
+                  <div class="table-small break-word" data-ng-class="{'small text-muted': directDebit.creditAccountIdentification.counterpartyName}" data-role="credit-counter-party-identification">
+                    {{ ::directDebit.creditAccountIdentification.identification }}
+                  </div>
+                </td>
+                <td
+                  data-label="{{ ext.helpers.headers[4].label | i18n }}"
+                  class="text-left"
+                  data-ng-bind="::directDebit.currency"
+                  data-role="currency">
+                </td>
+                <td
+                  data-label="{{ ext.helpers.headers[5].label | i18n }}"
+                  class="text-right"
+                  data-ng-bind="::directDebit.amount | currency: ''"
+                  data-role="amount">
+                </td>
+                <td
+                  data-label="{{ ext.helpers.headers[6].label | i18n }}"
+                  class="text-right text-muted"
+                  data-ng-bind="::directDebit.date | date: 'shortDate'"
+                  data-role="collection-date">
+                </td>
+                <td>
+                  <div class="btn-group d-flex justify-content-end" role="group">
+                      <button
+                        data-uib-tooltip="{{ ext.helpers.getConfirmTitle(directDebit.status) | i18n }}"
+                        data-tooltip-placement="top-right"
+                        data-container="body"
+
+                        data-ng-if="ext.helpers.hasAction(directDebit.status)"
+                        class="btn btn-sm btn-outline-secondary btn-block"
+                        data-ng-disabled="directDebit.isDisabled"
+                        data-ng-click="ext.directDebit = directDebit; ext.ddActionConfirmOpened = true">
+                          <span class='fa' ng-class="ext.helpers.getActionIcon(directDebit.status)" aria-hidden="true"></span>
+                      </button>
+                    <div class="btn-group more-actions" uib-dropdown keyboard-nav role="group">
+                      <button uib-dropdown-toggle class="btn btn-sm btn-outline-secondary btn-block">
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu"
+                        aria-labelledby="simple-btn-keyboard-nav">
+                        <li data-role="menuitem" class="dropdown-item">
+                          <a data-i18n-key="directDebit.action.blockCollector" data-role="block-collector"></a>
+                        </li>
+                        <li data-role="menuitem" class="dropdown-item">
+                          <a data-i18n-key="directDebit.action.seeAllByCollector" data-role="see-all-by-collector"></a>
+                        </li>
+                        <li data-role="menuitem" class="dropdown-item">
+                          <a data-i18n-key="directDebit.action.seeAllByAccount" data-role="see-all-by-account"></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr data-ng-if="ext.helpers.isToggled(directDebit.id)" data-ng-repeat-end class="bb-table-details">
+                <td colspan="9">
+                  <div class="row">
+                    <div class="col-12 col-md-4 col-lg-3">
+                      <strong>{{ 'directDebit.details.to' | i18n }}</strong>
+                      <div data-role="detail-counter-party-name">{{ directDebit.creditAccountIdentification.counterpartyName }}</div>
+                      <div data-role="detail-identification">{{ directDebit.creditAccountIdentification.identification }}</div>
+                      <div data-role="detail-bic">{{ directDebit.creditAccountIdentification.counterpartyBIC }}</div>
+                      <div data-role="detail-counter-party-bank-name">{{ directDebit.creditAccountIdentification.counterpartyBankName }}</div>
+                      <div data-role="detail-counter-party-country">{{ directDebit.creditAccountIdentification.counterpartyCountry }}</div>
+                    </div>
+                    <div class="col-12 col-md-8 col-lg-9">
+                      <div class="row">
+                        <div class="col-12 col-lg-6 col-xl-3">
+                          <strong data-i18n-key="directDebit.details.creditor.id"></strong>
+                          <div data-ng-bind="directDebit.creditorReference" data-role="detail-creditor-reference"></div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-3">
+                          <strong data-i18n-key="directDebit.details.mandate.id"></strong>
+                          <div data-ng-bind="directDebit.mandateReference" data-role="detail-mandate-reference"></div>
+                        </div>
+                        <div class="col-12 col-lg-6 col-xl-3">
+                          <strong data-i18n-key="directDebit.details.frequency"></strong>
+                          <div data-i18n-key="{{ ext.helpers.getFrequencyLabel(directDebit.paymentMode, directDebit.schedule.transferFrequency) }}" data-role="detail-transfer-frequency"></div>
+                        </div>
+                        <div data-ng-if="directDebit.rejectionReason" class="col-12 col-lg-6 col-xl-3">
+                          <strong data-i18n-key="directDebit.details.rejection.reason"></strong>
+                          <div data-ng-bind="directDebit.rejectionReason" data-role="detail-rejection-reason"></div>
+                        </div>
+                        <div data-ng-if="directDebit.status === 'PROCESSED'" class="col-12 col-lg-6 col-xl-3">
+                          <strong data-i18n-key="directDebit.details.refund.deadline"></strong>
+                          <div data-ng-bind="ext.helpers.getRefundDate(directDebit) | date: 'short'" data-role="detail-refund-date">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div data-ng-if="directDebit.reference" class="col-12 col-md-3">
+                          <strong data-i18n-key="directDebit.details.reference"></strong>
+                          <div data-ng-bind="directDebit.reference" data-role="detail-reference"></div>
+                        </div>
+                        <div data-ng-if="directDebit.description" class="col-12 col-lg-6 col-xl-9">
+                          <strong data-i18n-key="directDebit.details.description"></strong>
+                          <div data-ng-bind="directDebit.description" data-role="detail-description"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr data-ng-if="$ctrl.state.directDebits.loading">
+                <td colspan="10" class="empty-element-placeholder-relative"></td>
+              </tr>
+              <tr data-ng-if="!$ctrl.hasDirectDebits" class="no-items">
+                <td colspan="10" class="text-center" data-i18n-key="directDebit.label.noItems"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ui-bb-load-more-ng
+            data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+            data-ng-show="$ctrl.state.directDebits.hasMore"
+            data-label="{{ 'label.loadMore' | i18n }}"
+            data-on-load-more="$ctrl.loadMore(done)">
+          </ui-bb-load-more-ng>
+
+          <ui-bb-paginator-ng
+            data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'pagination')"
+            data-page-navigation-text="{{ 'pagination.label.page_navigation' | i18n }}"
+            data-first-text="{{ 'pagination.label.first' | i18n }}"
+            data-last-text="{{ 'pagination.label.last' | i18n }}"
+            data-previous-text="{{ 'pagination.label.prev' | i18n }}"
+            data-next-text="{{ 'pagination.label.next' | i18n }}"
+            data-total-items="{{ $ctrl.state.pageParams.totalItems }}"
+            data-items-per-page="{{ $ctrl.state.pageParams.size }}"
+            data-max-nav-pages="{{ $ctrl.state.pageParams.maxNavPages }}"
+            data-current-page="{{ $ctrl.state.pageParams.currentPage }}"
+            data-ng-disabled="$ctrl.state.accounts.loading"
+            data-change-page="$ctrl.changePage(params)"
+          ></ui-bb-paginator-ng>
+        </div>
+      </div>
+
+    </ui-bb-substitute-error-ng>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.ddActionConfirmOpened"
+    data-on-confirm="$ctrl.directDebitAction(ext.directDebit)"
+    data-labels="{
+      heading: (ext.helpers.getConfirmTitle(ext.directDebit.status) | i18n),
+      bodyText: (ext.helpers.getConfirmBody(ext.directDebit.status) | i18n),
+      confirm: (ext.helpers.getConfirmSubmit(ext.directDebit.status) | i18n),
+      cancel: ('directDebit.dialog.action.no' | i18n)
+    }"
+    data-size="'lg'">
+  </ui-bb-confirm-ng>
+</div>
+

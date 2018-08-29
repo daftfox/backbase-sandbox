@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bbm-plugins@1.0.122",
+        "scope": null,
+        "escapedName": "lib-bbm-plugins",
+        "name": "lib-bbm-plugins",
+        "rawSpec": "1.0.122",
+        "spec": "1.0.122",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bbm-plugins@1.0.122",
+  "_id": "lib-bbm-plugins@1.0.122",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bbm-plugins",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bbm-plugins@1.0.122",
+    "scope": null,
+    "escapedName": "lib-bbm-plugins",
+    "name": "lib-bbm-plugins",
+    "rawSpec": "1.0.122",
+    "spec": "1.0.122",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bbm-plugins/-/lib-bbm-plugins-1.0.122.tgz",
+  "_shasum": "54d3d391eea27aa992a5b623b617342a9c91b62b",
+  "_shrinkwrap": null,
+  "_spec": "lib-bbm-plugins@1.0.122",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bbm-plugins/-/lib-bbm-plugins-1.0.122.tgz",
+    "shasum": "54d3d391eea27aa992a5b623b617342a9c91b62b"
+  },
+  "main": "scripts/lib-bbm-plugins.js",
+  "name": "lib-bbm-plugins",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.122"
+}

@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-uib-paging@1.3.3-bb.4",
+        "scope": null,
+        "escapedName": "vendor-bb-uib-paging",
+        "name": "vendor-bb-uib-paging",
+        "rawSpec": "1.3.3-bb.4",
+        "spec": "1.3.3-bb.4",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "vendor-bb-uib-paging@1.3.3-bb.4",
+  "_id": "vendor-bb-uib-paging@1.3.3-bb.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-uib-paging",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-uib-paging@1.3.3-bb.4",
+    "scope": null,
+    "escapedName": "vendor-bb-uib-paging",
+    "name": "vendor-bb-uib-paging",
+    "rawSpec": "1.3.3-bb.4",
+    "spec": "1.3.3-bb.4",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/vendor-bb-uib-pager",
+    "/vendor-bb-uib-pagination"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-uib-paging/-/vendor-bb-uib-paging-1.3.3-bb.4.tgz",
+  "_shasum": "f2ab6ac1f0c4b043ad55fe0252f73fe96f06b2bc",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-uib-paging@1.3.3-bb.4",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-uib-paging/-/vendor-bb-uib-paging-1.3.3-bb.4.tgz",
+    "shasum": "f2ab6ac1f0c4b043ad55fe0252f73fe96f06b2bc"
+  },
+  "main": "scripts/vendor-bb-uib-paging.js",
+  "name": "vendor-bb-uib-paging",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.3.3-bb.4"
+}

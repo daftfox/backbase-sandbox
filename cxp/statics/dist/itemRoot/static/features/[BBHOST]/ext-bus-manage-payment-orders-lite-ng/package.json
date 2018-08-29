@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-manage-payment-orders-lite-ng@~2.36.20",
+        "scope": null,
+        "escapedName": "ext-bus-manage-payment-orders-lite-ng",
+        "name": "ext-bus-manage-payment-orders-lite-ng",
+        "rawSpec": "~2.36.20",
+        "spec": ">=2.36.20 <2.37.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-manage-payment-orders-lite-ng@>=2.36.20 <2.37.0",
+  "_id": "ext-bus-manage-payment-orders-lite-ng@2.36.20",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-manage-payment-orders-lite-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-manage-payment-orders-lite-ng@~2.36.20",
+    "scope": null,
+    "escapedName": "ext-bus-manage-payment-orders-lite-ng",
+    "name": "ext-bus-manage-payment-orders-lite-ng",
+    "rawSpec": "~2.36.20",
+    "spec": ">=2.36.20 <2.37.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-manage-payment-orders-lite-ng/-/ext-bus-manage-payment-orders-lite-ng-2.36.20.tgz",
+  "_shasum": "db0a1db5f50d21d566dc55285d9a21c0c61120b6",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-manage-payment-orders-lite-ng@~2.36.20",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-ellipsis-tooltip-ng": "^2.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-inline-status-ng": "^2.5.1",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-loading-overlay-ng": "^2.5.1",
+    "ui-bb-navigate-to-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-manage-payment-orders-lite-ng/-/ext-bus-manage-payment-orders-lite-ng-2.36.20.tgz",
+    "shasum": "db0a1db5f50d21d566dc55285d9a21c0c61120b6"
+  },
+  "main": "scripts/ext-bus-manage-payment-orders-lite-ng.js",
+  "name": "ext-bus-manage-payment-orders-lite-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.36.20"
+}

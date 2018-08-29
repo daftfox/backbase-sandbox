@@ -1,0 +1,83 @@
+<div data-ng-controller="TransactionsController as $ctrl"
+  class="ext-bb-transactions-extended-ng">
+  <div class="row">
+    <div class="col">
+      <h4 data-role="heading" data-i18n-key="header.transactions"></h4>
+    </div>
+    <div class="col">
+      <ui-bb-navigate-to-ng
+        data-action="'view.account.transactions'"
+        data-label="'label.allTransactions' | i18n">
+      </ui-bb-navigate-to-ng>
+    </div>
+  </div>
+  
+  <div class="empty-element-placeholder-relative" data-ng-if="$ctrl.state.initialLoading"></div>
+  <ui-bb-substitute-error-ng
+    data-message="$ctrl.errors.transactionsError.message | i18n"
+    data-ng-if="!$ctrl.state.initialLoading">
+    <div class="card mb-4" x-ms-format-detection="none">
+      <div class="card-body-no-padding">
+        <ui-bb-empty-state-ng
+          data-icon-classes="fas fa-exchange-alt fa-3x text-muted"
+          data-title="{{ 'message.no.transactions' | i18n }}"
+          data-subtitle="{{ ext.helpers.getEmptyMessage($ctrl) }}"
+          data-is-empty="!$ctrl.state.transactions.length && !$ctrl.loading">
+
+        <ui-bb-loading-overlay-ng data-is-loading="$ctrl.loading">
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th data-ng-repeat="header in ext.helpers.headers"
+                    data-ng-class="header.class">
+                  <span data-i18n-key="{{ header.label }}"></span>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr tabindex="0"
+                  data-ng-repeat="transaction in (($ctrl.searching && $ctrl.searchTransactions) || $ctrl.state.transactions) track by transaction.id">
+                  <td data-label="{{ ext.helpers.headers[0].label | i18n }}">
+                    <div
+                      class="table-small"
+                      data-ng-if="transaction.accountHolderName"
+                      data-ng-bind="::transaction.accountHolderName"
+                      data-role="transaction-product-name">
+                    </div>
+                  </td>
+                  <td data-label="{{ ext.helpers.headers[1].label | i18n }}">
+                    <div
+                      class="table-small"
+                      data-ng-if="transaction.counterPartyName"
+                      data-ng-bind="::transaction.counterPartyName"
+                      data-role="transaction-counter-party-name">
+                    </div>
+                  </td>
+                  <td data-label="{{ ext.helpers.headers[2].label | i18n }}" class="text-right" data-ng-bind="::transaction.currency" data-role="currency"></td>
+                  <td data-label="{{ ext.helpers.headers[3].label | i18n }}" class="text-right">
+                    <span
+                      data-ng-if="transaction.creditDebitIndicator === 'DBIT'"
+                      class="debit-credit-sign"
+                      data-role="transaction-debit-credit-sign">
+                      -
+                    </span>
+                    <span data-ng-bind="::transaction.amount | currency: ''" data-role="transaction-amount"></span>
+                  </td>
+                  <td
+                    class="text-right text-muted"
+                    data-label="{{ ext.helpers.headers[4].label | i18n }}"
+                    data-ng-bind="::transaction.bookingDate | date: 'shortDate'"
+                    data-role="transaction-book-date">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </ui-bb-loading-overlay-ng>
+        </ui-bb-empty-state-ng>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </ui-bb-substitute-error-ng>
+</div>

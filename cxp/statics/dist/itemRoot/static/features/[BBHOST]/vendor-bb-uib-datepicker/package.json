@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-uib-datepicker@1.3.3-bb.4",
+        "scope": null,
+        "escapedName": "vendor-bb-uib-datepicker",
+        "name": "vendor-bb-uib-datepicker",
+        "rawSpec": "1.3.3-bb.4",
+        "spec": "1.3.3-bb.4",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "vendor-bb-uib-datepicker@1.3.3-bb.4",
+  "_id": "vendor-bb-uib-datepicker@1.3.3-bb.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-uib-datepicker",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-uib-datepicker@1.3.3-bb.4",
+    "scope": null,
+    "escapedName": "vendor-bb-uib-datepicker",
+    "name": "vendor-bb-uib-datepicker",
+    "rawSpec": "1.3.3-bb.4",
+    "spec": "1.3.3-bb.4",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/vendor-bb-uib-datepicker-popup"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-uib-datepicker/-/vendor-bb-uib-datepicker-1.3.3-bb.4.tgz",
+  "_shasum": "faf90782425b824890f90fe89650aa42127515e0",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-uib-datepicker@1.3.3-bb.4",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-uib-dateparser": "1.3.3-bb.4",
+    "vendor-bb-uib-is-class": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-uib-datepicker/-/vendor-bb-uib-datepicker-1.3.3-bb.4.tgz",
+    "shasum": "faf90782425b824890f90fe89650aa42127515e0"
+  },
+  "main": "scripts/vendor-bb-uib-datepicker.js",
+  "name": "vendor-bb-uib-datepicker",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.3.3-bb.4"
+}

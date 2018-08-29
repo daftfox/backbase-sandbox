@@ -1,0 +1,11 @@
+---
+### Live profile
+spring:
+  profiles: live
+
+logging:
+  config: ${backbase.config.dir}/payment-order-presentation-service/logback.xml
+
+backbase:
+  persistence:
+    enabled: false

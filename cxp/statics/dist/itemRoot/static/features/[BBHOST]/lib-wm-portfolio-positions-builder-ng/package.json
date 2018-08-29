@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-wm-portfolio-positions-builder-ng@^1.15.2",
+        "scope": null,
+        "escapedName": "lib-wm-portfolio-positions-builder-ng",
+        "name": "lib-wm-portfolio-positions-builder-ng",
+        "rawSpec": "^1.15.2",
+        "spec": ">=1.15.2 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/ext-wm-positions-AcAsP-ng"
+    ]
+  ],
+  "_from": "lib-wm-portfolio-positions-builder-ng@>=1.15.2 <2.0.0",
+  "_id": "lib-wm-portfolio-positions-builder-ng@1.15.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-wm-portfolio-positions-builder-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-wm-portfolio-positions-builder-ng@^1.15.2",
+    "scope": null,
+    "escapedName": "lib-wm-portfolio-positions-builder-ng",
+    "name": "lib-wm-portfolio-positions-builder-ng",
+    "rawSpec": "^1.15.2",
+    "spec": ">=1.15.2 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-wm-positions-AcAsP-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-wm-portfolio-positions-builder-ng/-/lib-wm-portfolio-positions-builder-ng-1.15.2.tgz",
+  "_shasum": "f68a8992af65dc145af771fe6bd4aad9f858fbc1",
+  "_shrinkwrap": null,
+  "_spec": "lib-wm-portfolio-positions-builder-ng@^1.15.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/ext-wm-positions-AcAsP-ng",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-wm-portfolio-positions-builder-ng/-/lib-wm-portfolio-positions-builder-ng-1.15.2.tgz",
+    "shasum": "f68a8992af65dc145af771fe6bd4aad9f858fbc1"
+  },
+  "main": "scripts/lib-wm-portfolio-positions-builder-ng.js",
+  "name": "lib-wm-portfolio-positions-builder-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.15.2"
+}

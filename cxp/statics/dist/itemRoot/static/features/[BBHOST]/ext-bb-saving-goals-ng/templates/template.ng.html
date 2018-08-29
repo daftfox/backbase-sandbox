@@ -1,0 +1,202 @@
+<!-- web view -->
+<div data-ng-controller="ListController as $ctrl">
+  <ui-bb-loading-indicator-ng data-is-loading="state.isLoading"
+    data-loading-text="{{ 'saving.goals.state.loading' | i18n }}"
+  >
+    <ui-bb-substitute-error-ng message="state.savingGoalsError.message | i18n">
+      <div data-ng-if="ext.helpers.savingGoalsEnabledForKind(state.product.kind)">
+        <div class="notifications col-lg-4" data-ng-show="!ext.helpers.isFormActive">
+          <ui-bb-notification-stripe-ng
+            data-ng-repeat="notification in state.notifications"
+            data-timeout-second="{{ ext.helpers.notificationDismissTime }}"
+            data-message="{{ notification.message | i18n: { goalName: ext.helpers.selectedGoal.goalName } }}"
+            data-on-close="ext.helpers.shiftNotification()"
+            data-type="bg-{{ notification.level }}"
+            data-icon-classes="{{ notification.level === 'success' ?
+              'fa-check-circle' : 'fa-exclamation-circle' }} fa">
+          </ui-bb-notification-stripe-ng>
+        </div>
+
+        <div class="card" data-ng-if="state.savingGoals && state.savingGoals.length" data-ng-repeat="goal in state.savingGoals">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-10">
+                <h5 data-ng-bind="goal.goalName"></h5>
+              </div>
+              <div class="col-2 text-right" uib-dropdown keyboard-nav>
+                <button
+                  uib-dropdown-toggle
+                  class="btn btn-link pr-0 text-default"
+                  data-label="Options"
+                >
+                  <i class="fa fa-ellipsis-v" aria-hidden="true" data-role="more-actions"></i>
+                </button>
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  uib-dropdown-menu role="menu"
+                  aria-labelledby="simple-btn-keyboard-nav"
+                >
+                  <a href="javascript:void(0)"
+                    class="dropdown-item"
+                    data-i18n-key="saving.goals.edit.action.label"
+                    data-ng-click="ext.helpers.handleChanging($ctrl.edit, goal.id)"
+                  ></a>
+                  <a href="javascript:void(0)"
+                    class="dropdown-item"
+                    data-i18n-key="saving.goals.delete.action.label"
+                    data-ng-click="ext.helpers.startDelete($ctrl.deleteGoal, goal)"
+                  ></a>
+                </div>
+              </div>
+              <div class="col-12 mb-2">
+                <uib-progressbar
+                  data-type="success bg-success"
+                  data-value="goal.amountProgress.amount"
+                  data-max="goal.goalAmount.amount"
+                >
+                </uib-progressbar>
+              </div>
+              <div class="col-6 text-success" data-i18n-key="saving.goals.header.progress"></div>
+              <div class="col-6 text-right text-muted" data-i18n-key="saving.goals.header.amount"></div>
+              <div class="col-6 text-success">
+                <ui-bb-format-amount-ng
+                  class="amount-regular-color"
+                  data-amount="goal.amountProgress.amount"
+                  data-currency="goal.amountProgress.currencyCode"
+                  data-wrap
+                >
+                </ui-bb-format-amount-ng>
+              </div>
+              <div class="col-6 text-right text-muted">
+                <ui-bb-format-amount-ng
+                  class="amount-regular-color"
+                  data-amount="goal.goalAmount.amount"
+                  data-currency="goal.goalAmount.currencyCode"
+                  data-wrap
+                >
+                </ui-bb-format-amount-ng>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" data-ng-if="!state.savingGoals || !state.savingGoals.length">
+          <div class="col-12 text-right">
+            <button
+              class="btn btn-primary mb-4"
+              data-i18n-key="saving.goals.label.create"
+              data-ng-click="ext.helpers.handleChanging($ctrl.create)"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </ui-bb-substitute-error-ng>
+  </ui-bb-loading-indicator-ng>
+</div>
+
+<ui-bb-modal-ng
+  data-on-open="ext.helpers.initEditingForm()"
+  data-is-open="ext.helpers.isFormActive"
+  data-backdrop="'static'"
+  data-keyboard="false"
+>
+  <div data-ng-controller="FormController as $formCtrl">
+    <div class="modal-header">
+      <h5 class="modal-title" data-ng-bind="state.form.id ? ('saving.goals.label.update' | i18n) : ('saving.goals.label.create' | i18n)"></h5>
+      <button
+        type="button"
+        class="close"
+        aria-label="{{ 'saving.goals.form.button.close' | i18n }}"
+        data-ng-click="ext.helpers.cancelEdit()"
+      >
+        <h5 class="my-05"
+          aria-hidden="true"
+        >
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </h5>
+      </button>
+    </div>
+
+    <div class="modal-body saving-goals-form">
+      <ng-include src="'#widget-bb-saving-goals-ng/form-update.html'"></ng-include>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-i18n-key="saving.goals.form.button.cancel"
+        data-ng-click="ext.helpers.cancelEdit()"
+      ></button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-ng-bind="(state.form && state.form.id ? 'saving.goals.form.button.edit' : 'saving.goals.form.button.create') | i18n"
+        data-ng-disabled="!ext.helpers.allowSave(state.form)"
+        data-ng-click="ext.helpers.handleSaving($formCtrl.save, state.form)()"
+      ></button>
+    </div>
+  </div>
+</ui-bb-modal-ng>
+
+<ui-bb-modal-ng
+  data-is-open="ext.helpers.isConfirmationActive || ext.helpers.isDeleteConfirmationActive"
+  data-backdrop="'static'"
+  data-keyboard="false"
+  data-size="'sm'"
+>
+  <div class="modal-header">
+    <h5 class="modal-title"
+      data-ng-bind="(ext.helpers.isConfirmationActive ? 'saving.goals.form.discard.confirmation.title' : 'saving.goals.form.delete.confirmation.title') | i18n"
+    ></h5>
+  </div>
+
+  <div class="modal-body saving-goals-form">
+    <p data-ng-bind="(ext.helpers.isConfirmationActive ? 'saving.goals.form.discard.confirmation.message' : 'saving.goals.form.delete.confirmation.message') | i18n"></p>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      data-i18n-key="saving.goals.form.button.cancel"
+      data-ng-click="ext.helpers.cancelConfirmation()"
+    ></button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-ng-if="ext.helpers.isConfirmationActive"
+      data-i18n-key="saving.goals.form.confirmation.button.label"
+      data-ng-click="ext.helpers.cancelEdit(true)"
+    ></button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      data-ng-if="ext.helpers.isDeleteConfirmationActive"
+      data-i18n-key="saving.goals.delete.action.label"
+      data-ng-click="ext.helpers.handleDelete()"
+    ></button>
+  </div>
+</ui-bb-modal-ng>
+
+<script type="text/ng-template" id="#widget-bb-saving-goals-ng/form-update.html">
+  <div class="row">
+    <div class="form-group col-12 col-md-8">
+      <label class="font-weight-bold" data-i18n-key="saving.goals.label.name"></label>
+      <input type="text" class="form-control" placeholder="{{ 'saving.goals.name.placeholder' | i18n }}" data-ng-model="state.form.goalName" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-12 col-md-8">
+      <label class="font-weight-bold" data-i18n-key="saving.goals.label.amount"></label>
+      <ui-bb-currency-input-ng
+        class="currency-input d-flex"
+        placeholder="{{ 'saving.goals.amount.placeholder' | i18n }}"
+        data-max-length="13"
+        data-ng-model="state.form.goalAmount"
+        data-currencies="[state.product.currency]"
+      >
+      </ui-bb-currency-input-ng>
+    </div>
+  </div>
+</script>

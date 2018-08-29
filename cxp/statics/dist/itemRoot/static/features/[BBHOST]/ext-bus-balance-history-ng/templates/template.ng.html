@@ -1,0 +1,157 @@
+<div class="ext-bus-balance-history-ng" data-ng-controller="AccountsOverviewController as $ctrl">
+  <div class="card card-default">
+    <div class="card-body">
+
+      <div class="row d-flex align-items-center ml-3 mb-3">
+        <ui-bb-navigate-to-ng
+          data-action="'view.account.accountsOverview'"
+          data-label="'accounts.label.button.back.to.accounts.overview' | i18n">
+        </ui-bb-navigate-to-ng>
+      </div>
+
+      <ui-bb-substitute-error-ng data-message="$ctrl.state.accounts.errorDetails">
+        <ui-bb-empty-state-ng
+          data-icon-classes="fa fa-4x fa-credit-card text-muted"
+          data-title="{{'accounts.label.empty.accounts.title' | i18n}}"
+          data-subtitle="{{'accounts.label.empty.accounts.subtitle' | i18n}}"
+          data-is-empty="$ctrl.state.accounts.selected === null">
+          <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.balanceHistoryLoadingindicator">
+            <div class="container-fluid">
+              <div class="row d-flex align-items-center justify-content-between mx-1 my-1">
+                <h3 data-ng-bind="$ctrl.state.accounts.selected.name"></h3>
+              </div>
+
+              <hr>
+
+              <div class="row btn-toolbar">
+                <div class="col-md-5 mb-2">
+                  <ui-bb-calendar-popup-ng
+                    class="date-range-start"
+                    data-config="ext.helpers.calendarPopupConfig"
+                    data-date-range="ext.helpers.filterParams.dateRange"
+                    disabled="false"
+                    data-role="from-date">
+                  </ui-bb-calendar-popup-ng>
+                  <div data-ng-if="ext.helpers.filterParams.dateRange.endDate" class="row d-flex justify-content-start">
+                    <div class="apply-filter-date">
+                      <button class="btn btn-link" type="button" data-ng-click="ext.helpers.applyBalanceHistoryDateFilter($ctrl, ext.helpers.filterParams)">
+                        <span data-i18n-key="accounts.button.filter.apply" data-role="apply"></span>
+                      </button>
+                    </div>
+                    <div class="clear-filter-date">
+                      <button class="btn btn-link" type="button" data-ng-click="ext.helpers.applyBalanceHistoryFilter($ctrl)">
+                        <span data-i18n-key="accounts.button.filter.clear" data-role="clear-all"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="d-flex flex-column align-items-center justify-content-md-between flex-md-row">
+                    <div class="btn-group" role="group">
+                      <div class="mr-1 mb-1" data-ng-repeat="item in ext.helpers.buttonFilters track by $index">
+                        <button class="btn btn-default" type="button" data-ng-click="ext.helpers.applyBalanceHistoryFilter($ctrl, item.filter)">
+                          <span data-i18n-key="{{ item.label }}" data-role="button-filter"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="btn-group mb-1">
+                      <button class="btn btn-secondary mx-1" type="button" disabled>
+                        <span data-i18n-key="accounts.detail.button.export" data-role="button-export"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <ui-bb-substitute-error-ng data-message="ext.helpers.handleErrors($ctrl.state.accounts.errorBalanceHistory.messages)">
+                <div data-ng-class="{'bg-light text-center p-5' : !$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]}">
+                  <span data-i18n-key="accounts.card.chart.label.no.data"
+                    data-ng-if="!$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]">
+                  </span>
+                  <ui-bb-chartjs-chart-line-ng
+                    data-ng-if="$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]"
+                    data-series="$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]"
+                    data-plugins="ext.helpers.chartPlugins"
+                    data-options="ext.helpers.lineChartOptions($ctrl)">
+                  </ui-bb-chartjs-chart-line-ng>
+                </div>
+              </ui-bb-substitute-error-ng>
+            </div>
+
+            <ui-bb-empty-state-ng
+              data-icon-classes="fa fa-4x fa-credit-card text-muted"
+              data-title="{{'accounts.label.empty.accounts.history.title' | i18n }}"
+              data-subtitle="{{'accounts.label.empty.accounts.history.title' | i18n }}"
+              data-is-empty="ext.helpers.isEmptyArray($ctrl.state.accounts.balanceHistory)">
+
+              <div class="table-responsive p-1">
+                <div class="text-center m-1"
+                  data-ng-if="$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]">
+                  <span class="min-legend"
+                    data-ng-class="(ext.helpers.getMaxMinLegend($ctrl.getBalanceHistory()).min < 0) ? 'amount-negative' : 'amount-positive'">
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span data-i18n-key="accounts.chart.label.legend.min"></span>
+                    <ui-bus-format-amount-ng
+                      data-amount="ext.helpers.getMaxMinLegend($ctrl.getBalanceHistory()).min"
+                      data-currency="$ctrl.state.accounts.selected.currency">
+                    </ui-bus-format-amount-ng>
+                  </span>
+                  <span class="max-legend"
+                    data-ng-class="(ext.helpers.getMaxMinLegend($ctrl.getBalanceHistory()).max < 0) ? 'amount-negative' : 'amount-positive'">
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span data-i18n-key="accounts.chart.label.legend.max"></span>
+                    <ui-bus-format-amount-ng
+                      data-amount="ext.helpers.getMaxMinLegend($ctrl.getBalanceHistory()).max"
+                      data-currency="$ctrl.state.accounts.selected.currency">
+                    </ui-bus-format-amount-ng>
+                  </span>
+                </div>
+                  <table class="table table-hover table-striped">
+                      <thead>
+                      <tr>
+                        <th
+                          data-ng-repeat="header in ext.helpers.headers track by $index"
+                          data-ui-bb-sortable-column-ng
+                          data-options="header.sortable"
+                          data-active="ext.helpers.isSortableActive(header.sortable, $ctrl)"
+                          data-on-sort="$ctrl.onSort(key, direction)"
+                          class="{{ ::header.class }}">
+                          <span data-i18n-key="{{ ::header.label }}"></span>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          data-ng-class-odd="'table-row-odd'" data-ng-class-even="'table-row-even'"
+                          data-ng-repeat="item in $ctrl.getBalanceHistory() track by $index">
+                          <td data-label="{{ ext.helpers.headers[0].label | i18n }}"
+                          data-role="account-date">
+                            <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ item.dateTo }}">
+                              <span data-ng-bind="item.dateTo | date: 'short'"></span>
+                            </ui-bb-ellipsis-tooltip-ng>
+                          </td>
+                          <td
+                            data-label="{{ ext.helpers.headers[1].label | i18n }}"
+                            data-ng-bind="item.value.currency"
+                            data-role="currency">
+                          </td>
+                          <td
+                            class="text-right"
+                            data-label="{{ ext.helpers.headers[2].label | i18n }}"
+                            data-ng-bind="item.value.balance | currency: ''"
+                            data-role="booked-balance">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+
+            </ui-bb-empty-state-ng>
+          </ui-bb-loading-overlay-ng>
+
+        </ui-bb-empty-state-ng>
+      </ui-bb-substitute-error-ng>
+
+    </div>
+  </div>
+</div>

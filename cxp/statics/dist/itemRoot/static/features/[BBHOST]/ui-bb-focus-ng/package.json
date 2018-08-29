@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-focus-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-focus-ng",
+        "name": "ui-bb-focus-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-focus-ng@2.5.1",
+  "_id": "ui-bb-focus-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-focus-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-focus-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-focus-ng",
+    "name": "ui-bb-focus-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-focus-ng/-/ui-bb-focus-ng-2.5.1.tgz",
+  "_shasum": "85c16b3dcd56993d32b78aa16b5e9af9a7610d0e",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-focus-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-focus-ng/-/ui-bb-focus-ng-2.5.1.tgz",
+    "shasum": "85c16b3dcd56993d32b78aa16b5e9af9a7610d0e"
+  },
+  "main": "scripts/ui-bb-focus-ng.js",
+  "name": "ui-bb-focus-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

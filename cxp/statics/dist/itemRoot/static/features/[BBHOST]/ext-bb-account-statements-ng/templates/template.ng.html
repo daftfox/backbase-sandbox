@@ -1,0 +1,175 @@
+<div class="ext-bb-account-statements-ng"
+  data-ng-controller="AccountStatementsController as $ctrl">
+  <div class="empty-element-placeholder-relative" data-ng-if="$ctrl.state.initialLoading"></div>
+  <ui-bb-substitute-error-ng data-error="ext.helpers.getGeneralError($ctrl)"
+    data-message="ext.helpers.getGeneralError($ctrl).message | i18n : ext.helpers.getGeneralError($ctrl).data">
+    <ui-bb-modal-ng data-is-open="$ctrl.state.accountStatements.downloading">
+      <div class="modal-body">
+        <h3 class="text-center"
+          data-i18n-key="message.modal.title"></h3>
+        <div class="row">
+          <div class="col-12 text-center">
+            <p data-i18n-key="message.modal.content.first.line"></p>
+            <p data-i18n-key="message.modal.content.second.line"></p>
+          </div>
+        </div>
+        <div class="empty-element-placeholder-relative" data-role="spinner"></div>
+      </div>
+    </ui-bb-modal-ng>
+    <div class="notifications col-lg-4">
+      <ui-bb-notification-stripe-ng data-ng-repeat="notification in $ctrl.state.notifications track by $index"
+        data-timeout-second="{{ $ctrl.dismissMessageTime }}"
+        data-message="{{ notification.message }}"
+        data-on-close="$ctrl.state.notifications = ext.helpers.removeNotification(notification, $ctrl.state.notifications);"
+        data-type="bg-{{ notification.level === 'ALERT' ? 'danger' : notification.level | lowercase }}">
+      </ui-bb-notification-stripe-ng>
+    </div>
+    <div class="form-group">
+      <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.accounts.loading">
+        <ui-bb-account-selector-ng data-placeholder="{{ 'selector.placeholder' | i18n }}"
+          data-ng-model="$ctrl.state.accounts.selected"
+          data-accounts="$ctrl.state.accounts.data"
+          data-ng-change="ext.helpers.onAccountSelect($ctrl, $item)"
+          data-labels="ext.helpers.labels"
+          data-total-items="$ctrl.state.accounts.totalItems"
+          data-on-accounts-load="$ctrl.updateAccounts(options)"
+          data-search-box="ext.helpers.searchBox"
+          data-required>
+        </ui-bb-account-selector-ng>
+      </ui-bb-loading-overlay-ng>
+    </div>
+    <div class="card"
+      x-ms-format-detection="none">
+      <div>
+        <ui-bb-account-statements-filter-ng data-category-config="$ctrl.state.category"
+          data-show-categories="$ctrl.state.showCategory"
+          data-on-filter="$ctrl.onFilter(params);ext.helpers.toggleFiltering($ctrl, true);"
+          data-on-clear="ext.helpers.toggleFiltering($ctrl, false)"
+          data-button-labels="{
+            main: ('filter.button.main' | i18n),
+            apply: ('filter.button.apply' | i18n),
+            closePanel: ('filter.button.closePanel' | i18n),
+            clearAll: ('filter.button.clearAll' | i18n)
+          }"
+          data-field-labels="{
+            dateRange: ('filter.label.dateRange' | i18n),
+            category: ('filter.label.category' | i18n),
+          }"
+          data-datepicker-config="$ctrl.state.datePickerConfig">
+        </ui-bb-account-statements-filter-ng>
+        <ui-bb-empty-state-ng data-icon-classes="far fa-4x fa-file-alt text-muted"
+          data-title="{{ ext.helpers.getEmptyMessageTitle($ctrl) | i18n }}"
+          data-subtitle="{{ ext.helpers.getEmptyMessageSubtitle($ctrl) | i18n }}"
+          data-is-empty="ext.helpers.isEmpty($ctrl)">
+          <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.accounts.loading || $ctrl.state.accountStatements.loading">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th data-ng-if="$ctrl.state.accountStatements.isMultiSelect">
+                      <input type="checkbox"
+                            data-ui-bb-checkbox-indeterminate-ng
+                            data-ng-model="$ctrl.state.selectAll"
+                            data-bb-indeterminate="$ctrl.state.indeterminate"
+                            data-ng-click="$ctrl.toggleSelectAll()">
+                    </th>
+                    <th data-ng-repeat="header in ext.helpers.headers"
+                      class="{{ header.class }}"
+                      data-ui-bb-sortable-column-ng
+                      data-options="header.sortable"
+                      data-ng-hide="(header.sortable.key == 'category' && !$ctrl.state.showCategory) || (header.sortable.key == 'description' && !$ctrl.state.showDescription)"
+                      data-active="ext.helpers.isSortableActive(header.sortable, $ctrl)"
+                      data-on-sort="$ctrl.onSort(key, direction)">
+                      <span data-i18n-key="{{ ::header.label }}"></span>
+                    </th>
+                    <th><!-- Action buttons group --></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-ng-repeat="statement in $ctrl.state.accountStatements.data track by $index">
+                    <td data-ng-if="$ctrl.state.accountStatements.isMultiSelect">
+                      <input type="checkbox"
+                          data-ng-model="statement.isChecked"
+                          data-ng-change="$ctrl.toggleStatementCheckInOut(statement)">
+                    </td>
+                    <td data-label="{{ ext.helpers.headers[0].label | i18n }}">
+                      <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ ::statement.date | date: 'shortDate' }}"
+                        data-role="statement-book-date">
+                        <span data-ng-bind="statement.date | date: 'shortDate'"></span>
+                      </ui-bb-ellipsis-tooltip-ng>
+                    </td>
+                    <td data-label="{{ ext.helpers.headers[1].label | i18n }}" data-ng-if="$ctrl.state.showDescription">
+                      {{ statement.description }}
+                    </td>
+                    <td data-label="{{ ext.helpers.headers[2].label | i18n }}" data-ng-if="$ctrl.state.showCategory">
+                      {{ statement.category }}
+                    </td>
+                    <td>
+                      <a data-ng-href="{{ext.helpers.getDocumentLink($ctrl, statement.documents[0])}}"
+                        data-ng-if="!statement.isMultiple"
+                        data-uib-tooltip="{{ 'actions.download' | i18n }} - {{ext.helpers.formatsMap[statement.documents[0].contentType]}}"
+                        data-tooltip-placement="top-center"
+                        data-tooltip-enable="!statement.isDisabled"
+                        data-ng-click="ext.helpers.blockIfDisabled($event, statement.isDisabled)"
+                        target="_blank"
+                        data-role="download-statement"
+                        class="btn btn-sm btn-secondary btn-block text-center"
+                        data-ng-class="{'disabled': statement.isDisabled}">
+                        <i class="fa fa-download"
+                          aria-hidden="true"
+                          data-label="{{ 'actions.download' | i18n }}">
+                        </i>
+                      </a>
+                      <div class="btn-group d-flex justify-content-end"
+                        data-ng-if="statement.isMultiple">
+                        <div class="btn-group w-100"
+                          role="group"
+                          data-uib-dropdown
+                          data-dropdown-append-to-body
+                          data-keyboard-nav>
+                          <button data-uib-tooltip="{{ 'actions.download' | i18n }}"
+                            data-tooltip-placement="top-center"
+                            data-uib-dropdown-toggle
+                            data-ng-disabled="statement.isDisabled"
+                            class="btn btn-secondary btn-sm w-100 text-center"
+                            data-role="download-statement">
+                            <i class="fa fa-download"
+                              aria-hidden="true"
+                              data-label="{{ 'actions.download' | i18n }}">
+                            </i>
+                          </button>
+                          <ul data-uib-dropdown-menu
+                            class="dropdown-menu dropdown-menu-right dropdown-menu-small">
+                            <li class="dropdown-item"
+                              data-ng-repeat="doc in statement.documents track by $index">
+                              <a data-ng-href="{{ ext.helpers.getDocumentLink($ctrl, doc) }}"
+                                target="_blank"
+                                data-ng-bind="ext.helpers.formatsMap[doc.contentType] | uppercase">
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ui-bb-paginator-ng data-page-navigation-text="{{ 'pagination.label' | i18n }}"
+              data-first-text="{{ 'pagination.label.first' | i18n }}"
+              data-last-text="{{ 'pagination.label.last' | i18n }}"
+              data-previous-text="{{ 'pagination.label.prev' | i18n }}"
+              data-next-text="{{ 'pagination.label.next' | i18n }}"
+              data-total-items="{{ $ctrl.state.accountStatements.totalItems }}"
+              data-items-per-page="{{ $ctrl.state.accountStatements.pageSize }}"
+              data-max-nav-pages="{{ $ctrl.state.accountStatements.maxNavPages }}"
+              data-current-page="{{ $ctrl.state.accountStatements.currentPage }}"
+              data-ng-disabled="$ctrl.state.accountStatements.loading"
+              data-change-page="$ctrl.onPageChange(params)">
+            </ui-bb-paginator-ng>
+          </ui-bb-loading-overlay-ng>
+        </ui-bb-empty-state-ng>
+      </div>
+    </div>
+  </ui-bb-substitute-error-ng>
+</div>

@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-state-container@1.0.44",
+        "scope": null,
+        "escapedName": "lib-bb-state-container",
+        "name": "lib-bb-state-container",
+        "rawSpec": "1.0.44",
+        "spec": "1.0.44",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-state-container@1.0.44",
+  "_id": "lib-bb-state-container@1.0.44",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-state-container",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-state-container@1.0.44",
+    "scope": null,
+    "escapedName": "lib-bb-state-container",
+    "name": "lib-bb-state-container",
+    "rawSpec": "1.0.44",
+    "spec": "1.0.44",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-state-container-ng",
+    "/lib-bb-view-model-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-state-container/-/lib-bb-state-container-1.0.44.tgz",
+  "_shasum": "7736294ddb05875c00cfc643be54b9d9094b8715",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-state-container@1.0.44",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-state-container/-/lib-bb-state-container-1.0.44.tgz",
+    "shasum": "7736294ddb05875c00cfc643be54b9d9094b8715"
+  },
+  "main": "scripts/lib-bb-state-container.js",
+  "name": "lib-bb-state-container",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.44"
+}

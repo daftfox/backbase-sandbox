@@ -1,0 +1,1213 @@
+<div class="ext-bus-account-details-ng" data-ng-controller="AccountsOverviewController as $ctrl">
+  <div class="card card-default">
+    <div class="card-body">
+
+      <div class="row d-flex align-items-center ml-3 mb-3">
+        <ui-bb-navigate-to-ng
+          data-action="'view.account.accountsOverview'"
+          data-label="'accounts.label.button.back.to.accounts.overview' | i18n">
+        </ui-bb-navigate-to-ng>
+      </div>
+
+      <ui-bb-substitute-error-ng data-message="$ctrl.state.accounts.errorDetails">
+        <ui-bb-empty-state-ng
+          data-icon-classes="fa fa-4x fa-credit-card text-muted"
+          data-title="{{'accounts.label.empty.accounts.title' | i18n}}"
+          data-subtitle="{{'accounts.label.empty.accounts.subtitle' | i18n}}"
+          data-is-empty="$ctrl.state.accounts.selected === null">
+
+          <div class="container-fluid">
+            <div class="row d-flex align-items-center justify-content-between mx-1 my-1 d-print-none">
+              <h3 data-ng-bind="$ctrl.state.accounts.selected.name"></h3>
+              <button class="btn btn-secondary" type="button" onclick="window.print()">
+                <span data-i18n-key="accounts.detail.button.print" data-role="button-print"></span>
+              </button>
+            </div>
+          </div>
+          <ui-bb-loading-overlay-ng data-ng-if="$ctrl.state.chartsEnabled" data-is-loading="$ctrl.state.balanceHistoryLoadingindicator">
+            <ui-bb-substitute-error-ng data-message="ext.helpers.handleErrors($ctrl.state.accounts.errorBalanceHistory.messages)">
+              <div data-ng-class="{'bg-light text-center p-5' : !$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]}">
+                <span data-i18n-key="accounts.card.chart.label.no.data" data-ng-if="!$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]"></span>
+                <ui-bb-chartjs-chart-line-ng
+                  data-ng-if="$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]"
+                  data-series="$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]"
+                  data-options="ext.helpers.lineChartOptions($ctrl)"
+                  data-plugins="ext.helpers.chartPlugins"
+                ></ui-bb-chartjs-chart-line-ng>
+                <div class="text-center m-1">
+                  <div data-ng-if="$ctrl.state.accounts.balanceHistorySeries[$ctrl.state.accounts.selected.id]">
+                    <span class="min-legend"
+                      data-ng-class="(ext.helpers.getMaxMinLegend($ctrl.getBalanceHistory()).min < 0) ? 'amount-negative' : 'amount-positive'">
+                      <i class="fa fa-circle" aria-hidden="true"></i>
+                      <span data-i18n-key="accounts.chart.label.legend.min"></span>
+                      <ui-bus-format-amount-ng
+                        data-amount="ext.helpers.getMaxMinLegend($ctrl.getBalanceHistory()).min"
+                        data-currency="$ctrl.state.accounts.selected.currency">
+                      </ui-bus-format-amount-ng>
+                    </span>
+                    <span class="max-legend"
+                      data-ng-class="(ext.helpers.getMaxMinLegend($ctrl.getBalanceHistory()).max < 0) ? 'amount-negative' : 'amount-positive'">
+                      <i class="fa fa-circle" aria-hidden="true"></i>
+                      <span data-i18n-key="accounts.chart.label.legend.max"></span>
+                      <ui-bus-format-amount-ng
+                        data-amount="ext.helpers.getMaxMinLegend($ctrl.getBalanceHistory()).max"
+                        data-currency="$ctrl.state.accounts.selected.currency">
+                      </ui-bus-format-amount-ng>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </ui-bb-substitute-error-ng>
+          </ui-bb-loading-overlay-ng>
+          <hr>
+          <div data-ng-include="ext.helpers.getProductTypeTemplateId($ctrl.state.accounts.selected.productKindName)"></div>
+
+        </ui-bb-empty-state-ng>
+      </ui-bb-substitute-error-ng>
+
+    </div>
+  </div>
+</div>
+
+<!-- Current Account template -->
+<script type="text/ng-template" id="account-details/current.html">
+  <div class="d-flex flex-row">
+    <div class="pr-5 col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.name)">
+      <h6>
+        <span data-i18n-key="accounts.detail.name"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.name' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.name" data-role="current-name"></p>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.productTypeName)">
+      <h6> 
+        <span data-i18n-key="accounts.detail.type"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.type' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.productTypeName" data-role="current-product-type-name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.IBAN)">
+      <h6>
+        <span data-i18n-key="accounts.detail.IBAN"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.IBAN' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.IBAN" data-role="current-iban"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.BBAN)">
+      <h6>
+        <span data-i18n-key="accounts.detail.BBAN"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.BBAN' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.BBAN" data-role="current-bban"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.BIC)">
+      <h6>
+        <span data-i18n-key="accounts.detail.bic"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.BIC' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.BIC" data-role="current-bic"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.currency)">
+      <h6>
+        <span data-i18n-key="accounts.detail.currency"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.currency' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.currency" data-role="current-currency"></p>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.availableBalance)">
+      <h6>
+        <span data-i18n-key="accounts.detail.availableBalance"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.availableBalance' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-ng-class="($ctrl.state.accounts.selected.availableBalance < 0) ? 'amount-negative' : 'amount-positive'"
+          data-amount="$ctrl.state.accounts.selected.availableBalance"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="current-available-balance">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.bookedBalance)">
+      <h6>
+        <span data-i18n-key="accounts.detail.bookedBalance"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.bookedBalance' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-ng-class="($ctrl.state.accounts.selected.bookedBalance < 0) ? 'amount-negative' : 'amount-positive'"
+          data-amount="$ctrl.state.accounts.selected.bookedBalance"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="current-booked-balance">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.creditLimit)">
+      <h6>
+        <span data-i18n-key="accounts.detail.creditLimit"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.creditLimit' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.creditLimit"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="current-credit-limit">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.creditLimitInterestRate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.creditLimitInterestRate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.creditLimitInterestRate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.creditLimitInterestRate" data-role="current-credit-limit-interest-rate">
+        </span>%
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.creditLimitUsage)">
+      <h6>
+        <span data-i18n-key="accounts.detail.creditLimitUsage"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.creditLimitUsage' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.creditLimitUsage"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="current-credit-limit-usage">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.creditLimitExpiryDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.creditLimitExpiryDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.creditLimitExpiryDate' | i18n) }}">
+        </i>
+      </h6>
+      <div data-role="current-credit-limit-expiry-date">
+        <span data-ng-bind="$ctrl.state.accounts.selected.creditLimitExpiryDate | date: 'shortDate'"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.creditLimitExpiryDate | date:'hh:mm'"></span>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountInterestRate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.interestRate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.interestRate' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.accountInterestRate" data-role="current-interest-rate"></span>%</div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accruedInterest)">
+      <h6>
+        <span data-i18n-key="accounts.detail.accruedInterest"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.accruedInterest' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.accruedInterest"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="current-accrued-interest">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.bankBranchCode)">
+      <h6>
+        <span data-i18n-key="accounts.detail.branch"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.bankBranchCode' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.bankBranchCode" data-role="current-bank-branch-code"></span></div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountOpeningDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.openingDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.openingDate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.accountOpeningDate | date: 'shortDate'" data-role="current-opening-date"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.accountOpeningDate | date:'hh:mm'" data-role="current-opening-hours"></span>
+      </div>
+    </div>
+  </div>
+  <div data-ng-if="!ext.helpers.isEmptyArray($ctrl.state.accounts.selected.debitCards)">
+    <div class="d-flex flex-row mt-3">
+      <div class="col-6">
+        <h6>
+          <span data-i18n-key="accounts.detail.debitCard"></span>
+          <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+            data-uib-tooltip="{{ ('accounts.card.tooltip.label.debitCard' | i18n) }}">
+          </i>
+        </h6>
+        <div>
+          <span data-ng-bind="$ctrl.state.accounts.selected.debitCards[0].number" data-role="current-debit-card-number"></span>
+        </div>
+      </div>
+      <div class="col-6">
+        <h6>
+          <span data-i18n-key="accounts.detail.debitCardExpiryDate"></span>
+          <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+            data-uib-tooltip="{{ ('accounts.card.tooltip.label.debitCardExpiryDate' | i18n) }}">
+          </i>
+        </h6>
+        <div data-role="current-debit-card-expiry-date">
+          <span data-ng-bind="$ctrl.state.accounts.selected.debitCards[0].expiryDate | date: 'shortDate'"></span>
+          <span data-i18n-key="accounts.detail.at"></span>
+          <span data-ng-bind="$ctrl.state.accounts.selected.debitCards[0].expiryDate | date:'hh:mm'"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- Savings Account template -->
+<script type="text/ng-template" id="account-details/savings.html">
+  <div class="d-flex flex-row">
+    <div class="pr-5 col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.name)">
+      <h6>
+        <span data-i18n-key="accounts.detail.name"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.name' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.name" data-role="savings-name"></p>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.productTypeName)">
+      <h6> 
+        <span data-i18n-key="accounts.detail.type"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.type' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.productTypeName" data-role="savings-product-type-name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.IBAN)">
+      <h6>
+        <span data-i18n-key="accounts.detail.IBAN"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.IBAN' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.IBAN" data-role="savings-iban"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.BBAN)">
+      <h6>
+        <span data-i18n-key="accounts.detail.BBAN"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.BBAN' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.BBAN" data-role="savings-bban"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.BIC)">
+      <h6>
+        <span data-i18n-key="accounts.detail.bic"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.BIC' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.BIC" data-role="savings-bic"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.currency)">
+      <h6>
+        <span data-i18n-key="accounts.detail.currency"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.currency' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.currency" data-role="savings-currency"></p>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.bookedBalance)">
+      <h6>
+        <span data-i18n-key="accounts.detail.bookedBalance"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.bookedBalance' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-ng-class="($ctrl.state.accounts.selected.bookedBalance < 0) ? 'amount-negative' : 'amount-positive'"
+          data-amount="$ctrl.state.accounts.selected.bookedBalance"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="savings-booked-balance">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.minimumRequiredBalance)">
+      <h6>
+        <span data-i18n-key="accounts.detail.minimumRequiredBalance"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.minimumRequiredBalance' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.minimumRequiredBalance"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="savings-credit-limit">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountInterestRate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.interestRate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.interestRate' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.accountInterestRate" data-role="savings-interest-rate"></span>%</div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accruedInterest)">
+      <h6>
+        <span data-i18n-key="accounts.detail.accruedInterest"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.accruedInterest' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.accruedInterest"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="savings-accrued-interest">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.bankBranchCode)">
+      <h6>
+        <span data-i18n-key="accounts.detail.branch"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.bankBranchCode' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.bankBranchCode" data-role="savings-bank-branch-code"></span></div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountOpeningDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.openingDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.openingDate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.accountOpeningDate | date: 'shortDate'" data-role="savings-opening-date"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.accountOpeningDate | date:'hh:mm'" data-role="savings-opening-hours"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.lastUpdateDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.lastUpdateDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.lastUpdateDate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.lastUpdateDate | date: 'shortDate'" data-role="savings-last-update-date"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.lastUpdateDate | date:'hh:mm'" data-role="savings-last-update-date"></span>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- Loan Account template -->
+<script type="text/ng-template" id="account-details/loan.html">
+  <div class="d-flex flex-row">
+    <div class="pr-5 col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.name)">
+      <h6>
+        <span data-i18n-key="accounts.detail.name"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.name' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.name" data-role="loan-name"></p>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.productTypeName)">
+      <h6> 
+        <span data-i18n-key="accounts.detail.type"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.type' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.productTypeName" data-role="loan-product-type-name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.BBAN)">
+      <h6>
+        <span data-i18n-key="accounts.detail.BBAN"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.BBAN' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.BBAN" data-role="loan-bban"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.currency)">
+      <h6>
+        <span data-i18n-key="accounts.detail.currency"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.currency' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.currency" data-role="loan-currency"></p>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.bookedBalance)">
+      <h6>
+        <span data-i18n-key="accounts.detail.bookedBalance"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.bookedBalance' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-ng-class="($ctrl.state.accounts.selected.bookedBalance < 0) ? 'amount-negative' : 'amount-positive'"
+          data-amount="$ctrl.state.accounts.selected.bookedBalance"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="loan-booked-balance">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountInterestRate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.interestRate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.interestRate' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.accountInterestRate" data-role="loan-interest-rate"></span>%</div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.principalAmount)">
+      <h6>
+        <span data-i18n-key="accounts.detail.principalAmount"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.principalAmount' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.principalAmount"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="loan-principal-amount">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.amountInArrear)">
+      <h6>
+        <span data-i18n-key="accounts.detail.amountInArrear"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.amountInArrear' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.amountInArrear"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="loan-amount-in-arrear">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.startDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.startDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.startDate' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.startDate" data-role="loan-start-date"></span></div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.monthlyInstalmentAmount)">
+      <h6>
+        <span data-i18n-key="accounts.detail.monthlyInstalmentAmount"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.monthlyInstalmentAmount' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.monthlyInstalmentAmount"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="loan-monthly-instalment-amount">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.termUnit)">
+      <h6>
+        <span data-i18n-key="accounts.detail.term"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.term' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.termNumber" data-role="loan-account-term-number"></span>
+        <span data-i18n-key="{{ext.helpers.getFrequencyUnitKey($ctrl.state.accounts.selected.termUnit)}}"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.maturityDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.maturityDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.maturityDate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.maturityDate | date: 'shortDate'" data-role="loan-deposit-maturity-date"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.maturityDate | date:'hh:mm'" data-role="loan-deposit-maturity-hour"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.interestSettlementAccount)">
+      <h6>
+        <span data-i18n-key="accounts.detail.interestSettlementAccount"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.interestSettlementAccount' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.interestSettlementAccount" data-role="loan-interest-settlement-account"></span>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- Credit Card Account template -->
+<script type="text/ng-template" id="account-details/credit-card.html">
+  <div class="d-flex flex-row">
+    <div class="pr-5 col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.name)">
+      <h6>
+        <span data-i18n-key="accounts.detail.name"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.name' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.name" data-role="credit-card-name"></p>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.productTypeName)">
+      <h6> 
+        <span data-i18n-key="accounts.detail.type"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.type' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.productTypeName" data-role="credit-card-product-type-name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.number)">
+      <h6>
+        <span data-i18n-key="accounts.detail.number"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.number' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.number" data-role="credit-card-bban"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.availableBalance)">
+      <h6>
+        <span data-i18n-key="accounts.detail.availableBalance"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.availableBalance' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-ng-class="($ctrl.state.accounts.selected.availableBalance < 0) ? 'amount-negative' : 'amount-positive'"
+          data-amount="$ctrl.state.accounts.selected.availableBalance"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="credit-card-available-balance">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.bookedBalance)">
+      <h6>
+        <span data-i18n-key="accounts.detail.bookedBalance"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.bookedBalance' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-ng-class="($ctrl.state.accounts.selected.bookedBalance < 0) ? 'amount-negative' : 'amount-positive'"
+          data-amount="$ctrl.state.accounts.selected.bookedBalance"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="credit-card-booked-balance">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.currency)">
+      <h6>
+        <span data-i18n-key="accounts.detail.currency"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.currency' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.currency" data-role="credit-card-currency"></p>
+    </div>
+  </div>
+  <hr />
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountInterestRate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.interestRate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.interestRate' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.accountInterestRate" data-role="credit-card-interest-rate"></span>%</div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.creditLimit)">
+      <h6>
+        <span data-i18n-key="accounts.detail.creditLimit"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.creditLimit' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.creditLimit"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="credit-card-credit-limit">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.minimumPayment)">
+      <h6>
+        <span data-i18n-key="accounts.detail.minimumPayment"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.minimumPayment' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.minimumPayment"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="credit-card-minimum-payment">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.minimumPaymentDueDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.minimumPaymentDueDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.minimumPaymentDueDate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.minimumPaymentDueDate | date: 'shortDate'" data-role="credit-card-minimum-payment-due-date"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.minimumPaymentDueDate | date:'hh:mm'" data-role="credit-card-minimum-payment-due-hour"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.validThru)">
+      <h6>
+        <span data-i18n-key="accounts.detail.validThru"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.validThru' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.validThru | date: 'shortDate'" data-role="credit-card-valid-thru"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.validThru | date:'hh:mm'" data-role="credit-card-valid-thru"></span>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- Debit Card Account template -->
+<script type="text/ng-template" id="account-details/debit-card.html">
+  <div class="d-flex flex-row">
+    <div class="pr-5 col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.name)">
+      <h6>
+        <span data-i18n-key="accounts.detail.name"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.name' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.name" data-role="debit-card-name"></p>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.productTypeName)">
+      <h6> 
+        <span data-i18n-key="accounts.detail.type"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.type' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.productTypeName" data-role="debit-card-product-type-name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.number)">
+      <h6>
+        <span data-i18n-key="accounts.detail.number"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.number' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.number" data-role="debit-card-bban"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.bookedBalance)">
+      <h6>
+        <span data-i18n-key="accounts.detail.bookedBalance"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.bookedBalance' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-ng-class="($ctrl.state.accounts.selected.bookedBalance < 0) ? 'amount-negative' : 'amount-positive'"
+          data-amount="$ctrl.state.accounts.selected.bookedBalance"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="credit-card-available-balance">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.currency)">
+      <h6>
+        <span data-i18n-key="accounts.detail.currency"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.currency' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.currency" data-role="credit-card-currency"></p>
+    </div>
+  </div>
+  <hr />
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountOpeningDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.openingDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.openingDate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.accountOpeningDate | date: 'shortDate'" data-role="debit-card-opening-date"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.accountOpeningDate | date:'hh:mm'" data-role="debit-card-opening-hours"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountHolderName)">
+      <h6>
+        <span data-i18n-key="accounts.detail.cardHolderName"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.cardHolderName' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.accountHolderName" data-role="debit-card-account-holder-name"></span></div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.validThru)">
+      <h6>
+        <span data-i18n-key="accounts.detail.validThru"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.validThru' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.validThru | date: 'shortDate'" data-role="credit-card-valid-thru"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.validThru | date:'hh:mm'" data-role="credit-card-valid-thru"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.number)">
+      <h6>
+        <span data-i18n-key="accounts.detail.debitCard"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.debitCard' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.number" data-role="debit-card-number"></span>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- Investment Account template -->
+<script type="text/ng-template" id="account-details/investment.html">
+  <div class="d-flex flex-row">
+    <div class="pr-5 col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.name)">
+      <h6>
+        <span data-i18n-key="accounts.detail.name"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.name' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.name" data-role="investment-name"></p>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.productTypeName)">
+      <h6> 
+        <span data-i18n-key="accounts.detail.type"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.type' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.productTypeName" data-role="investment-product-type-name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.BBAN)">
+      <h6>
+        <span data-i18n-key="accounts.detail.BBAN"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.BBAN' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.BBAN" data-role="investment-bban"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.totalInvestmentValue)">
+      <h6>
+        <span data-i18n-key="accounts.detail.totalInvestmentValue"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.totalInvestmentValue' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.totalInvestmentValue"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="investment-total-investment-value">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.currency)">
+      <h6>
+        <span data-i18n-key="accounts.detail.currency"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.currency' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.currency" data-role="investment-currency"></p>
+    </div>
+  </div>
+</script>
+
+<!-- Term Deposit Account template -->
+<script type="text/ng-template" id="account-details/term-deposit.html">
+  <div class="d-flex flex-row">
+    <div class="pr-5 col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.name)">
+      <h6>
+        <span data-i18n-key="accounts.detail.name"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.name' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.name" data-role="term-deposit-name"></p>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.productTypeName)">
+      <h6> 
+        <span data-i18n-key="accounts.detail.type"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.type' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.productTypeName" data-role="term-deposit-product-type-name"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.BBAN)">
+      <h6>
+        <span data-i18n-key="accounts.detail.BBAN"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.BBAN' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.BBAN" data-role="term-deposit-bban"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.currency)">
+      <h6>
+        <span data-i18n-key="accounts.detail.currency"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.currency' | i18n) }}">
+        </i>
+      </h6>
+      <p data-ng-bind="$ctrl.state.accounts.selected.currency" data-role="term-deposit-currency"></p>
+    </div>
+  </div>
+  <hr />
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.principalAmount)">
+      <h6>
+        <span data-i18n-key="accounts.detail.principalAmount"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.principalAmount' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.principalAmount"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="term-deposit-principal-amount">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountInterestRate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.interestRate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.interestRate' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.accountInterestRate" data-role="term-deposit-interest-rate"></span>%</div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accruedInterest)">
+      <h6>
+        <span data-i18n-key="accounts.detail.accruedInterest"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.accruedInterest' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.accruedInterest"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="term-deposit-accrued-interest">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.startDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.startDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.startDate' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.startDate" data-role="term-deposit-start-date"></span></div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.termUnit)">
+      <h6>
+        <span data-i18n-key="accounts.detail.term"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.term' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.termNumber" data-role="term-deposit-account-term-number"></span>
+        <span data-i18n-key="{{ext.helpers.getFrequencyUnitKey($ctrl.state.accounts.selected.termUnit)}}"></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.maturityDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.maturityDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.maturityDate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.maturityDate | date: 'shortDate'" data-role="term-deposit-deposit-maturity-date"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.maturityDate | date:'hh:mm'" data-role="term-deposit-deposit-maturity-hour"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.maturityAmount)">
+      <h6>
+        <span data-i18n-key="accounts.detail.maturityAmount"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.maturityAmount' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <ui-bus-format-amount-ng
+          data-amount="$ctrl.state.accounts.selected.maturityAmount"
+          data-currency="$ctrl.state.accounts.selected.currency"
+          data-role="term-deposit-accrued-interest">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.autoRenewalIndicator)">
+      <h6>
+        <span data-i18n-key="accounts.detail.autoRenewalIndicator"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.autoRenewalIndicator' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="ext.helpers.formatBooleanToText($ctrl.state.accounts.selected.autoRenewalIndicator)" data-role="term-deposit-last-update-date"></span>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.interestPaymentFrequencyNumber)">
+      <h6>
+        <span data-i18n-key="accounts.detail.interestPaymentFrequencyNumber"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.interestPaymentFrequencyNumber' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-role="term-deposit-interest-payment-frequency">
+          <span data-ng-bind="$ctrl.state.accounts.selected.interestPaymentFrequencyNumber"></span>
+          <span data-i18n-key="{{ext.helpers.getFrequencyUnitKey($ctrl.state.accounts.selected.interestPaymentFrequencyUnit)}}"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.interestSettlementAccount)">
+      <h6>
+        <span data-i18n-key="accounts.detail.interestSettlementAccount"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.interestSettlementAccount' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.interestSettlementAccount" data-role="term-deposit-last-update-date"></span></div>
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-row mt-3">
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.bankBranchCode)">
+      <h6>
+        <span data-i18n-key="accounts.detail.branch"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.bankBranchCode' | i18n) }}">
+        </i>
+      </h6>
+      <div><span data-ng-bind="$ctrl.state.accounts.selected.bankBranchCode" data-role="term-deposit-bank-branch-code"></span></div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue($ctrl.state.accounts.selected.accountOpeningDate)">
+      <h6>
+        <span data-i18n-key="accounts.detail.openingDate"></span>
+        <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+          data-uib-tooltip="{{ ('accounts.card.tooltip.label.openingDate' | i18n) }}">
+        </i>
+      </h6>
+      <div>
+        <span data-ng-bind="$ctrl.state.accounts.selected.accountOpeningDate | date: 'shortDate'" data-role="term-deposit-opening-date"></span>
+        <span data-i18n-key="accounts.detail.at"></span>
+        <span data-ng-bind="$ctrl.state.accounts.selected.accountOpeningDate | date:'hh:mm'" data-role="term-deposit-opening-hours"></span>
+      </div>
+    </div>
+  </div>
+</script>

@@ -1,0 +1,47 @@
+{
+  "en-US": {
+    "header.date": "Book Date",
+    "header.account": "Account name, number",
+
+    "actions.download": "Download",
+
+    "pagination.label": "Page navigation",
+    "pagination.label.first": "First",
+    "pagination.label.last": "Last",
+    "pagination.label.next": "Next",
+    "pagination.label.prev": "Previous",
+
+    "message.modal.title": "Generating files",
+    "message.modal.content.first.line": "Your account statements are being generated.",
+    "message.modal.content.second.line": "The download will initiate shortly when they're ready.",
+
+    "message.download.fail": "Unable to download an account statement",
+    "message.download.success": "Successfully downloaded an account statement",
+
+    "message.empty.state.title": "No Account Statements",
+    "message.empty.state.subtitle": "for the selected account",
+
+    "message.error.auth": "You are not authorised to perform this action.",
+    "message.error.connection": "Connection Error",
+    "message.error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later.",
+    "message.error.user": "Incorrect filter parameters.",
+    "message.error.preference": "Incorrect parameter ({key}) value: {value}",
+
+    "selector.placeholder": "Select account",
+    "selector.searchPlaceholder": "Search",
+    "selector.label.allAccounts": "All Accounts",
+    "selector.label.accounts": "accounts",
+    "selector.label.account": "account",
+    "selector.label.noAccounts": "No accounts found",
+
+    "filter.button.main": "Filter",
+    "filter.button.apply": "Apply",
+    "filter.button.closePanel": "Close Panel",
+    "filter.button.clearAll": "Clear All",
+    "filter.label.dateRange": "Book Date",
+    "filter.label.category": "Category",
+
+    "notification.download.fail": "Unable to download an account statement",
+    "notification.download.success": "Successfully downloaded an account statement"
+  }
+}

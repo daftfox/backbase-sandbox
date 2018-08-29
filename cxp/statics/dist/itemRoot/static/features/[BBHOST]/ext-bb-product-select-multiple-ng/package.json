@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-product-select-multiple-ng@~2.17.0",
+        "scope": null,
+        "escapedName": "ext-bb-product-select-multiple-ng",
+        "name": "ext-bb-product-select-multiple-ng",
+        "rawSpec": "~2.17.0",
+        "spec": ">=2.17.0 <2.18.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bb-product-select-multiple-ng@>=2.17.0 <2.18.0",
+  "_id": "ext-bb-product-select-multiple-ng@2.17.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-product-select-multiple-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-product-select-multiple-ng@~2.17.0",
+    "scope": null,
+    "escapedName": "ext-bb-product-select-multiple-ng",
+    "name": "ext-bb-product-select-multiple-ng",
+    "rawSpec": "~2.17.0",
+    "spec": ">=2.17.0 <2.18.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-product-select-multiple-ng/-/ext-bb-product-select-multiple-ng-2.17.0.tgz",
+  "_shasum": "056f561ed435853f667fcfda31ecf15d623c9fa2",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-product-select-multiple-ng@~2.17.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "ui-bb-account-selector-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-product-select-multiple-ng/-/ext-bb-product-select-multiple-ng-2.17.0.tgz",
+    "shasum": "056f561ed435853f667fcfda31ecf15d623c9fa2"
+  },
+  "main": "scripts/ext-bb-product-select-multiple-ng.js",
+  "name": "ext-bb-product-select-multiple-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.17.0"
+}

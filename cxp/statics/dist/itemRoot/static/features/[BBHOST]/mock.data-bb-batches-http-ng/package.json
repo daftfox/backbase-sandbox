@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "mock.data-bb-batches-http-ng@~1.5.0",
+        "scope": null,
+        "escapedName": "mock.data-bb-batches-http-ng",
+        "name": "mock.data-bb-batches-http-ng",
+        "rawSpec": "~1.5.0",
+        "spec": ">=1.5.0 <1.6.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-mocks-release/workspace/dist"
+    ]
+  ],
+  "_from": "mock.data-bb-batches-http-ng@>=1.5.0 <1.6.0",
+  "_id": "mock.data-bb-batches-http-ng@1.5.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/mock.data-bb-batches-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "mock.data-bb-batches-http-ng@~1.5.0",
+    "scope": null,
+    "escapedName": "mock.data-bb-batches-http-ng",
+    "name": "mock.data-bb-batches-http-ng",
+    "rawSpec": "~1.5.0",
+    "spec": ">=1.5.0 <1.6.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/mock.data-bb-batches-http-ng/-/mock.data-bb-batches-http-ng-1.5.0.tgz",
+  "_shasum": "c7b8df12135ffc9c93fa4a8df2b0cd92d65d4b6a",
+  "_shrinkwrap": null,
+  "_spec": "mock.data-bb-batches-http-ng@~1.5.0",
+  "_where": "/opt/jobs/collection-retail-banking-mocks-release/workspace/dist",
+  "dependencies": {
+    "lib-bb-storage-ng": "^1.0.91",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/mock.data-bb-batches-http-ng/-/mock.data-bb-batches-http-ng-1.5.0.tgz",
+    "shasum": "c7b8df12135ffc9c93fa4a8df2b0cd92d65d4b6a"
+  },
+  "main": "scripts/mock.data-bb-batches-http-ng.js",
+  "name": "mock.data-bb-batches-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.5.0"
+}

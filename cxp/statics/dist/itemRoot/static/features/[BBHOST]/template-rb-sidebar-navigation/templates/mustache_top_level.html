@@ -1,0 +1,7 @@
+  <ul class="nav nav-tabs">
+    {{#links}}
+        <li class="bg-white nav-item{{#isInPath}} active{{/isInPath}}{{^children.isEmpty}} dropdown-submenu{{/children.isEmpty}}">
+            <a href="{{Url}}" class="nav-link text-dark{{^children.isEmpty}} dropdown-toggle{{/children.isEmpty}}"{{^children.isEmpty}} data-toggle="dropdown"{{/children.isEmpty}}>{{title}}</a>
+        </li>
+    {{/links}}
+  </ul>

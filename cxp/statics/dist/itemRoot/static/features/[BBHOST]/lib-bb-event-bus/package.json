@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-event-bus@1.1.77",
+        "scope": null,
+        "escapedName": "lib-bb-event-bus",
+        "name": "lib-bb-event-bus",
+        "rawSpec": "1.1.77",
+        "spec": "1.1.77",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-event-bus@1.1.77",
+  "_id": "lib-bb-event-bus@1.1.77",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-event-bus",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-event-bus@1.1.77",
+    "scope": null,
+    "escapedName": "lib-bb-event-bus",
+    "name": "lib-bb-event-bus",
+    "rawSpec": "1.1.77",
+    "spec": "1.1.77",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-event-bus-ng",
+    "/lib-bb-start-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-event-bus/-/lib-bb-event-bus-1.1.77.tgz",
+  "_shasum": "d3e6898e7d0af6653a31d9abcd6ddcd20f04a6df",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-event-bus@1.1.77",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-event-bus/-/lib-bb-event-bus-1.1.77.tgz",
+    "shasum": "d3e6898e7d0af6653a31d9abcd6ddcd20f04a6df"
+  },
+  "main": "scripts/lib-bb-event-bus.js",
+  "name": "lib-bb-event-bus",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.77"
+}

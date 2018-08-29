@@ -1,0 +1,32 @@
+{
+  "en-US": {
+    "message.loading": "Loading",
+    "portfolio.details.valuation": "Total Valuation",
+    "portfolios.title": "Portfolio details",
+    "portfolios.empty.title": "No portfolio details",
+    "portfolios.empty.message": "There are no portfolio details to display",
+    "model.error.auth.message": "You are not authorized to perform this action",
+    "model.error.auth.title": "Not authorized",
+    "model.error.connectivity.message": "Are you connected to the internet? Please check your connection and try again.",
+    "model.error.connectivity.title": "You`re offline",
+    "model.error.user.message": "There is a problem with the action you are trying to perform.",
+    "model.error.user.title": "Problem with access rights",
+    "model.error.unexpected.message": "Something`s gone wrong with our server. Please try again later.",
+    "model.error.unexpected.title": "System error"
+  },
+  "fr-FR": {
+    "message.loading": "Chargement",
+    "portfolios.title": "Details de portefeuille",
+    "portfolios.empty.title": "Aucun détails de portefeuille",
+    "portfolios.empty.message": "Il n'y a pas de détails à afficher",
+    "portfolio.details.valuation": "Valorisation totale",
+    "model.error.auth.message": "Vous n'êtes pas autorisé à procéder",
+    "model.error.connectivity.message": "Problème de connection, veullez réessayer. ",
+    "model.error.user.message": "L'action que vous essayer de faire n'abouti pas",
+    "model.error.unexpected.message": "Une erreure s'est produite durant votre manipulation",
+    "model.error.auth.title": "Pas autorisé",
+    "model.error.connectivity.title": "Vous n'êtes pas connecté",
+    "model.error.user.title": "Problème de droits d'accès",
+    "model.error.unexpected.title": "Erreur système"
+  }
+}

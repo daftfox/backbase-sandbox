@@ -1,0 +1,29 @@
+{
+  "en-US": {
+    "form.label.name": "Name",
+    "form.label.accountNumber": "Account Number",
+    "form.label.saveChanges": "Save",
+
+    "form.placeholder.name": "Name Surname",
+    "form.placeholder.accountNumber": "NL01 IBAN 0123 4567 89",
+
+    "errors.requiredName": "Please input a name",
+    "errors.requiredAccountIBAN": "Please input an IBAN",
+    "errors.invalidAccountIBAN": "Please input a valid IBAN",
+
+    "message.contact.delete.start": "Deleting contact",
+    "message.contact.delete.done": "Contact deleted successfully",
+    "message.contact.delete.failed": "Unable to delete the contact, please try again",
+    "message.contact.update.start": "Updating contact",
+    "message.contact.update.done": "Contact updated successfully",
+    "message.contact.update.failed": "Unable to update the contact, please try again",
+    "message.contact.create.start": "Creating new contact",
+    "message.contact.create.done": "Contact created successfully",
+    "message.contact.create.failed": "Unable to create the contact, please try again",
+
+    "message.contact.delete.confirm.title": "Delete contact?",
+    "message.contact.delete.confirm.message": "Contact will be deleted from your address book",
+    "message.contact.delete.confirm.button.ok": "OK",
+    "message.contact.delete.confirm.button.cancel": "Cancel",
+  }
+}

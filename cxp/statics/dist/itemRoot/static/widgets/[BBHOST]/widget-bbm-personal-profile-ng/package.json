@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bbm-personal-profile-ng@~2.17.1",
+        "scope": null,
+        "escapedName": "widget-bbm-personal-profile-ng",
+        "name": "widget-bbm-personal-profile-ng",
+        "rawSpec": "~2.17.1",
+        "spec": ">=2.17.1 <2.18.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bbm-personal-profile-ng@>=2.17.1 <2.18.0",
+  "_id": "widget-bbm-personal-profile-ng@2.17.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bbm-personal-profile-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bbm-personal-profile-ng@~2.17.1",
+    "scope": null,
+    "escapedName": "widget-bbm-personal-profile-ng",
+    "name": "widget-bbm-personal-profile-ng",
+    "rawSpec": "~2.17.1",
+    "spec": ">=2.17.1 <2.18.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bbm-personal-profile-ng/-/widget-bbm-personal-profile-ng-2.17.1.tgz",
+  "_shasum": "92adc2af6cab454dffbac7d997c6a9d8d645bada",
+  "_shrinkwrap": null,
+  "_spec": "widget-bbm-personal-profile-ng@~2.17.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bbm-personal-profile-ng": "^3.17.1",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-extension-events-ng": "^1.0.44",
+    "lib-bb-extension-helpers-ng": "^1.0.44",
+    "lib-bb-extension-intents-ng": "^1.0.44",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-state-container-ng": "^1.0.22",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-personal-profile-ng": "^1.18.1",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bbm-personal-profile-ng/-/widget-bbm-personal-profile-ng-2.17.1.tgz",
+    "shasum": "92adc2af6cab454dffbac7d997c6a9d8d645bada"
+  },
+  "main": "scripts/widget-bbm-personal-profile-ng.js",
+  "name": "widget-bbm-personal-profile-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.17.1"
+}

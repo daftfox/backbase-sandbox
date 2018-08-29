@@ -1,0 +1,9 @@
+---
+### Live profile
+logging:
+  config: ${backbase.config.dir}/approval-integration-service/logback.xml
+
+backbase:
+  persistence:
+    enabled: false
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--<configuration debug="false" scan="true" scanPeriod="30 seconds">-->
+    <!--NOTE If no unit of time is specified, then the unit of time is assumed to be milliseconds,
+    which is usually inappropriate. If you change the default scanning period, do not forget to
+    specify a time unit.-->
+
+    <contextName>Orchestrator</contextName>
+
+    <conversionRule conversionWord="smsg"
+                    converterClass="com.backbase.portal.commons.api.logging.SecureMessageConverter"/>
+    <conversionRule conversionWord="smdc"
+                    converterClass="com.backbase.portal.commons.api.logging.SecureMDCConverter"/>
+
+    <!-- To enable jmx access to the appenders -->
+    <jmxConfigurator/>
+
+
+    <!-- Console -->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %smsg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- asynch Appender -->
+    <appender name="ASYNCHSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="STDOUT" />
+        <queueSize>500</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <logger name="com.backbase" level="WARN"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.apache" level="ERROR"/>
+    <logger name="org.dbunit" level="ERROR"/>
+    <logger name="httpclient.wire.header" level="OFF"/>
+    <logger name="httpclient.wire.content" level="OFF"/>
+
+    <root level="WARN">
+        <appender-ref ref="ASYNCHSTDOUT"/>
+    </root>
+</configuration>

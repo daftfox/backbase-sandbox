@@ -1,0 +1,3 @@
+# Extended Gateway configuration
+logging:
+  config: ${backbase.config.dir}/gateway/logback.xml

@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "model-bus-contact-approvals-ng@^1.12.1",
+        "scope": null,
+        "escapedName": "model-bus-contact-approvals-ng",
+        "name": "model-bus-contact-approvals-ng",
+        "rawSpec": "^1.12.1",
+        "spec": ">=1.12.1 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-bus-contact-approvals-ng"
+    ]
+  ],
+  "_from": "model-bus-contact-approvals-ng@>=1.12.1 <2.0.0",
+  "_id": "model-bus-contact-approvals-ng@1.13.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/model-bus-contact-approvals-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "model-bus-contact-approvals-ng@^1.12.1",
+    "scope": null,
+    "escapedName": "model-bus-contact-approvals-ng",
+    "name": "model-bus-contact-approvals-ng",
+    "rawSpec": "^1.12.1",
+    "spec": ">=1.12.1 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bus-contact-approvals-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bus-contact-approvals-ng/-/model-bus-contact-approvals-ng-1.13.1.tgz",
+  "_shasum": "ef2f2709f7942de32d7b4742374a21a5a57edf48",
+  "_shrinkwrap": null,
+  "_spec": "model-bus-contact-approvals-ng@^1.12.1",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-bus-contact-approvals-ng",
+  "dependencies": {
+    "data-bb-contact-http-ng": "^1.8.0",
+    "lib-bb-model-errors": "^1.0.122",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bus-contact-approvals-ng/-/model-bus-contact-approvals-ng-1.13.1.tgz",
+    "shasum": "ef2f2709f7942de32d7b4742374a21a5a57edf48"
+  },
+  "main": "scripts/model-bus-contact-approvals-ng.js",
+  "name": "model-bus-contact-approvals-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.13.1"
+}

@@ -1,0 +1,9 @@
+---
+### Live profile
+logging:
+  config: ${backbase.config.dir}/billpay-presentation-service/logback.xml
+
+backbase:
+  persistence:
+    enabled: false
+

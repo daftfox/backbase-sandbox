@@ -1,0 +1,51 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "theme-bb-backbase@~1.5.4",
+        "scope": null,
+        "escapedName": "theme-bb-backbase",
+        "name": "theme-bb-backbase",
+        "rawSpec": "~1.5.4",
+        "spec": ">=1.5.4 <1.6.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "theme-bb-backbase@>=1.5.4 <1.6.0",
+  "_id": "theme-bb-backbase@1.5.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/theme-bb-backbase",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "theme-bb-backbase@~1.5.4",
+    "scope": null,
+    "escapedName": "theme-bb-backbase",
+    "name": "theme-bb-backbase",
+    "rawSpec": "~1.5.4",
+    "spec": ">=1.5.4 <1.6.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/theme-bb-backbase/-/theme-bb-backbase-1.5.4.tgz",
+  "_shasum": "3c9dedd747ab4da1e959c0ca5e08cf00c8e0ead1",
+  "_shrinkwrap": null,
+  "_spec": "theme-bb-backbase@~1.5.4",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/theme-bb-backbase/-/theme-bb-backbase-1.5.4.tgz",
+    "shasum": "3c9dedd747ab4da1e959c0ca5e08cf00c8e0ead1"
+  },
+  "main": "styles/theme-bb-backbase.css",
+  "name": "theme-bb-backbase",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.5.4"
+}

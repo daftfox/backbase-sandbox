@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jboss-web>
+
+    <resource-ref>
+        <res-ref-name>jdbc/content-datasource</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <mapped-name>jdbc/content-datasource</mapped-name>
+        <res-auth>Container</res-auth>
+        <jndi-name>java:/jdbc/content-datasource</jndi-name>
+    </resource-ref>
+
+    <resource-env-ref>
+        <resource-env-ref-name>backbase/config</resource-env-ref-name>
+        <jndi-name>java:/backbase/config</jndi-name>
+    </resource-env-ref>
+
+</jboss-web>

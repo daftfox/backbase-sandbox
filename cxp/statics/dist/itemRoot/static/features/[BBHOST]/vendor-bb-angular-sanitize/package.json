@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-angular-sanitize@1.6.7-bb.1",
+        "scope": null,
+        "escapedName": "vendor-bb-angular-sanitize",
+        "name": "vendor-bb-angular-sanitize",
+        "rawSpec": "1.6.7-bb.1",
+        "spec": "1.6.7-bb.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "vendor-bb-angular-sanitize@1.6.7-bb.1",
+  "_id": "vendor-bb-angular-sanitize@1.6.7-bb.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-angular-sanitize",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-angular-sanitize@1.6.7-bb.1",
+    "scope": null,
+    "escapedName": "vendor-bb-angular-sanitize",
+    "name": "vendor-bb-angular-sanitize",
+    "rawSpec": "1.6.7-bb.1",
+    "spec": "1.6.7-bb.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-angular-sanitize/-/vendor-bb-angular-sanitize-1.6.7-bb.1.tgz",
+  "_shasum": "2a97d126b696801825b18296e9c34172ceceadc1",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-angular-sanitize@1.6.7-bb.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-angular-sanitize/-/vendor-bb-angular-sanitize-1.6.7-bb.1.tgz",
+    "shasum": "2a97d126b696801825b18296e9c34172ceceadc1"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "scripts/vendor-bb-angular-sanitize.js",
+  "name": "vendor-bb-angular-sanitize",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.6.7-bb.1"
+}

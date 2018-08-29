@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bbm-contact-details-ng@~3.6.0",
+        "scope": null,
+        "escapedName": "ext-bbm-contact-details-ng",
+        "name": "ext-bbm-contact-details-ng",
+        "rawSpec": "~3.6.0",
+        "spec": ">=3.6.0 <3.7.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bbm-contact-details-ng@>=3.6.0 <3.7.0",
+  "_id": "ext-bbm-contact-details-ng@3.6.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bbm-contact-details-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bbm-contact-details-ng@~3.6.0",
+    "scope": null,
+    "escapedName": "ext-bbm-contact-details-ng",
+    "name": "ext-bbm-contact-details-ng",
+    "rawSpec": "~3.6.0",
+    "spec": ">=3.6.0 <3.7.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-contact-details-ng/-/ext-bbm-contact-details-ng-3.6.1.tgz",
+  "_shasum": "c082c33ada1fde537e5f7078686fa3da8cd098f8",
+  "_shrinkwrap": null,
+  "_spec": "ext-bbm-contact-details-ng@~3.6.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "ui-bb-avatar-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-contact-details-ng/-/ext-bbm-contact-details-ng-3.6.1.tgz",
+    "shasum": "c082c33ada1fde537e5f7078686fa3da8cd098f8"
+  },
+  "main": "scripts/ext-bbm-contact-details-ng.js",
+  "name": "ext-bbm-contact-details-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.6.1"
+}

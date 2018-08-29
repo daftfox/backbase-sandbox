@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-is-permitted-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-is-permitted-ng",
+        "name": "ui-bb-is-permitted-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-is-permitted-ng@2.5.1",
+  "_id": "ui-bb-is-permitted-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-is-permitted-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-is-permitted-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-is-permitted-ng",
+    "name": "ui-bb-is-permitted-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-is-permitted-ng/-/ui-bb-is-permitted-ng-2.5.1.tgz",
+  "_shasum": "c418775c8d870228c86ed56f2485fae4f2b4113a",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-is-permitted-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "lib-bb-permissions-ng": "^2.14.3",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-is-permitted-ng/-/ui-bb-is-permitted-ng-2.5.1.tgz",
+    "shasum": "c418775c8d870228c86ed56f2485fae4f2b4113a"
+  },
+  "main": "scripts/ui-bb-is-permitted-ng.js",
+  "name": "ui-bb-is-permitted-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

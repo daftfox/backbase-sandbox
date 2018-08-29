@@ -1,0 +1,286 @@
+<div class="ext-bb-audit-query-ng" data-ng-controller="AuditQueryController">
+  <div class="card">
+    <ng-include src="ext.helpers.template()"></ng-include>
+  </div>
+</div>
+
+<script type="text/ng-template" id="#widget-bb-audit-query-ng/form.html">
+  <ui-bb-loading-overlay-ng data-is-loading="state.isLoading || state.eventCategoriesLoading">
+    <ui-bb-substitute-error-ng data-message="state.error.message | i18n">
+      <div data-ng-controller="FormController as $ctrl" class="card-body">
+        <div class="form-group row">
+          <div class="col-4">
+            <label data-i18n-key="datepicker.label.start.heading"></label>
+            <div class="input-group">
+              <input type="text" class="form-control" data-uib-datepicker-popup="{{$ctrl.startDatepicker.format}}" data-ng-model="$ctrl.startDatepicker.model"
+                data-is-open="$ctrl.startDatepicker.isOpen" data-datepicker-options="$ctrl.startDatepicker.options" data-ng-disabled="$ctrl.startDatepicker.disabled"
+                data-ng-required="true" data-close-text="{{ 'datepicker.label.close' | i18n }}" data-alt-input-formats="$ctrl.startDatepicker.altFormats"
+                placeholder="{{$ctrl.startDatepicker.format}}" data-show-button-bar="false" data-role="audit-filter-start-date"/>
+              <span class="input-group-append">
+                  <button type="button" class="btn btn-outline-secondary" data-ng-click="ext.helpers.openStartDatepicker($ctrl)"
+                    aria-label="{{'datepicker.label.open' | i18n}}" data-role="audit-filter-start-date-button">
+                    <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                  </button>
+                </span>
+            </div>
+          </div>
+          <div class="col-4">
+            <label data-i18n-key="datepicker.label.end.heading"></label>
+            <div class="input-group">
+              <input type="text" class="form-control" data-uib-datepicker-popup="{{$ctrl.endDatepicker.format}}" data-ng-model="$ctrl.endDatepicker.model"
+                data-is-open="$ctrl.endDatepicker.isOpen" data-datepicker-options="$ctrl.endDatepicker.options"  data-ng-disabled="$ctrl.endDatepicker.disabled"
+                data-ng-required="true" data-close-text="{{ 'datepicker.label.close' | i18n }}" data-alt-input-formats="$ctrl.endDatepicker.altFormats"
+                placeholder="{{$ctrl.endDatepicker.format}}" data-show-button-bar="false" data-role="audit-filter-end-date"/>
+              <span class="input-group-append">
+                  <button type="button" class="btn btn-outline-secondary" data-ng-click="ext.helpers.openEndDatepicker($ctrl)"
+                    aria-label="{{'datepicker.label.open' | i18n}}" data-role="audit-filter-end-date-button">
+                  <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                </button>
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label data-i18n-key="dropdown.label.service-agreement.heading"></label>
+            <div class="dropdown">
+              <select class="form-control selectpicker dropdown-toggle"
+                data-ng-model="$ctrl.dropdownServiceAgreement.model"
+                data-ng-disabled="$ctrl.dropdownServiceAgreement.disabled"
+                data-ng-options="option as option.name for option in ext.helpers.serviceAgreements(state) track by option.value"
+                data-ng-change="ext.helpers.serviceAgreementChanged($ctrl)"
+                data-role="audit-filter-service-agreement">
+                <option data-ng-if="false" value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <label data-i18n-key="dropdown.label.legal-entity.heading"></label>
+            <div class="dropdown">
+              <select class="form-control selectpicker dropdown-toggle"
+                data-ng-model="$ctrl.dropdownLegalEntity.model"
+                data-ng-disabled="ext.helpers.isLegalEntityDisabled($ctrl)"
+                data-ng-options="option as option.name for option in ext.helpers.legalEntities(state) track by option.value"
+                data-role="audit-filter-legal-entity">
+                <option data-ng-if="false" value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <label data-i18n-key="input.label.user.heading"></label>
+            <div class="input-group">
+              <input type="text"
+                class="form-control"
+                data-ng-model="$ctrl.user.model"
+                data-ng-disabled="$ctrl.user.disabled"
+                maxlength="64"
+                placeholder="{{'input.placeholder.user' | i18n}}"
+                data-role="audit-filter-user"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <label data-i18n-key="dropdown.label.category.heading"></label>
+            <div data-uib-dropdown data-tooltip-placement="bottom"
+              data-tooltip-append-to-body="true" data-uib-tooltip="{{ 'event-categories.loading' | i18n }}"
+              data-tooltip-enable="state.eventCategoriesLoading">
+              <select class="form-control selectpicker dropdown-toggle"
+                data-ng-model="$ctrl.dropdownCategory.model"
+                data-ng-disabled="$ctrl.dropdownCategory.disabled || state.eventCategoriesLoading"
+                data-ng-options="option as option.name for option in ext.helpers.categories(state) track by option.value"
+                data-ng-change="ext.helpers.clearModelValues($ctrl.dropdownType, $ctrl.dropdownStatus)"
+                data-role="audit-filter-categories">
+                <option data-ng-if="false" value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <label data-i18n-key="dropdown.label.type.heading"></label>
+            <select class="form-control selectpicker"
+              data-ng-model="$ctrl.dropdownType.model"
+              data-ng-disabled="ext.helpers.isTypeDisabled($ctrl)"
+              data-ng-options="option as option.name for option in ext.helpers.types(state, $ctrl) track by option.value"
+              data-ng-change="ext.helpers.clearModelValues($ctrl.dropdownStatus)"
+              data-role="audit-filter-type">
+              <option data-ng-if="false" value=""></option>
+            </select>
+          </div>
+          <div class="col-4">
+            <label data-i18n-key="dropdown.label.status.heading"></label>
+            <select class="form-control selectpicker dropdown-toggle"
+              data-ng-model="$ctrl.dropdownStatus.model"
+              data-ng-disabled="ext.helpers.isStatusDisabled($ctrl)"
+              data-ng-options="option as option.name for option in ext.helpers.status(state, $ctrl) track by option.value"
+              data-role="audit-filter-status">
+              <option data-ng-if="false" value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-3 offset-6">
+            <button data-i18n-key="button.label.clear-all" data-ng-click="ext.helpers.clearAll($ctrl)" data-ng-disabled="!ext.helpers.isAnyControlSet($ctrl) || state.isCannedSearch"
+              class="btn btn-outline-secondary btn-block" title="{{ 'button.label.clear-all' | i18n }}" aria-label="{{ 'button.label.clear-all' | i18n }}" data-role="audit-filter-clear-all"></button>
+          </div>
+          <div class="col-3">
+            <button data-i18n-key="button.label.continue" data-ng-click="$ctrl.submitQuery()" class="btn btn-primary btn-block"
+              title="{{ 'button.label.continue' | i18n }}" aria-label="{{ 'button.label.continue' | i18n }}" data-role="audit-filter-submit"></button>
+          </div>
+        </div>
+      </div>
+    </ui-bb-substitute-error-ng>
+  </ui-bb-loading-overlay-ng>
+</script>
+<script type="text/ng-template" id="#widget-bb-audit-query-ng/table.html">
+  <ui-bb-loading-overlay-ng data-is-loading="state.isLoading">
+    <div data-ng-controller="TableController as $ctrl" class="card-body">
+      <div class="row">
+        <div class="col-md-6 col-12 ">
+          <button data-i18n-key="button.label.edit-search" data-ng-click="$ctrl.editExistingQuery()" class="btn btn-outline-secondary"
+            title="{{ 'button.label.edit-search' | i18n }}" aria-label="{{ 'button.label.edit-search' | i18n }}"
+            data-role="audit-edit-search-button"></button>
+          <button data-i18n-key="button.label.new-search" data-ng-click="$ctrl.newQuery()" class="btn btn-primary"
+            title="{{ 'button.label.new-search' | i18n }}" aria-label="{{ 'button.label.new-search' | i18n }}"
+            data-ng-disabled="state.isCannedSearch"
+            data-role="audit-new-search-button"></button>
+        </div>
+        <div class="col-md-6 col-12 text-right">
+          <div class="btn-group">
+            <button class="btn btn-outline-secondary" data-tooltip-trigger="mouseenter" data-tooltip-placement="bottom"
+              data-tooltip-append-to-body="true" data-uib-tooltip="{{ 'csv_export.max-size-exceeded' | i18n }}"
+              data-ng-if="ext.helpers.isExportToCsvDisabled(state)">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </button>
+            <button data-ng-click="ext.helpers.exportToCsv(state)"
+              class="btn btn-primary" data-ng-disabled="ext.helpers.isExportToCsvDisabled(state) || state.csvIsLoading"
+              title="{{ 'button.label.export-to-csv' | i18n }}" aria-label="{{ 'button.label.export-to-csv' | i18n }}"
+              data-role="audit-export-csv-button">
+              {{ ext.helpers.csvExportBtnText(state.csvIsLoading) | i18n }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h4 class="my-3"><span data-i18n-key="results.label.total-count"></span>{{ state.totalCount }}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th data-i18n-key="{{ label }}" data-ng-repeat="label in ext.helpers.auditMessageTableHeader track by $index"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="message in state.auditMessages"
+                data-ng-click="ext.helpers.toggleAuditDetailModal(state, message, $index)">
+                <td data-ng-repeat="value in ext.helpers.auditMessageTableRow(message) track by $index"
+                  data-label="{{ ext.helpers.auditMessageTableHeader[$index] | i18n }}" data-ng-bind="value" class="break-word">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ui-bb-paginator-ng
+        class="bb-pagination"
+        data-page-navigation-text="{{ 'pagination.label.page-navigation' | i18n }}"
+        data-first-text="{{ 'pagination.label.first' | i18n }}"
+        data-last-text="{{ 'pagination.label.last' | i18n }}"
+        data-previous-text="{{ 'pagination.label.prev' | i18n }}"
+        data-next-text="{{ 'pagination.label.next' | i18n }}"
+        data-total-items="{{ state.totalCount }}"
+        data-items-per-page="{{ state.resultsPerPage }}"
+        data-max-nav-pages="{{ state.maxNavPages }}"
+        data-current-page="{{ state.currentPage }}"
+        data-ng-disabled="state.isLoading"
+        data-change-page="$ctrl.submitQuery(state, params)">
+      </ui-bb-paginator-ng>
+
+      <ui-bb-modal-ng
+        data-is-open="state.showAuditDetailModal"
+        data-animation="true"
+        data-size="'lg'"
+        data-backdrop="'static'"
+        data-keyboard="true"
+        data-role="audit-details-modal">
+        <ng-include src="'#widget-bb-audit-query-ng/audit-detail-modal.html'"></ng-include>
+      </ui-bb-modal-ng>
+
+    </div>
+  </ui-bb-loading-overlay-ng>
+</script>
+
+<script type="text/ng-template" id="#widget-bb-audit-query-ng/audit-detail-modal.html">
+  <div class="modal-header">
+    <h3 class="modal-title">{{'details.modal.title' | i18n}}</h3>
+    <div class="d-flex flex-row d-print-none">
+      <button class="btn btn-secondary"
+        data-role="audit-details-modal-print-button"
+        type="button"
+        aria-label="{{'details.modal.print' | i18n}}"
+        onclick="window.scrollTo(0,0);window.print()">
+        <span class="fa fa-print" aria-hidden="true"></span>
+      </button>
+      <div class="btn-group pl-2" role="group">
+        <button
+          type="button"
+          data-role="audit-details-modal-previous-button"
+          class="btn btn-secondary"
+          aria-label="{{'details.modal.previous' | i18n}}"
+          data-ng-disabled="ext.helpers.isDisabledPreviousAuditDetail(state)"
+          data-ng-click="ext.helpers.setPreviousAuditDetail(state)">
+          <span class="fa fa-angle-left fa-lg" aria-hidden="true"></span>
+        </button>
+        <button
+          type="button"
+          data-role="audit-details-modal-next-button"
+          class="btn btn-secondary"
+          aria-label="{{'details.modal.next' | i18n}}"
+          data-ng-disabled="ext.helpers.isDisabledNextAuditDetail(state)"
+          data-ng-click="ext.helpers.setNextAuditDetail(state)">
+          <span class="fa fa-angle-right fa-lg" aria-hidden="true"></span>
+        </button>
+      </div>
+      <button class="close"
+        data-role="audit-details-modal-close-button"
+        type="button"
+        aria-label="{{'details.modal.close' | i18n}}"
+        data-ng-click="ext.helpers.toggleAuditDetailModal(state)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <dl class="row" data-ng-repeat="data in state.currentMessageDetails track by $index">
+      <dt class="col-12 col-md-4" data-ng-bind="data.label" data-role="audit-details-modal-term-{{$index}}"></dt>
+      <dd class="col-12 col-md-6" data-ng-bind="data.value" data-role="audit-details-modal-description-{{$index}}"></dd>
+    </dl>
+  </div>
+
+  <div class="modal-footer d-print-none">
+    <div class="btn-group float-right" role="group">
+      <button
+        type="button"
+        data-role="audit-details-modal-previous-button"
+        class="btn btn-secondary"
+        aria-label="{{'details.modal.previous' | i18n}}"
+        data-ng-disabled="ext.helpers.isDisabledPreviousAuditDetail(state)"
+        data-ng-click="ext.helpers.setPreviousAuditDetail(state)">
+        <span class="fa fa-angle-left fa-lg" aria-hidden="true"></span>
+      </button>
+      <button
+        type="button"
+        data-role="audit-details-modal-next-button"
+        class="btn btn-secondary"
+        aria-label="{{'details.modal.next' | i18n}}"
+        data-ng-disabled="ext.helpers.isDisabledNextAuditDetail(state)"
+        data-ng-click="ext.helpers.setNextAuditDetail(state)">
+        <span class="fa fa-angle-right fa-lg" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</script>

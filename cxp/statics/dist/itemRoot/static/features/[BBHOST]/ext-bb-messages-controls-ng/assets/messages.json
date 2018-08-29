@@ -1,0 +1,27 @@
+{
+  "en-US": {
+    "label.compose": "Compose",
+    "label.openNewDraft": "Open new draft",
+
+    "ui-bb-draft-ng.label.close": "Close",
+    "ui-bb-draft-ng.label.send": "Send",
+    "ui-bb-draft-ng.label.remove": "Remove",
+    "ui-bb-draft-ng.label.toggleImportance": "Toggle importance",
+    "ui-bb-draft-ng.form.header": "New message",
+    "ui-bb-draft-ng.form.subject": "Subject",
+    "ui-bb-draft-ng.form.topic": "Topic",
+    "ui-bb-draft-ng.form.message": "Message",
+    "ui-bb-draft-ng.form.send": "Send",
+    "ui-bb-draft-ng.form.cancel": "Cancel",
+    "ui-bb-draft-ng.error.send": "Unable to send the message. Please try again later.",
+
+    "dialog.cancel.title": "Cancel Message",
+    "dialog.cancel.body": "Are you sure you want to cancel the message? This action cannot be undone.",
+    "dialog.cancel.yes": "Yes",
+    "dialog.cancel.no": "No",
+
+    "form.select.topic.placeholder": "Select topic",
+    "form.subject.placeholder": "Write subject",
+    "form.message.placeholder": "Dear, Jack! Thank you for a good news"
+  }
+}

@@ -1,0 +1,7 @@
+---
+logging:
+  config: ${backbase.config.dir}/arrangements-integration-service/logback.xml
+
+backbase:
+  persistence:
+    enabled: false

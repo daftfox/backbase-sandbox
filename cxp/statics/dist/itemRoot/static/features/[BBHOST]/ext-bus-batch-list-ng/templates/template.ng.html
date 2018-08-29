@@ -1,0 +1,202 @@
+<div class="ext-bus-batch-list-ng" data-ng-controller="BatchListController as $ctrl">
+  <div class="empty-element-placeholder-relative" data-ng-if="$ctrl.state.initialLoading"></div>
+  <div class="notifications col-lg-5 col-md-7">
+    <ui-bb-notification-stripe-ng
+      data-ng-repeat="notification in $ctrl.state.notifications"
+      data-message="{{ notification.message }}"
+      data-timeout-second="{{ $ctrl.state.dismissTime || 3 }}"
+      data-on-close="$ctrl.state.notifications = ext.helpers.removeNotification(notification, $ctrl.state.notifications);"
+      data-type="bg-{{ notification.level === 'ALERT' ? 'danger' : notification.level | lowercase }}">
+    </ui-bb-notification-stripe-ng>
+  </div>
+  <div class="card" data-ng-if="!$ctrl.state.initialLoading" x-ms-format-detection="none">
+    <div class="card-body p-0">
+      <div class="text-right table-controls" ng-class="{ invisible: !ext.helpers.isAnySelected($ctrl.selections) }">
+        <div class="btn-group" role="btn-group">
+          <button
+            class="btn btn-secondary"
+            data-i18n-key="actions.authorize"
+            data-ng-click="$ctrl.authorizeMultiple($ctrl.selections.selectedBatches)"
+            data-role="authorize-all-batches">
+          </button>
+          <button class="btn btn-secondary"
+            data-ng-click="ext.rejectBatchesModalOpened = true"
+            data-i18n-key="actions.reject"
+            data-role="reject-all-batches">
+          </button>
+        </div>
+      </div>
+
+      <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.batches.loading">
+        <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th class="check-column">
+                  <input type="checkbox"
+                    data-ng-if="!ext.helpers.isSelectedPart(ext.helpers.filterBatches($ctrl.state.batches.items), $ctrl.selections)"
+                    data-ng-disabled="!ext.helpers.filterBatches($ctrl.state.batches.items).length"
+                    data-ng-checked="ext.helpers.isSelectedAll(ext.helpers.filterBatches($ctrl.state.batches.items), $ctrl.selections)"
+                    data-ng-click="ext.helpers.toggleAllBatches(ext.helpers.filterBatches($ctrl.state.batches.items), $ctrl.selections)"
+                    data-role="select-all-batch-items"/>
+                  <span class="checkbox-indeterminate checkbox-small bg-primary"
+                    data-ng-if="ext.helpers.isSelectedPart(ext.helpers.filterBatches($ctrl.state.batches.items), $ctrl.selections)"
+                    data-ng-click="ext.helpers.deselectBatches($ctrl.selections)"
+                  ></span>
+                </th>
+                <th data-ng-repeat="header in ext.helpers.headers"
+                  data-ui-bb-sortable-column-ng
+                  data-options="header.sortable"
+                  data-active="ext.helpers.isSortableActive(header.sortable, $ctrl)"
+                  data-on-sort="$ctrl.onSort(key, direction)"
+                  class="{{ ::header.class }}">
+                  <span data-i18n-key="{{ ::header.label }}"></span>
+                </th>
+                <th><!-- Action buttons group --></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                data-ng-repeat="batch in $ctrl.state.batches.items track by batch.id"
+                data-ng-class="{'bg-info': ext.helpers.isSelected(batch.id, $ctrl.selections)}"
+              >
+                <td>
+                  <input type="checkbox" data-ng-disabled="!ext.helpers.canAuthorize(batch)"
+                         data-ng-checked="ext.helpers.isSelected(batch.id, $ctrl.selections)"
+                         data-ng-click="ext.helpers.toggleSelection(batch.id, $ctrl.selections)"
+                         data-role="select-batch-item"/>
+                </td>
+
+                <td data-label="{{ 'label.status' | i18n }}">
+                  <span uib-tooltip="{{ ext.helpers.getStatusLabel(batch.status) | i18n }}" tooltip-placement="top-left">
+                    <span class="badge badge-{{ batch.status | lowercase }}" data-label="{{ ext.helpers.getStatusLabel(batch.status, 'large') | i18n }}" data-role="status">
+                      <span class="label-content" data-ng-bind="ext.helpers.getStatusLabel(batch.status, 'small') | i18n"></span>
+                    </span>
+                  </span>
+                </td>
+                <td data-label="{{ ext.helpers.headers[1].label | i18n }}" class="medium-col">
+                  <ui-bb-ellipsis-tooltip-ng
+                    data-tooltip="{{ ::batch.type }} {{ ::batch.reference }}"
+                  >
+                    <span data-ng-bind="::batch.type" data-role="type"></span>
+                    <br />
+                    <span class="batch-reference" data-ng-bind="::batch.reference" data-role="reference"></span>
+                  </ui-bb-ellipsis-tooltip-ng>
+                </td>
+                <td data-label="{{ ext.helpers.headers[2].label | i18n }}" class="text-left" data-ng-bind="::batch.paymentsCount" data-role="payment-orders">
+                </td>
+                <td data-label="{{ ext.helpers.headers[3].label | i18n }}" data-ng-bind="::batch.currency" data-role="currency">
+                </td>
+                <td data-label="{{ ext.helpers.headers[4].label | i18n }}" class="text-right" data-role="amount">
+                  <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ ::batch.amount | currency: '' }}">
+                    <span data-ng-bind="::batch.amount | currency: ''"></span>
+                  </ui-bb-ellipsis-tooltip-ng>
+                </td>
+                <td data-label="{{ ext.helpers.headers[5].label | i18n }}" class="text-right text-muted" data-role="execution-date">
+                  <ui-bb-ellipsis-tooltip-ng
+                    data-tooltip="{{ ::batch.executionDate | date: 'shortDate' }}"
+                  >
+                    <span data-ng-bind="::batch.executionDate | date: 'shortDate'"></span>
+                  </ui-bb-ellipsis-tooltip-ng>
+                </td>
+                <td data-label="{{ ext.helpers.headers[6].label | i18n }}" data-role="uploaded-by">
+                  <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ ::batch.user }}">
+                    <span data-ng-bind="::batch.user"></span>
+                  </ui-bb-ellipsis-tooltip-ng>
+                </td>
+                <td data-label="{{ ext.helpers.headers[7].label | i18n }}" class="text-right text-muted" data-role="uploaded-on">
+                  <ui-bb-ellipsis-tooltip-ng
+                    data-tooltip="{{ ::batch.creationDate | date : 'short' }}"
+                  >
+                    <span data-ng-bind="::batch.creationDate | date: 'shortDate'"></span>
+                  </ui-bb-ellipsis-tooltip-ng>
+                </td>
+                <td>
+                  <div class="btn-group btn-group-justified">
+                    <div class="btn-group" role="group">
+                      <button
+                        data-uib-tooltip="{{ 'actions.authorize' | i18n }}"
+                        data-tooltip-placement="top-right"
+                        data-container="body"
+                        data-ng-disabled="!ext.helpers.canAuthorize(batch)"
+                        class="btn btn-sm btn-secondary btn-block"
+                        data-ng-click="$ctrl.authorize(batch.id)"
+                        data-role="authorize-button">
+                        <i data-label="{{ 'actions.authorize' | i18n }}" class="fa fa-check" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-sm btn-secondary btn-block"
+                        title="{{ 'actions.reject' | i18n }}"
+                        data-uib-tooltip="{{ 'actions.reject' | i18n }}"
+                        data-tooltip-placement="top-right"
+                        data-container="body"
+                        data-ng-disabled="!ext.helpers.canAuthorize(batch)"
+                        data-ng-click="ext.helpers.openRejectConfirmDialog(ext, batch.id)"
+                        data-role="reject-button">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr data-ng-if="!$ctrl.state.batches.loading && $ctrl.state.batches.items.length === 0">
+                <td
+                  colspan="11"
+                  class="text-center"
+                  data-i18n-key="label.emptyList"
+                ></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ui-bb-load-more-ng
+          data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+          data-ng-show="$ctrl.state.batches.hasMore()"
+          data-label="{{ 'label.loadMore' | i18n }}"
+          data-on-load-more="$ctrl.loadMore(done)"
+        ></ui-bb-load-more-ng>
+
+        <ui-bb-paginator-ng
+          data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'pagination')"
+          data-page-navigation-text="{{ 'pagination.label.page_navigation' | i18n }}"
+          data-first-text="{{ 'pagination.label.first' | i18n }}"
+          data-last-text="{{ 'pagination.label.last' | i18n }}"
+          data-previous-text="{{ 'pagination.label.prev' | i18n }}"
+          data-next-text="{{ 'pagination.label.next' | i18n }}"
+          data-total-items="{{ $ctrl.state.pageParams.totalItems }}"
+          data-items-per-page="{{ $ctrl.state.pageParams.size }}"
+          data-max-nav-pages="{{ $ctrl.state.pageParams.maxNavPages }}"
+          data-current-page="{{ $ctrl.state.pageParams.currentPage }}"
+          data-ng-disabled="$ctrl.state.batches.loading"
+          data-change-page="$ctrl.changePage(params)"
+        ></ui-bb-paginator-ng>
+      </ui-bb-loading-overlay-ng>
+    </div>
+  </div>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.rejectBatchesModalOpened"
+    data-labels="{
+      heading: ('dialog.reject.multiple.title' | i18n),
+      bodyText: ('dialog.reject.multiple.body' | i18n: { number: ext.helpers.howManySelected($ctrl.selections) }),
+      confirm: ('dialog.reject.yes' | i18n),
+      cancel: ('dialog.reject.no' | i18n),
+    }"
+    data-on-confirm="$ctrl.rejectMultiple($ctrl.selections.selectedBatches)"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.rejectBatchModalOpened"
+    data-labels="{
+      heading: ('dialog.reject.title' | i18n),
+      bodyText: ('dialog.reject.body' | i18n),
+      confirm: ('dialog.reject.yes' | i18n),
+      cancel: ('dialog.reject.no' | i18n),
+    }"
+    data-on-confirm="$ctrl.reject(ext.batchId)"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+</div>

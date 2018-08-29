@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-headings-ng@~2.4.2",
+        "scope": null,
+        "escapedName": "ext-bus-headings-ng",
+        "name": "ext-bus-headings-ng",
+        "rawSpec": "~2.4.2",
+        "spec": ">=2.4.2 <2.5.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-headings-ng@>=2.4.2 <2.5.0",
+  "_id": "ext-bus-headings-ng@2.4.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-headings-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-headings-ng@~2.4.2",
+    "scope": null,
+    "escapedName": "ext-bus-headings-ng",
+    "name": "ext-bus-headings-ng",
+    "rawSpec": "~2.4.2",
+    "spec": ">=2.4.2 <2.5.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-headings-ng/-/ext-bus-headings-ng-2.4.2.tgz",
+  "_shasum": "0b52d29ccee25b9a786dcc5716d766f1f9105c4b",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-headings-ng@~2.4.2",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-header-ng": "^1.4.2",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-headings-ng/-/ext-bus-headings-ng-2.4.2.tgz",
+    "shasum": "0b52d29ccee25b9a786dcc5716d766f1f9105c4b"
+  },
+  "main": "scripts/ext-bus-headings-ng.js",
+  "name": "ext-bus-headings-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.4.2"
+}

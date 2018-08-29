@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-form-navigate-away-ng@^1.2.9",
+        "scope": null,
+        "escapedName": "ui-bb-form-navigate-away-ng",
+        "name": "ui-bb-form-navigate-away-ng",
+        "rawSpec": "^1.2.9",
+        "spec": ">=1.2.9 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bus-initiate-payment-us-domestic-wire-ng"
+    ]
+  ],
+  "_from": "ui-bb-form-navigate-away-ng@>=1.2.9 <2.0.0",
+  "_id": "ui-bb-form-navigate-away-ng@1.2.9",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-form-navigate-away-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-form-navigate-away-ng@^1.2.9",
+    "scope": null,
+    "escapedName": "ui-bb-form-navigate-away-ng",
+    "name": "ui-bb-form-navigate-away-ng",
+    "rawSpec": "^1.2.9",
+    "spec": ">=1.2.9 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bus-initiate-payment-us-domestic-wire-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-form-navigate-away-ng/-/ui-bb-form-navigate-away-ng-1.2.9.tgz",
+  "_shasum": "de2d07d59799b52e63e22c1f745e517be98b09e3",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-form-navigate-away-ng@^1.2.9",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bus-initiate-payment-us-domestic-wire-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-form-navigate-away-ng/-/ui-bb-form-navigate-away-ng-1.2.9.tgz",
+    "shasum": "de2d07d59799b52e63e22c1f745e517be98b09e3"
+  },
+  "main": "scripts/ui-bb-form-navigate-away-ng.js",
+  "name": "ui-bb-form-navigate-away-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.2.9"
+}

@@ -1,0 +1,3 @@
+---
+logging:
+  config: ${backbase.config.dir}/notifications-presentation-service/logback.xml

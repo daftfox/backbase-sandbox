@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-expandable-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-expandable-ng",
+        "name": "ui-bb-expandable-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-expandable-ng@2.5.1",
+  "_id": "ui-bb-expandable-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-expandable-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-expandable-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-expandable-ng",
+    "name": "ui-bb-expandable-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-expandable-ng/-/ui-bb-expandable-ng-2.5.1.tgz",
+  "_shasum": "d2fe4ddba843d96283a8dcb1d56ad48a7ec331f7",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-expandable-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-uib-collapse": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-expandable-ng/-/ui-bb-expandable-ng-2.5.1.tgz",
+    "shasum": "d2fe4ddba843d96283a8dcb1d56ad48a7ec331f7"
+  },
+  "main": "scripts/ui-bb-expandable-ng.js",
+  "name": "ui-bb-expandable-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

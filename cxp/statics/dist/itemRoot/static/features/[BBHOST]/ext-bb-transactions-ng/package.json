@@ -1,0 +1,65 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-transactions-ng@^2.33.1",
+        "scope": null,
+        "escapedName": "ext-bb-transactions-ng",
+        "name": "ext-bb-transactions-ng",
+        "rawSpec": "^2.33.1",
+        "spec": ">=2.33.1 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-transactions-ng"
+    ]
+  ],
+  "_from": "ext-bb-transactions-ng@>=2.33.1 <3.0.0",
+  "_id": "ext-bb-transactions-ng@2.34.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-transactions-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-transactions-ng@^2.33.1",
+    "scope": null,
+    "escapedName": "ext-bb-transactions-ng",
+    "name": "ext-bb-transactions-ng",
+    "rawSpec": "^2.33.1",
+    "spec": ">=2.33.1 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-transactions-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-transactions-ng/-/ext-bb-transactions-ng-2.34.0.tgz",
+  "_shasum": "e75190258124e80f6156122ff049c6b3e885555b",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-transactions-ng@^2.33.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-transactions-ng",
+  "dependencies": {
+    "ui-bb-date-label-filter-ng": "^2.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-inline-status-ng": "^2.5.1",
+    "ui-bb-load-more-ng": "^2.5.1",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-paginator-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "ui-bb-transaction-search-filter-ng": "^3.34.0",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-accordion": "1.3.3-bb.4",
+    "vendor-bb-uib-alert": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-transactions-ng/-/ext-bb-transactions-ng-2.34.0.tgz",
+    "shasum": "e75190258124e80f6156122ff049c6b3e885555b"
+  },
+  "main": "scripts/ext-bb-transactions-ng.js",
+  "name": "ext-bb-transactions-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.34.0"
+}

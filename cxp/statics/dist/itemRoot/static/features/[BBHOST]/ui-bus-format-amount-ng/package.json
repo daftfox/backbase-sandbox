@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bus-format-amount-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bus-format-amount-ng",
+        "name": "ui-bus-format-amount-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bus-format-amount-ng@2.5.1",
+  "_id": "ui-bus-format-amount-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bus-format-amount-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bus-format-amount-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bus-format-amount-ng",
+    "name": "ui-bus-format-amount-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bus-format-amount-ng/-/ui-bus-format-amount-ng-2.5.1.tgz",
+  "_shasum": "bf94f7379bf96ef1ac8b0e3b1ba5d1b00d6d12c4",
+  "_shrinkwrap": null,
+  "_spec": "ui-bus-format-amount-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "lib-bb-currency-ng": "^1.0.77",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bus-format-amount-ng/-/ui-bus-format-amount-ng-2.5.1.tgz",
+    "shasum": "bf94f7379bf96ef1ac8b0e3b1ba5d1b00d6d12c4"
+  },
+  "main": "scripts/ui-bus-format-amount-ng.js",
+  "name": "ui-bus-format-amount-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-extension-events-ng@1.0.44",
+        "scope": null,
+        "escapedName": "lib-bb-extension-events-ng",
+        "name": "lib-bb-extension-events-ng",
+        "rawSpec": "1.0.44",
+        "spec": "1.0.44",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-extension-events-ng@1.0.44",
+  "_id": "lib-bb-extension-events-ng@1.0.44",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-extension-events-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-extension-events-ng@1.0.44",
+    "scope": null,
+    "escapedName": "lib-bb-extension-events-ng",
+    "name": "lib-bb-extension-events-ng",
+    "rawSpec": "1.0.44",
+    "spec": "1.0.44",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-start-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-extension-events-ng/-/lib-bb-extension-events-ng-1.0.44.tgz",
+  "_shasum": "bc72db4e065d220b7f7632b3650dc343f11e0810",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-extension-events-ng@1.0.44",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-extension-intents-ng": "^1.0.44",
+    "lib-bb-notifications-ng": "^1.0.55",
+    "lib-bb-state-container-ng": "^1.0.22",
+    "lib-bb-view-model-ng": "^1.0.44",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-extension-events-ng/-/lib-bb-extension-events-ng-1.0.44.tgz",
+    "shasum": "bc72db4e065d220b7f7632b3650dc343f11e0810"
+  },
+  "main": "scripts/lib-bb-extension-events-ng.js",
+  "name": "lib-bb-extension-events-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.44"
+}

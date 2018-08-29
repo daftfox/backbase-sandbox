@@ -1,0 +1,269 @@
+{namespace templates_NavigationContainer}
+
+/**
+ * Navigation Container
+ * @param item Item in context
+ */
+{template .NavigationContainer}
+
+    {let $layoutType}
+        {if $item.preferences.layoutType.value == 'fixed'}
+            container
+        {elseif $item.preferences.layoutType.value == 'fluid'}
+            container-fluid
+        {/if}
+    {/let}
+
+    {let $navbarType: $item.preferences.stickyNavbar.value == 'true' ? 'fixed-top' : 'static-top' /}
+
+    {if $item.preferences.viewType.value == 'TopNavigationContainer'}
+        {call .TopNavigationContainer}
+            {param item: $item /}
+            {param layoutType: $layoutType /}
+            {param navbarType: $navbarType /}
+        {/call}
+    {elseif $item.preferences.viewType.value == 'SideNavigationContainer'}
+        {call .SideNavigationContainer}{param item: $item /}{/call}
+    {elseif $item.preferences.viewType.value == 'TopSideNavigationContainer'}
+        {call .TopSideNavigationContainer}
+            {param item: $item /}
+            {param layoutType: $layoutType /}
+            {param navbarType: $navbarType /}
+        {/call}
+    {/if}
+
+{/template}
+
+
+/**
+ * Navigation Container
+ * @param item Item in context
+ * @param layoutType fixed/fluid layout
+ * @param navbarType fixed/static navigation bar
+ */
+{template .TopNavigationContainer}
+    {let $navbarSelector}#{$item.name}-navbar-collapse{/let}
+    <nav class="navbar navbar-light bg-white navbar-expand-md {$navbarType} bp-container bp-NavigationContainer bp-ui-dragRoot" data-pid="{$item.name}" role="navigation">
+            <div class="{$layoutType} p-0">
+                <div class="navbar-header">
+                    {call .NavbarToggler}
+                        {param collapseTargetSelector: $navbarSelector /}
+                    {/call}
+                    {call .NavbarBrand}
+                        {param item: $item /}
+                        {param areaId: 0 /}
+                    {/call}
+                </div>
+                <div id="{$item.name}-navbar-collapse" class="collapse navbar-collapse rb-navbar-links">
+                    {call .UserMenuArea}
+                        {param showInMobile: false /}
+                        {param item: $item /}
+                        {param areaId: 1 /}
+                    {/call}
+                    {call .TopNavigationArea}
+                        {param item: $item /}
+                        {param areaId: 2 /}
+                        {param mobileUserAreaId: 3 /}
+                    {/call}
+                </div>
+            </div>
+        </nav>
+{/template}
+
+/**
+ * Navigation Container
+ * @param item Item in context
+ */
+{template .SideNavigationContainer}
+    <div class="page-container bp-container bp-NavigationContainer bp-ui-dragRoot" data-pid="{$item.name}">
+        <div class="row rb-row-content rb-row-content-left">
+            {call .SidebarArea}
+                {param item: $item /}
+                {param areaId: 0 /}
+                {param mobileUserAreaId: 1 /}
+            {/call}
+            {call .ContentArea}
+                {param item: $item /}
+                {param areaId: 2 /}
+            {/call}
+        </div>
+    </div>
+{/template}
+
+
+/**
+ * Navigation Container
+ * @param item Item in context
+ * @param layoutType fixed/fluid layout
+ * @param navbarType fixed/static navigation bar
+ */
+{template .TopSideNavigationContainer}
+    {let $sidebarSelector}#nav-sidebar-collapse{/let}
+    {let $contentOutlineClass: $item.preferences.stickyNavbar.value == 'true' ? 'sticky-top-outline' : '' /}
+
+    <div class="page-container bp-container bp-NavigationContainer bp-ui-dragRoot" data-pid="{$item.name}">
+        <!-- top navbar -->
+        <nav class="navbar navbar-light bg-white navbar-expand-md {$navbarType} rb-navbar-top" role="navigation">
+            <div class="{$layoutType} p-0">
+                <div class="navbar-header">
+                    {call .NavbarToggler}
+                        {param collapseTargetSelector: $sidebarSelector /}
+                    {/call}
+                    {call .NavbarBrand}
+                        {param item: $item /}
+                        {param areaId: 0 /}
+                    {/call}
+                </div>
+                {call .UserMenuArea}
+                    {param showInMobile: false /}
+                    {param item: $item /}
+                    {param areaId: 1 /}
+                {/call}
+            </div>
+        </nav>
+        <!-- side navbar and content -->
+        <div class="rb-row-content rb-row-content-left {$contentOutlineClass}">
+            {call .SidebarArea}
+                {param item: $item /}
+                {param areaId: 2 /}
+                {param mobileUserAreaId: 3 /}
+            {/call}
+            {call .ContentArea}
+                {param item: $item /}
+                {param areaId: 4 /}
+            {/call}
+        </div>
+    </div>
+{/template}
+
+
+/**
+ * Navbar Brand
+ * @param item Item in context
+ * @param areaId id of the manageble area
+ */
+{template .NavbarBrand  private="true"}
+    <div class="navbar-brand rb-brand p-0 --area bp-area">
+        {if not($item.preferences.loadChildren and $item.preferences.loadChildren.value == 'false') and $item.children}
+            {foreach $child in $item.children}
+                {if parseInt($child.preferences.area.value) == $areaId}
+                    {include($child) |noAutoescape}
+                {/if}
+            {/foreach}
+        {/if}
+    </div>
+{/template}
+
+/**
+ * NavbarToggler
+ * @param collapseTargetSelector selector for data-target of the collapse button
+ */
+{template .NavbarToggler  private="true"}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="{$collapseTargetSelector}" aria-controls="{$collapseTargetSelector}" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+{/template}
+
+/**
+ * NavbarToggler
+ * @param showInMobile defines if it's hidden or shown on mobile view
+ * @param item Item in context
+ * @param areaId id of the manageble area
+ */
+{template .UserMenuArea  private="true"}
+    {let $hiddenClass: $showInMobile == false ? 'd-none d-md-block' : 'd-block d-md-none' /}
+
+    <div class="nav navbar-nav navbar-right rb-notifications-area --area bp-area {$hiddenClass} no-margin">
+        {if not($item.preferences.loadChildren and $item.preferences.loadChildren.value == 'false') and $item.children}
+            {foreach $child in $item.children}
+                {if parseInt($child.preferences.area.value) == $areaId}
+                    {include($child) |noAutoescape}
+                {/if}
+            {/foreach}
+        {/if}
+    </div>
+{/template}
+
+/**
+ * TopNavigationArea
+ * @param item Item in context
+ * @param areaId id of the manageble area
+ * @param mobileUserAreaId id of the manageble area
+ */
+{template .TopNavigationArea  private="true"}
+    <div class="nav navbar-nav rb-nav-top --area bp-area">
+        {call .OffScreen}
+            {param contentElementId: 'rb-content' /}
+        {/call}
+        {if not($item.preferences.loadChildren and $item.preferences.loadChildren.value == 'false') and $item.children}
+            {foreach $child in $item.children}
+                {if parseInt($child.preferences.area.value) == $areaId}
+                    {include($child) |noAutoescape}
+                {/if}
+            {/foreach}
+        {/if}
+    </div>
+    {call .UserMenuArea}
+        {param showInMobile: true /}
+        {param item: $item /}
+        {param areaId: $mobileUserAreaId /}
+    {/call}
+{/template}
+
+/**
+ * SidebarArea
+ * @param item Item in context
+ * @param areaId id of the manageble area
+ * @param mobileUserAreaId id of the manageble area
+ */
+{template .SidebarArea  private="true"}
+    {let $sidebarColumnClasses: $item.preferences.sidebarColumnClasses.value /}
+
+    <div class="rb-sidebar {$sidebarColumnClasses}" role="navigation">
+        <div class="rb-sidebar-area --area bp-area">
+            {call .OffScreen}
+                {param contentElementId: 'rb-content' /}
+            {/call}
+            {if not($item.preferences.loadChildren and $item.preferences.loadChildren.value == 'false') and $item.children}
+                {foreach $child in $item.children}
+                    {if parseInt($child.preferences.area.value) == $areaId}
+                        {include($child) |noAutoescape}
+                    {/if}
+                {/foreach}
+            {/if}
+        </div>
+
+        {call .UserMenuArea}
+            {param showInMobile: true /}
+            {param item: $item /}
+            {param areaId: $mobileUserAreaId /}
+        {/call}
+    </div>
+{/template}
+
+/**
+ * ContentArea
+ * @param item Item in context
+ * @param areaId id of the manageble area
+ */
+{template .ContentArea  private="true"}
+    {let $contentColumnClasses: $item.preferences.contentColumnClasses.value /}
+
+    <div id="rb-content" class="rb-content {$contentColumnClasses} --area bp-area">
+       {if not($item.preferences.loadChildren and $item.preferences.loadChildren.value == 'false') and $item.children}
+            {foreach $child in $item.children}
+                {if parseInt($child.preferences.area.value) == $areaId}
+                    {include($child) |noAutoescape}
+                {/if}
+            {/foreach}
+        {/if}
+    </div>
+{/template}
+
+/**
+ * ContentArea
+ * @param contentElementId - id for the content start element
+ */
+{template .OffScreen private="true"}
+    <a href="#{$contentElementId}" class="skiplinks">Skip to Content</a>
+{/template}

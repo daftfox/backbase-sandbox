@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-currency-ng@^1.0.77",
+        "scope": null,
+        "escapedName": "lib-bb-currency-ng",
+        "name": "lib-bb-currency-ng",
+        "rawSpec": "^1.0.77",
+        "spec": ">=1.0.77 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ui-bb-format-amount-ng"
+    ]
+  ],
+  "_from": "lib-bb-currency-ng@>=1.0.77 <2.0.0",
+  "_id": "lib-bb-currency-ng@1.0.77",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-currency-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-currency-ng@^1.0.77",
+    "scope": null,
+    "escapedName": "lib-bb-currency-ng",
+    "name": "lib-bb-currency-ng",
+    "rawSpec": "^1.0.77",
+    "spec": ">=1.0.77 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ui-bb-currency-input-ng",
+    "/ui-bb-format-amount-ng",
+    "/ui-bus-format-amount-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-currency-ng/-/lib-bb-currency-ng-1.0.77.tgz",
+  "_shasum": "5b2e50ed4187e31c0442453cb6199b0d2ae61037",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-currency-ng@^1.0.77",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ui-bb-format-amount-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-currency-ng/-/lib-bb-currency-ng-1.0.77.tgz",
+    "shasum": "5b2e50ed4187e31c0442453cb6199b0d2ae61037"
+  },
+  "main": "scripts/lib-bb-currency-ng.js",
+  "name": "lib-bb-currency-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.77"
+}

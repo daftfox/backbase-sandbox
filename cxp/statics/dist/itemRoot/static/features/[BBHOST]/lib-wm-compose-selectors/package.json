@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-wm-compose-selectors@^1.15.2",
+        "scope": null,
+        "escapedName": "lib-wm-compose-selectors",
+        "name": "lib-wm-compose-selectors",
+        "rawSpec": "^1.15.2",
+        "spec": ">=1.15.2 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/ext-wm-allocations-chart-ng"
+    ]
+  ],
+  "_from": "lib-wm-compose-selectors@>=1.15.2 <2.0.0",
+  "_id": "lib-wm-compose-selectors@1.15.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-wm-compose-selectors",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-wm-compose-selectors@^1.15.2",
+    "scope": null,
+    "escapedName": "lib-wm-compose-selectors",
+    "name": "lib-wm-compose-selectors",
+    "rawSpec": "^1.15.2",
+    "spec": ">=1.15.2 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-wm-allocations-chart-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-wm-compose-selectors/-/lib-wm-compose-selectors-1.15.2.tgz",
+  "_shasum": "14b9c589e81f673fab5dafe6367ebd759529a1eb",
+  "_shrinkwrap": null,
+  "_spec": "lib-wm-compose-selectors@^1.15.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/ext-wm-allocations-chart-ng",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-wm-compose-selectors/-/lib-wm-compose-selectors-1.15.2.tgz",
+    "shasum": "14b9c589e81f673fab5dafe6367ebd759529a1eb"
+  },
+  "main": "scripts/lib-wm-compose-selectors.js",
+  "name": "lib-wm-compose-selectors",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.15.2"
+}

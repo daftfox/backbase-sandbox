@@ -1,0 +1,51 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-chartjs@2.6.0-bb.1",
+        "scope": null,
+        "escapedName": "vendor-bb-chartjs",
+        "name": "vendor-bb-chartjs",
+        "rawSpec": "2.6.0-bb.1",
+        "spec": "2.6.0-bb.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "vendor-bb-chartjs@2.6.0-bb.1",
+  "_id": "vendor-bb-chartjs@2.6.0-bb.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-chartjs",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-chartjs@2.6.0-bb.1",
+    "scope": null,
+    "escapedName": "vendor-bb-chartjs",
+    "name": "vendor-bb-chartjs",
+    "rawSpec": "2.6.0-bb.1",
+    "spec": "2.6.0-bb.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-chartjs/-/vendor-bb-chartjs-2.6.0-bb.1.tgz",
+  "_shasum": "6429f270cc0f7869a938149b87bb2aa83a61930e",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-chartjs@2.6.0-bb.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-chartjs/-/vendor-bb-chartjs-2.6.0-bb.1.tgz",
+    "shasum": "6429f270cc0f7869a938149b87bb2aa83a61930e"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "scripts/vendor-bb-chartjs.js",
+  "name": "vendor-bb-chartjs",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.6.0-bb.1"
+}

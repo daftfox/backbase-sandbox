@@ -1,0 +1,42 @@
+{
+  "en-US": {
+    "header.debtor": "From",
+    "header.creditor": "To",
+    "header.currency": "Ccy",
+    "header.amount": "Amount",
+    "header.actions": "Actions",
+
+    "label.search.placeholder" : "Search",
+    "label.search.title" : "Search Drafts",
+    "label.search.clear" : "Clear",
+    "label.search.submit" : "Submit",
+
+    "label.loading": "Loading...",
+    "label.selected": "selected",
+    "label.noItems": "No Drafts",
+    "label.noResultsFound": "No results found",
+    "label.view": "View",
+    "label.delete": "Delete",
+    "label.noItems.description": "You can save payments as your personal drafts, if you'd like to send them for approval later.",
+    "label.noResultsFound.description": "We can't find what you are looking for.<br>Please try a different criteria.",
+    "label.loadMore": "Load More",
+    "label.first": "First",
+    "label.last": "Last",
+    "label.next": "Next",
+    "label.prev": "Previous",
+    "label.page_navigation": "Page navigation",
+
+    "dialog.delete.drafts.title": "Delete {num} drafts?",
+    "dialog.delete.drafts.body": "Are you sure to <b>permanently delete</b> {num} drafts? This action can't be undone.",
+    "dialog.delete.draft.title": "Delete the draft?",
+    "dialog.delete.draft.body": "Are you sure to <b>permanently delete</b> the draft? This action can't be undone.",
+    "dialog.delete.drafts.yes": "Delete",
+    "dialog.delete.drafts.no": "Cancel",
+
+    "actions.handledraft" : "Draft Actions",
+
+    "error.connectivity": "Connection Error",
+    "error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later."
+  
+  }
+}

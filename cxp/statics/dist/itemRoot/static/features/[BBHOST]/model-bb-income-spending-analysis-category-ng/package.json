@@ -1,0 +1,57 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "model-bb-income-spending-analysis-category-ng@^2.2.0",
+        "scope": null,
+        "escapedName": "model-bb-income-spending-analysis-category-ng",
+        "name": "model-bb-income-spending-analysis-category-ng",
+        "rawSpec": "^2.2.0",
+        "spec": ">=2.2.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-income-spending-analysis-category-ng"
+    ]
+  ],
+  "_from": "model-bb-income-spending-analysis-category-ng@>=2.2.0 <3.0.0",
+  "_id": "model-bb-income-spending-analysis-category-ng@2.3.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/model-bb-income-spending-analysis-category-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "model-bb-income-spending-analysis-category-ng@^2.2.0",
+    "scope": null,
+    "escapedName": "model-bb-income-spending-analysis-category-ng",
+    "name": "model-bb-income-spending-analysis-category-ng",
+    "rawSpec": "^2.2.0",
+    "spec": ">=2.2.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-income-spending-analysis-category-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-income-spending-analysis-category-ng/-/model-bb-income-spending-analysis-category-ng-2.3.0.tgz",
+  "_shasum": "40866e5ff8db182156e19f4e0c2fac4e9ea73821",
+  "_shrinkwrap": null,
+  "_spec": "model-bb-income-spending-analysis-category-ng@^2.2.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-income-spending-analysis-category-ng",
+  "dependencies": {
+    "data-bb-product-summary-http-ng": "^1.6.3",
+    "data-bb-transactions-http-ng": "^3.5.1",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-storage-ng": "^1.0.98",
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-income-spending-analysis-category-ng/-/model-bb-income-spending-analysis-category-ng-2.3.0.tgz",
+    "shasum": "40866e5ff8db182156e19f4e0c2fac4e9ea73821"
+  },
+  "main": "scripts/model-bb-income-spending-analysis-category-ng.js",
+  "name": "model-bb-income-spending-analysis-category-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.3.0"
+}

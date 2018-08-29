@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context useHttpOnly="false">
+
+    <Environment name="backbase/config"
+                 value="${backbase.config.path}/backbase.properties"
+                 type="java.lang.String"
+                 override="false"/>
+
+    <Resource name="jdbc/portalDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="10"
+              maxIdle="2"
+              username="${db.foundation.username}"
+              password="${db.foundation.password}"
+              maxWaitMillis="5000"
+              driverClassName="${db.jdbc.driver}"
+              validationQuery="select 1 from DUAL"
+              defaultTransactionIsolation="READ_COMMITTED"
+              url="${portal.foundation.jdbc.url}"/>
+
+    <Resource name="jdbc/auditDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="4"
+              maxIdle="2"
+              username="${db.audit.username}"
+              password="${db.audit.password}"
+              maxWaitMillis="5000"
+              driverClassName="${db.jdbc.driver}"
+              validationQuery="select 1 from DUAL"
+              defaultTransactionIsolation="READ_COMMITTED"
+              url="${audit.jdbc.url}"/>
+
+    <Resource name="jdbc/mobileDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="4"
+              maxIdle="2"
+              username="${db.mobile.username}"
+              password="${db.mobile.password}"
+              maxWaitMillis="5000"
+              driverClassName="${db.jdbc.driver}"
+              validationQuery="select 1 from DUAL"
+              defaultTransactionIsolation="READ_COMMITTED"
+              url="${mobile.jdbc.url}"/>
+
+</Context>

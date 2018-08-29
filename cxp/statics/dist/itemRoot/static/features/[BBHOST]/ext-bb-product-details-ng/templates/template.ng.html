@@ -1,0 +1,264 @@
+<div class="ext-bb-product-details-ng" data-ng-controller="ProductSummaryController as $ctrl">
+  <div class="card card-default">
+    <div class="card-body">
+
+      <ui-bb-substitute-error-ng data-message="ext.helpers.handleErrors($ctrl.productDetailsError.message)">
+        <ui-bb-empty-state-ng
+          data-icon-classes="fa fa-4x fa-credit-card text-muted"
+          data-title="{{'product.details.empty.state.title' | i18n}}"
+          data-subtitle="{{'product.details.empty.state.subtitle' | i18n}}"
+          data-is-empty="$ctrl.extendedProduct === null">
+
+          <!-- General product details section -->
+          <div data-ng-if="$ctrl.extendedProduct.generalDetails" class="d-flex flex-column">
+            <h5 data-ng-bind="$ctrl.extendedProduct.generalDetails.name"></h5>
+
+            <div class="d-flex flex-row">
+              <div class="pr-5" data-ng-if="$ctrl.extendedProduct.generalDetails.valueOne">
+                <h6 data-ng-bind="$ctrl.extendedProduct.generalDetails.valueOneLabel | i18n"></h6>
+                <p data-ng-bind="$ctrl.extendedProduct.generalDetails.valueOne"></p>
+              </div>
+              <div data-ng-if="$ctrl.extendedProduct.generalDetails.valueTwo">
+                <span class="font-weight-bold" data-ng-bind="$ctrl.extendedProduct.generalDetails.valueTwoLabel | i18n"></span>
+                <p data-ng-if="$ctrl.extendedProduct.generalDetails.valueTwoType === 'text'"
+                  data-ng-bind="$ctrl.extendedProduct.generalDetails.valueTwo"></p>
+                <p data-ng-if="$ctrl.extendedProduct.generalDetails.valueTwoType === 'card'"
+                  data-ng-bind="ext.helpers.maskCardNumber($ctrl.extendedProduct.generalDetails.valueTwo)">
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div data-ng-if="$ctrl.extendedProduct.generalDetails.valueThree">
+                <h6>{{$ctrl.extendedProduct.generalDetails.valueThreeLabel | i18n }}
+                  <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                    data-uib-tooltip="{{ $ctrl.extendedProduct.generalDetails.valueThreeTooltip | i18n }}">
+                  </i>
+                </h6>
+                <p data-ng-if="$ctrl.extendedProduct.generalDetails.valueThreeType === 'text'"
+                  data-ng-bind="$ctrl.extendedProduct.generalDetails.valueThree"></p>
+                <p data-ng-if="$ctrl.extendedProduct.generalDetails.valueThreeType === 'amount'">
+                  <ui-bb-format-amount-ng
+                    data-amount="$ctrl.extendedProduct.generalDetails.valueThree"
+                    data-currency="$ctrl.extendedProduct.currency"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </p>
+              </div>
+              <div class="col-8" data-ng-if="$ctrl.extendedProduct.generalDetails.valueFour">
+                <h6>{{$ctrl.extendedProduct.generalDetails.valueFourLabel | i18n }}
+                  <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                    data-uib-tooltip="{{ $ctrl.extendedProduct.generalDetails.valueFourTooltip | i18n }}">
+                  </i>
+                </h6>
+                <p data-ng-if="$ctrl.extendedProduct.generalDetails.valueFourType === 'text'"
+                  data-ng-bind="$ctrl.extendedProduct.generalDetails.valueFour"></p>
+                <p data-ng-if="$ctrl.extendedProduct.generalDetails.valueFourType === 'amount'">
+                  <ui-bb-format-amount-ng
+                    data-amount="$ctrl.extendedProduct.generalDetails.valueFour"
+                    data-currency="$ctrl.extendedProduct.currency"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </p>
+              </div>
+              <hr>
+            </div>
+          </div>
+
+          <!-- Product interest details section -->
+          <div data-ng-if="$ctrl.extendedProduct.interestDetails">
+            <h5 data-ng-bind="$ctrl.extendedProduct.interestDetails.headerLabel | i18n"></h5>
+
+            <div class="d-flex">
+              <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.interestDetails.valueOne">
+                <h6>{{$ctrl.extendedProduct.interestDetails.valueOneLabel | i18n }}
+                  <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                    data-uib-tooltip="{{ $ctrl.extendedProduct.interestDetails.valueOneTooltip | i18n }}">
+                  </i>
+                </h6>
+                <p data-ng-if="$ctrl.extendedProduct.interestDetails.valueOneType === 'percentage'"
+                  data-ng-bind="$ctrl.extendedProduct.interestDetails.valueOne + ' %'">
+                </p>
+                <p data-ng-if="$ctrl.extendedProduct.interestDetails.valueOneType === 'amount'">
+                  <ui-bb-format-amount-ng
+                    data-amount="$ctrl.extendedProduct.interestDetails.valueOne"
+                    data-currency="$ctrl.extendedProduct.currency"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </p>
+              </div>
+              <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.interestDetails.valueTwo">
+                <h6>{{$ctrl.extendedProduct.interestDetails.valueTwoLabel | i18n }}
+                  <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                    data-uib-tooltip="{{ $ctrl.extendedProduct.interestDetails.valueTwoTooltip | i18n }}">
+                  </i>
+                </h6>
+                <p data-ng-if="$ctrl.extendedProduct.interestDetails.valueTwoType === 'amount'">
+                  <ui-bb-format-amount-ng
+                    data-amount="$ctrl.extendedProduct.interestDetails.valueTwo"
+                    data-currency="$ctrl.extendedProduct.currency"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </p>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.interestDetails.valueThree">
+                <h6>{{$ctrl.extendedProduct.interestDetails.valueThreeLabel | i18n }}
+                  <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                    data-uib-tooltip="{{ $ctrl.extendedProduct.interestDetails.valueThreeTooltip | i18n }}">
+                  </i>
+                </h6>
+                <p data-ng-if="$ctrl.extendedProduct.interestDetails.valueThreeType === 'percentage'"
+                  data-ng-bind="$ctrl.extendedProduct.interestDetails.valueThree + ' %'">
+                </p>
+                <p data-ng-if="$ctrl.extendedProduct.interestDetails.valueThreeType === 'label'"
+                  data-ng-bind="$ctrl.extendedProduct.interestDetails.valueThreeLabelValue | i18n: { number: $ctrl.extendedProduct.interestDetails.valueThree }">
+                </p>
+                <p data-ng-if="$ctrl.extendedProduct.interestDetails.valueThreeType === 'amount'">
+                  <ui-bb-format-amount-ng
+                    data-amount="$ctrl.extendedProduct.interestDetails.valueThree"
+                    data-currency="$ctrl.extendedProduct.currency"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </p>
+              </div>
+              <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.interestDetails.valueFour">
+                <h6>{{$ctrl.extendedProduct.interestDetails.valueFourLabel | i18n }}
+                  <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                    data-uib-tooltip="{{ $ctrl.extendedProduct.interestDetails.valueFourTooltip | i18n }}">
+                  </i>
+                </h6>
+                <p data-ng-if="$ctrl.extendedProduct.interestDetails.valueFourType === 'label'"
+                  data-ng-bind="$ctrl.extendedProduct.interestDetails.valueFourLabelValue | i18n:{ number: $ctrl.extendedProduct.interestDetails.valueFour }">
+                </p>
+                <p data-ng-if="$ctrl.extendedProduct.interestDetails.valueFourType === 'amount'">
+                  <ui-bb-format-amount-ng
+                    data-amount="$ctrl.extendedProduct.interestDetails.valueFour"
+                    data-currency="$ctrl.extendedProduct.currency"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </p>
+              </div>
+            </div>
+            <hr>
+          </div>
+
+          <!-- Product maturity details section -->
+          <div data-ng-if="$ctrl.extendedProduct.maturityDetails">
+            <h5 data-ng-bind="$ctrl.extendedProduct.maturityDetails.headerLabel | i18n"></h5>
+              <div class="d-flex">
+                <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.maturityDetails.valueOne">
+                  <h6>{{$ctrl.extendedProduct.maturityDetails.valueOneLabel | i18n }}
+                    <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                      data-uib-tooltip="{{ $ctrl.extendedProduct.maturityDetails.valueOneTooltip | i18n }}">
+                    </i>
+                  </h6>
+                  <p data-ng-if="$ctrl.extendedProduct.maturityDetails.valueOneType === 'amount'">
+                    <ui-bb-format-amount-ng
+                      data-amount="$ctrl.extendedProduct.maturityDetails.valueOne"
+                      data-currency="$ctrl.extendedProduct.currency"
+                      data-wrap>
+                    </ui-bb-format-amount-ng>
+                  </p>
+                </div>
+                <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.maturityDetails.valueTwo">
+                  <h6>{{$ctrl.extendedProduct.maturityDetails.valueTwoLabel | i18n }}
+                    <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                      data-uib-tooltip="{{ $ctrl.extendedProduct.maturityDetails.valueTwoTooltip | i18n }}">
+                    </i>
+                  </h6>
+                  <p data-ng-if="$ctrl.extendedProduct.maturityDetails.valueTwoType === 'date'"
+                    data-ng-bind="$ctrl.extendedProduct.maturityDetails.valueTwo | date : 'd MMMM yyyy'">
+                  </p>
+                  <p data-ng-if="$ctrl.extendedProduct.maturityDetails.valueTwoType === 'label'"
+                    data-ng-bind="$ctrl.extendedProduct.maturityDetails.valueTwoLabelValue | i18n:{ number: $ctrl.extendedProduct.maturityDetails.valueTwo }">
+                  </p>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.maturityDetails.valueThree">
+                  <h6>{{$ctrl.extendedProduct.maturityDetails.valueThreeLabel | i18n }}
+                    <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                      data-uib-tooltip="{{ $ctrl.extendedProduct.maturityDetails.valueThreeTooltip | i18n }}">
+                    </i>
+                  </h6>
+                  <p data-ng-if="$ctrl.extendedProduct.maturityDetails.valueThreeType === 'date'"
+                    data-ng-bind="$ctrl.extendedProduct.maturityDetails.valueThree | date : 'd MMMM yyyy'">
+                  </p>
+                </div>
+                <div class="col-6" data-ng-if="$ctrl.extendedProduct.maturityDetails.valueFour">
+                  <h6>{{$ctrl.extendedProduct.maturityDetails.valueFourLabel | i18n }}
+                    <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                      data-uib-tooltip="{{ $ctrl.extendedProduct.maturityDetails.valueFourTooltip | i18n }}">
+                    </i>
+                  </h6>
+                  <p data-ng-if="$ctrl.extendedProduct.maturityDetails.valueFourType === 'date'"
+                    data-ng-bind="$ctrl.extendedProduct.maturityDetails.valueFour | date : 'd MMMM yyyy'">
+                  <p data-ng-if="$ctrl.extendedProduct.maturityDetails.valueFourType === 'percentage'"
+                    data-ng-bind="$ctrl.extendedProduct.maturityDetails.valueFour + ' %'">
+                  </p>
+                </div>
+              </div>
+            <hr>
+          </div>
+
+          <!-- Product associated cards section -->
+          <div data-ng-if="$ctrl.extendedProduct.associatedCards.account || $ctrl.extendedProduct.associatedCards.debitCards.length > 0">
+            <h5 data-ng-bind="$ctrl.extendedProduct.associatedCards.headerLabel | i18n" class="pb-3"></h5>
+
+            <div data-ng-if="$ctrl.extendedProduct.associatedCards.sectionType === 'account'">
+              <div class="col-12 col-sm-4 pl-0">
+                <div class="p-3 mb-2 bg-light border rounded">
+                  <h6 data-ng-bind="$ctrl.extendedProduct.associatedCards.accountLabel | i18n"></h6>
+                  <p data-ng-bind="$ctrl.extendedProduct.associatedCards.account"></p>
+                </div>
+              </div>
+            </div>
+
+            <div data-ng-if="$ctrl.extendedProduct.associatedCards.sectionType === 'debitCards'">
+              <div data-ng-repeat="debitCard in $ctrl.extendedProduct.associatedCards.debitCards track by $index">
+                <div class="col-12 col-sm-4 pl-0" >
+                  <div class="p-3 mb-2 bg-light border rounded">
+                    <h6 data-ng-bind="$ctrl.extendedProduct.associatedCards.debitCardLabel | i18n"></h6>
+                    <p data-ng-bind="ext.helpers.maskCardNumber(debitCard.number)"></p>
+
+                    <h6 class="text-muted" 
+                      data-ng-bind="$ctrl.extendedProduct.associatedCards.debitCardExpiryDateLabel | i18n">
+                    </h6>
+                    <span class="text-muted" data-ng-bind="debitCard.expiryDate | date : 'dd MMMM yyyy'"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+          </div>
+
+          <!-- Product activity details section -->
+          <div data-ng-if="$ctrl.extendedProduct.activityDetails">
+            <div class="d-flex">
+              <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.activityDetails.accountOpeningDateValue">
+                <h6>{{$ctrl.extendedProduct.activityDetails.accountOpeningDateLabel | i18n }}
+                  <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                    data-uib-tooltip="{{ $ctrl.extendedProduct.activityDetails.accountOpeningDateTooltip | i18n }}">
+                  </i>
+                </h6>
+                <p data-ng-bind="$ctrl.extendedProduct.activityDetails.accountOpeningDateValue | date : 'd MMMM yyyy'"></p>
+              </div>
+              <div class="col-6 pl-0" data-ng-if="$ctrl.extendedProduct.activityDetails.lastUpdateDateValue">
+                <h6>{{$ctrl.extendedProduct.activityDetails.lastUpdateDateLabel | i18n }}
+                  <i class="fa fa-info-circle info-icon text-muted" aria-hidden="true"
+                    data-uib-tooltip="{{ $ctrl.extendedProduct.activityDetails.lastUpdateDateTooltip | i18n }}">
+                  </i>
+                </h6>
+                <p data-ng-bind="$ctrl.extendedProduct.activityDetails.lastUpdateDateValue | date : 'd MMMM yyyy'"></p>
+              </div>
+            </div>
+          </div>
+        </ui-bb-empty-state-ng>
+      </ui-bb-substitute-error-ng>
+
+    </div>
+  </div>
+</div>

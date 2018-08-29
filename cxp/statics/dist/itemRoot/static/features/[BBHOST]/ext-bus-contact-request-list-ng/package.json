@@ -1,0 +1,65 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-contact-request-list-ng@~3.6.1",
+        "scope": null,
+        "escapedName": "ext-bus-contact-request-list-ng",
+        "name": "ext-bus-contact-request-list-ng",
+        "rawSpec": "~3.6.1",
+        "spec": ">=3.6.1 <3.7.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-contact-request-list-ng@>=3.6.1 <3.7.0",
+  "_id": "ext-bus-contact-request-list-ng@3.6.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-contact-request-list-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-contact-request-list-ng@~3.6.1",
+    "scope": null,
+    "escapedName": "ext-bus-contact-request-list-ng",
+    "name": "ext-bus-contact-request-list-ng",
+    "rawSpec": "~3.6.1",
+    "spec": ">=3.6.1 <3.7.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-contact-request-list-ng/-/ext-bus-contact-request-list-ng-3.6.1.tgz",
+  "_shasum": "18ef83d159089e46b37016336948a296e4f9235d",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-contact-request-list-ng@~3.6.1",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-avatar-ng": "^2.5.1",
+    "ui-bb-country-ng": "^1.5.1",
+    "ui-bb-focus-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-iban-ng": "^2.6.1",
+    "ui-bb-inline-status-ng": "^2.5.1",
+    "ui-bb-load-more-ng": "^2.5.1",
+    "ui-bb-loading-overlay-ng": "^2.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-paginator-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-angular-ng-messages": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-contact-request-list-ng/-/ext-bus-contact-request-list-ng-3.6.1.tgz",
+    "shasum": "18ef83d159089e46b37016336948a296e4f9235d"
+  },
+  "main": "scripts/ext-bus-contact-request-list-ng.js",
+  "name": "ext-bus-contact-request-list-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.6.1"
+}

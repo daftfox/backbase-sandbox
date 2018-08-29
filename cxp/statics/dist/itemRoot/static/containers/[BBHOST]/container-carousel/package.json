@@ -1,0 +1,63 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "container-carousel@~3.0.0",
+        "scope": null,
+        "escapedName": "container-carousel",
+        "name": "container-carousel",
+        "rawSpec": "~3.0.0",
+        "spec": ">=3.0.0 <3.1.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist"
+    ]
+  ],
+  "_from": "container-carousel@>=3.0.0 <3.1.0",
+  "_id": "container-carousel@3.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-carousel",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "container-carousel@~3.0.0",
+    "scope": null,
+    "escapedName": "container-carousel",
+    "name": "container-carousel",
+    "rawSpec": "~3.0.0",
+    "spec": ">=3.0.0 <3.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/container-carousel/-/container-carousel-3.0.0.tgz",
+  "_shasum": "1ff65bea2862304f0f0063e4389807d4bf75b0a2",
+  "_shrinkwrap": null,
+  "_spec": "container-carousel@~3.0.0",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist",
+  "author": "",
+  "dependencies": {
+    "template-carousel": "^2.0.0"
+  },
+  "description": "Container Carousel",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/container-carousel/-/container-carousel-3.0.0.tgz",
+    "shasum": "1ff65bea2862304f0f0063e4389807d4bf75b0a2"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "container-carousel",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/container-carousel.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "3.0.0"
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="contentServiceContentServiceDistributedCacheFlushManager"
+          class="com.backbase.portal.contentservices.business.cache.impl.DistributedCacheFlushManagerImpl"
+            init-method="schedule"
+            destroy-method="shutDown">
+        <constructor-arg name="lastPublicationDateService" ref="lastPublicationDateService" />
+        <constructor-arg name="ehcacheCacheInvalidator" ref="ehcacheCacheInvalidator" />
+        <constructor-arg name="hibernateCacheInvalidator" ref="hibernateCacheInvalidator" />
+        <constructor-arg name="cacheFlushEnabled" value="${distributed.cache.flush.enabled:true}" />
+        <constructor-arg name="intervalInSeconds" value="${distributed.cache.flush.interval.in.seconds:5}" />
+    </bean>
+
+</beans>

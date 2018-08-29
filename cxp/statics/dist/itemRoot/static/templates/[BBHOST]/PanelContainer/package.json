@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "template-panel@^2.0.0",
+        "scope": null,
+        "escapedName": "template-panel",
+        "name": "template-panel",
+        "rawSpec": "^2.0.0",
+        "spec": ">=2.0.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist/node_modules/container-deck/node_modules/container-panel"
+    ]
+  ],
+  "_from": "template-panel@>=2.0.0 <3.0.0",
+  "_id": "template-panel@2.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-deck/template-panel",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "template-panel@^2.0.0",
+    "scope": null,
+    "escapedName": "template-panel",
+    "name": "template-panel",
+    "rawSpec": "^2.0.0",
+    "spec": ">=2.0.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/container-deck/container-panel"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/template-panel/-/template-panel-2.0.1.tgz",
+  "_shasum": "31833e28d55b3b855e50b15a2f1c88f2e0779f1f",
+  "_shrinkwrap": null,
+  "_spec": "template-panel@^2.0.0",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist/node_modules/container-deck/node_modules/container-panel",
+  "author": "",
+  "dependencies": {},
+  "description": "",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/template-panel/-/template-panel-2.0.1.tgz",
+    "shasum": "31833e28d55b3b855e50b15a2f1c88f2e0779f1f"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "template-panel",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/template-panel.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.0.1"
+}

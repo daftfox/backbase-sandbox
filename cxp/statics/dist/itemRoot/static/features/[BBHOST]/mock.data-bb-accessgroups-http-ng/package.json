@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "mock.data-bb-accessgroups-http-ng@~2.2.5",
+        "scope": null,
+        "escapedName": "mock.data-bb-accessgroups-http-ng",
+        "name": "mock.data-bb-accessgroups-http-ng",
+        "rawSpec": "~2.2.5",
+        "spec": ">=2.2.5 <2.3.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-mocks-release/workspace/dist"
+    ]
+  ],
+  "_from": "mock.data-bb-accessgroups-http-ng@>=2.2.5 <2.3.0",
+  "_id": "mock.data-bb-accessgroups-http-ng@2.2.5",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/mock.data-bb-accessgroups-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "mock.data-bb-accessgroups-http-ng@~2.2.5",
+    "scope": null,
+    "escapedName": "mock.data-bb-accessgroups-http-ng",
+    "name": "mock.data-bb-accessgroups-http-ng",
+    "rawSpec": "~2.2.5",
+    "spec": ">=2.2.5 <2.3.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/mock.data-bb-accessgroups-http-ng/-/mock.data-bb-accessgroups-http-ng-2.2.5.tgz",
+  "_shasum": "5cb4600011b6f3698e10c5f1b0b640d832f4467b",
+  "_shrinkwrap": null,
+  "_spec": "mock.data-bb-accessgroups-http-ng@~2.2.5",
+  "_where": "/opt/jobs/collection-retail-banking-mocks-release/workspace/dist",
+  "dependencies": {
+    "lib-bb-storage-ng": "^1.0.91",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/mock.data-bb-accessgroups-http-ng/-/mock.data-bb-accessgroups-http-ng-2.2.5.tgz",
+    "shasum": "5cb4600011b6f3698e10c5f1b0b640d832f4467b"
+  },
+  "main": "scripts/mock.data-bb-accessgroups-http-ng.js",
+  "name": "mock.data-bb-accessgroups-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.2.5"
+}

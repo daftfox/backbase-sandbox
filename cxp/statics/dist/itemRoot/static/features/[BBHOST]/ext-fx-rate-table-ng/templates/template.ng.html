@@ -1,0 +1,137 @@
+<div data-ng-controller="FXRateTableController as $ctrl">
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+    <div class="clearfix py-3 border-bottom mx-3">
+      <h3 class="float-left mb-0" data-i18n-key="tradingfx.title"></h3>
+    </div>
+    <ui-bb-loading-overlay-ng data-is-loading="state.currencyPairs.loading">
+      <div class="m-3">
+        <ui-bb-empty-state-ng
+          data-message="state.errors.currencyPairsError.message | i18n"
+          data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+          data-title="{{ ext.helpers.getError(state.errors.currencyPairsError).title | i18n }}"
+          data-subtitle="{{ ext.helpers.getError(state.errors.currencyPairsError).message | i18n }}"
+          data-is-empty="state.errors.currencyPairsError">
+          <ui-bb-empty-state-ng
+            data-icon-classes="fa fa-4x fa-exclamation-triangle text-muted"
+            data-title="{{ 'currency.empty.title' | i18n }}"
+            data-subtitle="{{ 'currency.empty.message.noCurrency' | i18n }}"
+            data-is-empty="!ext.helpers.isCurrencyPairsAvailable(state.currencyPairs)">
+
+            <table class="table table-fixed table-striped table-hover border">
+              <thead>
+              <tr>
+                <th>
+                  <h6 class="my-2" data-i18n-key="currency.symbol"></h6>
+                </th>
+                <th class="text-right">
+                  <h6 class="my-2" data-i18n-key="currency.price"></h6>
+                </th>
+                <th class="text-right">
+                  <h6 class="my-2" data-i18n-key="currency.change"></h6>
+                </th>
+                <th class="text-right text-nowrap">
+                  <h6 class="my-2">
+                    <span>%</span>
+                    <span data-i18n-key="currency.change"></span>
+                  </h6>
+                </th>
+                <th class="text-right">
+                  <h6 class="my-2" data-i18n-key="currency.bid"></h6>
+                </th>
+                <th class="text-right">
+                  <h6 class="my-2" data-i18n-key="currency.ask"></h6>
+                </th>
+                <th colspan="2">
+                  <!--Buy-->
+                  <!--Sell-->
+                </th>
+                <th>
+                  <!--Favorite-->
+                </th>
+                <th>
+                  <!--Go to details-->
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="item in ext.helpers.currencyPairs()">
+                <td class="align-middle"><h6 class="m-0">{{item.pairKey}}</h6></td>
+                <td class="align-middle text-right"><span>{{item.price | number:4}}</span></td>
+                <td class="align-middle text-right text-nowrap">
+                  <span
+                    class="amount-negative"
+                    data-ng-class="item.change > 0 ? 'text-success' : 'text-danger'"
+                    data-role="item-change"
+                  >
+                    <span>
+                      {{ ext.helpers.showSign(item.change, 4) }}
+                    </span>
+                  </span>
+                </td>
+                <td class="align-middle text-right text-nowrap">
+                  <span
+                      class="amount-negative"
+                      data-ng-class="item.changePct > 0 ? 'text-success' : 'text-danger'"
+                      data-role="item-change-pct"
+                    >
+                    <span>
+                      {{ ext.helpers.showSign(item.changePct, 2) }}%
+                    </span>
+                  </span>
+                </td>
+                <td class="align-middle text-right"><span>{{item.bid | number:4}}</span></td>
+                <td class="align-middle text-right"><span>{{item.ask | number:4}}</span></td>
+                <td class="align-middle text-center text-nowrap" colspan="2">
+                  <button
+                    class="btn btn-light btn-sm px-3 ml-2"
+                    data-ng-click="$ctrl.viewTradeOrder(item.pairKey)"
+                    data-ng-disabled="!item.isBuyEnabled"
+                    data-i18n-key="currency.buy"
+                    data-role="currency-buy"
+                    aria-label="{{'currency.buy' | i18n}}"
+                  ></button>
+                  <button
+                    class="btn btn-light btn-sm px-3"
+                    data-ng-click="$ctrl.viewTradeOrder(item.pairKey)"
+                    data-ng-disabled="!item.isSellEnabled"
+                    data-i18n-key="currency.sell"
+                    data-role="currency-sell"
+                    aria-label="{{'currency.sell' | i18n}}"
+                  ></button>
+                </td>
+                <td class="align-middle text-center text-nowrap">
+                  <button class="btn btn-link ml-3">
+                    <i class="far fa-star"></i>
+                  </button>
+                </td>
+                <td class="align-middle text-center">
+                  <button
+                    class="btn btn-link"
+                    data-ng-click="$ctrl.viewCurrencyPairDetails(item.pairKey);$event.stopPropagation();"
+                    >
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <ui-bb-paginator-ng
+              data-ng-if="state.pageParams.totalItems > state.pageParams.size"
+              data-total-items="{{ state.pageParams.totalItems }}"
+              data-items-per-page="{{ state.pageParams.size }}"
+              data-max-nav-pages="{{ state.pageParams.maxNavPages }}"
+              data-current-page="{{ state.pageParams.from + 1 }}"
+              data-ng-disabled="state.currencyPairs.loading"
+              data-change-page="$ctrl.load({page: params.currentPage - 1})">
+            </ui-bb-paginator-ng>
+            
+          </ui-bb-empty-state-ng>
+        </ui-bb-empty-state-ng>
+      </div>
+    </ui-bb-loading-overlay-ng>
+  </ui-bb-loading-indicator-ng>
+</div>

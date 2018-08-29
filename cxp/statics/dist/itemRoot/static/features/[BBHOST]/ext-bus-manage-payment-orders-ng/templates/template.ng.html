@@ -1,0 +1,965 @@
+<div class="ext-bus-manage-payment-orders-ng"
+  data-ng-controller="ManagePaymentOrderController as $ctrl"
+  data-ng-class="{ 'd-print-none' : ext.showModal }">
+  <div class="notifications col-md-4">
+    <ui-bb-notification-stripe-ng
+      data-ng-repeat="notification in $ctrl.state.notifications"
+      data-timeout-second="{{ $ctrl.state.notificationDismissTime }}"
+      data-message="{{ notification.message }}"
+      data-on-close="$ctrl.state.notifications = ext.helpers.removeNotification(notification, $ctrl.state.notifications);"
+      data-type="alert-{{ notification.level === 'ALERT' ? 'danger' : notification.level | lowercase }}">
+    </ui-bb-notification-stripe-ng>
+
+    <!-- Bulk approve warning alert -->
+    <div
+      data-uib-alert
+      data-type="warning"
+      class="alert-dismissible"
+      data-ng-if="$ctrl.state.bulkActionNotification.isVisible">
+      <i class="fa fa-exclamation-circle text-warning mr-1" aria-hidden="true"></i>
+      <span>
+          {{ "bulk.approve.details.title" | i18n:{
+              count: $ctrl.state.bulkActionDetails.failCount,
+              status:  $ctrl.state.bulkActionDetails.approvalStatus.toLowerCase()
+            }
+          }}
+          <a
+            href="#"
+            class="ml-2"
+            data-ng-click="ext.helpers.showBulkActionDetails(ext, $ctrl)"
+            data-i18n-key="bulk.approve.notification.details">
+          </a>
+      </span>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        data-ng-click="ext.helpers.dismissBulkActionWarning($ctrl)"
+        aria-label="{{ 'bulk.approve.notification.close' | i18n }}">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> <!-- Bulk approve waring alert :end -->
+  </div>
+
+  <div class="empty-element-placeholder-relative" data-ng-if="$ctrl.state.initialLoading"></div>
+  <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.isLoading">
+    <ui-bb-substitute-error-ng data-message="$ctrl.state.error | i18n"
+      data-ng-if="!$ctrl.state.initialLoading">
+      <div class="card" x-ms-format-detection="none">
+        <div class="card-body p-0">
+          <div class="card card-flat">
+            <div class="card-header">
+              <!-- Filters & Action -->
+              <div class="row">
+                <!-- Left side -->
+                <div class="col-md-6">
+                  <div class="form-row align-items-center">
+                    <ui-bb-search-box-ng
+                      class="col-8 col-md-8 my-1 pl-0"
+                      data-config="{
+                        hideButton: false,
+                        showIcon: false,
+                        labels: ext.helpers.searchLabelsTranslations()
+                      }"
+                      data-ng-model="$ctrl.state.search.query"
+                      data-on-submit="$ctrl.onSearchSubmit()"
+                      data-on-clear="$ctrl.onSearchClear()">
+                    </ui-bb-search-box-ng>
+
+                    <div class="col-auto my-1 pl-0">
+                      <button
+                        type="button"
+                        data-ng-class="{ 'active' : $ctrl.state.isFilterOpen }"
+                        class="btn btn-secondary btn-filter"
+                        data-role="filter"
+                        data-ng-click="ext.helpers.toggleFilter(ext)"
+                        title="{{ $ctrl.buttonLabels.main}}">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                        {{ 'filter.button.main' | i18n }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- end: Left side -->
+
+                <!-- Right side -->
+                <div
+                  class="col-md-6"
+                  data-ng-if="ext.helpers.isAnySelected($ctrl.state.selections)">
+                  <div class="form-row align-items-center justify-content-end">
+                    <div class="col-auto my-1 pl-0">
+                      <div class="btn text-muted">
+                        {{ ext.helpers.howManySelected($ctrl.state.selections) }}
+                        {{ ::'selection.selected' | i18n }}
+                      </div>
+                      |
+                      <button
+                        class="btn btn-link"
+                        data-ng-click="ext.helpers.deselectPayments($ctrl.state.selections)">
+                        {{ ::'selection.clear.selection' | i18n }}
+                      </button>
+                    </div>
+                    <!-- Actions on selected payment orders | Approve & reject -->
+                    <div class="col-auto my-1 pl-0">
+                      <button
+                        type="button"
+                        class="btn btn-success mr-2"
+                        data-ng-click="ext.helpers.confirmActionOnBulk(ext, ext.helpers.action.APPROVE)"
+                        data-ng-disabled="!ext.helpers.canPerformActionForBulk($ctrl.state, ext.helpers.action.APPROVE)">
+                        {{ ::'selection.approve' | i18n }}
+                      </button>
+                      <button
+                        type="button" class="btn btn-default"
+                        data-ng-click="ext.helpers.confirmActionOnBulk(ext, ext.helpers.action.REJECT)"
+                        data-ng-disabled="!ext.helpers.canPerformActionForBulk($ctrl.state, ext.helpers.action.REJECT)">
+                        {{ ::'selection.reject' | i18n }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end: Filters & Action -->
+            </div>
+
+            <form data-role="search"
+              name="searchFilterForm"
+              data-ng-submit="$ctrl.onApplyFilter(searchFilterForm)"
+              data-ui-bb-track-changes-ng="$ctrl.filterParams">
+
+              <div data-ng-show="ext.showFilter">
+                <div class="card-body">
+                  <div data-ng-include="'#payment/filter-form.html'"></div>
+                </div>
+                <ui-bb-filter-form-actions-ng
+                  data-filter-params="$ctrl.state.filterParams"
+                  data-search-filter-form="searchFilterForm"
+                  data-on-close="ext.helpers.toggleFilter(ext)"
+                  data-on-filter="$ctrl.onApplyFilter(form)"
+                  data-on-clear="$ctrl.onSearchClear()"
+                  data-button-labels="{
+                    apply: ('filter.button.apply' | i18n),
+                    closePanel: ('filter.button.closePanel' | i18n),
+                    clearAll: ('filter.button.clearAll' | i18n)
+                  }"
+                > </ui-bb-filter-form-actions-ng>
+              </div>
+            </form>
+
+            <ui-bb-empty-state-ng
+              data-icon-classes="{{ ext.helpers.getEmptyIcon($ctrl) }} fa-3x text-muted"
+              data-title="{{ ext.helpers.getEmptyTitle($ctrl) }}"
+              data-subtitle="{{ ext.helpers.getEmptyDescription($ctrl) }}"
+              data-is-empty="!$ctrl.state.paymentOrders.data.length && !$ctrl.state.paymentOrders.loading">
+
+              <div class="card-body text-muted" data-ng-if="$ctrl.state.paymentOrders.searching && !$ctrl.state.paymentOrders.loading" >
+                <div
+                  data-role="matches-found"
+                  data-i18n-key="label.search.matches"
+                  data-i18n-data="{ matches: $ctrl.state.pagination.totalItems }"
+                ></div>
+              </div>
+
+              <div class="card-body p-0">
+                <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.paymentOrders.loading">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                      <thead>
+                        <tr>
+                          <th class="align-middle"
+                              data-ng-click="ext.helpers.toggleAllPayments($ctrl.state.paymentOrders.data, $ctrl.state.selections)">
+                            <input
+                              type="checkbox"
+                              data-indeterminate-ng="ext.helpers.isSelectedPart($ctrl.state.paymentOrders.data, $ctrl.state.selections)"
+                              data-ng-checked="ext.helpers.isSelectedAll($ctrl.state.paymentOrders.data, $ctrl.state.selections)"
+                              data-role="select-all-payment-orders"/>
+                          </th>
+                          <th data-ng-repeat="header in ext.helpers.headers"
+                            class="{{ header.class }}"
+                            data-ui-bb-sortable-column-ng
+                            data-options="header.sortable"
+                            data-active="ext.helpers.isSortableActive(header.sortable, $ctrl)"
+                            data-on-sort="$ctrl.onSort(key, direction)">
+                            <span data-i18n-key="{{ ::header.label }}"></span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr colspan="7"
+                          data-ng-class-odd="'table-row-odd'"
+                          data-ng-class-even="'table-row-even'"
+                          data-ng-click="ext.helpers.openModalWindow(ext, payment)"
+                          data-ng-repeat="payment in $ctrl.state.paymentOrders.data track by payment.id"
+                          data-ng-class="{'bg-info': ext.helpers.isSelected(payment, $ctrl.state.selections)}">
+                          <td class="align-middle"
+                              data-ng-click="ext.helpers.toggleSelection(payment, $ctrl.state.selections, $event)">
+                            <input
+                              type="checkbox"
+                              data-ng-checked="ext.helpers.isSelected(payment, $ctrl.state.selections)"
+                              data-role="select-payment-order"/>
+                          </td>
+                          <td data-label="{{ 'header.status' | i18n }}" class="payment-status {{ payment.status.toLowerCase() }} align-middle">
+                            <span data-uib-tooltip="{{ ext.helpers.getStatusLabelKey(payment.status) | i18n }}" data-tooltip-placement="top-left">
+                              <span class="badge badge-pill badge-{{ ext.helpers.getStatusIcon(payment.status) }}"
+                                data-label="{{ ext.helpers.getStatusLabelKey(payment.status) | i18n }}">
+                                <span class="badge-content"
+                                  data-ng-bind="ext.helpers.getStatusLabelKey(payment.status, true) | i18n"
+                                  data-role="status">
+                                </span>
+                              </span>
+                            </span>
+                          </td>
+                          <td data-label="{{ ext.helpers.headers[1].label | i18n }}">
+                            <div class="table-small break-word"
+                              data-ui-bb-highlight-text-ng="ext.helpers.getSearchQuery($ctrl)"
+                              data-role="debit-counter-party-name">
+                              {{ payment.debtor.name }}
+                            </div>
+                            <div class="table-small break-word"
+                              data-ui-bb-highlight-text-ng="ext.helpers.getSearchQuery($ctrl)"
+                              data-ng-class="{'small text-muted': payment.debtor.name}"
+                              data-role="debit-counter-party-identification">
+                              {{ ::ext.helpers.getAccountNumber(payment.debtorAccount.identification) }}
+                            </div>
+                          </td>
+                          <td data-label="{{ ext.helpers.headers[2].label | i18n }}">
+                            <div class="table-small break-word"
+                              data-ui-bb-highlight-text-ng="ext.helpers.getSearchQuery($ctrl)"
+                              data-role="credit-counter-party-name">
+                              {{ payment.transactionInformation.creditor.name }}
+                            </div>
+                            <div class="table-small break-word"
+                              data-ui-bb-highlight-text-ng="ext.helpers.getSearchQuery($ctrl)"
+                              data-ng-class="{'small text-muted': payment.transactionInformation.creditor.name}"
+                              data-role="credit-counter-party-identification">
+                              {{ ::ext.helpers.getAccountNumber(payment.transactionInformation.creditorAccount.identification) }}
+                            </div>
+                          </td>
+                          <td
+                            data-label="{{ ext.helpers.headers[3].label | i18n }}"
+                            data-ng-bind="::payment.transactionInformation.instructedAmount.currencyCode"
+                            data-role="currency"></td>
+                          <td data-label="{{ ext.helpers.headers[4].label | i18n }}" class="text-right">
+                            <div class="table-small" data-ng-bind="::payment.transactionInformation.instructedAmount.amount | currency: ''"
+                              data-role="amount"></div>
+                          </td>
+                          <td data-label="{{ 'header.execution' | i18n }}" class="text-right">
+                            <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ payment.requestedExecutionDate | date: 'shortDate' }}">
+                              <span class="text-muted" data-ng-bind="::payment.requestedExecutionDate | date: 'shortDate'"
+                              data-role="execution-date"></span>
+                            </ui-bb-ellipsis-tooltip-ng>
+                          </td>
+                          <td data-label="{{ 'header.actions.role' | i18n }}" class="text-right">
+                            <div
+                              class="btn-group btn-group-sm" role="group"
+                              data-uib-dropdown data-dropdown-append-to-body>
+                              <button data-ng-class="{ disabled: !ext.helpers.canPerformAction(payment, ext.helpers.action.APPROVE) }"
+                                      data-uib-tooltip="{{ (ext.helpers.canPerformAction(payment, ext.helpers.action.APPROVE) ? 'actions.authorize' : 'actions.authorize.disabled') | i18n }}"
+                                      data-tooltip-placement="top-right"
+                                      data-tooltip-append-to-body="true"
+                                      data-container="body"
+                                      class="btn btn-secondary"
+                                      data-ng-click="ext.helpers.authorize($ctrl, payment, $event)">
+                                <i data-label="{{ 'actions.authorize' | i18n }}"
+                                  class="fa fa-check fa-fw"
+                                  aria-hidden="true"
+                                  data-role="authorize-payment-order"></i>
+                              </button>
+
+                              <button data-ng-class="{ disabled: !ext.helpers.canPerformAction(payment, ext.helpers.action.REJECT) }"
+                                      data-uib-tooltip="{{ (ext.helpers.canPerformAction(payment, ext.helpers.action.REJECT) ? 'actions.reject' : 'actions.reject.disabled') | i18n }}"
+                                      data-tooltip-placement="top-right"
+                                      data-tooltip-append-to-body="true"
+                                      data-container="body"
+                                      class="btn btn-secondary"
+                                      data-ng-click="ext.helpers.rejectInit(payment, $event, ext)">
+                                <i data-label="{{ 'actions.authorize' | i18n }}"
+                                  class="fa fa-times fa-fw"
+                                  aria-hidden="true"
+                                  data-role="reject-payment-order"></i>
+                              </button>
+
+                              <button
+                                data-uib-dropdown-toggle
+                                data-container="body"
+                                data-tooltip-append-to-body="true"
+                                data-tooltip-placement="top-right"
+                                class="btn btn-secondary dropdown-toggle"
+                                data-ng-click="$event.stopPropagation()"
+                                data-uib-tooltip="{{ 'actions.moreActions' | i18n }}">
+                                <i
+                                  class="fa fa-ellipsis-v fa-fw" aria-hidden="true"
+                                  data-label="{{ 'actions.moreActions' | i18n }}">
+                                </i>
+                              </button>
+
+                              <div
+                                data-uib-dropdown-menu
+                                class="uib-dropdown-menu dropdown-menu dropdown-menu-right">
+                                <a
+                                  class="dropdown-item"
+                                  data-container="body"
+                                  data-uib-tooltip="{{'actions.cancel.disabled' | i18n }}"
+                                  data-tooltip-enable="{{!ext.helpers.canPerformAction(payment, ext.helpers.action.CANCEL)}}"
+                                  data-tooltip-placement="left"
+                                  data-tooltip-append-to-body="true"
+                                  data-ng-class="{ disabled: !ext.helpers.canPerformAction(payment, ext.helpers.action.CANCEL) }"
+                                  data-ng-click="ext.helpers.confirmPaymentCancel($event, payment, ext)">
+                                  {{ 'actions.cancel' | i18n }}
+                                </a>
+
+                                <a
+                                  class="dropdown-item"
+                                  data-container="body"
+                                  data-uib-tooltip="{{'actions.delete.disabled' | i18n }}"
+                                  data-tooltip-enable="{{!ext.helpers.canPerformAction(payment, ext.helpers.action.DELETE)}}"
+                                  data-tooltip-placement="left"
+                                  data-tooltip-append-to-body="true"
+                                  data-ng-class="{ disabled: !ext.helpers.canPerformAction(payment, ext.helpers.action.DELETE) }"
+                                  data-ng-click="ext.helpers.confirmPaymentDelete($event, payment, ext)">
+                                  {{ 'actions.delete' | i18n }}
+                                </a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <ui-bb-load-more-ng
+                    data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+                    data-ng-show="$ctrl.state.paymentOrders.hasMore"
+                    data-label="{{ 'label.loadMore' | i18n }}"
+                    data-on-load-more="$ctrl.loadMore(done)"
+                  ></ui-bb-load-more-ng>
+
+                  <ui-bb-paginator-ng
+                    data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'pagination')"
+                    data-page-navigation-text="{{ 'label.page_navigation' | i18n }}"
+                    data-first-text="{{ 'label.first' | i18n }}"
+                    data-last-text="{{ 'label.last' | i18n }}"
+                    data-previous-text="{{ 'label.prev' | i18n }}"
+                    data-next-text="{{ 'label.next' | i18n }}"
+                    data-total-items="{{ $ctrl.state.pagination.totalItems }}"
+                    data-items-per-page="{{ $ctrl.state.pagination.itemsPerPage }}"
+                    data-max-nav-pages="{{ $ctrl.state.pagination.maxNavPages }}"
+                    data-current-page="{{ $ctrl.state.pagination.currentPage }}"
+                    data-ng-disabled="$ctrl.state.accounts.loading"
+                    data-change-page="$ctrl.changePage(params)"
+                  ></ui-bb-paginator-ng>
+                </ui-bb-loading-overlay-ng>
+              </div>
+            </ui-bb-empty-state-ng>
+          </div>
+        </div>
+      </div>
+    </ui-bb-substitute-error-ng>
+  </ui-bb-loading-overlay-ng>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.rejectOpened"
+    data-on-confirm="$ctrl.reject(ext.rejectPaymentId)"
+    data-labels="{
+      heading: ('dialog.reject.title' | i18n),
+      bodyText: ('dialog.reject.body' | i18n),
+      confirm: ('dialog.reject.yes' | i18n),
+      cancel: ('dialog.reject.no' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.cancelOpened"
+    data-on-confirm="$ctrl.cancelPayment(ext.cancelPaymentId, ext.paymentVersion)"
+    data-labels="{
+      heading: ('dialog.cancel.title' | i18n),
+      bodyText: ('dialog.cancel.body' | i18n),
+      confirm: ('dialog.action.yes' | i18n),
+      cancel: ('dialog.action.no' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.deleteOpened"
+    data-on-confirm="$ctrl.deletePayment(ext.deletePaymentId, ext.paymentVersion)"
+    data-labels="{
+      heading: ('dialog.delete.title' | i18n),
+      bodyText: ('dialog.delete.body' | i18n),
+      confirm: ('dialog.action.yes' | i18n),
+      cancel: ('dialog.action.no' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.confirmBulkApprove"
+    data-on-confirm="$ctrl.approveBulk()"
+    data-labels="{
+      heading: ('dialog.bulk.approve.title' | i18n),
+      bodyHtml: ('dialog.bulk.approve.body' | i18n: {count: $ctrl.state.selections.selectedPayments.length}),
+      confirm: ('dialog.bulk.approve.yes' | i18n),
+      cancel: ('dialog.bulk.approve.no' | i18n)
+    }"
+    data-confirm-btn-class="'btn-success'">
+  </ui-bb-confirm-ng>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.confirmBulkReject"
+    data-on-confirm="$ctrl.rejectBulk()"
+    data-labels="{
+      heading: ('dialog.bulk.reject.title' | i18n),
+      bodyHtml: ('dialog.bulk.reject.body' | i18n: {count: $ctrl.state.selections.selectedPayments.length}),
+      confirm: ('dialog.bulk.reject.yes' | i18n),
+      cancel: ('dialog.bulk.reject.no' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+
+</div>
+
+<ui-bb-modal-ng
+  data-is-open="ext.showModal"
+  data-animation="true"
+  data-on-close="ext.helpers.closeModalWindow(ext)">
+
+  <div data-ng-init="payment = ext.payment" data-ng-include="'#payment-details/payment.html'"></div>
+</ui-bb-modal-ng>
+
+<script type="text/ng-template" id="#payment-details/payment.html">
+  <div class="printable-content">
+    <div class="modal-header flex-column">
+      <h3 class="modal-title" data-i18n-key="{{ 'header.' + ext.helpers.paymentTypeId[payment.paymentType] +'.title' }}"></h3>
+      <div>
+        <small class="text-muted">
+          <span data-i18n-key="details.created.by"></span>
+          <b data-ng-bind="::payment.createdBy"></b>
+          <span data-ng-if="payment.createdAt">
+          {{ 'details.on' | i18n }} {{ payment.createdAt | date: 'shortDate' }}
+          {{ 'details.at' | i18n }} {{ payment.createdAt | date: 'shortTime' }}
+        </span>
+        </small>
+        <span class="badge badge-pill badge-{{ ext.helpers.getStatusIcon(payment.status) }} ml-2"
+              data-label="{{ ext.helpers.getStatusLabelKey(payment.status) | i18n }}">
+        <span class="badge-content"
+              data-ng-bind="ext.helpers.getStatusLabelKey(payment.status) | i18n"
+              data-role="status">
+        </span>
+      </span>
+      </div>
+    </div>
+    <div class="modal-body"
+          data-ng-include="'#payment-details/' + ext.helpers.paymentTypeId[payment.paymentType] + '.html'">
+    </div>
+  </div>
+
+  <div class="modal-footer justify-content-between d-print-none">
+    <button class="btn btn-secondary" type="button" data-ng-click="ext.helpers.printModalWindow('.printable-content')">
+      <span data-i18n-key="details.button.print"></span>
+    </button>
+    <button class="btn btn-secondary" type="button" data-ng-click="ext.helpers.closeModalWindow(ext)">
+      <span data-i18n-key="details.button.close"></span>
+    </button>
+  </div>
+</script>
+
+<!-- Bulk approve, details modal window -->
+<ui-bb-modal-ng
+  data-size="'lg'"
+  data-is-open="ext.showBulkActionDetails"
+  data-animation="true"
+  data-on-close="ext.helpers.closeModalWindow(ext)">
+
+  <div
+    data-ng-init="$ctrl = ext.context;"
+    data-ng-include="'#bulk-approve-payments/details.html'">
+  </div>
+</ui-bb-modal-ng>
+
+<script type="text/ng-template" id="#bulk-approve-payments/details.html">
+  <div class="modal-header flex-column">
+    <h5 class="modal-title">
+      <i class="fa fa-exclamation-circle text-warning mr-1"></i>
+      {{
+        "bulk.approve.details.title" | i18n:{
+          count: $ctrl.state.bulkActionDetails.failCount,
+          status:  $ctrl.state.bulkActionDetails.approvalStatus.toLowerCase()
+        }
+      }}
+    </h5>
+  </div>
+  <div class="modal-body">
+    <p>
+      {{
+        "bulk.approve.details.msg" | i18n: {
+          status:  $ctrl.state.bulkActionDetails.approvalStatus.toLowerCase()
+        }
+      }}
+    </p>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th
+              data-ng-repeat="header in ext.helpers.headers"
+              class="{{ header.class }} border-top-0">
+              <span data-i18n-key="{{ ::header.label }}"></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr colspan="6"
+            data-ng-class-odd="'table-row-odd'"
+            data-ng-class-even="'table-row-even'"
+            data-ng-repeat="payment in $ctrl.state.bulkActionDetails.paymentOrders">
+            <td data-label="{{ 'header.status' | i18n }}" class="payment-status {{ payment.paymentOrder.status.toLowerCase() }} align-middle">
+              <span data-uib-tooltip="{{ ext.helpers.getStatusLabelKey(payment.paymentOrder.status) | i18n }}" data-tooltip-placement="top-left">
+                <span class="badge badge-pill badge-{{ ext.helpers.getStatusIcon(payment.paymentOrder.status) }}"
+                  data-label="{{ ext.helpers.getStatusLabelKey(payment.paymentOrder.status) | i18n }}">
+                  <span class="badge-content"
+                    data-ng-bind="ext.helpers.getStatusLabelKey(payment.paymentOrder.status, true) | i18n"
+                    data-role="status">
+                  </span>
+                </span>
+              </span>
+            </td>
+            <td data-label="{{ ext.helpers.headers[1].label | i18n }}">
+              <div class="table-small break-word"
+                data-ui-bb-highlight-text-ng="ext.helpers.getSearchQuery($ctrl)"
+                data-role="debit-counter-party-name">
+                {{ payment.paymentOrder.debtor.name }}
+              </div>
+              <div class="table-small break-word"
+                data-ui-bb-highlight-text-ng="ext.helpers.getSearchQuery($ctrl)"
+                data-ng-class="{'small text-muted': payment.paymentOrder.debtor.name}"
+                data-role="debit-counter-party-identification">
+                {{ ::ext.helpers.getAccountNumber(payment.paymentOrder.debtorAccount.identification) }}
+              </div>
+            </td>
+            <td data-label="{{ ext.helpers.headers[2].label | i18n }}">
+              <div class="table-small break-word"
+                data-ui-bb-highlight-text-ng="ext.helpers.getSearchQuery($ctrl)"
+                data-role="credit-counter-party-name">
+                {{ payment.paymentOrder.creditTransferTransactionInformation[0].creditor.name }}
+              </div>
+              <div class="table-small break-word"
+                data-ui-bb-highlight-text-ng="ext.helpers.getSearchQuery($ctrl)"
+                data-ng-class="{'small text-muted': payment.paymentOrder.creditTransferTransactionInformation[0].creditor.name}"
+                data-role="credit-counter-party-identification">
+                {{ ::ext.helpers.getAccountNumber(payment.paymentOrder.creditTransferTransactionInformation[0].creditorAccount.identification) }}
+              </div>
+            </td>
+            <td
+              data-label="{{ ext.helpers.headers[3].label | i18n }}"
+              data-ng-bind="::payment.paymentOrder.creditTransferTransactionInformation[0].instructedAmount.currencyCode"
+              data-role="currency"></td>
+            <td data-label="{{ ext.helpers.headers[4].label | i18n }}" class="text-right">
+              <div
+                class="table-small"
+                data-ng-bind="::payment.paymentOrder.creditTransferTransactionInformation[0].instructedAmount.amount | currency: ''"
+                data-role="amount">
+              </div>
+            </td>
+            <td data-label="{{ 'header.execution' | i18n }}" class="text-right">
+              <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ payment.paymentOrder.requestedExecutionDate | date: 'shortDate' }}">
+                <span class="text-muted" data-ng-bind="::payment.paymentOrder.requestedExecutionDate | date: 'shortDate'"
+                data-role="execution-date"></span>
+              </ui-bb-ellipsis-tooltip-ng>
+            </td>
+            <td>
+                <i
+                  data-uib-tooltip="{{ (payment.status.errors[0].key | i18n) || payment.status.errors[0].message }}"
+                  data-tooltip-placement="left"
+                  class="fa fa-exclamation-circle text-warning mr-1">
+                </i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" data-ng-click="ext.showBulkActionDetails = false;">
+      <span data-i18n-key="details.button.close"></span>
+    </button>
+  </div>
+</script>
+<!-- Bulk approve, details modal window :end -->
+
+<script type="text/ng-template" id="#payment-details/sepa.html">
+  <div class="row">
+    <div class="col-6">
+      <h6 data-i18n-key="header.debtor"></h6>
+      <div><span class="break-word" data-ng-bind="::payment.debtor.name"></span></div>
+      <div data-ng-if="ext.helpers.hasValue(payment.debtorAccount.identification.identification)">
+        <span data-ng-bind="::ext.helpers.getAccountNumber(payment.debtorAccount.identification)"></span>
+      </div>
+    </div>
+    <div class="col-6">
+      <h6 data-i18n-key="header.creditor"></h6>
+      <div><span class="break-word" data-ng-bind="::payment.transactionInformation.creditor.name"></span></div>
+      <div data-ng-if="ext.helpers.hasValue(payment.transactionInformation.creditorAccount.identification.identification)">
+        <span data-ng-bind="::ext.helpers.getAccountNumber(payment.transactionInformation.creditorAccount.identification)"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-6">
+      <h6 data-i18n-key="header.amount"></h6>
+      <div>
+        <ui-bus-format-amount-ng
+          class="amount-positive"
+          data-amount="::payment.transactionInformation.instructedAmount.amount"
+          data-currency="::payment.transactionInformation.instructedAmount.currencyCode">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-6" data-ng-if="payment.transactionInformation.endToEndIdentification">
+      <h6 data-i18n-key="details.transaction.id"></h6>
+      <div><span data-ng-bind="::payment.transactionInformation.endToEndIdentification"></span></div>
+    </div>
+    <div class="col-6" data-ng-if="payment.requestedExecutionDate">
+      <h6 data-i18n-key="header.execution"></h6>
+      <div><span data-ng-bind="::payment.requestedExecutionDate | date: 'shortDate' "></span></div>
+    </div>
+  </div>
+  <div class="row mt-3" data-ng-if="payment.transactionInformation.remittanceInformation.content">
+    <div class="col-12">
+      <h6 data-i18n-key="details.description"></h6>
+      <div><span class="break-word" data-ng-bind="::payment.transactionInformation.remittanceInformation.content"></span></div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#payment-details/domestic-wire.html">
+  <div class="row">
+    <div class="col-6">
+      <h6 data-i18n-key="header.debtor"></h6>
+      <div><span class="break-word" data-ng-bind="::payment.debtor.name"></span></div>
+      <div data-ng-if="ext.helpers.hasValue(payment.debtorAccount.identification.identification)">
+        <span data-ng-bind="::ext.helpers.formatAccountNumber(payment.debtorAccount.identification.identification)"></span>
+      </div>
+    </div>
+    <div class="col-6">
+      <h6 data-i18n-key="header.creditor"></h6>
+      <div><span class="break-word" data-ng-bind="::payment.transactionInformation.creditor.name"></span></div>
+      <div data-ng-if="ext.helpers.hasValue(payment.transactionInformation.creditorAccount.identification.identification)">
+        <span data-ng-bind="::ext.helpers.formatAccountNumber(payment.transactionInformation.creditorAccount.identification.identification)"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-6">
+      <h6 data-i18n-key="header.amount.you.pay"></h6>
+      <div>
+        <ui-bus-format-amount-ng
+          class="amount-positive"
+          data-amount="::payment.transactionInformation.instructedAmount.amount"
+          data-currency="::payment.transactionInformation.instructedAmount.currencyCode">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.getAddressText(payment.transactionInformation.creditor.postalAddress)">
+      <h6 data-i18n-key="header.to.address.label"></h6>
+      <div>
+        <span class="break-word" data-ng-bind="::ext.helpers.getAddressText(payment.transactionInformation.creditor.postalAddress)"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-6 offset-6" data-ng-if="ext.helpers.hasValue(payment.transactionInformation.remittanceInformation.content)">
+      <h6 data-i18n-key="header.to.message.label"></h6>
+      <div>
+        <span class="break-word" data-ng-bind="::payment.transactionInformation.remittanceInformation.content"></span>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-6" data-ng-if="payment.transactionInformation.endToEndIdentification">
+      <h6 data-i18n-key="header.payment.reference" ></h6>
+      <div><span data-ng-bind="::payment.transactionInformation.endToEndIdentification"></span></div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.hasValue(payment.requestedExecutionDate)">
+      <h6 data-i18n-key="header.execution"></h6>
+      <div><span data-ng-bind="::payment.requestedExecutionDate | date: 'shortDate' "></span></div>
+    </div>
+  </div>
+  <hr />
+  <div class="row mt-3">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 mb-3" data-ng-if="payment.transactionInformation.creditorBank.name">
+          <h6 data-i18n-key="header.to.bank.name"></h6>
+          <div><span class="break-word" data-ng-bind="::payment.transactionInformation.creditorBank.name"></span></div>
+        </div>
+        <div class="col-12 mb-3">
+          <h6 data-i18n-key="header.to.bank.routing.number"></h6>
+          <div><span data-ng-bind="::payment.transactionInformation.creditorBank.bankBranchCode"></span></div>
+        </div>
+        <div class="col-12 mb-3" data-ng-if="payment.transactionInformation.creditorBank.postalAddress">
+          <h6 data-i18n-key="header.to.address.label"></h6>
+          <div><span class="break-word" data-ng-bind="::ext.helpers.getAddressText(payment.transactionInformation.creditorBank.postalAddress)"></span></div>
+        </div>
+        <div class="col-12 mb-3" data-ng-if="payment.transactionInformation.messageToBank">
+          <h6 data-i18n-key="header.bank.message.label"></h6>
+          <div><span class="break-word" data-ng-bind="::payment.transactionInformation.messageToBank"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 mb-3" data-ng-if="payment.transactionInformation.correspondentBank.name">
+          <h6 data-i18n-key="header.to.bank.correspondent.name"></h6>
+          <div><span class="break-word" data-ng-bind="::payment.transactionInformation.correspondentBank.name"></span></div>
+        </div>
+
+        <div class="col-12 mb-3" data-ng-if="payment.transactionInformation.correspondentBank.bankBranchCode">
+          <h6 data-i18n-key="header.to.bank.correspondent.routing.number"></h6>
+          <div><span data-ng-bind="::payment.transactionInformation.correspondentBank.bankBranchCode"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#payment-details/international-wire.html">
+  <div class="row">
+    <div class="col-6">
+      <h6 data-i18n-key="header.debtor"></h6>
+      <div><span class="break-word" data-ng-bind="::payment.debtor.name"></span></div>
+      <div data-ng-if="ext.helpers.hasValue(payment.debtorAccount.identification.identification)">
+        <span data-ng-bind="::ext.helpers.getAccountNumber(payment.debtorAccount.identification)"></span>
+      </div>
+    </div>
+    <div class="col-6">
+      <h6 data-i18n-key="header.creditor"></h6>
+      <div><span class="break-word" data-ng-bind="::payment.transactionInformation.creditor.name"></span></div>
+      <div data-ng-if="ext.helpers.hasValue(payment.transactionInformation.creditorAccount.identification.identification)">
+        <span data-ng-bind="::ext.helpers.getAccountNumber(payment.transactionInformation.creditorAccount.identification)"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-6">
+      <h6>{{ (payment.transactionInformation.instructedAmount.currencyCode === 'USD' ?
+        'header.amount.you.pay' : 'header.amount.beneficiary.receives') | i18n }}</h6>
+      <div>
+        <ui-bus-format-amount-ng
+          class="amount-positive"
+          data-amount="::payment.transactionInformation.instructedAmount.amount"
+          data-currency="::payment.transactionInformation.instructedAmount.currencyCode">
+        </ui-bus-format-amount-ng>
+      </div>
+    </div>
+    <div class="col-6" data-ng-if="ext.helpers.getAddressText(payment.transactionInformation.creditor.postalAddress)">
+      <h6 data-i18n-key="header.to.address.label"></h6>
+      <div>
+        <span class="break-word" data-ng-bind="::ext.helpers.getAddressText(payment.transactionInformation.creditor.postalAddress)"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-6 offset-6" data-ng-if="payment.transactionInformation.remittanceInformation.content">
+      <h6 data-i18n-key="header.to.message.label"></h6>
+      <div>
+        <span class="break-word" data-ng-bind="::payment.transactionInformation.remittanceInformation.content"></span>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 mb-3" data-ng-if="payment.transactionInformation.endToEndIdentification">
+          <h6 data-i18n-key="header.payment.reference" ></h6>
+          <div><span data-ng-bind="::payment.transactionInformation.endToEndIdentification"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.hasValue(payment.requestedExecutionDate)">
+          <h6 data-i18n-key="header.execution"></h6>
+          <div><span data-ng-bind="::payment.requestedExecutionDate | date: 'shortDate' "></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row mt-3">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.hasValue(payment.transactionInformation.creditorBank.name)">
+          <h6 data-i18n-key="header.to.bank.name"></h6>
+          <div><span class="break-word" data-ng-bind="::payment.transactionInformation.creditorBank.name"></span></div>
+        </div>
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.hasValue(payment.transactionInformation.creditorBank.bic)">
+          <h6 data-i18n-key="header.to.bank.bic"></h6>
+          <div><span data-ng-bind="::payment.transactionInformation.creditorBank.bic"></span></div>
+        </div>
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.getAddressText(payment.transactionInformation.creditorBank.postalAddress)">
+          <h6 data-i18n-key="header.to.address.label"></h6>
+          <div><span class="break-word" data-ng-bind="::ext.helpers.getAddressText(payment.transactionInformation.creditorBank.postalAddress)"></span></div>
+        </div>
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.hasValue(payment.transactionInformation.messageToBank)">
+          <h6 data-i18n-key="header.bank.message.label"></h6>
+          <div><span class="break-word" data-ng-bind="::payment.transactionInformation.messageToBank"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.hasValue(payment.transactionInformation.correspondentBank.name)">
+          <h6 data-i18n-key="header.to.bank.correspondent.name"></h6>
+          <div><span class="break-word" data-ng-bind="::payment.transactionInformation.correspondentBank.name"></span></div>
+        </div>
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.hasValue(payment.transactionInformation.correspondentBank.bankBranchCode)">
+          <h6 data-i18n-key="header.to.bank.correspondent.routing.number"></h6>
+          <div><span data-ng-bind="::payment.transactionInformation.correspondentBank.bankBranchCode"></span></div>
+        </div>
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.hasValue(payment.transactionInformation.intermediaryBank)">
+          <h6 data-i18n-key="header.to.bank.intermediary.type"></h6>
+          <div><span data-ng-bind="::ext.helpers.getIntermediaryBankType(payment.transactionInformation.intermediaryBank)"></span></div>
+        </div>
+        <div class="col-12 mb-3" data-ng-if="ext.helpers.hasValue(payment.transactionInformation.intermediaryBank.name)">
+          <h6 data-i18n-key="header.bank.intermediary.name"></h6>
+          <div><span class="break-word" data-ng-bind="::payment.transactionInformation.intermediaryBank.name"></span></div>
+        </div>
+        <div class="col-12 mb-3">
+          <div data-ng-if="payment.transactionInformation.intermediaryBank.bankBranchCode &&
+            ext.helpers.getIntermediaryBankType(payment.transactionInformation.intermediaryBank) === 'ABA'">
+            <h6 data-i18n-key="header.bank.intermediary.routing.number"></h6>
+            <div><span data-ng-bind="::payment.transactionInformation.intermediaryBank.bankBranchCode"></span></div>
+          </div>
+          <div data-ng-if="payment.transactionInformation.intermediaryBank.bic &&
+            ext.helpers.getIntermediaryBankType(payment.transactionInformation.intermediaryBank) === 'SWIFT/BIC'">
+            <h6 data-i18n-key="header.bank.intermediary.bic"></h6>
+            <div><span data-ng-bind="::payment.transactionInformation.intermediaryBank.bic"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#payment/filter-form.html">
+  <div class="row">
+    <div class="col-lg-4 col-md-6">
+      <div class="form-group">
+        <h6 data-role="status-label" data-i18n-key="filter.label.status"></h6>
+        <div>
+          <select class="form-control"
+            data-ng-model="$ctrl.state.filterParams.status"
+            data-role="select-status">
+            <option value="" data-i18n-key="filter.label.all"></option>
+            <option
+              data-ng-repeat="status in ext.helpers.paymentStatusFiltersLookup()"
+              data-role="status-{{ status.name }}"
+              data-i18n-key="payment.status.{{ status.name }}"
+              value="{{ status.key }}">
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6" data-ng-if="false">
+      <h6 data-role="status-label" data-i18n-key="filter.label.fromAccount"></h6>
+      <div class="form-group">
+        <ui-bb-autocomplete-search-ng
+          data-ng-model="$ctrl.state.filterParams.fromAccount.name"
+          data-label-key="from-account"
+          data-load-result="$ctrl.getAccountsFrom(options)"
+          data-on-select="$ctrl.selectAccountFrom($model)"
+          data-on-clear="$ctrl.selectAccountFrom({})"
+          data-search-box-config="{
+            debounce: 500,
+            labels: { placeholder: ('filter.label.enterAccountName' | i18n) }
+          }"
+          data-match-template-url="#payment/autocomplete_match_custom.html"
+          data-messages="{
+            result: ('filter.label.oneResultFound' | i18n),
+            results: ('filter.label.resultsFound' | i18n),
+            noResults: ('filter.label.noResultsFound' | i18n)
+          }">
+        </ui-bb-autocomplete-search-ng>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <h6 data-role="amount-range-label" data-i18n-key="filter.label.amount"></h6>
+      <div class="row">
+        <div class="col-6 pr-1">
+          <div class="form-group">
+            <input
+              type="number"
+              min="0"
+              class="amount-range-start form-control"
+              data-ng-model="$ctrl.state.filterParams.amountFrom"
+              placeholder="{{ 'filter.label.min' | i18n }}"
+              title="{{ 'filter.label.min' | i18n }}"
+              data-role="amount-min"/>
+          </div>
+        </div>
+        <div class="col-6 pl-1">
+          <div class="form-group">
+            <input
+              type="number"
+              min="0"
+              class="amount-range-end form-control"
+              data-ng-model="$ctrl.state.filterParams.amountTo"
+              placeholder="{{ 'filter.label.max' | i18n }}"
+              title="{{ 'filter.label.max' | i18n }}"
+              data-role="amount-max"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6" data-ng-if="$ctrl.state.currencies">
+      <div class="form-group">
+        <h6 data-role="currency-label" data-i18n-key="filter.label.currency"></h6>
+        <div>
+          <select class="form-control"
+            data-ng-model="$ctrl.state.filterParams.currency"
+            data-role="select-currency">
+            <option value="" disabled data-i18n-key="filter.label.all"></option>
+            <option
+              data-ng-repeat="currency in $ctrl.state.currencies"
+              data-role="currency-{{ currency.name }}"
+              value="{{ currency.name }}">
+              {{ currency.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="form-group">
+        <h6 data-role="date-range-label" data-i18n-key="filter.label.executionDate"></h6>
+        <ui-bb-calendar-popup-ng
+          class="date-range-start"
+          data-config="ext.helpers.calendarPopupConfig"
+          data-date-range="$ctrl.state.filterParams.dateRange"
+          disabled="false"
+          data-role="from-date">
+        </ui-bb-calendar-popup-ng>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#payment/autocomplete_match_custom.html">
+  <div class="px-2 py-2">
+    <div
+      data-ng-bind-html="match.model.name"
+      data-role="filter-search-account-name"></div>
+    <div
+      class="text-muted"
+      data-ng-bind-html="match.model.identifier"
+      data-role="filter-search-account-identifier"></div>
+  </div>
+</script>

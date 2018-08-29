@@ -1,0 +1,62 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-create-new-ng@~1.5.2",
+        "scope": null,
+        "escapedName": "widget-bb-create-new-ng",
+        "name": "widget-bb-create-new-ng",
+        "rawSpec": "~1.5.2",
+        "spec": ">=1.5.2 <1.6.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-create-new-ng@>=1.5.2 <1.6.0",
+  "_id": "widget-bb-create-new-ng@1.5.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-create-new-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-create-new-ng@~1.5.2",
+    "scope": null,
+    "escapedName": "widget-bb-create-new-ng",
+    "name": "widget-bb-create-new-ng",
+    "rawSpec": "~1.5.2",
+    "spec": ">=1.5.2 <1.6.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-create-new-ng/-/widget-bb-create-new-ng-1.5.2.tgz",
+  "_shasum": "df1ffd3f52dde86b67b4e816010e73e58b0141e3",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-create-new-ng@~1.5.2",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-create-new-ng": "^2.4.2",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-permissions-ng": "^2.20.0",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-create-new-ng/-/widget-bb-create-new-ng-1.5.2.tgz",
+    "shasum": "df1ffd3f52dde86b67b4e816010e73e58b0141e3"
+  },
+  "main": "scripts/widget-bb-create-new-ng.js",
+  "name": "widget-bb-create-new-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.5.2"
+}

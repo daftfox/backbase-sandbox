@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-initiate-us-payment-ng@~1.45.11",
+        "scope": null,
+        "escapedName": "widget-bb-initiate-us-payment-ng",
+        "name": "widget-bb-initiate-us-payment-ng",
+        "rawSpec": "~1.45.11",
+        "spec": ">=1.45.11 <1.46.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-initiate-us-payment-ng@>=1.45.11 <1.46.0",
+  "_id": "widget-bb-initiate-us-payment-ng@1.45.20",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-initiate-us-payment-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-initiate-us-payment-ng@~1.45.11",
+    "scope": null,
+    "escapedName": "widget-bb-initiate-us-payment-ng",
+    "name": "widget-bb-initiate-us-payment-ng",
+    "rawSpec": "~1.45.11",
+    "spec": ">=1.45.11 <1.46.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-initiate-us-payment-ng/-/widget-bb-initiate-us-payment-ng-1.45.20.tgz",
+  "_shasum": "f1fc229a274e559104b828733efb27bcc0701790",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-initiate-us-payment-ng@~1.45.11",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bus-initiate-payment-us-domestic-wire-ng": "^2.36.20",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-extension-intents-ng": "^1.0.44",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-permissions-ng": "^2.20.0",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-state-container-ng": "^1.0.22",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-payment-orders-ng": "^1.119.20",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-initiate-us-payment-ng/-/widget-bb-initiate-us-payment-ng-1.45.20.tgz",
+    "shasum": "f1fc229a274e559104b828733efb27bcc0701790"
+  },
+  "main": "scripts/widget-bb-initiate-us-payment-ng.js",
+  "name": "widget-bb-initiate-us-payment-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.45.20"
+}

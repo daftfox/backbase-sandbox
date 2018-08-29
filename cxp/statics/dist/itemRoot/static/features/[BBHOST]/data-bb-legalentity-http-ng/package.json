@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-legalentity-http-ng@^1.4.1",
+        "scope": null,
+        "escapedName": "data-bb-legalentity-http-ng",
+        "name": "data-bb-legalentity-http-ng",
+        "rawSpec": "^1.4.1",
+        "spec": ">=1.4.1 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/model-bb-audit-query-ng"
+    ]
+  ],
+  "_from": "data-bb-legalentity-http-ng@>=1.4.1 <2.0.0",
+  "_id": "data-bb-legalentity-http-ng@1.4.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-legalentity-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-legalentity-http-ng@^1.4.1",
+    "scope": null,
+    "escapedName": "data-bb-legalentity-http-ng",
+    "name": "data-bb-legalentity-http-ng",
+    "rawSpec": "^1.4.1",
+    "spec": ">=1.4.1 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-bb-audit-query-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-legalentity-http-ng/-/data-bb-legalentity-http-ng-1.4.1.tgz",
+  "_shasum": "986ff1468db3a0e155f030565354c16d7f47b521",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-legalentity-http-ng@^1.4.1",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/model-bb-audit-query-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-legalentity-http-ng/-/data-bb-legalentity-http-ng-1.4.1.tgz",
+    "shasum": "986ff1468db3a0e155f030565354c16d7f47b521"
+  },
+  "main": "scripts/data-bb-legalentity-http-ng.js",
+  "name": "data-bb-legalentity-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.4.1"
+}

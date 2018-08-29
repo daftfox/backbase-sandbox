@@ -1,0 +1,59 @@
+<div data-ng-controller="PortfolioDetailsController as $ctrl">
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+    <ui-bb-empty-state-ng
+      data-message="state.errors.portfolioDetailsError.message | i18n"
+      data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.portfolioDetailsError).icon }} text-muted"
+      data-title="{{ ext.helpers.getError(state.errors.portfolioDetailsError).title | i18n }}"
+      data-subtitle="{{ ext.helpers.getError(state.errors.portfolioDetailsError).message | i18n }}"
+      data-is-empty="state.errors.portfolioDetailsError"
+    >
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+        data-title="{{ 'portfolios.empty.title' | i18n }}"
+        data-subtitle="{{ 'portfolios.empty.message' | i18n }}"
+        data-is-empty="!state.portfolioDetails.data"
+      >
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-6">
+              <h2
+                data-ng-bind="state.portfolioDetails.data.clientName"
+                data-role="portfolio-details-client-name"
+              ></h2>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-12 float-right text-muted">
+                  <small
+                    class="font-weight-bold float-right"
+                    data-i18n-key="portfolio.details.valuation"
+                  ></small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="float-right mt-1">
+                    <small
+                      class="text-muted"
+                      data-ng-bind="state.portfolioDetails.data.valuation.currencyCode"
+                      data-role="portfolio-details-valuation-currency-code"
+                    ></small>
+                    <ui-bb-format-amount-ng
+                      class="ml-2 h5"
+                      data-no-map
+                      data-amount="state.portfolioDetails.data.valuation.amount"
+                      data-role="portfolio-details-valuation"
+                    ></ui-bb-format-amount-ng>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ui-bb-empty-state-ng>
+    </ui-bb-empty-state-ng>
+  </ui-bb-loading-indicator-ng>
+</div>

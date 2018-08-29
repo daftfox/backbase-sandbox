@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "model-bb-user-ng@^1.7.1",
+        "scope": null,
+        "escapedName": "model-bb-user-ng",
+        "name": "model-bb-user-ng",
+        "rawSpec": "^1.7.1",
+        "spec": ">=1.7.1 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-bb-user-identity-details-ng"
+    ]
+  ],
+  "_from": "model-bb-user-ng@>=1.7.1 <2.0.0",
+  "_id": "model-bb-user-ng@1.9.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/model-bb-user-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "model-bb-user-ng@^1.7.1",
+    "scope": null,
+    "escapedName": "model-bb-user-ng",
+    "name": "model-bb-user-ng",
+    "rawSpec": "^1.7.1",
+    "spec": ">=1.7.1 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-user-identity-details-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-user-ng/-/model-bb-user-ng-1.9.1.tgz",
+  "_shasum": "5fd0b4684aaccebf36fc0e9d958d812ffa3d1487",
+  "_shrinkwrap": null,
+  "_spec": "model-bb-user-ng@^1.7.1",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-bb-user-identity-details-ng",
+  "dependencies": {
+    "data-bb-legalentity-http-ng": "^1.4.1",
+    "data-bb-user-http-ng": "^1.5.2",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-user-ng/-/model-bb-user-ng-1.9.1.tgz",
+    "shasum": "5fd0b4684aaccebf36fc0e9d958d812ffa3d1487"
+  },
+  "main": "scripts/model-bb-user-ng.js",
+  "name": "model-bb-user-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.9.1"
+}

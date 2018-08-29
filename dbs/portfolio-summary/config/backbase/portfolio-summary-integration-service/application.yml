@@ -1,0 +1,7 @@
+---
+### Live profile
+spring:
+  profiles: live
+
+logging:
+  config: ${backbase.config.dir}/portfolio-summary-integration-service/logback.xml

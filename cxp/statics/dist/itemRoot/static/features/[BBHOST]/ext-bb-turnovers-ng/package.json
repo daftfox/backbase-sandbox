@@ -1,0 +1,59 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-turnovers-ng@^2.15.0",
+        "scope": null,
+        "escapedName": "ext-bb-turnovers-ng",
+        "name": "ext-bb-turnovers-ng",
+        "rawSpec": "^2.15.0",
+        "spec": ">=2.15.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-turnovers-ng"
+    ]
+  ],
+  "_from": "ext-bb-turnovers-ng@>=2.15.0 <3.0.0",
+  "_id": "ext-bb-turnovers-ng@2.16.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-turnovers-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-turnovers-ng@^2.15.0",
+    "scope": null,
+    "escapedName": "ext-bb-turnovers-ng",
+    "name": "ext-bb-turnovers-ng",
+    "rawSpec": "^2.15.0",
+    "spec": ">=2.15.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-turnovers-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-turnovers-ng/-/ext-bb-turnovers-ng-2.16.0.tgz",
+  "_shasum": "ba6f11ccaddc1d1ba90a441a130a92d5115b6dda",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-turnovers-ng@^2.15.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-turnovers-ng",
+  "dependencies": {
+    "lib-bb-styles": "^1.17.0",
+    "ui-bb-chartjs-chart-bar-ng": "^2.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-buttons": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-turnovers-ng/-/ext-bb-turnovers-ng-2.16.0.tgz",
+    "shasum": "ba6f11ccaddc1d1ba90a441a130a92d5115b6dda"
+  },
+  "main": "scripts/ext-bb-turnovers-ng.js",
+  "name": "ext-bb-turnovers-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.16.0"
+}

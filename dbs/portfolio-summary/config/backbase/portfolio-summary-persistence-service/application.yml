@@ -1,0 +1,12 @@
+---
+### Live profile
+spring:
+  profiles: live
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name}
+    username: ${spring.datasource.username.portfolio-summary-persistence-service}
+    password: ${spring.datasource.password.portfolio-summary-persistence-service}
+    url: ${spring.datasource.url.portfolio-summary-persistence-service}
+
+logging:
+  config: ${backbase.config.dir}/portfolio-summary-persistence-service/logback.xml

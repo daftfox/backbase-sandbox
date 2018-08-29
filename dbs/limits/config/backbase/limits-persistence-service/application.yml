@@ -1,0 +1,13 @@
+---
+### Live profile
+spring:
+  profiles: live
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name}
+    username: ${spring.datasource.username.limits-persistence-service}
+    password: ${spring.datasource.password.limits-persistence-service}
+    url: ${spring.datasource.url.limits-persistence-service}
+
+logging:
+  config: ${backbase.config.dir}/limits-persistence-service/logback.xml
+

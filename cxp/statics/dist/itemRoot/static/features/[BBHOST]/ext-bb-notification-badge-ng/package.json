@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-notification-badge-ng@^3.7.2",
+        "scope": null,
+        "escapedName": "ext-bb-notification-badge-ng",
+        "name": "ext-bb-notification-badge-ng",
+        "rawSpec": "^3.7.2",
+        "spec": ">=3.7.2 <4.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-notification-badge-ng"
+    ]
+  ],
+  "_from": "ext-bb-notification-badge-ng@>=3.7.2 <4.0.0",
+  "_id": "ext-bb-notification-badge-ng@3.8.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-notification-badge-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-notification-badge-ng@^3.7.2",
+    "scope": null,
+    "escapedName": "ext-bb-notification-badge-ng",
+    "name": "ext-bb-notification-badge-ng",
+    "rawSpec": "^3.7.2",
+    "spec": ">=3.7.2 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-notification-badge-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-notification-badge-ng/-/ext-bb-notification-badge-ng-3.8.0.tgz",
+  "_shasum": "072002a5f8a6d1f3c78bade6c77b7afd6b2ef710",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-notification-badge-ng@^3.7.2",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-notification-badge-ng",
+  "dependencies": {
+    "ui-bb-confirm-ng": "^3.5.1",
+    "ui-bb-date-label-filter-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-load-more-ng": "^2.5.1",
+    "ui-bb-loading-overlay-ng": "^2.5.1",
+    "ui-bb-message-ng": "^2.8.0",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-popover": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-notification-badge-ng/-/ext-bb-notification-badge-ng-3.8.0.tgz",
+    "shasum": "072002a5f8a6d1f3c78bade6c77b7afd6b2ef710"
+  },
+  "main": "scripts/ext-bb-notification-badge-ng.js",
+  "name": "ext-bb-notification-badge-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.8.0"
+}

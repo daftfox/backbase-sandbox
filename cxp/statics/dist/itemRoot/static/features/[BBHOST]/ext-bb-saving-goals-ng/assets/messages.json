@@ -1,0 +1,39 @@
+{
+  "en-US": {
+    "saving.goals.state.loading": "Loading...",
+
+    "saving.goals.header.amount": "Saving goal",
+    "saving.goals.header.progress": "Saved",
+    "saving.goals.label.create": "New Saving Goal",
+    "saving.goals.label.update": "Edit Saving Goal",
+    "saving.goals.label.name": "Goal Name",
+    "saving.goals.label.amount": "Goal Amount",
+
+    "saving.goals.edit.action.label": "Edit",
+    "saving.goals.delete.action.label": "Delete",
+
+    "saving.goals.name.placeholder": "Type Goal Name",
+    "saving.goals.amount.placeholder": "00",
+    "saving.goals.form.button.create": "Create",
+    "saving.goals.form.button.edit": "Save",
+    "saving.goals.form.button.cancel": "Cancel",
+    "saving.goals.form.button.close": "Close",
+    "saving.goals.form.discard.confirmation.title": "Discard changes?",
+    "saving.goals.form.discard.confirmation.message": "Are you sure that you want to exit editing mode and discard all changes?",
+    "saving.goals.form.confirmation.button.label": "Discard",
+    "saving.goals.form.delete.confirmation.title": "Delete Saving Goal",
+    "saving.goals.form.delete.confirmation.message": "Are you sure that you would like to delete this saving goal?",
+
+    "saving.goals.model.create.success": "New Saving Goal created",
+    "saving.goals.model.update.success": "Saving Goal edited",
+    "saving.goals.model.delete.success": "Saving Goal {goalName} deleted",
+
+    "saving.goals.errors.name.empty": "Saving goal must have a name",
+    "saving.goals.errors.amount.insufficient": "Saving goal amount must be greater then 0",
+
+    "saving.goals.model.error.auth": "You are not authorized to perform this action",
+    "saving.goals.model.error.connectivity": "There was a connection problem, please try again",
+    "saving.goals.model.error.user": "There is a problem with the action you are trying to perform",
+    "saving.goals.model.error.unexpected": "An unexpected error occurred while performing this action"
+  }
+}

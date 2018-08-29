@@ -1,0 +1,176 @@
+<div data-ng-controller="FXRateTableDetailsController as $ctrl">
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+    <ui-bb-loading-overlay-ng data-is-loading="state.initialLoading">
+      <div class="py-3 mx-3 border-bottom">
+        <ui-bb-empty-state-ng
+          data-message="state.errors.currencyPairError.message | i18n"
+          data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+          data-title="{{ ext.helpers.getError(state.errors.currencyPairError).title | i18n }}"
+          data-subtitle="{{ ext.helpers.getError(state.errors.currencyPairError).message | i18n }}"
+          data-is-empty="state.errors.currencyPairError">
+          <ui-bb-empty-state-ng
+            data-icon-classes="fa fa-4x fa-exclamation-triangle text-muted"
+            data-title="{{ 'currency.empty.title' | i18n }}"
+            data-subtitle="{{ 'currency.empty.message.noCurrency' | i18n }}"
+            data-is-empty="!ext.helpers.isCurrencyPairAvailable(state.currencyPair)">
+
+            <div class="row align-items-center mb-2">
+              <div class="col">
+                <h5
+                  class="d-inline-block"
+                  data-role="currency-pair-key"
+                >
+                  {{ext.helpers.currencyPair().pairKey}}
+                </h5>
+                <button class="btn btn-link d-inline-block mb-1 pl-1">
+                  <i class="far fa-star"></i>
+                </button>
+                <div data-role="currency-pair-key-desc">
+                  <span>{{ext.helpers.currencyPair().pairKey}}</span>
+                  <span data-i18n-key="currency.desc"></span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <div
+                      class="mr-2 float-left"
+                      data-role="currency-bid">
+                      <span class="text-muted" data-i18n-key="currency.bid"></span>
+                      <h5>{{ext.helpers.currencyPair().bid}}</h5>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div
+                      class="mr-2 float-left"
+                      data-role="currency-ask"
+                    >
+                      <span class="text-muted" data-i18n-key="currency.ask"></span>
+                      <h5>{{ext.helpers.currencyPair().ask}}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <button
+                  class="btn btn-light"
+                  data-ng-click="$ctrl.viewTradeOrder(ext.helpers.currencyPair().pairKey)"
+                  data-ng-disabled="!ext.helpers.currencyPair().isBuyEnabled"
+                  data-i18n-key="currency.buy"
+                  data-role="currency-buy"
+                  aria-label="{{'currency.buy' | i18n}}"
+                ></button>
+                <button
+                  class="btn btn-light ml-2"
+                  data-ng-click="$ctrl.viewTradeOrder(ext.helpers.currencyPair().pairKey)"
+                  data-ng-disabled="!ext.helpers.currencyPair().isSellEnabled"
+                  data-i18n-key="currency.sell"
+                  data-role="currency-sell"
+                  aria-label="{{'currency.sell' | i18n}}"
+                ></button>
+              </div>
+            </div>
+            <div class="row align-items-center my-2">
+              <div
+                class="col"
+                data-role="currency-price"
+              >
+                <span class="text-muted" data-i18n-key="currency.price"></span>
+                <h5>{{ext.helpers.currencyPair().price}}</h5>
+              </div>
+              <div
+                class="col"
+                data-role="currency-change"
+              >
+                <span class="text-muted" data-i18n-key="currency.change"></span>
+                <div
+                  class="amount-negative"
+                  data-ng-class="ext.helpers.currencyPair().change > 0 ? 'text-success' : 'text-danger'"
+                  data-role="currency-pair-change"
+                >
+                  <span>
+                    {{ ext.helpers.showSign(ext.helpers.currencyPair().change) }}
+                  </span>
+                </div>
+              </div>
+              <div
+                class="col"
+                data-role="currency-pct-change"
+              >
+                <span class="text-muted" class="text-nowrap">
+                  <span>% </span>
+                  <span data-i18n-key="currency.change"></span>
+                </span>
+                <div
+                  class="amount-negative"
+                  data-ng-class="ext.helpers.currencyPair().changePct > 0 ? 'text-success' : 'text-danger'"
+                  data-role="currency-pair-changePct"
+                >
+                  <span>
+                    {{ ext.helpers.showSign(ext.helpers.currencyPair().changePct, 2) }}%
+                  </span>
+                </div>
+              </div>
+              <div
+                class="col"
+                data-role="currency-prev-close"
+              >
+                <span class="text-muted" data-i18n-key="currency.prevClose"></span>
+                <div>{{ext.helpers.currencyPair().prevClose}}</div>
+              </div>
+              <div
+                class="col"
+                data-role="currency-day-range-to"
+              >
+                <span class="text-muted" data-i18n-key="currency.dayRange"></span>
+                <div>{{ext.helpers.currencyPair().dayRangeFrom}} - {{ext.helpers.currencyPair().dayRangeTo}}</div>
+              </div>
+              <div
+                class="col"
+                data-role="currency-open"
+              >
+                <span class="text-muted" data-i18n-key="currency.open"></span>
+                <div>{{ext.helpers.currencyPair().open}}</div>
+              </div>
+            </div>
+            <div
+              class="row"
+              data-role="currency-52wk-range"
+            >
+              <div class="col-2 offset-4">
+                <span class="text-muted" data-i18n-key="currency.52WkRange"></span>
+                <div>{{ext.helpers.currencyPair().wkRangeFrom}} - {{ext.helpers.currencyPair().wkRangeTo}}</div>
+              </div>
+              <div
+                class="col"
+                data-role="currency-ytd-return"
+              >
+                <span class="text-muted" data-i18n-key="currency.ytdReturn"></span>
+                <span
+                  class="amount-negative"
+                  data-ng-class="ext.helpers.currencyPair().ytdReturn > 0 ? 'text-success' : 'text-danger'"
+                  data-role="currency-pair-ytdReturn"
+                >
+                  <div>
+                    {{ ext.helpers.showSign(ext.helpers.currencyPair().ytdReturn, 2) }}%
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div data-role="currency-market-state-timestamp">
+              <small class="text-muted">
+                <span data-i18n-key="currency.marketPrefix"></span>
+                <span>{{state.timestamp | date: "h:mm" : "GMT"}}</span>
+                <span data-i18n-key="currency.marketTimezone"></span>
+                <strong><span data-i18n-key="currency.market"></span></strong>
+              </small>
+            </div>
+          </ui-bb-empty-state-ng>
+        </ui-bb-empty-state-ng>
+      </div>
+    </ui-bb-loading-overlay-ng>
+  </ui-bb-loading-indicator-ng>
+</div>

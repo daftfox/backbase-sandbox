@@ -1,0 +1,115 @@
+<div data-ng-controller="ProductSummaryController as $ctrl"
+  class="ext-bb-product-summary-ng"
+  data-element-dimensions-ng="dimensions"
+>
+  <ui-bb-loading-indicator-ng data-is-loading="$ctrl.isProductLoading" data-loading-text="{{ 'message.loading' | i18n }}">
+  <ui-bb-substitute-error-ng data-message="ext.helpers.handleErrors($ctrl.productKindsError.message)">
+    <div data-ng-if="!$ctrl.productKinds.length" class="text-center">
+      <div class="h1 text-muted">
+        <i class="fa fa-5x fa-folder-open"></i>
+      </div>
+      <p>{{ ::'summary.no.products' | i18n }}</p>
+    </div>
+    <uib-accordion data-close-others="false"
+     data-template-url="#ext-bb-product-summary-ng/accordion-template.html"
+    >
+      <!-- Accordion Summary Section -->
+      <div class="d-flex justify-content-between mx-2 my-1">
+        <h3 class="float-left">{{::'label.title.my.products' | i18n }}</h3>
+        <div class="mb-0 text-right">
+          <button
+            class="btn btn-outline-primary"
+            data-i18n-key="button.label.manageAccounts"
+            data-ng-click="$ctrl.viewManageProducts()">
+          </button>
+        </div>
+      </div>
+      <div class="card mb-3" data-ng-if="$ctrl.total">
+        <div class="card-body">
+          <strong>
+            <div class="float-left">
+              {{ ::'label.totalBalance' | i18n }}
+              <i class="far fa-question-circle"
+                aria-hidden="true"
+                data-popover-trigger="click outsideClick"
+                data-uib-popover="{{ ::'label.totalBalanceInfo' | i18n }}"
+                data-popover-placement="bottom"
+              ></i>
+            </div>
+            <ui-bb-format-amount-ng
+              class="float-right"
+              data-amount="$ctrl.total.value"
+              data-currency="$ctrl.total.currency"
+              data-wrap>
+            </ui-bb-format-amount-ng>
+          </strong>
+        </div>
+      </div>
+
+      <!-- Accordion List Group Section -->
+      <uib-accordion-group data-ng-class="productKind.id"
+        data-ng-repeat="productKind in ext.helpers.filterVisibleProducts($ctrl.productKinds) track by productKind.id"
+        data-is-open="productKind.isOpen"
+        data-template-url="#ext-bb-product-summary-ng/group-template.html"
+        data-heading="{{productKind.name}}"
+        class="mb-3"
+      >
+        <uib-accordion-heading>
+          <div class="row d-flex align-items-center pr-5">
+            <div class="col-8 amount-positive d-flex align-items-center">
+              <i class="fa fa-2x fa-credit-card mr-3" aria-hidden="true"></i>
+              <strong>{{ productKind.name }}</strong>
+            </div>
+
+
+            <div class="col-4 text-right" data-ng-if="::productKind.aggregatedBalance">
+              <strong>
+                <ui-bb-format-amount-ng
+                data-amount="productKind.aggregatedBalance.value"
+                data-currency="productKind.aggregatedBalance.currency"
+                data-wrap
+                ></ui-bb-format-amount-ng>
+              </strong>
+            </div>
+            <i class="dropdown-arrow absolute-center-y fa list-group-item-text text-muted" aria-hidden="true" data-ng-class="productKind.isOpen ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+          </div>
+
+        </uib-accordion-heading>
+        <ui-bb-account-card-ng
+          data-ng-repeat="product in productKind.products | filter:{ visible: true} track by product.id"
+          data-ng-click="$ctrl.selectProduct(product)"
+          data-ng-class="$ctrl.productSelected.id === product.id ? 'active': ''"
+          class="selectable bb-account-card bb-account-card-large bb-account-card-open list-item"
+          data-account-name="ext.helpers.handleAlias(product.alias,product.name)"
+          data-account-number="product.identifier"
+          data-amount="product.primaryValue"
+          data-currency="product.currency"
+          data-additional-info="ext.helpers.buildAdditionalInfo(product)"
+        ></ui-bb-account-card-ng>
+      </uib-accordion-group>
+    </uib-accordion>
+  </ui-bb-substitute-error-ng>
+  </ui-bb-loading-indicator-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bb-product-summary-ng/accordion-template.html">
+  <div role="tablist" data-ng-transclude></div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-product-summary-ng/group-template.html">
+  <div class="card">
+    <div class="card-header" data-ng-click="toggleOpen()">
+      <div>
+        <div data-uib-accordion-transclude="heading">
+          <uib-accordion-header>
+            {{heading}}
+            <i class="fa" data-ng-class="isOpen ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
+          </uib-accordion-header>
+        </div>
+      </div>
+    </div>
+    <div class="card-collapse collapse" uib-collapse="!isOpen">
+      <div ng-transclude></div>
+    </div>
+  </div>
+</script>

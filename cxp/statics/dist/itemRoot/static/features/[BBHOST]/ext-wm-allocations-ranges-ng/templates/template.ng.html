@@ -1,0 +1,133 @@
+<div
+  data-ng-controller="AllocationsController as $ctrl"
+  data-role="allocations-ranges-wrapper"
+  class="ext-wm-allocations-ranges-ng pt-3"
+>
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+
+    <div class="clearfix px-3">
+      <h3 class="float-left mb-0" data-i18n-key="allocations.title"></h3>
+      <div
+        class="btn-group float-right"
+        data-role="allocations-switcher-group"
+        aria-label="{{ 'allocations.switcher' | i18n }}"
+      >
+        <button
+          class="btn btn-outline-secondary"
+          data-ng-class="{ 'active': ext.helpers.isClass() }"
+          data-ng-click="ext.helpers.clearOpenAllocations(); $ctrl.switchAllocations()"
+          type="button"
+          data-role="allocations-asset-class-button"
+          data-i18n-key="allocations.class"
+        ></button>
+        <button
+          class="btn btn-outline-secondary"
+          data-ng-class="{ 'active': !ext.helpers.isClass() }"
+          data-ng-click="ext.helpers.clearOpenAllocations(); $ctrl.switchAllocations()"
+          type="button"
+          data-role="allocations-currency-button"
+          data-i18n-key="allocations.currency"
+        ></button>
+      </div>
+    </div>
+
+    <hr class="my-4"/>
+
+    <ui-bb-empty-state-ng
+      data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.allocationsError).icon }} text-muted"
+      data-title="{{ ext.helpers.getError(state.errors.allocationsError).title | i18n }}"
+      data-subtitle="{{ ext.helpers.getError(state.errors.allocationsError).message | i18n }}"
+      data-is-empty="state.errors.allocationsError"
+    >
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+        data-title="{{ 'allocations.empty.title' | i18n }}"
+        data-subtitle="{{ 'allocations.empty.message' | i18n }}"
+        data-is-empty="!ext.helpers.isAllocationsAvailable()"
+      >
+
+        <div class="container-fluid">
+          <ui-wm-chartjs-ranges-ng
+            data-ranges-data="ext.helpers.getAllocationsRangesData()"
+            data-dots-data="ext.helpers.getAllocationsDotsData()"
+          >
+
+            <chart-spiderweb-tooltip data-role="allocations-ranges-chart-tooltip">
+              <div class="popover fade d-none bs-popover-right">
+                <div class="arrow m-0"></div>
+                <div class="popover-header">
+                  <i class="fa fa-circle mr-1 small popover-title-circle"></i>
+                  <small>
+                    <strong class="popover-title-content"></strong>
+                  </small>
+                </div>
+
+                <div class="popover-body">
+                  <table class="w-100">
+                    <tbody>
+                    <tr>
+                      <td class="pr-4">
+                        <small
+                          class="table-nowrap"
+                          data-i18n-key="chart.total"
+                        ></small>
+                      </td>
+                      <td
+                        class="text-right popover-percentage"
+                        data-role="popover-percentage"
+                      ></td>
+                    </tr>
+                    <tr>
+                      <td class="pr-4">
+                        <small
+                          class="popover-currency table-nowrap"
+                          data-role="label-currency"
+                        ></small>
+                        <small
+                          data-i18n-key="chart.valuation"
+                          data-role="label-valuation"
+                        ></small>
+                      </td>
+                      <td
+                        class="text-right popover-valuation"
+                        data-role="popover-valuation"
+                      ></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <hr class="m-0"/>
+
+                <div class="popover-body popover-ranges">
+                  <table class="w-100">
+                    <tr>
+                      <td class="pr-4">
+                        <small
+                          class="table-nowrap"
+                          data-role="label-recommended-range"
+                          data-i18n-key="chart.recommendedRange"
+                        ></small>
+                      </td>
+                      <td
+                        class="text-right popover-range"
+                        data-role="popover-range"
+                      ></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+            </chart-spiderweb-tooltip>
+
+          </ui-wm-chartjs-ranges-ng>
+        </div>
+
+      </ui-bb-empty-state-ng>
+    </ui-bb-empty-state-ng>
+
+  </ui-bb-loading-indicator-ng>
+</div>

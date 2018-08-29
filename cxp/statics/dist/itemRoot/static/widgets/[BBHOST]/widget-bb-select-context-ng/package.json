@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-select-context-ng@~1.7.2",
+        "scope": null,
+        "escapedName": "widget-bb-select-context-ng",
+        "name": "widget-bb-select-context-ng",
+        "rawSpec": "~1.7.2",
+        "spec": ">=1.7.2 <1.8.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-select-context-ng@>=1.7.2 <1.8.0",
+  "_id": "widget-bb-select-context-ng@1.7.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-select-context-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-select-context-ng@~1.7.2",
+    "scope": null,
+    "escapedName": "widget-bb-select-context-ng",
+    "name": "widget-bb-select-context-ng",
+    "rawSpec": "~1.7.2",
+    "spec": ">=1.7.2 <1.8.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-select-context-ng/-/widget-bb-select-context-ng-1.7.2.tgz",
+  "_shasum": "7a4c4b1c255e6304bd7906f471abedbf3391bbd9",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-select-context-ng@~1.7.2",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-select-context-ng": "^2.4.2",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-user-data-ng": "^1.4.2",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-select-context-ng": "^1.4.2",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-select-context-ng/-/widget-bb-select-context-ng-1.7.2.tgz",
+    "shasum": "7a4c4b1c255e6304bd7906f471abedbf3391bbd9"
+  },
+  "main": "scripts/widget-bb-select-context-ng.js",
+  "name": "widget-bb-select-context-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.7.2"
+}

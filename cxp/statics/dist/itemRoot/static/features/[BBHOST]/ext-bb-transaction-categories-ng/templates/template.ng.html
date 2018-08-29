@@ -1,0 +1,127 @@
+<div class="ext-bb-transaction-categories-ng" data-ng-controller="TransactionCategoriesController as $ctrl">
+  <ui-bb-loading-indicator-ng
+    data-is-loading="$ctrl.isLoading"
+    data-loading-text="{{ 'message.label.loading' | i18n }}">
+    <ui-bb-modal-ng
+      data-is-open="$ctrl.isModalOpen"
+      data-on-open="ext.helpers.initModal($ctrl)"
+      data-on-close="ext.helpers.onClose()">
+        <div data-ng-include="'#popup.html'"></div>
+    </ui-bb-modal-ng>
+  </ui-bb-loading-indicator-ng>
+</div>
+
+<script type="text/ng-template" id="#popup.html">
+  <div class="modal-narrow">
+    <div class="modal-header modal-header-with-subtitle row text-center mx-0"
+      data-ng-init="modal = ext.helpers.getModalData()">
+      <h4 class="modal-title col-12 mb-3" data-i18n-key="modal.title.change.category"></h4>
+      <ui-bb-format-amount-ng
+        class="h5 col-12"
+        data-ng-class="{ 'amount-regular-color': modal.transaction.creditDebitIndicator === 'DBIT' }"
+        data-amount="ext.helpers.getSignedAmount(modal.transaction)"
+        data-currency=""
+        data-no-map
+        data-wrap
+      >
+      </ui-bb-format-amount-ng>
+      <h6 class="modal-subtitle col-12" data-ng-bind="modal.transaction.counterPartyName"></h6>
+      <p class="text-muted col-12" data-ng-bind="modal.transaction.valueDate | date: 'longDate'"></p>
+    </div>
+    <div class="modal-body p-0">
+      <div data-ng-if="!$ctrl.isSubCategories"
+        class="bb-transaction-category-list bb-transaction-category-list-limited list-group clearfix"
+        >
+
+        <div data-ng-repeat="item in modal.items track by item.categoryId"
+          class="bb-transaction-category-list-item list-group-item list-group-item-action col-12 p-0 rounded-0"
+          data-ng-class="{
+            'active': item.categoryName === modal.newCategory,
+            'border-top-0': $first,
+            'border-bottom-0': $last
+          }"
+        >
+          <div class="radio row m-0">
+            <span class="bb-transaction-category-label col-12"
+              role="row"
+              data-ng-click="modal.newCategory = item.categoryName"
+            >
+              <input
+                class="bb-transaction-category-input"
+                type="radio"
+                data-ng-model="modal.newCategory"
+                data-ng-value="item.categoryName"
+                name="category"
+                tabindex="-1"
+              />
+              <span aria-hidden="true"
+                class="bb-transaction-category {{ ext.helpers.getCategoryIconClass(item.categoryName) }} fa-lg">
+              </span>
+              <span class="bb-transaction-category-name" data-ng-bind="item.categoryName"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- start of subcategories -->
+      <div data-ng-if="$ctrl.isSubCategories"
+        class="bb-transaction-category-list bb-transaction-category-list-limited"
+        >
+        <div data-ng-repeat="item in modal.items track by item.categoryId"
+          class="list-group row m-0"
+          data-ng-class="{
+            'border-top-0': $first,
+            'border-bottom-0': $last
+          }"
+        >
+          <div class="bb-transaction-category-parent-label col-12 py-3" role="row"
+          >
+            <span aria-hidden="true"
+              class="bb-transaction-category {{ ext.helpers.getCategoryIconClass(item.categoryName) }} fa-lg">
+            </span>
+            <span class="bb-transaction-category-name pl-2" data-ng-bind="item.categoryName"></span>
+          </div>
+
+          <div
+            data-ng-repeat="subcategory in item.subCategories track by subcategory.categoryId"
+            class="list-group-item list-group-item-action p-0 rounded-0 border-right-0 border-left-0"
+            data-ng-class="{
+              'active': subcategory.categoryName === modal.newCategory,
+              'border-top-0': $first,
+              'border-bottom-0': $last
+            }"
+          >
+            <div class="bb-transaction-category-label col-12 p-3"
+              role="row"
+              data-ng-click="modal.newCategory = subcategory.categoryName"
+            >
+              <input
+                class="bb-transaction-category-input"
+                type="radio"
+                data-ng-model="modal.newCategory"
+                data-ng-value="subcategory.categoryName"
+                name="category"
+                tabindex="-1"
+              />
+              <span class="bb-transaction-category-name pl-2" data-ng-bind="subcategory.categoryName"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of subcategories -->
+    </div>
+    <div class="modal-footer pt-3">
+      <button
+        class="btn btn-secondary"
+        data-ng-click="ext.helpers.cancel()"
+        data-i18n-key="modal.button.cancel">
+      </button>
+      <button
+        class="btn btn-primary"
+        data-ng-click="ext.helpers.submit()"
+        data-ng-disabled="$ctrl.selectedTransaction.category === modal.newCategory"
+        data-i18n-key="modal.button.save">
+      </button>
+    </div>
+  </div>
+</script>

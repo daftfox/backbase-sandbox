@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bbm-personal-profile-ng@^3.17.1",
+        "scope": null,
+        "escapedName": "ext-bbm-personal-profile-ng",
+        "name": "ext-bbm-personal-profile-ng",
+        "rawSpec": "^3.17.1",
+        "spec": ">=3.17.1 <4.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bbm-personal-profile-ng"
+    ]
+  ],
+  "_from": "ext-bbm-personal-profile-ng@>=3.17.1 <4.0.0",
+  "_id": "ext-bbm-personal-profile-ng@3.19.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bbm-personal-profile-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bbm-personal-profile-ng@^3.17.1",
+    "scope": null,
+    "escapedName": "ext-bbm-personal-profile-ng",
+    "name": "ext-bbm-personal-profile-ng",
+    "rawSpec": "^3.17.1",
+    "spec": ">=3.17.1 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bbm-personal-profile-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-personal-profile-ng/-/ext-bbm-personal-profile-ng-3.19.1.tgz",
+  "_shasum": "839e4288fa4506d9f15e5a400818d256e5f34ceb",
+  "_shrinkwrap": null,
+  "_spec": "ext-bbm-personal-profile-ng@^3.17.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bbm-personal-profile-ng",
+  "dependencies": {
+    "ui-bb-avatar-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-personal-profile-ng/-/ext-bbm-personal-profile-ng-3.19.1.tgz",
+    "shasum": "839e4288fa4506d9f15e5a400818d256e5f34ceb"
+  },
+  "main": "scripts/ext-bbm-personal-profile-ng.js",
+  "name": "ext-bbm-personal-profile-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.19.1"
+}

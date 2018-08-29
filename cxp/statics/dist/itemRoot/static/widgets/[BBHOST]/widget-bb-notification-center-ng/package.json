@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-notification-center-ng@~1.12.2",
+        "scope": null,
+        "escapedName": "widget-bb-notification-center-ng",
+        "name": "widget-bb-notification-center-ng",
+        "rawSpec": "~1.12.2",
+        "spec": ">=1.12.2 <1.13.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-notification-center-ng@>=1.12.2 <1.13.0",
+  "_id": "widget-bb-notification-center-ng@1.12.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-notification-center-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-notification-center-ng@~1.12.2",
+    "scope": null,
+    "escapedName": "widget-bb-notification-center-ng",
+    "name": "widget-bb-notification-center-ng",
+    "rawSpec": "~1.12.2",
+    "spec": ">=1.12.2 <1.13.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-notification-center-ng/-/widget-bb-notification-center-ng-1.12.2.tgz",
+  "_shasum": "0bd72b4820a378141db28f246aa3e15e4927b7db",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-notification-center-ng@~1.12.2",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-notification-center-ng": "^3.7.2",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-start": "^2.0.69",
+    "model-bb-notifications-ng": "^1.9.2",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-notification-center-ng/-/widget-bb-notification-center-ng-1.12.2.tgz",
+    "shasum": "0bd72b4820a378141db28f246aa3e15e4927b7db"
+  },
+  "main": "scripts/widget-bb-notification-center-ng.js",
+  "name": "widget-bb-notification-center-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.12.2"
+}

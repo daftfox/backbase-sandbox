@@ -1,0 +1,101 @@
+<div class="ext-bb-user-identity-search-ng">
+  <ng-include src="ext.helpers.template"></ng-include>
+</div>
+
+<script type="text/ng-template" id="#ext-bb-user-identity-search-ng/list.html">
+  <div class="ext-bb-user-search-ng card" data-ng-controller="UserIdentitySearchController as $ctrl">
+    <div class="card-header bg-transparent card-header-with-btn">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <ui-bb-search-box-ng
+            data-role="user-identity-search-search-input"
+            data-config="{
+              labels: {
+                title: ('find-user-identity.search.aria-label' | i18n),
+                placeholder: ('find-user-identity.search.placeholder' | i18n),
+                clear: ('find-user-identity.search-clear.aria-label' | i18n),
+                submit: ('find-user-identity.search-submit.aria-label' | i18n),
+              },
+              maxlength: 50
+            }"
+            data-on-submit="$ctrl.searchForPage(state, 0)"
+            data-ng-model="$ctrl.state.externalId"
+            data-is-loading="state.loadingUserIdentities"
+            data-on-clear="$ctrl.searchForPage(state, 0)">
+          </ui-bb-search-box-ng>
+        </div>
+      </div>
+    </div>
+
+    <div data-ng-if="!ext.helpers.hasItems && !state.loadingUserIdentities"
+      class="py-5">
+      <ui-bb-empty-state-ng
+        data-role="user-identity-search-results-empty-state"
+        data-icon-classes="fa fa-4x fas fa-search my-3"
+        data-title="{{ 'find-user-identity.results.not-found.title' | i18n }}"
+        data-is-empty="!ext.helpers.hasItems">
+      </ui-bb-empty-state-ng>
+    </div>
+
+    <ui-bb-loading-overlay-ng data-is-loading="state.loadingUserIdentities" data-ng-if="ext.helpers.hasItems" >
+      <div class="col-12 py-2" data-role="user-identity-search-results-total-text">
+        <strong><span data-role="user-identity-search-results-total-count">{{ state.totalCount | number }}</span> {{ 'find-user-identity.results.counter-suffix' | i18n }}</strong>
+      </div>
+
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover" data-role="user-identity-search-results-table">
+            <thead>
+              <tr>
+                <th scope="col" data-i18n-key="find-user-identity.results-table.username.heading"></th>
+                <th scope="col" data-i18n-key="find-user-identity.results-table.full-name.heading"></th>
+                <th scope="col" data-i18n-key="find-user-identity.results-table.legal-entity.heading"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-ng-repeat="user in ext.helpers.items track by $index"
+                role="button"
+                tabindex="0"
+                data-ng-click="$ctrl.goToUserIdentityDetails(user)">
+                <td data-label="{{ 'find-user-identity.results-table.username.heading' | i18n }}">
+                  <span class="d-flex" data-ng-bind="user.externalId"></span>
+                </td>
+                <td data-label="{{ 'find-user-identity.results-table.full-name.heading' | i18n }}">
+                  <span class="d-flex" data-ng-bind="user.fullName"></span>
+                </td>
+                <td data-label="{{ 'find-user-identity.results-table.legal-entity.heading' | i18n }}">
+                  <span class="d-flex" data-ng-bind="user.legalEntityName"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card-footer bg-transparent">
+        <div data-ng-if="ext.helpers.hasItems">
+          <ui-bb-paginator-ng
+            data-role="user-identity-search-results-pagination"
+            class="bb-pagination"
+            data-first-text="{{ ('find-user-identity.results-pager.first.aria-label' | i18n ) }}"
+            data-last-text="{{ ('find-user-identity.results-pager.last.aria-label' | i18n ) }}"
+            data-previous-text="{{ ('find-user-identity.results-pager.previous.aria-label' | i18n ) }}"
+            data-next-text="{{ ('find-user-identity.results-pager.next.aria-label' | i18n ) }}"
+            data-total-items="{{ state.totalCount }}"
+            data-items-per-page="{{ state.resultsPerPage }}"
+            data-max-nav-pages="{{ state.maxNavPages }}"
+            data-change-page="$ctrl.searchByPaginator(state, params)"
+            data-current-page="{{ state.currentPage }}">
+          </ui-bb-paginator-ng>
+        </div>
+      </div>
+    </ui-bb-loading-overlay-ng>
+  </div>
+</script>
+
+<style>
+  /* temporary fix due to reusable component containing styling inline */
+  .pagination {
+    margin: 1em 0 !important;
+  }
+</style>

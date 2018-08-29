@@ -1,0 +1,16 @@
+# A trigger defines the DBS event conditions that have to be matched in order to activate an action recipe.
+
+---
+-
+    id: "1"
+    eventId: "com.backbase.pandp.accounting.command.event.spec.v1.AccountBalanceChangedEvent"
+    selectors:
+      - path: "account.internalId"
+        type: "string"
+    filter:
+      - path: "balance.threshold"
+        type: "number"
+      - path: "balance.oldValue"
+        type: "number"
+      - path: "balance.newValue"
+        type: "number"

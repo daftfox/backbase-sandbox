@@ -1,0 +1,31 @@
+{
+    "en-US": {
+        "label.title": "Pending Payments",
+        "table.header.delivery-date": "Delivery Date",
+        "table.header.amount": "Amount",
+        "table.header.payment-type": "Payment Type",
+        "table.header.payment-details": "Payment Details",
+        "table.link.edit" : "Edit",
+        "table.link.delete" : "Delete",
+        "table.aria-label.menu" : "Menu",
+        "payment.payment-type.recurring" : "Recurring Bill Pay",
+        "payment.payment-type.one-time" : "One-time Bill Pay",
+        "payment.payment-details.from" : "From",
+
+        "delete-dialog.button.heading": "Delete payment",
+        "delete-dialog.button.bodyText": "Are you sure you want to delete this payment? This action can not be undone.",
+        "delete-dialog.button.confirm": "Delete",
+        "delete-dialog.button.cancel": "Cancel",
+
+        "tooltip.recurring-payment.edit.disabled": "Please note: It's not possible to edit recurring payments. You will need to delete and recreate the payment.",
+        "tooltip.recurring-payment.delete.disabled": "You cannot delete a payment which is in-process.",
+        "tooltip.payment.in-process.disabled": "You cannot edit or delete a payment which is in-process.",
+
+        "notifications.changes-saved": "Changes saved",
+
+        "billpay.model.error.auth": "Sorry, the request could not be completed at this time",
+        "billpay.model.error.connectivity": "Sorry, the request could not be completed at this time",
+        "billpay.model.error.user": "Sorry, the request could not be completed at this time",
+        "billpay.model.error.unexpected": "Sorry, the request could not be completed at this time"
+    }
+}

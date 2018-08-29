@@ -1,0 +1,297 @@
+<div class="ext-bb-action-recipes-ng" data-ng-controller="ActionRecipesController as $ctrl"
+  data-ng-init="views = $ctrl.static.View">
+  <ui-bb-loading-indicator-ng
+    data-is-loading="$ctrl.state.loading"
+    data-loading-text="{{ 'label.loading' | i18n }}">
+
+    <ui-bb-substitute-error-ng
+      data-message="$ctrl.state.error | i18n">
+      <ui-bb-empty-state-ng
+        data-icon-classes="fa fa-5x fa-lock text-muted"
+        data-title="{{ ('error.permission.title' | i18n) }}"
+        data-subtitle="{{ ('error.permission.subtitle' | i18n) }}"
+        data-is-empty="!$ctrl.isAllowedPrivilege('view')">
+        <div data-ng-include="'templates/' + $ctrl.currentView() + '.html'"></div>
+      </ui-bb-empty-state-ng>
+    </ui-bb-substitute-error-ng>
+  </ui-bb-loading-indicator-ng>
+</div>
+
+<!-- Recipe view -->
+<script type="text/ng-template" id="templates/create.html">
+  <div class="page-header pb-1 border-bottom mb-3 clearfix">
+    <h4 class="float-left my-1" data-i18n-key="label.recipe.new-action"></h4>
+  </div>
+  <div class="card" data-ng-if="$ctrl.state.newAction">
+    <div class="card-header bg-light">
+      <span class="card-title">{{:: $ctrl.state.newAction.specification.type | i18n}}</span>
+      <button type="button"
+        class="close push-right"
+        aria-label="{{:: 'label.recipe.new-action.close.aria-label' | i18n}}"
+        data-ng-click="$ctrl.onCreateDismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="card-body">
+      <div data-ng-include="'templates/recipe/' + $ctrl.state.newAction.recipeType + '.html'"></div>
+      <div data-ng-include="'templates/recipe/channels.html'"></div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary"
+        data-ng-disabled="!ext.helpers.isValid($ctrl.state.newAction)"
+        data-ng-click="$ctrl.onSave($ctrl.state.newAction)"
+        data-i18n-key="label.recipe.saveAndEnable">
+      </button>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="templates/edit.html">
+  <div class="page-header pb-1 border-bottom mb-3 d-flex justify-content-between align-items-center">
+    <h5 class="my-1" data-i18n-key="label.recipe.edit-action"></h5>
+  </div>
+  <div class="card" data-ng-if="$ctrl.state.newAction">
+    <div class="card-header">
+      <span class="card-title">{{:: $ctrl.state.newAction.specification.type | i18n}}</span>
+      <button type="button"
+        class="close push-right"
+        aria-label="{{:: 'label.recipe.edit-action.close.aria-label' | i18n}}"
+        data-ng-click="$ctrl.onCreateDismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="card-body">
+      <div data-ng-include="'templates/recipe/' + $ctrl.state.newAction.recipeType + '.html'"></div>
+      <div data-ng-include="'templates/recipe/channels.html'"></div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary"
+        data-ng-disabled="!ext.helpers.isValid($ctrl.state.newAction) || !$ctrl.isAllowedPrivilege('edit')"
+        data-ng-click="$ctrl.onSave($ctrl.state.newAction)"
+        data-i18n-key="label.recipe.save">
+      </button>
+      <button class="btn btn-danger"
+        data-ng-disabled="!$ctrl.isAllowedPrivilege('delete')"
+        data-ng-click="ext.deleteConfirmOpened = true"
+        data-i18n-key="label.edit.delete">
+      </button>
+    </div>
+  </div>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.deleteConfirmOpened"
+    data-labels="{
+      heading: ('label.recipe.confirm.remove-header' | i18n),
+      bodyText: ('label.recipe.confirm.remove-text' | i18n),
+      confirm: ('label.recipe.confirm.remove-btn' | i18n),
+      cancel: ( 'label.recipe.confirm.cancel-btn' | i18n)
+    }"
+    data-on-confirm="$ctrl.onRemove($ctrl.state.newAction)">
+  </ui-bb-confirm-ng>
+</script>
+
+<script type="text/ng-template" id="templates/recipe/credit-transaction.html">
+  <div data-ng-include="'templates/recipe/account.html'"></div>
+
+  <div class="row recipe-amount-select my-4">
+    <div class="col-12 col-md-6 form-group">
+      <label data-i18n-key="label.recipe.newTransaction.gte"></label>
+    </div>
+    <div class="col-12 col-md-6 form-group">
+      <ui-bb-currency-input-ng
+        class="d-flex"
+        data-max-length="6"
+        placeholder="0"
+        data-is-disabled="!$ctrl.isAllowedPrivilege($ctrl.state.view)"
+        data-ng-model="$ctrl.state.newAction.amount"
+        data-messages="{
+          'label.currency': ('ui-bb-currency-input-ng.label.currency' | i18n),
+          'label.amount': ('ui-bb-currency-input-ng.label.amount' | i18n),
+          'label.decimals': ('ui-bb-currency-input-ng.label.decimals' | i18n),
+        }">
+      </ui-bb-currency-input-ng>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="templates/recipe/low-balance.html">
+  <div data-ng-include="'templates/recipe/account.html'"></div>
+
+  <div class="row recipe-amount-select">
+    <div class="col-12 col-sm-6 form-group">
+      <label data-i18n-key="label.recipe.lowBalance.lt"></label>
+    </div>
+    <div class="col-12 col-sm-6 form-group">
+      <div class="col-12 input-group">
+        <ui-bb-currency-input-ng
+          data-max-length="6"
+          placeholder="0"
+          data-is-disabled="!$ctrl.isAllowedPrivilege($ctrl.state.view)"
+          data-ng-model="$ctrl.state.newAction.amount"
+          data-messages="{
+            'label.currency': ('ui-bb-currency-input-ng.label.currency' | i18n),
+            'label.amount': ('ui-bb-currency-input-ng.label.amount' | i18n),
+            'label.decimals': ('ui-bb-currency-input-ng.label.decimals' | i18n),
+          }">
+        </ui-bb-currency-input-ng>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="templates/recipe/account.html">
+  <div class="form-group recipe-acount-select">
+    <ui-bb-account-selector-ng
+      data-is-disabled="!$ctrl.isAllowedPrivilege($ctrl.state.view)"
+      data-ng-model="$ctrl.state.newAction.account"
+      data-accounts="$ctrl.state.accounts"
+      data-ng-change="$ctrl.changeAccount($item)"
+      aria-label="{{:: 'label.recipe.select-account' | i18n }}"
+      placeholder="{{:: 'label.recipe.select-account' | i18n }}"
+      required>
+    </ui-bb-account-selector-ng>
+  </div>
+</script>
+
+<!-- New recipe: Channel -->
+<script type="text/ng-template" id="templates/recipe/channels.html">
+  <div class="row recipe-channel-select">
+    <div class="col-12">
+      <div class="form-inline">
+        <div class="form-group">
+          <label>{{ 'label.recipe.notify-me' | i18n }}</label>
+          <label class="ml-3" data-ng-if="$ctrl.state.newAction.actions.channelsConfig.browser">
+            <input
+              data-ng-disabled="!$ctrl.isAllowedPrivilege($ctrl.state.view)"
+              class="mr-1"
+              type="checkbox"
+              data-ng-model="$ctrl.state.newAction.actions.browser.value">{{ 'label.recipe.notify.browser' | i18n }}
+          </label>
+          <label class="ml-3" data-ng-if="$ctrl.state.newAction.actions.channelsConfig.sms">
+            <input
+              data-ng-disabled="!$ctrl.isAllowedPrivilege($ctrl.state.view)"
+              class="mr-1"
+              type="checkbox"
+              data-ng-model="$ctrl.state.newAction.actions.sms.value">{{ 'label.recipe.notify.sms' | i18n }}
+          </label>
+          <label class="ml-3" data-ng-if="$ctrl.state.newAction.actions.channelsConfig.email">
+            <input
+              data-ng-disabled="!$ctrl.isAllowedPrivilege($ctrl.state.view)"
+              class="mr-1"
+              type="checkbox"
+              data-ng-model="$ctrl.state.newAction.actions.email.value">{{ 'label.recipe.notify.email' | i18n }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- New action: Specification selection -->
+<script type="text/ng-template" id="templates/select-specification.html">
+  <div class="page-header pb-1 border-bottom mb-3 clearfix">
+    <h4 class="float-left my-1" data-i18n-key="label.recipe.choose-action"></h4>
+    <button type="button"
+      class="btn btn-secondary float-right"
+      data-i18n-key="label.recipe.cancel"
+      data-ng-click="$ctrl.navigateTo(views.LIST)">
+    </button>
+  </div>
+  <div class="list-group specification-list">
+    <a href="#" class="list-group-item specification"
+      data-ng-repeat="specification in $ctrl.state.specifications track by specification.id"
+      data-ng-click="$ctrl.onCreate(specification)">
+      <span class="specification-name" data-i18n-key="{{ specification.type }}"></span>
+    </a>
+  </div>
+</script>
+
+<!-- Action list -->
+<script type="text/ng-template" id="templates/list.html">
+  <div class="page-header pb-1 border-bottom mb-3 clearfix">
+    <h4 class="float-left my-1" data-i18n-key="label.title"></h4>
+    <button type="button"
+      class="btn btn-primary float-right"
+      data-ng-disabled="!$ctrl.isAllowedPrivilege('create')"
+      data-i18n-key="label.new-action"
+      aria-label="{{:: 'label.new-action' | i18n }}"
+      data-ng-click="$ctrl.navigateTo(views.SPECIFICATIONS)">
+    </button>
+  </div>
+  <div class="text-center" data-ng-if="$ctrl.state.recipes.data.length === 0">
+    <h5 data-i18n-key="label.list.empty"></h5>
+  </div>
+  <div class="list-group recipe-list" data-ng-if="$ctrl.state.recipes.data.length > 0">
+    <a href="javascript:void(0)" class="list-group-item recipe"
+      data-ng-repeat="recipe in $ctrl.state.recipes.data track by $index"
+      data-ng-click="$ctrl.onEdit(recipe)">
+      <div class="row">
+        <div class="col-10">
+          <div data-ng-include="'templates/list-item/' + recipe.recipeType + '.html'"></div>
+        </div>
+        <div class="col-2">
+          <ui-bb-switcher-ng class="float-right"
+            data-on-change="!recipe.active ? $ctrl.onActivate(recipe) : $ctrl.onDeactivate(recipe)"
+            data-switcher="recipe.active"
+            data-size="small"
+            data-disabled="recipe.changingStatus || !$ctrl.isAllowedPrivilege('execute')"
+            aria-label="{{:: 'label.recipe.activation.aria-label' | i18n }}">
+          </ui-bb-switcher-ng>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="my-2">
+    <ui-bb-load-more-ng
+      data-ng-show="$ctrl.state.recipes.hasMore"
+      data-label="{{ 'label.load.more' | i18n }}"
+      data-on-load-more="$ctrl.loadMore(done)">
+    </ui-bb-load-more-ng>
+  </div>
+</script>
+
+<script type="text/ng-template" id="templates/list-item/low-balance.html">
+  <div>
+    <span data-i18n-key="label.notify-me"></span>
+    <span class="specification-name"><b>{{ 'label.list.recipe.type.accountBalance' | i18n }}</b></span>
+    <span class="trigger-condition">{{ 'label.list.recipe.condition.less' | i18n }}</span>
+    <span class="trigger-value">
+      <b>
+        <ui-bb-format-amount-ng
+          data-amount="recipe.amount.value"
+          data-currency="recipe.amount.currency">
+        </ui-bb-format-amount-ng>
+      </b>
+    </span>
+  </div>
+  <div>
+    <span class="text-muted account-number">
+      {{ recipe.account.kind | i18n }}
+      &nbsp;-&nbsp;
+      {{ recipe.account.identifier || recipe.account.name }}
+    </span>
+  </div>
+</script>
+
+<script type="text/ng-template" id="templates/list-item/credit-transaction.html">
+  <div>
+    <span data-i18n-key="label.notify-me"></span>
+    <span class="specification-name"><b>{{ 'label.list.recipe.type.newTransaction' | i18n }}</b></span>
+    <span class="trigger-condition">{{ 'label.list.recipe.condition.moreOrEqual' | i18n }}</span>
+    <span class="trigger-value">
+      <b>
+        <ui-bb-format-amount-ng
+          data-amount="recipe.amount.value"
+          data-currency="recipe.amount.currency">
+        </ui-bb-format-amount-ng>
+      </b>
+    </span>
+  </div>
+  <div>
+    <span class="text-muted account-number">
+      {{ recipe.account.kind | i18n }}
+      &nbsp;-&nbsp;
+      {{ recipe.account.identifier || recipe.account.name }}
+    </span>
+  </div>
+</script>

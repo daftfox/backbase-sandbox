@@ -1,0 +1,97 @@
+<ehcache:config
+        xmlns:ehcache="http://www.ehcache.org/v3"
+        xmlns:jcache="http://www.ehcache.org/v3/jsr107">
+
+    <ehcache:service>
+        <jcache:defaults default-template="defaultCache" />
+    </ehcache:service>
+    <ehcache:persistence directory="${java.io.tmpdir}/foundation"/>
+
+    <ehcache:cache-template name="defaultCache">
+        <ehcache:expiry>
+            <ehcache:tti>300</ehcache:tti>
+        </ehcache:expiry>
+        <ehcache:heap>1500</ehcache:heap>
+    </ehcache:cache-template>
+
+    <ehcache:cache alias="widgetCache" uses-template="defaultCache"/>
+
+    <ehcache:cache alias="gModelCache" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:tti>300</ehcache:tti>
+        </ehcache:expiry>
+        <ehcache:heap>1000</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="webCache" uses-template="defaultCache">
+        <ehcache:resources>
+            <ehcache:heap>1000</ehcache:heap>
+            <ehcache:disk unit="GB">1</ehcache:disk>
+        </ehcache:resources>
+    </ehcache:cache>
+
+    <ehcache:cache alias="contentTemplateCache" uses-template="defaultCache">
+        <ehcache:heap>5000</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="widgetChromeStaticCache" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:tti>604800</ehcache:tti>
+        </ehcache:expiry>
+        <ehcache:heap>10</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="retrievedWidgetCache" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:tti>604800</ehcache:tti>
+        </ehcache:expiry>
+        <ehcache:heap>200</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="globalModelCache" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:tti>3600</ehcache:tti>
+        </ehcache:expiry>
+        <ehcache:heap>10000</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="urlLevelCache" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:tti>3600</ehcache:tti>
+        </ehcache:expiry>
+        <ehcache:resources>
+            <ehcache:heap>1000</ehcache:heap>
+            <ehcache:disk unit="GB">1</ehcache:disk>
+        </ehcache:resources>
+    </ehcache:cache>
+
+    <ehcache:cache alias="springAclCacheRegion" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:tti>1200</ehcache:tti>
+        </ehcache:expiry>
+        <ehcache:heap>50000</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="springAclSidCacheRegion" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:tti>604800</ehcache:tti>
+        </ehcache:expiry>
+        <ehcache:heap>100</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="serverSideClosureCache" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:none/>
+        </ehcache:expiry>
+        <ehcache:heap>10000</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="resourceCache" uses-template="defaultCache">
+        <ehcache:expiry>
+            <ehcache:none/>
+        </ehcache:expiry>
+        <ehcache:heap>10000</ehcache:heap>
+    </ehcache:cache>
+
+</ehcache:config>
+

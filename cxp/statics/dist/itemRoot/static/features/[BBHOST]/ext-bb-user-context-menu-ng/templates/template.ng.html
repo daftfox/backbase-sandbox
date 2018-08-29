@@ -1,0 +1,139 @@
+<div class="ext-bb-user-context-menu-ng" data-ng-controller="UserContextMenuController as $ctrl">
+  <div data-ng-if="$ctrl.contextNames.contract && $ctrl.contextNames.company"
+    data-uib-popover-template="'#ext-bb-user-context-menu-ng/popover-template.html'"
+    data-popover-placement="auto bottom-right"
+    data-popover-is-open="$ctrl.state.popover.isOpen"
+    data-popover-trigger="outsideClick"
+    data-popover-class="notification-badge-popover popover-md"
+    data-ng-click="$ctrl.togglePopover()">
+    <i class="fa fa-chevron-down pt-1 float-right" aria-hidden="true"></i>
+    <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ $ctrl.contextNames.company }}">
+      <span data-ng-bind="$ctrl.contextNames.company"></span>
+    </ui-bb-ellipsis-tooltip-ng>
+  </div>
+
+  <ui-bb-modal-ng data-is-open="ext.open">
+    <div data-ng-include="'#ext-bb-user-context-menu-ng/switch-context.html'"></div>
+  </ui-bb-modal-ng>
+
+  <script type="text/ng-template" id="#ext-bb-user-context-menu-ng/popover-template.html">
+    <div class="card p-0">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <a href="javascript:void(0)"
+              class="float-right"
+              data-ng-if="$ctrl.state.showServiceAgreements || !$ctrl.state.disableLegalEntities"
+              data-ng-click="ext.helpers.openContextForm(ext, $ctrl)"
+              data-i18n-key="menu.label.change"></a>
+            <small data-ng-bind="$ctrl.contextNames.company"></small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" data-ng-bind="$ctrl.contextNames.contract"></div>
+        </div>
+      </div>
+      <div class="card-body border-top">
+        <div class="row">
+          <div class="col-md-12 text-muted"
+            data-ng-if="$ctrl.currentUser.name"
+            data-i18n-key="menu.label.loggedInAs"
+            data-i18n-data="{ username: $ctrl.currentUser.name }"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a data-ng-if="$ctrl.userDataUrl"
+              href="{{ $ctrl.userDataUrl }}"
+              class="user-action"
+              title="{{ 'menu.title.customLink' | i18n }}"
+              data-i18n-key="menu.label.manageProfile"></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <span data-ng-click="$ctrl.logout()"
+              class="user-action"
+              title="{{ 'logout.label.logout' | i18n }}"
+              data-i18n-key="menu.label.logout"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="#ext-bb-user-context-menu-ng/switch-context.html">
+    <div class="modal-header">
+      <h5 class="modal-title" data-i18n-key="context.label.changeContext"></h5>
+    </div>
+    <div class="modal-body clearfix">
+      <form name="userContextForm"
+        data-role="user-context-form"
+        data-ng-submit="$ctrl.changeUserContext($ctrl.state.serviceAgreementId, $ctrl.state.legalEntityId)">
+        <div data-ng-if="$ctrl.fetchError || $ctrl.selectContextError" class="text-danger">
+          <div data-ng-if="$ctrl.fetchError" data-i18n-key="context.error.failedFetchData"></div>
+          <div data-ng-if="$ctrl.selectContextError" data-i18n-key="context.error.invalidContext"></div>
+        </div>
+        <div class="form-group"
+          data-ng-if="$ctrl.currentUser.name"
+          data-i18n-key="context.label.changeOneOfOptions"
+          data-i18n-data="{ username: $ctrl.currentUser.name }"></div>
+        <div class="form-group" data-ng-show="$ctrl.state.showServiceAgreements"
+          data-ng-init="$ctrl.state.serviceAgreementName = $ctrl.contextNames.contract">
+          <label data-i18n-key="context.label.selectServiceAgreement"></label>
+          <ui-bb-autocomplete-search-ng
+            data-ng-model="$ctrl.state.serviceAgreementName"
+            data-label-key="name"
+            data-load-result="$ctrl.getServiceAgreements(options)"
+            data-on-select="$ctrl.selectServiceAgreement($model)"
+            data-on-clear="$ctrl.resetServiceAgreements(true)"
+            search-box-config="{
+              debounce: $ctrl.debounce,
+              labels: { placeholder: ('context.placeholder.enterContractName' | i18n) }
+            }"
+            data-messages="{
+              result: ('context.label.oneResultFound' | i18n),
+              results: ('context.label.resultsFound' | i18n),
+              noResults: ('context.label.noResultsFound' | i18n)
+            }">
+          </ui-bb-autocomplete-search-ng>
+        </div>
+        <div class="form-group" data-ng-init="$ctrl.state.legalEntityName = $ctrl.contextNames.company">
+          <label data-i18n-key="context.label.selectLegalEntity"></label>
+          <ui-bb-autocomplete-search-ng
+            data-ng-model="$ctrl.state.legalEntityName"
+            data-label-key="name"
+            data-load-result="$ctrl.getLegalEntities($ctrl.state.serviceAgreementId, options)"
+            data-on-select="$ctrl.selectLegalEntity($model)"
+            data-on-clear="$ctrl.state.legalEntityId = null"
+            data-disabled="$ctrl.state.disableLegalEntities"
+            search-box-config="{
+              debounce: $ctrl.debounce,
+              labels: { placeholder: ('context.placeholder.enterCompanyName' | i18n) }
+            }"
+            data-messages="{
+              result: ('context.label.oneResultFound' | i18n),
+              results: ('context.label.resultsFound' | i18n),
+              noResults: ('context.label.noResultsFound' | i18n)
+            }">
+          </ui-bb-autocomplete-search-ng>
+        </div>
+        <div class="form-group float-right">
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-secondary"
+                data-i18n-key="context.button.cancel"
+                aria-label="{{:: 'context.button.cancel' | i18n }}"
+                data-ng-click="ext.helpers.dismissContext()">
+              </button>
+              <button type="submit" class="btn btn-primary"
+                data-i18n-key="context.button.change"
+                data-ng-disabled="!ext.helpers.isContextSelected($ctrl.state)"
+                aria-label="{{:: 'context.button.change' | i18n }}">
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </script>
+</div>

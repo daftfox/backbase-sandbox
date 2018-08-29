@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-language-switch-ng@^2.4.2",
+        "scope": null,
+        "escapedName": "ext-bb-language-switch-ng",
+        "name": "ext-bb-language-switch-ng",
+        "rawSpec": "^2.4.2",
+        "spec": ">=2.4.2 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-bb-language-switch-ng"
+    ]
+  ],
+  "_from": "ext-bb-language-switch-ng@>=2.4.2 <3.0.0",
+  "_id": "ext-bb-language-switch-ng@2.5.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-language-switch-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-language-switch-ng@^2.4.2",
+    "scope": null,
+    "escapedName": "ext-bb-language-switch-ng",
+    "name": "ext-bb-language-switch-ng",
+    "rawSpec": "^2.4.2",
+    "spec": ">=2.4.2 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-language-switch-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-language-switch-ng/-/ext-bb-language-switch-ng-2.5.0.tgz",
+  "_shasum": "7c1c70da33b6a44122174f922a95e656b4c5e0eb",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-language-switch-ng@^2.4.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-bb-language-switch-ng",
+  "dependencies": {
+    "ui-bb-dropdown-select-ng": "^2.5.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-language-switch-ng/-/ext-bb-language-switch-ng-2.5.0.tgz",
+    "shasum": "7c1c70da33b6a44122174f922a95e656b4c5e0eb"
+  },
+  "main": "scripts/ext-bb-language-switch-ng.js",
+  "name": "ext-bb-language-switch-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.0"
+}

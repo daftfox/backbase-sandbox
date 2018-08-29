@@ -1,0 +1,56 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-autocomplete-search-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-autocomplete-search-ng",
+        "name": "ui-bb-autocomplete-search-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-autocomplete-search-ng@2.5.1",
+  "_id": "ui-bb-autocomplete-search-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-autocomplete-search-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-autocomplete-search-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-autocomplete-search-ng",
+    "name": "ui-bb-autocomplete-search-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-autocomplete-search-ng/-/ui-bb-autocomplete-search-ng-2.5.1.tgz",
+  "_shasum": "26d4476c1f724f3b3c0ebde6d456ca9993cf414e",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-autocomplete-search-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "ui-bb-list-ng": "^2.5.1",
+    "ui-bb-search-box-ng": "^2.5.1",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-angular-sanitize": "1.6.7-bb.1",
+    "vendor-bb-uib-typeahead": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-autocomplete-search-ng/-/ui-bb-autocomplete-search-ng-2.5.1.tgz",
+    "shasum": "26d4476c1f724f3b3c0ebde6d456ca9993cf414e"
+  },
+  "main": "scripts/ui-bb-autocomplete-search-ng.js",
+  "name": "ui-bb-autocomplete-search-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

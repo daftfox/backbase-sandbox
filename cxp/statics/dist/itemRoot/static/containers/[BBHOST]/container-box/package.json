@@ -1,0 +1,63 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "container-box@~2.0.3",
+        "scope": null,
+        "escapedName": "container-box",
+        "name": "container-box",
+        "rawSpec": "~2.0.3",
+        "spec": ">=2.0.3 <2.1.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist"
+    ]
+  ],
+  "_from": "container-box@>=2.0.3 <2.1.0",
+  "_id": "container-box@2.0.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-box",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "container-box@~2.0.3",
+    "scope": null,
+    "escapedName": "container-box",
+    "name": "container-box",
+    "rawSpec": "~2.0.3",
+    "spec": ">=2.0.3 <2.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/container-box/-/container-box-2.0.3.tgz",
+  "_shasum": "1e57a6483cb6f4ea631301b0446c32ae1a36693e",
+  "_shrinkwrap": null,
+  "_spec": "container-box@~2.0.3",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist",
+  "author": "",
+  "dependencies": {
+    "template-box": "^2.0.0"
+  },
+  "description": "Simple wrapping container.",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/container-box/-/container-box-2.0.3.tgz",
+    "shasum": "1e57a6483cb6f4ea631301b0446c32ae1a36693e"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "container-box",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/container-box.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.0.3"
+}

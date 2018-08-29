@@ -1,0 +1,11 @@
+{
+  "en-US": {
+    "login.label.greeting": "Hi",
+    "login.label.username": "Username",
+    "login.label.password": "Password",
+    "login.button": "Log in",
+    "login.error.invalidCredentials": "The Username or Password you entered is invalid",
+    "login.error.errorOnServiceLevel" : "An error has occurred while accessing the service. Please contact your system administrator.",
+    "login.error.unableToConnect": "Unable to connect to server"
+   }
+}

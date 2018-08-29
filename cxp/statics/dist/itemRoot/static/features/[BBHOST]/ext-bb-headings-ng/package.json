@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-headings-ng@~1.7.1",
+        "scope": null,
+        "escapedName": "ext-bb-headings-ng",
+        "name": "ext-bb-headings-ng",
+        "rawSpec": "~1.7.1",
+        "spec": ">=1.7.1 <1.8.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bb-headings-ng@>=1.7.1 <1.8.0",
+  "_id": "ext-bb-headings-ng@1.7.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-headings-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-headings-ng@~1.7.1",
+    "scope": null,
+    "escapedName": "ext-bb-headings-ng",
+    "name": "ext-bb-headings-ng",
+    "rawSpec": "~1.7.1",
+    "spec": ">=1.7.1 <1.8.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-headings-ng/-/ext-bb-headings-ng-1.7.1.tgz",
+  "_shasum": "f9c288070dd3f4a8236f87767214a8bdccec2954",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-headings-ng@~1.7.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "ui-bb-header-ng": "~1.15.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-headings-ng/-/ext-bb-headings-ng-1.7.1.tgz",
+    "shasum": "f9c288070dd3f4a8236f87767214a8bdccec2954"
+  },
+  "main": "scripts/ext-bb-headings-ng.js",
+  "name": "ext-bb-headings-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.7.1"
+}

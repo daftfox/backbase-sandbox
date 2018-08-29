@@ -1,0 +1,263 @@
+<div data-ng-controller="TransactionsController as $ctrl" class="ext-bb-transactions-ng">
+  <ui-bb-empty-state-ng
+    data-icon-classes="fa fa-5x fa-list text-muted"
+    data-title="{{ 'transactions.no.results.title' | i18n }}"
+    data-subtitle="{{ 'transactions.no.results.subtitle' | i18n }}"
+    data-is-empty="ext.helpers.showNoTransactions($ctrl)"
+  >
+    <ui-bb-transaction-search-filter-ng
+      data-filters="$ctrl.filters"
+      data-on-filter="$ctrl.applySearchFilter(params)"
+      data-button-labels="{
+          main: ('filter.button.main' | i18n),
+          apply: ('filter.button.apply' | i18n),
+          closePanel: ('filter.button.closePanel' | i18n),
+          clearAll: ('filter.button.clearAll' | i18n),
+        }"
+      data-field-labels="{
+          search: ('filter.label.search' | i18n),
+          transaction: ('filter.label.creditDebitIndicator' | i18n),
+          credit: ('filter.label.credit' | i18n),
+          debit: ('filter.label.debit' | i18n),
+          dateRange: ('filter.label.dateRange' | i18n),
+          amountRange: ('filter.label.amountRange' | i18n),
+          amountFrom: ('filter.label.amountFrom' | i18n),
+          amountTo: ('filter.label.amountTo' | i18n),
+          billed: ('filter.label.billed' | i18n),
+          unbilled: ('filter.label.unbilled' | i18n),
+          pending: ('filter.label.pending' | i18n),
+          billingStatus: ('filter.label.title.billing.status' | i18n),
+          category: ('filter.label.category' | i18n),
+          checkSerialNumberRange: ('filter.label.checkSerialNumberRange' | i18n),
+          checkSerialNumberFrom: ('filter.label.checkSerialNumberFrom' | i18n),
+          checkSerialNumberTo: ('filter.label.checkSerialNumberTo' | i18n),
+        }"
+      data-categories="$ctrl.categories"
+      data-transactions-enum-values="$ctrl.transactionsEnumValues">
+    </ui-bb-transaction-search-filter-ng>
+    <div class="table-controls p-3 absolute-top-right">
+      <div class="btn-group" uib-dropdown data-keyboard-nav>
+        <button uib-dropdown-toggle class="btn btn-secondary" data-role="export-transactions">
+          <span class="d-none d-sm-block">{{ 'export.button.main' | i18n }} <i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+          <span class="d-sm-none"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+          <li data-role="menuitem"
+              class="dropdown-item"
+              data-ng-click="$ctrl.exportToFile('csv', 0)">
+            <a data-role="csv">
+              <span class="d-sm-none">{{ 'export.button.exportAs' | i18n }}</span> <span>{{ 'export.button.csv' | i18n }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <ui-bb-loading-indicator-ng data-is-loading="$ctrl.loading && !$ctrl.transactions" data-loading-text="{{ 'message.label.loading' | i18n }}">
+      <div class="notifications">
+        <ui-bb-notification-stripe-ng
+          data-ng-repeat="notification in state.notifications"
+          data-timeout-second="{{ $ctrl.dismissTime }}"
+          data-message="{{ notification.message | i18n }}"
+          data-on-close="$ctrl.dismissNotification(notification.id)"
+          data-type="bg-{{ notification.level }}"
+          data-icon-classes="{{ notification.level === 'success' ?
+            'fa-check-circle' : 'fa-exclamation-circle' }} fa">
+        </ui-bb-notification-stripe-ng>
+      </div>
+
+      <!-- Errors -->
+      <ui-bb-substitute-error-ng data-message="$ctrl.errors.transactionsError.message | i18n: $ctrl.errors.transactionsError.context">
+        <ui-bb-empty-state-ng
+          data-icon-classes="fa fa-5x fa-search text-muted"
+          data-title="{{ 'search.no.results.title' | i18n }}"
+          data-subtitle="{{ 'search.no.results.subtitle' | i18n }}"
+          data-is-empty="ext.helpers.showNoResults($ctrl)"
+        >
+          <uib-accordion class="list-group">
+            <div class="transaction-group list-items-wrapper" data-ng-repeat="(date, transactions) in (($ctrl.searching && $ctrl.searchTransactions) || $ctrl.transactions) track by date">
+              <div class="hidden list-item"></div>
+              <div class="transaction-group-date card card-header list-item"
+                data-ng-bind="ext.helpers.dateLabel(date | date: 'mediumDate' | dateLabel)">
+              </div>
+
+              <uib-accordion-group class="list-item list-item-transaction-accordion"
+                data-ng-repeat="transaction in transactions track by transaction.id"
+                data-template-url="#ext-bb-transactions-ng/group-template.html"
+                data-is-open="false">
+                <uib-accordion-heading>
+                  <div class="transaction-item row" role="row">
+                    <div class="col-8 d-flex align-items-center">
+                      <div class="transaction-category-icon d-inline-block mr-3" data-ng-if="transaction.customType === ext.helpers.transactionTypes.TYPE_1">
+                        <span aria-hidden="true" title="{{ transaction.category }}" class="bb-transaction-category bb-transaction-category-icon bb-transaction-category-large {{ ext.helpers.getCategoryIconClass(transaction.category) }}"></span>
+                      </div>
+
+                      <div class="transaction-party d-inline-block" data-ng-if="transaction.customType === ext.helpers.transactionTypes.TYPE_1">
+                        <strong class="transaction-party-name" data-ng-bind="transaction.counterPartyName"></strong>
+                        <div class="transaction-category text-muted" data-ng-bind="transaction.category"></div>
+                        <div class="transaction-account text-muted" data-ng-if="$ctrl.isMultipleAccounts" data-ng-bind="transaction.accountNumber"></div>
+                      </div>
+                      <div class="transaction-party d-inline-block" data-ng-if="transaction.customType === ext.helpers.transactionTypes.TYPE_2">
+                        <strong class="transaction-party-name" data-ng-bind="transaction.counterPartyName"></strong>
+                        <div class="transaction-type-group text-muted" data-ng-bind="transaction.typeGroup"></div>
+                        <div class="transaction-account text-muted" data-ng-if="$ctrl.isMultipleAccounts" data-ng-bind="transaction.accountNumber"></div>
+                      </div>
+                      <div class="transaction-party d-inline-block" data-ng-if="transaction.customType === ext.helpers.transactionTypes.TYPE_3">
+                        <strong class="transaction-description" data-ng-bind="transaction.description"></strong>
+                        <div class="transaction-type-group text-muted" data-ng-bind="transaction.typeGroup"></div>
+                        <div class="transaction-account text-muted" data-ng-if="$ctrl.isMultipleAccounts" data-ng-bind="transaction.accountNumber"></div>
+                      </div>
+                      <div class="transaction-party d-inline-block" data-ng-if="transaction.customType === ext.helpers.transactionTypes.TYPE_4">
+                        <strong class="transaction-type-group" data-ng-bind="transaction.typeGroup"></strong>
+                        <div class="transaction-account text-muted" data-ng-if="$ctrl.isMultipleAccounts" data-ng-bind="transaction.accountNumber"></div>
+                      </div>
+                    </div>
+
+                    <div class="col-4 d-flex flex-row-reverse align-items-center justify-content-between flex-wrap">
+                      <strong class="transaction-amount">
+                        <ui-bb-format-amount-ng
+                          data-ng-class="{ 'amount-regular-color': transaction.creditDebitIndicator === 'DBIT' }"
+                          data-amount="ext.helpers.getSignedAmount(transaction)"
+                          data-wrap
+                          data-show-plus-sign>
+                        </ui-bb-format-amount-ng>
+                      </strong>
+
+                      <div class="transaction-billing-status" data-ng-if="transaction.billingStatus === 'UNBILLED' || transaction.billingStatus === 'PENDING'">
+                        <span class="badge badge-pill badge-pending" data-ng-bind="ext.helpers.billingStatusLabel(transaction.billingStatus)"></span>
+                      </div>
+                    </div>
+                  </div>
+                </uib-accordion-heading>
+                <div
+                  class="transaction-details"
+                  data-ng-class="{ 'col-11 ml-7': transaction.customType === ext.helpers.transactionTypes.TYPE_1, 'col-12': transaction.customType !== ext.helpers.transactionTypes.TYPE_1 }"
+                >
+                  <p class="transaction-details-change-category-btn row col-12" data-ng-if="transaction.customType === ext.helpers.transactionTypes.TYPE_1">
+                    <button class="btn btn-link p-0" data-ng-click="$ctrl.changeTransactionCategory(transaction)" data-i18n-key="details.label.changeCategory"></button>
+                  </p>
+                  <div class="transaction-details-account-number row" data-ng-if="$ctrl.isMultipleAccounts">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.accountNumber"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.accountNumber"></p>
+                  </div>
+                  <div class="transaction-details-type-group row" data-ng-if="transaction.typeGroup">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.transactionType"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.typeGroup"></p>
+                  </div>
+                  <div class="transaction-details-counter-party-name row" data-ng-if="transaction.counterPartyName">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.counterPartyName"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.counterPartyName"></p>
+                  </div>
+                  <div class="transaction-details-counter-party-account-number row" data-ng-if="transaction.counterPartyAccountNumber">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.counterPartyAccountNumber"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.counterPartyAccountNumber"></p>
+                  </div>
+                  <div class="transaction-details-scheduled-date row" data-ng-if="transaction.scheduledDate">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18-key="details.label.scheduledDate"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.scheduledDate"></p>
+                  </div>
+                  <div class="transaction-details-reference row" data-ng-if="transaction.reference">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.transactionReference"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.reference"></p>
+                  </div>
+                  <div class="transaction-details-instructed-currency row" data-ng-if="transaction.instructedCurrency">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.instructedCurrency"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.instructedCurrency"></p>
+                  </div>
+                  <div class="transaction-details-exchange-rate row" data-ng-if="transaction.currencyExchangeRate">
+                    <div class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.currencyExchangeRate"></div>
+                    <div class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.currencyExchangeRate"></div>
+                  </div>
+                  <div class="transaction-details-instructed-amount row" data-ng-if="transaction.instructedAmount">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.instructedAmount"></p>
+                    <p class="transaction-details-value col-6 col-md-8">
+                      <span class="debit-credit-sign" data-ng-bind="transaction.debitCreditSign"></span>
+                      <ui-bb-format-amount-ng
+                        class="amount-regular-color"
+                        data-amount="transaction.instructedAmount"
+                        data-currency="transaction.instructedCurrency">
+                      </ui-bb-format-amount-ng>
+                    </p>
+                  </div>
+                  <div class="transaction-details-description row" data-ng-if="transaction.description">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.description"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.description"></p>
+                  </div>
+                  <div class="transaction-details-category row" data-ng-if="transaction.category">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.category"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.category"></p>
+                  </div>
+                  <div class="transaction-details-check-serial-number row" data-ng-if="transaction.checkSerialNumber">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.checkSerialNumber"></p>
+                    <p class="transaction-details-value col-6 col-md-8" data-ng-bind="transaction.checkSerialNumber"></p>
+                  </div>
+                  <div class="transaction-details-running-balance row" data-ng-if="transaction.runningBalance">
+                    <p class="transaction-details-label col-6 col-md-4 font-weight-bold" data-i18n-key="details.label.runningBalance"></p>
+                    <p class="transaction-details-value col-6 col-md-8">
+                      <ui-bb-format-amount-ng
+                        class="amount-regular-color"
+                        data-amount="transaction.runningBalance">
+                      </ui-bb-format-amount-ng>
+                    </p>
+                  </div>
+                </div>
+              </uib-accordion-group>
+              <div data-ng-if="!$last" class="hidden"></div>
+            </div>
+          </uib-accordion>
+
+          <ui-bb-inline-status-ng
+            class="d-block text-center py-2"
+            data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+            data-show-spinner="$ctrl.loading">
+          </ui-bb-inline-status-ng>
+
+          <div class="pb-3">
+            <ui-bb-load-more-ng
+              class="bb-load-more"
+              data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+              data-ng-show="$ctrl.searching ? !$ctrl.searchAllTransactionsLoaded : !$ctrl.allTransactionsLoaded"
+              data-label="{{ 'details.label.loadMore' | i18n }}"
+              data-on-load-more="$ctrl.searching ? $ctrl.searchMore(done) : $ctrl.loadMore(done)">
+            </ui-bb-load-more-ng>
+
+            <div
+              class="text-center text-muted"
+              data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+              data-ng-show="$ctrl.searching ? $ctrl.searchAllTransactionsLoaded : $ctrl.allTransactionsLoaded"
+              data-ng-bind="'details.label.allTransactionsLoaded' | i18n">
+            </div>
+
+            <ui-bb-paginator-ng
+              class="bb-pagination"
+              data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'pagination')"
+              data-page-navigation-text="{{ 'pagination.label.pageNavigation' | i18n }}"
+              data-first-text="{{ 'pagination.label.first' | i18n }}"
+              data-last-text="{{ 'pagination.label.last' | i18n }}"
+              data-previous-text="{{ 'pagination.label.prev' | i18n }}"
+              data-next-text="{{ 'pagination.label.next' | i18n }}"
+              data-total-items="{{ $ctrl.state.pageParams.totalItems }}"
+              data-items-per-page="{{ $ctrl.state.pageParams.size }}"
+              data-max-nav-pages="{{ $ctrl.state.pageParams.maxNavPages }}"
+              data-current-page="{{ $ctrl.state.pageParams.currentPage }}"
+              data-ng-disabled="$ctrl.loading"
+              data-change-page="$ctrl.changePage(params)">
+            </ui-bb-paginator-ng>
+          </div>
+        </ui-bb-empty-state-ng>
+      </ui-bb-substitute-error-ng>
+    </ui-bb-loading-indicator-ng>
+  </ui-bb-empty-state-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bb-transactions-ng/group-template.html">
+  <div class="card card-hover card-open-darker">
+    <div class="card-header bg-transparent border-light card-header-collapse" data-ng-click="toggleOpen()" data-uib-accordion-transclude="heading">
+      <uib-accordion-header>
+        <span data-ng-bind="heading"></span>
+      </uib-accordion-header>
+    </div>
+    <div class="card-collapse collapse" data-uib-collapse="!isOpen">
+      <div class="card-body pt-0" data-ng-transclude></div>
+    </div>
+  </div>
+</script>

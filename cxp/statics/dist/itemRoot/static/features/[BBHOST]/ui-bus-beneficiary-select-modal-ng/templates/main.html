@@ -1,0 +1,106 @@
+<ui-bb-modal-ng data-is-open="$ctrl.isOpen">
+  <div class="p-3">
+    <header class="d-flex justify-content-between">
+      <h5 data-role="heading">{{:: $ctrl.config.labels.headerText }}</h5>
+      <button type="button" class="close" data-ng-click="$ctrl.isOpen = false">
+        <i class="fa fa-times"></i>
+      </button>
+    </header>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li tabindex="1" class="nav-item"
+          data-ng-click="$ctrl.selectTab($ctrl.Tabs.CONTACTS)"
+          data-ng-class="{active: $ctrl.state.activeTab === $ctrl.Tabs.CONTACTS}">
+        <a class="nav-link" href="javascript:void(0)" role="tab">
+          {{:: $ctrl.config.labels.contactsTab }} (<span data-ng-if="$ctrl.contacts.totalCount > 0 && $ctrl.contacts.totalCount !== $ctrl.state[$ctrl.Tabs.CONTACTS].totalCount">{{ $ctrl.contacts.totalCount }} {{ $ctrl.config.labels.outOf }} </span>{{ $ctrl.state[$ctrl.Tabs.CONTACTS].totalCount }})</a>
+      </li>
+      <li tabindex="2" class="nav-item"
+          data-ng-click="$ctrl.selectTab($ctrl.Tabs.ACCOUNTS)"
+          data-ng-class="{active: $ctrl.state.activeTab === $ctrl.Tabs.ACCOUNTS}">
+        <a class="nav-link" href="javascript:void(0)" role="tab">
+          {{:: $ctrl.config.labels.ownAccountsTab }} (<span data-ng-if="$ctrl.accounts.totalCount > 0 && $ctrl.accounts.totalCount !== $ctrl.state[$ctrl.Tabs.ACCOUNTS].totalCount">{{ $ctrl.accounts.totalCount }} {{ $ctrl.config.labels.outOf }} </span>{{ $ctrl.state[$ctrl.Tabs.ACCOUNTS].totalCount }})</a>
+      </li>
+    </ul>
+
+    <!-- Tabs content -->
+    <div data-ng-hide="$ctrl.state.activeTab !== $ctrl.Tabs.CONTACTS">
+      <div data-ng-include="'templates/beneficiary-select-modal/contacts.html'"></div>
+    </div>
+    <div data-ng-hide="$ctrl.state.activeTab !== $ctrl.Tabs.ACCOUNTS">
+      <div data-ng-include="'templates/beneficiary-select-modal/accounts.html'"></div>
+    </div>
+  </div>
+</ui-bb-modal-ng>
+
+<!-- CONTACTS -->
+<script type="text/ng-template" id="templates/beneficiary-select-modal/contacts.html">
+  <div class="list-group pt-3">
+    <ui-bb-search-box-ng
+      class="pb-3"
+      data-ng-model="$ctrl.state.contacts.params.query"
+      data-ng-model-options="{ debounce: 500 }"
+      data-config="{ labels: { placeholder: $ctrl.config.labels.placeholderContacts } }"
+      data-on-change="$ctrl.onSearchContacts(search)"
+      data-on-clear="$ctrl.onSearchClearContacts()"
+      data-is-loading="$ctrl.state.contacts.loading"
+      data-forced-submit="true">
+    </ui-bb-search-box-ng>
+    <ui-bb-list-ng class="pre-scrollable"
+                   data-on-scrolled-to-bottom="$ctrl.loadMoreContactsWithDigest()">
+      <div class="list-group-item pb-2"
+           data-ng-repeat="contact in $ctrl.contacts.data track by $index"
+           data-ng-click="$ctrl.onSelect($ctrl.getItemContact(contact, $ctrl.config.direct)); $ctrl.isOpen = false;">
+        <div class="alert alert-secondary d-inline-block"
+             data-ng-if="$ctrl.signature[contact.name[0].toUpperCase()] === $index"
+             data-ng-bind-html="contact.name[0].toUpperCase() | searchFilter:$ctrl.state.contacts.params.query">
+        </div>
+        <div><span data-ng-bind-html="contact.name | searchFilter:$ctrl.state.contacts.params.query"></span> &mdash; <span data-ng-bind-html="contact.accounts[0].name | searchFilter:$ctrl.state.contacts.params.query"></span></div>
+        <div class="text-muted" data-ng-bind-html="($ctrl.formatIban(contact.accounts[0].IBAN) || contact.accounts[0].accountNumber || contact.accounts[0].BBAN).toUpperCase() | searchFilter:$ctrl.state.contacts.params.query"></div>
+      </div>
+    </ui-bb-list-ng>
+    <div class="text-center" data-ng-if="$ctrl.state.contacts.params.query && !$ctrl.contacts.data.length">
+      <!-- No search results -->
+      <div class="p-5 text-muted">{{:: $ctrl.config.labels.noSearchResults }}</div>
+    </div>
+    <div class="text-center text-muted mt-2" data-ng-if="$ctrl.state.contacts.loading"><i class="fa fa-spinner fa-spin"></i></div>
+  </div>
+</script>
+
+<!-- ACCOUNTS -->
+<script type="text/ng-template" id="templates/beneficiary-select-modal/accounts.html">
+  <div class="list-group pt-3">
+    <ui-bb-search-box-ng
+      class="pb-3"
+      data-ng-model="$ctrl.state.accounts.params.query"
+      data-ng-model-options="{ debounce: 500 }"
+      data-config="{ labels: { placeholder: $ctrl.config.labels.placeholderAccounts } }"
+      data-on-change="$ctrl.onSearchAccounts(search)"
+      data-on-clear="$ctrl.onSearchClearAccounts()"
+      data-is-loading="$ctrl.state.accounts.loading"
+      data-forced-submit="true">
+    </ui-bb-search-box-ng>
+    <ui-bb-list-ng class="pre-scrollable"
+                   data-on-scrolled-to-bottom="$ctrl.loadMoreAccountsWithDigest()">
+      <div class="list-group-item d-flex align-items-center row mr-0 ml-0"
+           data-ng-repeat="account in $ctrl.accounts.data track by $index"
+           data-ng-click="$ctrl.onSelect($ctrl.getItemAccount(account)); $ctrl.isOpen = false;">
+        <div class="col-sm-8 p-0">
+          <div data-ng-bind-html="account.name | searchFilter:$ctrl.state.accounts.params.query"></div>
+          <div class="text-muted" data-ng-bind-html="$ctrl.formattedIdentifier(account)  | searchFilter:$ctrl.state.accounts.params.query"></div>
+        </div>
+        <div class="text-info text-right col-sm-4 p-0">
+          <ui-bus-format-amount-ng
+            data-amount="account.amount"
+            data-currency="account.currency">
+          </ui-bus-format-amount-ng>
+        </div>
+      </div>
+    </ui-bb-list-ng>
+    <div class="text-center" data-ng-if="$ctrl.state.accounts.params.query && !$ctrl.accounts.data.length">
+      <!-- No search results -->
+      <div class="p-5 text-muted">{{:: $ctrl.config.labels.noSearchResults }}</div>
+    </div>
+    <div class="text-center text-muted mt-2" data-ng-if="$ctrl.state.accounts.loading"><i class="fa fa-spinner fa-spin"></i></div>
+  </div>
+</script>

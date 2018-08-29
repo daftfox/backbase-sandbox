@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-angular-ng-messages@1.6.7-bb.1",
+        "scope": null,
+        "escapedName": "vendor-bb-angular-ng-messages",
+        "name": "vendor-bb-angular-ng-messages",
+        "rawSpec": "1.6.7-bb.1",
+        "spec": "1.6.7-bb.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "vendor-bb-angular-ng-messages@1.6.7-bb.1",
+  "_id": "vendor-bb-angular-ng-messages@1.6.7-bb.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-angular-ng-messages",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-angular-ng-messages@1.6.7-bb.1",
+    "scope": null,
+    "escapedName": "vendor-bb-angular-ng-messages",
+    "name": "vendor-bb-angular-ng-messages",
+    "rawSpec": "1.6.7-bb.1",
+    "spec": "1.6.7-bb.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-angular-ng-messages/-/vendor-bb-angular-ng-messages-1.6.7-bb.1.tgz",
+  "_shasum": "49ef6caf3ee2d8a7aa3f3e8854f190d3ab32867c",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-angular-ng-messages@1.6.7-bb.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-angular-ng-messages/-/vendor-bb-angular-ng-messages-1.6.7-bb.1.tgz",
+    "shasum": "49ef6caf3ee2d8a7aa3f3e8854f190d3ab32867c"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "scripts/vendor-bb-angular-ng-messages.js",
+  "name": "vendor-bb-angular-ng-messages",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.6.7-bb.1"
+}

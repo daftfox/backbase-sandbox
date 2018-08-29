@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-maps-ng@^2.5.0",
+        "scope": null,
+        "escapedName": "ui-bb-maps-ng",
+        "name": "ui-bb-maps-ng",
+        "rawSpec": "^2.5.0",
+        "spec": ">=2.5.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-places-list-map-ng"
+    ]
+  ],
+  "_from": "ui-bb-maps-ng@>=2.5.0 <3.0.0",
+  "_id": "ui-bb-maps-ng@2.6.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-maps-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-maps-ng@^2.5.0",
+    "scope": null,
+    "escapedName": "ui-bb-maps-ng",
+    "name": "ui-bb-maps-ng",
+    "rawSpec": "^2.5.0",
+    "spec": ">=2.5.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bb-places-list-map-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-maps-ng/-/ui-bb-maps-ng-2.6.0.tgz",
+  "_shasum": "f6eff0be70846e893171e12b260c0abd46d998fe",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-maps-ng@^2.5.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-places-list-map-ng",
+  "dependencies": {
+    "lib-bb-google-maps-ng": "^1.6.0",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-maps-ng/-/ui-bb-maps-ng-2.6.0.tgz",
+    "shasum": "f6eff0be70846e893171e12b260c0abd46d998fe"
+  },
+  "main": "scripts/ui-bb-maps-ng.js",
+  "name": "ui-bb-maps-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.6.0"
+}

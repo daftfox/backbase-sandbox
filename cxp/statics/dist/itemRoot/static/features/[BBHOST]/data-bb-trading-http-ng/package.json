@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-trading-http-ng@^0.0.0",
+        "scope": null,
+        "escapedName": "data-bb-trading-http-ng",
+        "name": "data-bb-trading-http-ng",
+        "rawSpec": "^0.0.0",
+        "spec": ">=0.0.0 <0.0.1",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/model-fx-trading-ng"
+    ]
+  ],
+  "_from": "data-bb-trading-http-ng@>=0.0.0 <0.0.1",
+  "_id": "data-bb-trading-http-ng@0.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-trading-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-trading-http-ng@^0.0.0",
+    "scope": null,
+    "escapedName": "data-bb-trading-http-ng",
+    "name": "data-bb-trading-http-ng",
+    "rawSpec": "^0.0.0",
+    "spec": ">=0.0.0 <0.0.1",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-fx-trading-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-trading-http-ng/-/data-bb-trading-http-ng-0.0.0.tgz",
+  "_shasum": "ac8765268d8520758cfe149a0c6509366c7e9295",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-trading-http-ng@^0.0.0",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/model-fx-trading-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-trading-http-ng/-/data-bb-trading-http-ng-0.0.0.tgz",
+    "shasum": "ac8765268d8520758cfe149a0c6509366c7e9295"
+  },
+  "main": "scripts/data-bb-trading-http-ng.js",
+  "name": "data-bb-trading-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "0.0.0"
+}

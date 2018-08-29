@@ -1,0 +1,57 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-wm-portfolio-details-ng@^2.15.2",
+        "scope": null,
+        "escapedName": "ext-wm-portfolio-details-ng",
+        "name": "ext-wm-portfolio-details-ng",
+        "rawSpec": "^2.15.2",
+        "spec": ">=2.15.2 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-wm-portfolio-details-ng"
+    ]
+  ],
+  "_from": "ext-wm-portfolio-details-ng@>=2.15.2 <3.0.0",
+  "_id": "ext-wm-portfolio-details-ng@2.15.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-wm-portfolio-details-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-wm-portfolio-details-ng@^2.15.2",
+    "scope": null,
+    "escapedName": "ext-wm-portfolio-details-ng",
+    "name": "ext-wm-portfolio-details-ng",
+    "rawSpec": "^2.15.2",
+    "spec": ">=2.15.2 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-wm-portfolio-details-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-wm-portfolio-details-ng/-/ext-wm-portfolio-details-ng-2.15.2.tgz",
+  "_shasum": "c1ff6e85a825372ea4b92e2776c7f1d2f7c9d69e",
+  "_shrinkwrap": null,
+  "_spec": "ext-wm-portfolio-details-ng@^2.15.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-wm-portfolio-details-ng",
+  "dependencies": {
+    "lib-bb-model-errors": "^1.0.122",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-wm-portfolio-details-ng/-/ext-wm-portfolio-details-ng-2.15.2.tgz",
+    "shasum": "c1ff6e85a825372ea4b92e2776c7f1d2f7c9d69e"
+  },
+  "main": "scripts/ext-wm-portfolio-details-ng.js",
+  "name": "ext-wm-portfolio-details-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.15.2"
+}

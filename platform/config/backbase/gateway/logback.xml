@@ -1,0 +1,15 @@
+<configuration scan="true" scanPeriod="30 seconds" >
+    <property name="logging.level" value="WARN" />
+
+    <logger name="com.backbase.infra.gateway" level="INFO"/>
+
+    <!-- !!! HACK: Temporary ignore Netflix client registry log, until we solve problem of proper starting Service Registry. This will be remove in near future -->
+    <logger name="com.netflix.discovery.DiscoveryClient" level="OFF" />
+    <logger name="com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient" level="OFF" />
+    <logger name="org.apache.directory.server.schema.registries.DefaultAttributeTypeRegistry" level="OFF" />
+    <logger name="com.netflix.discovery.InstanceInfoReplicator" level="ERROR"/>
+    <!-- !!! HACK -->
+
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+</configuration>

@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-account-card-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-account-card-ng",
+        "name": "ui-bb-account-card-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-account-card-ng@2.5.1",
+  "_id": "ui-bb-account-card-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-account-card-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-account-card-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-account-card-ng",
+    "name": "ui-bb-account-card-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-account-card-ng/-/ui-bb-account-card-ng-2.5.1.tgz",
+  "_shasum": "347b86286cc099e0cf6a4472019c60c1fc5d4547",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-account-card-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "ui-bb-avatar-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-account-card-ng/-/ui-bb-account-card-ng-2.5.1.tgz",
+    "shasum": "347b86286cc099e0cf6a4472019c60c1fc5d4547"
+  },
+  "main": "scripts/ui-bb-account-card-ng.js",
+  "name": "ui-bb-account-card-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

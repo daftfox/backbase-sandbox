@@ -1,0 +1,36 @@
+<div
+  class="ext-bbm-notification-center-details-ng"
+  data-ng-controller="NotificationsDetailsController as $ctrl">
+  <div class="bbm-layout bbm-layout-page bbm-layout-scroll">
+    <div
+      class="bbm-notification"
+      data-ng-class="{ 'bbm-notification-has-title' : ext.helpers.getNotification().title }">
+      <div class="bbm-notification-information prevent-ios-click">
+        <span class="{{ 'bbm-notification-level bbm-notification-level-' + ext.helpers.getNotification().level | lowercase }}">
+          <i
+            class="fa {{ ext.helpers.getLevelIcon(ext.helpers.getNotification().level) }}"
+            title="{{ 'ext.helpers.getNotification().level.' + ext.helpers.getNotification().level | lowercase | i18n }}"></i>
+        </span>
+        <span
+          class="bbm-notification-date"
+          data-ng-bind="ext.helpers.getDateLabel(ext.helpers.getNotification())">
+        </span>
+      </div>
+      <h3
+        class="bbm-notification-title prevent-ios-click"
+        data-ng-if="ext.helpers.getNotification().title"
+        data-ng-bind="ext.helpers.getNotification().title">
+      </h3>
+      <div
+        class="bbm-notification-message prevent-ios-click"
+        data-ng-bind="ext.helpers.getNotification().message">
+      </div>
+      <a
+        class="bbm-notification-link"
+        data-ng-if="ext.helpers.getNotification().link"
+        data-ng-href="{{ ext.helpers.getNotification().link }}"
+        data-ng-bind="ext.helpers.getNotification().link">
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-core-js@2.4.1-bb.1",
+        "scope": null,
+        "escapedName": "vendor-bb-core-js",
+        "name": "vendor-bb-core-js",
+        "rawSpec": "2.4.1-bb.1",
+        "spec": "2.4.1-bb.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "vendor-bb-core-js@2.4.1-bb.1",
+  "_id": "vendor-bb-core-js@2.4.1-bb.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-core-js",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-core-js@2.4.1-bb.1",
+    "scope": null,
+    "escapedName": "vendor-bb-core-js",
+    "name": "vendor-bb-core-js",
+    "rawSpec": "2.4.1-bb.1",
+    "spec": "2.4.1-bb.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-core-js/-/vendor-bb-core-js-2.4.1-bb.1.tgz",
+  "_shasum": "eef4f2802cb4fbfe45bdfccac43c021063670002",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-core-js@2.4.1-bb.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {},
+  "description": "Standard polyfill library",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-core-js/-/vendor-bb-core-js-2.4.1-bb.1.tgz",
+    "shasum": "eef4f2802cb4fbfe45bdfccac43c021063670002"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "scripts/vendor-bb-core-js.js",
+  "name": "vendor-bb-core-js",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.4.1-bb.1"
+}

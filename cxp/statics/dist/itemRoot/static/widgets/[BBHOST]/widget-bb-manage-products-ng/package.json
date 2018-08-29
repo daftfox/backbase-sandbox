@@ -1,0 +1,63 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-manage-products-ng@~1.21.0",
+        "scope": null,
+        "escapedName": "widget-bb-manage-products-ng",
+        "name": "widget-bb-manage-products-ng",
+        "rawSpec": "~1.21.0",
+        "spec": ">=1.21.0 <1.22.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-manage-products-ng@>=1.21.0 <1.22.0",
+  "_id": "widget-bb-manage-products-ng@1.21.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-manage-products-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-manage-products-ng@~1.21.0",
+    "scope": null,
+    "escapedName": "widget-bb-manage-products-ng",
+    "name": "widget-bb-manage-products-ng",
+    "rawSpec": "~1.21.0",
+    "spec": ">=1.21.0 <1.22.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-manage-products-ng/-/widget-bb-manage-products-ng-1.21.0.tgz",
+  "_shasum": "e42d8488e867638bcaecd7b41d51caa9ece71f20",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-manage-products-ng@~1.21.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-manage-products-ng": "^2.17.0",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-product-summary-ng": "^1.27.0",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-manage-products-ng/-/widget-bb-manage-products-ng-1.21.0.tgz",
+    "shasum": "e42d8488e867638bcaecd7b41d51caa9ece71f20"
+  },
+  "main": "scripts/widget-bb-manage-products-ng.js",
+  "name": "widget-bb-manage-products-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.21.0"
+}

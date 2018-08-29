@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+        <!-- indicate to first look for a server -->
+        <property name="locateExistingServerIfPossible" value="true"/>
+    </bean>
+
+
+    <!-- Hibernate Statistics -->
+    <bean id="hibernateStatistics"
+          class="com.backbase.portal.commons.configuration.jmx.HibernateStatisticsFactoryBean"/>
+
+    <context:mbean-export registration="replaceExisting" server="mbeanServer"/>
+
+    <bean id="contentServicesCacheManagedBean" name="contentServicesCacheManagedBean"
+          class="com.backbase.portal.contentservices.web.jmx.ContentServicesCacheManagedBean"
+          init-method="registerMBeans">
+        <constructor-arg name="mBeanServer" ref="mbeanServer"/>
+        <constructor-arg name="registerCacheConfigurations" value="true"/>
+        <constructor-arg name="registerCacheManager" value="true"/>
+        <constructor-arg name="registerCaches" value="true"/>
+        <constructor-arg name="registerCacheStatistics" value="true"/>
+        <constructor-arg name="registerCacheStores" value="true"/>
+        <constructor-arg name="registrationBehaviour" value="REGISTRATION_REPLACE_EXISTING"/>
+    </bean>
+
+
+</beans>

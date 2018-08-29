@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-storage-ng@1.0.98",
+        "scope": null,
+        "escapedName": "lib-bb-storage-ng",
+        "name": "lib-bb-storage-ng",
+        "rawSpec": "1.0.98",
+        "spec": "1.0.98",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-storage-ng@1.0.98",
+  "_id": "lib-bb-storage-ng@1.0.98",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-storage-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-storage-ng@1.0.98",
+    "scope": null,
+    "escapedName": "lib-bb-storage-ng",
+    "name": "lib-bb-storage-ng",
+    "rawSpec": "1.0.98",
+    "spec": "1.0.98",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-intent-ng",
+    "/lib-bb-state-container-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-storage-ng/-/lib-bb-storage-ng-1.0.98.tgz",
+  "_shasum": "8c4be345cee19d58acd9bc7e6795879c4ee97f44",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-storage-ng@1.0.98",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "lib-bb-storage": "^1.0.23",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-storage-ng/-/lib-bb-storage-ng-1.0.98.tgz",
+    "shasum": "8c4be345cee19d58acd9bc7e6795879c4ee97f44"
+  },
+  "main": "scripts/lib-bb-storage-ng.js",
+  "name": "lib-bb-storage-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.98"
+}

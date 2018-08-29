@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-places-ng@^2.5.0",
+        "scope": null,
+        "escapedName": "ext-bb-places-ng",
+        "name": "ext-bb-places-ng",
+        "rawSpec": "^2.5.0",
+        "spec": ">=2.5.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-places-ng"
+    ]
+  ],
+  "_from": "ext-bb-places-ng@>=2.5.0 <3.0.0",
+  "_id": "ext-bb-places-ng@2.6.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-places-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-places-ng@^2.5.0",
+    "scope": null,
+    "escapedName": "ext-bb-places-ng",
+    "name": "ext-bb-places-ng",
+    "rawSpec": "^2.5.0",
+    "spec": ">=2.5.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-places-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-places-ng/-/ext-bb-places-ng-2.6.0.tgz",
+  "_shasum": "556793abfa91894b77b6866d999c8917175f1e6b",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-places-ng@^2.5.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-places-ng",
+  "dependencies": {
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-maps-ng": "^2.6.0",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-places-ng/-/ext-bb-places-ng-2.6.0.tgz",
+    "shasum": "556793abfa91894b77b6866d999c8917175f1e6b"
+  },
+  "main": "scripts/ext-bb-places-ng.js",
+  "name": "ext-bb-places-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.6.0"
+}

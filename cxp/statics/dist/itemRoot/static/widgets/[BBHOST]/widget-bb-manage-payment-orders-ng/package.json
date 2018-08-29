@@ -1,0 +1,63 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-manage-payment-orders-ng@~1.107.11",
+        "scope": null,
+        "escapedName": "widget-bb-manage-payment-orders-ng",
+        "name": "widget-bb-manage-payment-orders-ng",
+        "rawSpec": "~1.107.11",
+        "spec": ">=1.107.11 <1.108.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-manage-payment-orders-ng@>=1.107.11 <1.108.0",
+  "_id": "widget-bb-manage-payment-orders-ng@1.107.20",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-manage-payment-orders-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-manage-payment-orders-ng@~1.107.11",
+    "scope": null,
+    "escapedName": "widget-bb-manage-payment-orders-ng",
+    "name": "widget-bb-manage-payment-orders-ng",
+    "rawSpec": "~1.107.11",
+    "spec": ">=1.107.11 <1.108.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-manage-payment-orders-ng/-/widget-bb-manage-payment-orders-ng-1.107.20.tgz",
+  "_shasum": "dac3d55c43fbbcf942d8e2272e9a4f5b0ebcba27",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-manage-payment-orders-ng@~1.107.11",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-manage-payment-orders-ng": "^3.36.20",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-state-container-ng": "^1.0.22",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-payment-orders-ng": "^1.119.20",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-manage-payment-orders-ng/-/widget-bb-manage-payment-orders-ng-1.107.20.tgz",
+    "shasum": "dac3d55c43fbbcf942d8e2272e9a4f5b0ebcba27"
+  },
+  "main": "scripts/widget-bb-manage-payment-orders-ng.js",
+  "name": "widget-bb-manage-payment-orders-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.107.20"
+}

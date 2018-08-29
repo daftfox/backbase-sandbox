@@ -1,0 +1,62 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-account-statements-ng@~2.2.0",
+        "scope": null,
+        "escapedName": "widget-bb-account-statements-ng",
+        "name": "widget-bb-account-statements-ng",
+        "rawSpec": "~2.2.0",
+        "spec": ">=2.2.0 <2.3.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-account-statements-ng@>=2.2.0 <2.3.0",
+  "_id": "widget-bb-account-statements-ng@2.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-account-statements-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-account-statements-ng@~2.2.0",
+    "scope": null,
+    "escapedName": "widget-bb-account-statements-ng",
+    "name": "widget-bb-account-statements-ng",
+    "rawSpec": "~2.2.0",
+    "spec": ">=2.2.0 <2.3.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-account-statements-ng/-/widget-bb-account-statements-ng-2.2.0.tgz",
+  "_shasum": "55297bd155707cb91387010f85c96eb9e298eded",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-account-statements-ng@~2.2.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bus-account-statements-ng": "^3.2.0",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-account-statements-ng": "^2.2.0",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-account-statements-ng/-/widget-bb-account-statements-ng-2.2.0.tgz",
+    "shasum": "55297bd155707cb91387010f85c96eb9e298eded"
+  },
+  "main": "scripts/widget-bb-account-statements-ng.js",
+  "name": "widget-bb-account-statements-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.2.0"
+}

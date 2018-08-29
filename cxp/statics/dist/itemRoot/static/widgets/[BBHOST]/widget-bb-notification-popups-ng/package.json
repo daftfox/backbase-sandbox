@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-notification-popups-ng@~1.8.2",
+        "scope": null,
+        "escapedName": "widget-bb-notification-popups-ng",
+        "name": "widget-bb-notification-popups-ng",
+        "rawSpec": "~1.8.2",
+        "spec": ">=1.8.2 <1.9.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-notification-popups-ng@>=1.8.2 <1.9.0",
+  "_id": "widget-bb-notification-popups-ng@1.8.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-notification-popups-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-notification-popups-ng@~1.8.2",
+    "scope": null,
+    "escapedName": "widget-bb-notification-popups-ng",
+    "name": "widget-bb-notification-popups-ng",
+    "rawSpec": "~1.8.2",
+    "spec": ">=1.8.2 <1.9.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-notification-popups-ng/-/widget-bb-notification-popups-ng-1.8.2.tgz",
+  "_shasum": "1446a3dfb5d4174ad6eb7217c6a5762608036ffa",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-notification-popups-ng@~1.8.2",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-notification-popups-ng": "^2.7.2",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-start": "^2.0.69",
+    "model-bb-notifications-ng": "^1.9.2",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-notification-popups-ng/-/widget-bb-notification-popups-ng-1.8.2.tgz",
+    "shasum": "1446a3dfb5d4174ad6eb7217c6a5762608036ffa"
+  },
+  "main": "scripts/widget-bb-notification-popups-ng.js",
+  "name": "widget-bb-notification-popups-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.8.2"
+}

@@ -1,0 +1,382 @@
+<div
+  data-ng-controller="PortfolioSummaryController as $ctrl"
+  class="ext-wm-portfolio-summary-dashboard-ng"
+>
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+    <div class="notifications">
+      <ui-bb-notification-stripe-ng
+        data-ng-if="ext.helpers.getNotifications().status.isOpen"
+        data-message="{{ext.helpers.getNotifications().status.i18n }}"
+        data-timeout-second="{{ext.helpers.getNotifications().dismissMessageTime}}"
+        data-icon-classes="fas fa-check-circle"
+        data-on-close="ext.helpers.closeNotification()"
+        data-type="{{ext.helpers.getNotifications().status.success ? 'bg-success' : 'bg-danger'}}"
+      ></ui-bb-notification-stripe-ng>
+    </div>
+    <ui-bb-empty-state-ng
+      data-message="state.errors.portfoliosError.message | i18n"
+      data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.portfoliosError).icon }} text-muted"
+      data-title="{{ ext.helpers.getError(state.errors.portfoliosError).title | i18n }}"
+      data-subtitle="{{ ext.helpers.getError(state.errors.portfoliosError).message | i18n }}"
+      data-is-empty="state.errors.portfoliosError"
+    >
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+        data-title="{{ 'portfolios.empty.title' | i18n }}"
+        data-subtitle="{{ 'portfolios.empty.message.noPortfolios' | i18n }}"
+        data-is-empty="!ext.helpers.isPortfoliosAvailable(state.portfolios)"
+      >
+        <div
+          data-ui-tree="ext.helpers.getDragAndDropOptions($ctrl)"
+          data-max-depth="1"
+        >
+          <div
+            role="tablist"
+            data-ui-tree-nodes
+            data-ng-model="ext.helpers.portfolios"
+          >
+            <div
+              class="mb-4 card"
+              data-ui-tree-node
+              data-role="portfolio-panel"
+              data-ng-mouseover="ext.helpers.changeTooltipStyle()"
+              data-ng-repeat="item in ext.helpers.portfolios"
+            >
+              <div
+                class="card-header"
+                data-ng-class="ext.helpers.isOpen(item.IBAN, $index) ? 'list-item' : '' "
+              >
+                <div class="row">
+                  <div class="float-left align-self-center">
+                    <div class="p-2 ml-2 text-muted">
+                      <i
+                        class="fas fa-bars"
+                        aria-hidden="true"
+                        ui-tree-handle="true"
+                        data-role="portfolio-drag-and-drop-handler"
+                      ></i>
+                    </div>
+                  </div>
+
+                  <div class="col-3 mr-4 align-self-center small">
+                    <div class="row">
+                      <div class="pr-0" data-ng-class="item.alias.length > 25 ? 'col-6' : 'col-auto' ">
+                        <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ item.alias }}">
+                          <span
+                            data-ng-if="!ext.helpers.showChangeNameInput($ctrl.state.portfolios.portfolioSelected, item)"
+                            class="font-weight-bold"
+                            data-ng-bind="item.alias"
+                            data-role="item-alias"
+                          ></span>
+                          <input
+                            data-ng-if="ext.helpers.showChangeNameInput($ctrl.state.portfolios.portfolioSelected, item)"
+                            data-ng-keyup="$event.keyCode === 13 && ext.helpers.changeAlias($ctrl, item)"
+                            data-ng-model="item.alias"
+                            data-ui-bb-focus-ng="$ctrl.state.portfolios.portfolioSelected.showInput"
+                            data-ng-blur="ext.helpers.changeAlias($ctrl, item)"
+                            type="text"
+                            class="w-100"
+                            maxlength="30">
+                        </ui-bb-ellipsis-tooltip-ng>
+                      </div>
+                      <div class="col-auto p-0">
+                        <button
+                          class="btn-link border-0 no-underline"
+                          data-ng-if="!ext.helpers.showChangeNameInput($ctrl.state.portfolios.portfolioSelected, item)"
+                          data-ng-click="ext.helpers.showInput(item)"
+                          data-role="alias-edit-button"
+                        >
+                          <i class="fas fa-pencil-alt fa-1x" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="portfolio-stripe-table-column table-font-xs">
+                      <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ ::item.IBAN }}">
+                        <small
+                          class="text-muted d-block"
+                          data-ng-bind="item.IBAN"
+                          data-role="portfolio-iban"
+                          data-role="item-iban"
+                        ></small>
+                      </ui-bb-ellipsis-tooltip-ng>
+                    </div>
+                  </div>
+
+                  <div class="col-1 ml-5 align-self-center text-right">
+                    <small class="text-muted" data-i18n-key="portfolio.risk"></small>
+                    <small class="d-block"
+                           data-role="portfolio-risk"
+                           data-ng-bind="item.riskClass"
+                    ></small>
+                  </div>
+
+                  <div class="col align-self-center text-right text-nowrap">
+                    <small class="text-muted text-nowrap" data-i18n-key="portfolio.valuation"></small>
+                    <h6 class="mb-0">
+                      <small
+                        data-ng-bind="item.valuation.currencyCode"
+                        data-role="item-valuation-currency-code"
+                      ></small>
+                      <ui-bb-format-amount-ng
+                        data-no-map
+                        data-role="item-valuation-amount"
+                        data-amount="item.valuation.amount"
+                      ></ui-bb-format-amount-ng>
+                    </h6>
+                  </div>
+
+                  <div class="col align-self-center text-right">
+                    <span class="h6">
+                      <i
+                        data-uib-tooltip="{{'portfolio.ytd.performance.tooltip' | i18n }}"
+                        data-tooltip-placement="left"
+                        class="fa fa-info-circle text-muted"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+                    <small
+                      class="text-muted text-nowrap"
+                      data-i18n-key="portfolio.ytd.performance.pct"
+                    ></small>
+                    <h6
+                      class="mb-0 amount-negative font-weight-bold"
+                      data-ng-class="item.performanceYTDpct > 0 ? 'text-success' : 'text-danger' "
+                      data-role="item-performance-ytd-pct"
+                    >
+                      <span>
+                        {{ext.helpers.showSign(item.performanceYTDpct)}}%
+                      </span>
+                    </h6>
+                  </div>
+
+                  <div class="col align-self-center text-center small">
+                    <button
+                      class="btn btn-outline-primary"
+                      data-i18n-key="portfolio.details"
+                      aria-label="{{ portfolio.details | i18n }}"
+                      data-role="view-details"
+                      data-ng-click="$ctrl.viewPortfolioDetails(item.IBAN);$event.stopPropagation();"
+                    ></button>
+                  </div>
+
+                  <div class="float-right align-self-center mr-2 p-1 text-muted">
+                    <button
+                    class="btn btn-link pull-right"
+                    data-ng-click="ext.helpers.onToggle(item.IBAN)"
+                    data-role="toggle-portfolio-panel"
+                  >
+                    <i class="fa"
+                       data-ng-class="ext.helpers.isOpen(item.IBAN, $index) ? 'fa-chevron-up' :'fa-chevron-down text-muted'"
+                       aria-hidden="true">
+                    </i>
+                  </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="card-body"
+                data-ng-if="ext.helpers.isOpen(item.IBAN, $index)"
+              >
+                <div class="row small">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-6 col-xl-5 py-3">
+                        <div class="row" data-ng-if="!item.assetClasses.length">
+                          <div class="col-12 text-center">
+                            <span class="text-muted" data-i18n-key="portfolios.empty.message.noChartData"></span>
+                          </div>
+                        </div>
+                        <div class="row" data-ng-if="item.assetClasses.length">
+                          <div class="col-6 chart">
+                            <ui-bb-chartjs-chart-donut-ng
+                              data-series="item.dataseries"
+                              data-options="ext.helpers.chartOptions"
+                              data-plugins="ext.helpers.plugins">
+                            </ui-bb-chartjs-chart-donut-ng>
+                          </div>
+                          <div class="col-6">
+                            <div
+                              class="asset colorset-item-container-legend"
+                              data-ng-repeat="asset in item.assetClasses"
+                            >
+                              <div class="row">
+                                <div class="col-8 font-size-small">
+                                  <i
+                                    class="fa fa-circle mr-1 mt-1 small float-left"
+                                    data-ng-class="ext.helpers.getColorClassByIndex($index + 1)"
+                                  ></i>
+                                  <ui-bb-ellipsis-tooltip-ng
+                                    data-tooltip="{{asset.name}}"
+                                  >
+                                    <strong>{{asset.name}}</strong>
+                                  </ui-bb-ellipsis-tooltip-ng>
+                                </div>
+                                <div class="col-4 text-right font-size-small percent">
+                                  <ui-bb-ellipsis-tooltip-ng
+                                    data-tooltip="{{ext.helpers.localizeNumber(asset.valuePct)}}"
+                                  >
+                                    {{ext.helpers.localizeNumber(asset.valuePct)}} %
+                                  </ui-bb-ellipsis-tooltip-ng>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6 col-xl-7">
+                        <div class="row">
+                          <div class="col-12 col-xl-8 border-left py-3">
+                            <div class="row mb-4">
+                              <div class="col-6 pr-0">
+                                <strong data-i18n-key="portfolio.ytd.performance.value"></strong>
+                              </div>
+                              <div class="col-2 text-right text-muted pr-0">
+                                <span
+                                  class="text-muted text-nowrap"
+                                  data-ng-bind="item.performanceYTD.currencyCode"
+                                  data-role="item-performance-ytd-currency-code"
+                                ></span>
+                              </div>
+                              <div class="col-4 text-right text-nowrap">
+                                <ui-bb-format-amount-ng
+                                  data-no-map data-role="item-performance-ytd-amount"
+                                  data-amount="item.performanceYTD.amount"
+                                ></ui-bb-format-amount-ng>
+                              </div>
+                            </div>
+                            <div class="mb-4">
+                              <div class="row">
+                                <div class="col-6 pr-0">
+                                  <strong data-i18n-key="portfolio.mtd.performance.value"></strong>
+                                </div>
+                                <div class="col-2 text-right text-muted text-nowrap pr-0">
+                                  <span
+                                    data-ng-bind="item.performanceMTD.currencyCode"
+                                    data-role="item-performance-mtd-currency-code"
+                                  ></span>
+                                </div>
+                                <div class="col-4 text-right text-nowrap">
+                                  <ui-bb-format-amount-ng
+                                    data-no-map
+                                    data-role="item-performance-mtd-amount"
+                                    data-amount="item.performanceMTD.amount"
+                                  ></ui-bb-format-amount-ng>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-6">
+                                  <strong data-i18n-key="portfolio.mtd.performance"></strong>
+                                </div>
+                                <div class="col-6 text-right">
+                                  <strong
+                                    class="font-weight-bold amount-negative text-nowrap"
+                                    data-ng-class="item.performanceMTDpct > 0 ? 'text-success' : 'text-danger' "
+                                  >
+                                    <span
+                                      data-ng-bind="ext.helpers.showSign(item.performanceMTDpct)"
+                                      data-role="item-performance-mtd-pct"
+                                    ></span>%
+                                  </strong>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6 pr-0">
+                                <strong data-i18n-key="portfolio.inCashTotal"></strong>
+                              </div>
+                              <div class="col-2 text-right text-muted text-nowrap pr-0">
+                                <span
+                                  data-ng-bind="item.inCashTotal.currencyCode"
+                                  data-role="portfolio-in-cash-total-currency-code"
+                                ></span>
+                              </div>
+                              <div class="col-4 text-right text-nowrap">
+                                <ui-bb-format-amount-ng
+                                  data-no-map data-role="item-in-cash-total-amount"
+                                  data-amount="item.inCashTotal.amount"
+                                ></ui-bb-format-amount-ng>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6 pr-0">
+                                <strong data-i18n-key="portfolio.outCashTotal"></strong>
+                              </div>
+                              <div class="col-2 text-right text-muted text-nowrap pr-0">
+                                <span
+                                  data-ng-bind="item.outCashTotal.currencyCode"
+                                  data-role="portfolio-out-cash-total-currency-code"
+                                ></span>
+                              </div>
+                              <div class="col-4 text-right text-nowrap">
+                                <ui-bb-format-amount-ng
+                                  data-no-map
+                                  data-role="portfolio-out-cash-total-amount"
+                                  data-amount="item.outCashTotal.amount"
+                                ></ui-bb-format-amount-ng>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6 pr-0">
+                                <strong data-i18n-key="portfolio.netCashTotal"></strong>
+                              </div>
+                              <div class="col-2 text-right text-muted text-nowrap pr-0">
+                                <span
+                                  data-ng-bind="item.inCashTotal.currencyCode"
+                                  data-role="portfolio-net-cash-total-currency-code"
+                                ></span>
+                              </div>
+                              <div class="col-4 text-right text-nowrap">
+                                <ui-bb-format-amount-ng
+                                  data-no-map
+                                  data-role="net-cash-total-amount"
+                                  data-amount="ext.helpers.getNetCashTotalAmount(item.inCashTotal.amount, item.outCashTotal.amount)"
+                                ></ui-bb-format-amount-ng>
+                              </div>
+                            </div>
+                            <div class="d-md-none mb-4"></div>
+                          </div>
+
+                          <div class="col-12 col-xl-4 border-left py-3">
+                            <div class="row">
+                              <div class="col-6 col-xl-12">
+                                <strong data-i18n-key="portfolio.managers"></strong>
+                                <div data-ng-repeat="manager in item.managers">
+                                  <a
+                                    href=""
+                                    class="btn-link"
+                                    data-ng-bind="manager.name"
+                                    data-role="manager-name"
+                                  ></a>
+                                </div>
+                                <div class="d-none d-xl-block mb-4"></div>
+                              </div>
+                              <div class="col-6 col-xl-12">
+                                <strong data-i18n-key="portfolio.attorneys"></strong>
+                                <div data-ng-repeat="attorney in item.attorneys">
+                                  <a
+                                    href=""
+                                    class="btn-link"
+                                    data-ng-bind="attorney.name"
+                                    data-role="attorney-name">
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ui-bb-empty-state-ng>
+    </ui-bb-empty-state-ng>
+  </ui-bb-loading-indicator-ng>
+</div>

@@ -1,0 +1,14 @@
+---
+### Live profile
+spring:
+  profiles: live
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name}
+    username: ${spring.datasource.username.audit-persistence-service}
+    password: ${spring.datasource.password.audit-persistence-service}
+    url: ${spring.datasource.url.audit-persistence-service}
+
+logging:
+  config: ${backbase.config.dir}/audit-persistence-service/logback.xml
+
+

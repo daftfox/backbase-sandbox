@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-account-statements-filter-ng@^2.4.0",
+        "scope": null,
+        "escapedName": "ui-bb-account-statements-filter-ng",
+        "name": "ui-bb-account-statements-filter-ng",
+        "rawSpec": "^2.4.0",
+        "spec": ">=2.4.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-account-statements-ng"
+    ]
+  ],
+  "_from": "ui-bb-account-statements-filter-ng@>=2.4.0 <3.0.0",
+  "_id": "ui-bb-account-statements-filter-ng@2.4.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-account-statements-filter-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-account-statements-filter-ng@^2.4.0",
+    "scope": null,
+    "escapedName": "ui-bb-account-statements-filter-ng",
+    "name": "ui-bb-account-statements-filter-ng",
+    "rawSpec": "^2.4.0",
+    "spec": ">=2.4.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bb-account-statements-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-account-statements-filter-ng/-/ui-bb-account-statements-filter-ng-2.4.0.tgz",
+  "_shasum": "a0650ccd9f3e6491aff7281cf797b996e5b71287",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-account-statements-filter-ng@^2.4.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-account-statements-ng",
+  "dependencies": {
+    "ui-bb-account-statements-category-filter-ng": "^2.4.0",
+    "ui-bb-calendar-popup-ng": "^2.0.56",
+    "ui-bb-track-form-changes-ng": "^2.0.56",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-account-statements-filter-ng/-/ui-bb-account-statements-filter-ng-2.4.0.tgz",
+    "shasum": "a0650ccd9f3e6491aff7281cf797b996e5b71287"
+  },
+  "main": "scripts/ui-bb-account-statements-filter-ng.js",
+  "name": "ui-bb-account-statements-filter-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.4.0"
+}

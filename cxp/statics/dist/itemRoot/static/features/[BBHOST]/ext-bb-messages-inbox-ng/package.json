@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-messages-inbox-ng@~2.4.7",
+        "scope": null,
+        "escapedName": "ext-bb-messages-inbox-ng",
+        "name": "ext-bb-messages-inbox-ng",
+        "rawSpec": "~2.4.7",
+        "spec": ">=2.4.7 <2.5.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bb-messages-inbox-ng@>=2.4.7 <2.5.0",
+  "_id": "ext-bb-messages-inbox-ng@2.4.7",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-messages-inbox-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-messages-inbox-ng@~2.4.7",
+    "scope": null,
+    "escapedName": "ext-bb-messages-inbox-ng",
+    "name": "ext-bb-messages-inbox-ng",
+    "rawSpec": "~2.4.7",
+    "spec": ">=2.4.7 <2.5.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-messages-inbox-ng/-/ext-bb-messages-inbox-ng-2.4.7.tgz",
+  "_shasum": "ac85bec6f839619dcf7da17ebe7126d863b428a7",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-messages-inbox-ng@~2.4.7",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "ui-bb-confirm-ng": "^3.0.56",
+    "ui-bb-conversation-list-ng": "^2.4.7",
+    "ui-bb-conversation-view-ng": "^2.4.7",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-notification-stripe-ng": "^2.0.56",
+    "ui-bb-paginator-ng": "^2.0.56",
+    "ui-bb-substitute-error-ng": "^2.0.56",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-accordion": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-messages-inbox-ng/-/ext-bb-messages-inbox-ng-2.4.7.tgz",
+    "shasum": "ac85bec6f839619dcf7da17ebe7126d863b428a7"
+  },
+  "main": "scripts/ext-bb-messages-inbox-ng.js",
+  "name": "ext-bb-messages-inbox-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.4.7"
+}

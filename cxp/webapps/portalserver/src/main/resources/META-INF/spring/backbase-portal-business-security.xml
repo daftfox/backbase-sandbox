@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                 http://www.springframework.org/schema/beans/spring-beans.xsd
+                 http://www.springframework.org/schema/security
+                 http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- Configure Authentication mechanism -->
+    <authentication-manager alias="authenticationManager">
+        <!-- JWT Pre Gateway Authentication Provider -->
+        <authentication-provider ref="jwtPreAuthenticationProvider"/>
+        <!-- Username/password Gateway Authentication Provider-->
+        <authentication-provider ref="gatewayAuthenticationProvider"/>
+        <authentication-provider user-service-ref="portalUserDetailsService">
+            <password-encoder ref="passwordEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+
+    <!-- JWT Pre Authentication Filter that retrieves the Authorization Cookie from the request -->
+    <beans:bean name="jwtPreAuthenticationFilter"
+                class="com.backbase.extension.portal.gateway.security.filter.JwtPreAuthenticationFilter">
+        <beans:constructor-arg ref="backbaseConfiguration"/>
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+    </beans:bean>
+
+    <!-- JWT From Append Filter -->
+    <beans:bean name="jwtFromSessionAppendFilter"
+                class="com.backbase.extension.portal.gateway.security.filter.JwtFromSessionAppendFilter">
+        <beans:constructor-arg ref="backbaseConfiguration"/>
+    </beans:bean>
+
+    <!-- Spring Default Authentication Provider that requires a userDetailsService to retrieve information
+         about the logged in user identified by the JWT -->
+    <beans:bean name="jwtPreAuthenticationProvider"
+                class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+        <beans:property name="preAuthenticatedUserDetailsService" ref="jwtPreAuthenticatedUserDetailsService"/>
+    </beans:bean>
+
+    <beans:bean name="jwtSyncTokenFilter"
+                class="com.backbase.extension.portal.gateway.security.filter.JwtSyncTokenFilter">
+        <beans:constructor-arg ref="gatewayAuthRestClient"/>
+        <beans:constructor-arg ref="backbaseConfiguration"/>
+    </beans:bean>
+
+    <!-- Username/password Gateway Authentication Provider-->
+    <beans:bean name="gatewayAuthenticationProvider"
+                class="com.backbase.extension.portal.gateway.security.provider.GatewayAuthenticationProvider">
+        <beans:constructor-arg ref="gatewayUserDetailsService"/>
+        <beans:constructor-arg ref="gatewayAuthRestClient"/>
+        <beans:constructor-arg ref="backbaseConfiguration"/>
+    </beans:bean>
+
+    <!-- Custom User Details Provider that uses the Authentication Micro Service to decode the JWT and creates the
+         principal based on the response -->
+    <beans:bean name="jwtPreAuthenticatedUserDetailsService"
+                class="com.backbase.extension.portal.gateway.security.userdetails.JwtPreAuthenticatedUserDetailsService">
+        <beans:constructor-arg ref="gatewayUserDetailsService"/>
+    </beans:bean>
+
+    <beans:bean name="gatewayJwtConsumer" class="com.backbase.extension.portal.gateway.security.token.GatewayExternalJwtConsumer">
+        <beans:constructor-arg ref="backbaseConfiguration"/>
+    </beans:bean>
+
+    <!-- Gateway UserDetails Service -->
+    <beans:bean name="gatewayUserDetailsService"
+                class="com.backbase.extension.portal.gateway.security.userdetails.GatewayUserDetailsService">
+        <beans:constructor-arg ref="userService"/>
+        <beans:constructor-arg ref="groupService"/>
+        <beans:constructor-arg ref="gatewayAuthRestClient"/>
+        <beans:constructor-arg ref="backbaseConfiguration"/>
+        <beans:constructor-arg ref="gatewayJwtConsumer"/>
+    </beans:bean>
+
+    <!-- Gateway Rest Client -->
+    <beans:bean name="gatewayAuthRestClient"
+                class="com.backbase.extension.portal.gateway.security.rest.GatewayAuthRestClient">
+        <beans:constructor-arg ref="backbaseConfiguration"/>
+    </beans:bean>
+
+    <!-- Gateway Auth Session Invalidator -->
+    <beans:bean name="gatewaySessionInvalidator"
+                class="com.backbase.extension.portal.gateway.security.common.GatewaySessionInvalidator">
+        <beans:constructor-arg ref="gatewayAuthRestClient"/>
+        <beans:constructor-arg ref="backbaseConfiguration"/>
+    </beans:bean>
+
+    <!--Rest Template with production wise configuration-->
+    <beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <beans:property name="requestFactory">
+            <beans:bean class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory"/>
+        </beans:property>
+    </beans:bean>
+
+
+</beans:beans>

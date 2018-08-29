@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-manage-products-ng@^2.17.0",
+        "scope": null,
+        "escapedName": "ext-bb-manage-products-ng",
+        "name": "ext-bb-manage-products-ng",
+        "rawSpec": "^2.17.0",
+        "spec": ">=2.17.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-manage-products-ng"
+    ]
+  ],
+  "_from": "ext-bb-manage-products-ng@>=2.17.0 <3.0.0",
+  "_id": "ext-bb-manage-products-ng@2.18.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-manage-products-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-manage-products-ng@^2.17.0",
+    "scope": null,
+    "escapedName": "ext-bb-manage-products-ng",
+    "name": "ext-bb-manage-products-ng",
+    "rawSpec": "^2.17.0",
+    "spec": ">=2.17.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-manage-products-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-manage-products-ng/-/ext-bb-manage-products-ng-2.18.0.tgz",
+  "_shasum": "e66ca0507b19bebf431d9cc98b6a03102cd2de19",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-manage-products-ng@^2.17.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-manage-products-ng",
+  "dependencies": {
+    "ui-bb-element-dimensions-ng": "^1.18.0",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-focus-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-manage-products-ng/-/ext-bb-manage-products-ng-2.18.0.tgz",
+    "shasum": "e66ca0507b19bebf431d9cc98b6a03102cd2de19"
+  },
+  "main": "scripts/ext-bb-manage-products-ng.js",
+  "name": "ext-bb-manage-products-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.18.0"
+}

@@ -1,0 +1,56 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-user-identity-details-ng@~1.1.1",
+        "scope": null,
+        "escapedName": "ext-bb-user-identity-details-ng",
+        "name": "ext-bb-user-identity-details-ng",
+        "rawSpec": "~1.1.1",
+        "spec": ">=1.1.1 <1.2.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bb-user-identity-details-ng@>=1.1.1 <1.2.0",
+  "_id": "ext-bb-user-identity-details-ng@1.1.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-user-identity-details-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-user-identity-details-ng@~1.1.1",
+    "scope": null,
+    "escapedName": "ext-bb-user-identity-details-ng",
+    "name": "ext-bb-user-identity-details-ng",
+    "rawSpec": "~1.1.1",
+    "spec": ">=1.1.1 <1.2.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-user-identity-details-ng/-/ext-bb-user-identity-details-ng-1.1.1.tgz",
+  "_shasum": "0d83d9f60e62d35b0e572859a02e29074827a49e",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-user-identity-details-ng@~1.1.1",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-dropdown-select-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-overlay-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-user-identity-details-ng/-/ext-bb-user-identity-details-ng-1.1.1.tgz",
+    "shasum": "0d83d9f60e62d35b0e572859a02e29074827a49e"
+  },
+  "main": "scripts/ext-bb-user-identity-details-ng.js",
+  "name": "ext-bb-user-identity-details-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.1"
+}

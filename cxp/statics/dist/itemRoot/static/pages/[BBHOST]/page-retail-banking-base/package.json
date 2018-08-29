@@ -1,0 +1,67 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "rb-demo-page-base@~2.0.0",
+        "scope": null,
+        "escapedName": "rb-demo-page-base",
+        "name": "rb-demo-page-base",
+        "rawSpec": "~2.0.0",
+        "spec": ">=2.0.0 <2.1.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-demo-release/workspace/dist"
+    ]
+  ],
+  "_from": "rb-demo-page-base@>=2.0.0 <2.1.0",
+  "_id": "rb-demo-page-base@2.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/rb-demo-page-base",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "rb-demo-page-base@~2.0.0",
+    "scope": null,
+    "escapedName": "rb-demo-page-base",
+    "name": "rb-demo-page-base",
+    "rawSpec": "~2.0.0",
+    "spec": ">=2.0.0 <2.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/rb-demo-page-base/-/rb-demo-page-base-2.0.0.tgz",
+  "_shasum": "d25227728de1194c9f64a335f907268596764cde",
+  "_shrinkwrap": null,
+  "_spec": "rb-demo-page-base@~2.0.0",
+  "_where": "/opt/jobs/collection-retail-banking-demo-release/workspace/dist",
+  "dependencies": {},
+  "description": "Retail Banking demo master page",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/rb-demo-page-base/-/rb-demo-page-base-2.0.0.tgz",
+    "shasum": "d25227728de1194c9f64a335f907268596764cde"
+  },
+  "keywords": [
+    "page",
+    "template",
+    "retail",
+    "banking",
+    "demo"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "rb-demo-page-base",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/rb/rb-demo-page-base.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.0.0"
+}

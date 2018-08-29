@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-scheduling-ng@^1.33.20",
+        "scope": null,
+        "escapedName": "ui-bb-scheduling-ng",
+        "name": "ui-bb-scheduling-ng",
+        "rawSpec": "^1.33.20",
+        "spec": ">=1.33.20 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/ext-bus-initiate-payment-us-international-wire-ng"
+    ]
+  ],
+  "_from": "ui-bb-scheduling-ng@>=1.33.20 <2.0.0",
+  "_id": "ui-bb-scheduling-ng@1.34.9",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-scheduling-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-scheduling-ng@^1.33.20",
+    "scope": null,
+    "escapedName": "ui-bb-scheduling-ng",
+    "name": "ui-bb-scheduling-ng",
+    "rawSpec": "^1.33.20",
+    "spec": ">=1.33.20 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bus-initiate-payment-us-international-wire-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-scheduling-ng/-/ui-bb-scheduling-ng-1.34.9.tgz",
+  "_shasum": "e2c4eb886f9d5261feb2d2bab38e2395050ed0c5",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-scheduling-ng@^1.33.20",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/ext-bus-initiate-payment-us-international-wire-ng",
+  "dependencies": {
+    "ui-bb-calendar-popup-ng": "^2.5.1",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-scheduling-ng/-/ui-bb-scheduling-ng-1.34.9.tgz",
+    "shasum": "e2c4eb886f9d5261feb2d2bab38e2395050ed0c5"
+  },
+  "main": "scripts/ui-bb-scheduling-ng.js",
+  "name": "ui-bb-scheduling-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.34.9"
+}

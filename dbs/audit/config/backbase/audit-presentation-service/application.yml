@@ -1,0 +1,8 @@
+---
+logging:
+  config: ${backbase.config.dir}/audit-presentation-service/logback.xml
+
+backbase:
+  persistence:
+    enabled: false
+

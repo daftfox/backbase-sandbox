@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-conversation-view-ng@^2.4.7",
+        "scope": null,
+        "escapedName": "ui-bb-conversation-view-ng",
+        "name": "ui-bb-conversation-view-ng",
+        "rawSpec": "^2.4.7",
+        "spec": ">=2.4.7 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-messages-inbox-ng"
+    ]
+  ],
+  "_from": "ui-bb-conversation-view-ng@>=2.4.7 <3.0.0",
+  "_id": "ui-bb-conversation-view-ng@2.4.7",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-conversation-view-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-conversation-view-ng@^2.4.7",
+    "scope": null,
+    "escapedName": "ui-bb-conversation-view-ng",
+    "name": "ui-bb-conversation-view-ng",
+    "rawSpec": "^2.4.7",
+    "spec": ">=2.4.7 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bb-messages-inbox-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-conversation-view-ng/-/ui-bb-conversation-view-ng-2.4.7.tgz",
+  "_shasum": "402dd64d964c88189205d91676f5c1a04805b0a5",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-conversation-view-ng@^2.4.7",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-messages-inbox-ng",
+  "dependencies": {
+    "ui-bb-rich-text-editor-ng": "^2.4.7",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-angular-sanitize": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-conversation-view-ng/-/ui-bb-conversation-view-ng-2.4.7.tgz",
+    "shasum": "402dd64d964c88189205d91676f5c1a04805b0a5"
+  },
+  "main": "scripts/ui-bb-conversation-view-ng.js",
+  "name": "ui-bb-conversation-view-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.4.7"
+}

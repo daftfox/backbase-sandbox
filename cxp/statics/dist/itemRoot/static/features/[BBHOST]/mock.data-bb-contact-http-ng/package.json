@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "mock.data-bb-contact-http-ng@~1.8.0",
+        "scope": null,
+        "escapedName": "mock.data-bb-contact-http-ng",
+        "name": "mock.data-bb-contact-http-ng",
+        "rawSpec": "~1.8.0",
+        "spec": ">=1.8.0 <1.9.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-mocks-release/workspace/dist"
+    ]
+  ],
+  "_from": "mock.data-bb-contact-http-ng@>=1.8.0 <1.9.0",
+  "_id": "mock.data-bb-contact-http-ng@1.8.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/mock.data-bb-contact-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "mock.data-bb-contact-http-ng@~1.8.0",
+    "scope": null,
+    "escapedName": "mock.data-bb-contact-http-ng",
+    "name": "mock.data-bb-contact-http-ng",
+    "rawSpec": "~1.8.0",
+    "spec": ">=1.8.0 <1.9.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/mock.data-bb-contact-http-ng/-/mock.data-bb-contact-http-ng-1.8.0.tgz",
+  "_shasum": "1813b1844a8ae7e1bbc9cb6f1483311cd3bab7ba",
+  "_shrinkwrap": null,
+  "_spec": "mock.data-bb-contact-http-ng@~1.8.0",
+  "_where": "/opt/jobs/collection-retail-banking-mocks-release/workspace/dist",
+  "dependencies": {
+    "lib-bb-storage-ng": "^1.0.91",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/mock.data-bb-contact-http-ng/-/mock.data-bb-contact-http-ng-1.8.0.tgz",
+    "shasum": "1813b1844a8ae7e1bbc9cb6f1483311cd3bab7ba"
+  },
+  "main": "scripts/mock.data-bb-contact-http-ng.js",
+  "name": "mock.data-bb-contact-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.8.0"
+}

@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-highlight-text-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-highlight-text-ng",
+        "name": "ui-bb-highlight-text-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-highlight-text-ng@2.5.1",
+  "_id": "ui-bb-highlight-text-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-highlight-text-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-highlight-text-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-highlight-text-ng",
+    "name": "ui-bb-highlight-text-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-highlight-text-ng/-/ui-bb-highlight-text-ng-2.5.1.tgz",
+  "_shasum": "5f3e506fc23e83d0606468a5bbb8282ef7a3de3d",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-highlight-text-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-highlight-text-ng/-/ui-bb-highlight-text-ng-2.5.1.tgz",
+    "shasum": "5f3e506fc23e83d0606468a5bbb8282ef7a3de3d"
+  },
+  "main": "scripts/ui-bb-highlight-text-ng.js",
+  "name": "ui-bb-highlight-text-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

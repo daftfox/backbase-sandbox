@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "template-horizontal-navigation@~3.0.0",
+        "scope": null,
+        "escapedName": "template-horizontal-navigation",
+        "name": "template-horizontal-navigation",
+        "rawSpec": "~3.0.0",
+        "spec": ">=3.0.0 <3.1.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist"
+    ]
+  ],
+  "_from": "template-horizontal-navigation@>=3.0.0 <3.1.0",
+  "_id": "template-horizontal-navigation@3.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/template-horizontal-navigation",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "template-horizontal-navigation@~3.0.0",
+    "scope": null,
+    "escapedName": "template-horizontal-navigation",
+    "name": "template-horizontal-navigation",
+    "rawSpec": "~3.0.0",
+    "spec": ">=3.0.0 <3.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/template-horizontal-navigation/-/template-horizontal-navigation-3.0.0.tgz",
+  "_shasum": "144e1991ff7464db9e4dc48260d3dd183059850a",
+  "_shrinkwrap": null,
+  "_spec": "template-horizontal-navigation@~3.0.0",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist",
+  "author": "",
+  "dependencies": {},
+  "description": "",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/template-horizontal-navigation/-/template-horizontal-navigation-3.0.0.tgz",
+    "shasum": "144e1991ff7464db9e4dc48260d3dd183059850a"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "template-horizontal-navigation",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/template-horizontal-navigation.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "3.0.0"
+}

@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-start@2.0.69",
+        "scope": null,
+        "escapedName": "lib-bb-start",
+        "name": "lib-bb-start",
+        "rawSpec": "2.0.69",
+        "spec": "2.0.69",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-start@2.0.69",
+  "_id": "lib-bb-start@2.0.69",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-start",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-start@2.0.69",
+    "scope": null,
+    "escapedName": "lib-bb-start",
+    "name": "lib-bb-start",
+    "rawSpec": "2.0.69",
+    "spec": "2.0.69",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-start/-/lib-bb-start-2.0.69.tgz",
+  "_shasum": "5f87c74f3867a35b0daf18ca4fa607826d5d4d83",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-start@2.0.69",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.0",
+    "lib-bb-start-ng": "^1.7.10",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-start/-/lib-bb-start-2.0.69.tgz",
+    "shasum": "5f87c74f3867a35b0daf18ca4fa607826d5d4d83"
+  },
+  "main": "scripts/lib-bb-start.js",
+  "name": "lib-bb-start",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.0.69"
+}

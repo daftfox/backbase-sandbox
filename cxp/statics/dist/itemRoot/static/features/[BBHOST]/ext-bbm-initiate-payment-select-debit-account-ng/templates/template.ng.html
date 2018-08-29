@@ -1,0 +1,41 @@
+<div class="ext-bbm-initiate-payment-select-account-ng">
+  <div class="bbm-layout bbm-layout-scroll">
+    <div class="bbm-list">
+      <!-- Accounts -->
+      <div class="bbm-list-group">
+        <ul class="bbm-list-group-items">
+          <!-- Debit accounts -->
+          <li
+            class="bbm-list-item"
+            data-ng-repeat="account in ext.helpers.getDebitAccounts() track by $index"
+            data-ng-click="ext.helpers.selectAccount(account)">
+            <div class="bbm-account bbm-account-compact">
+              <div class="bbm-account-compact-primary-information">
+                <h3
+                  class="bbm-account-compact-name"
+                  data-ng-bind="ext.helpers.getAccountDisplayName(account)">
+                </h3>
+                <div class="bbm-account-compact-primary-amount">
+                  <ui-bb-format-amount-ng
+                    data-amount="account.amount"
+                    data-currency="account.currency"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+              <div class="bbm-account-compact-secondary-information">
+                <div class="bbm-account-compact-identifier">
+                  <span
+                    class="prevent-ios-click"
+                    data-role="product-id"
+                    data-ng-bind="account.identifier">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

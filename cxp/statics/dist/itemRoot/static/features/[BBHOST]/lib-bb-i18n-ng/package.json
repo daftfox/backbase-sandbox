@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-i18n-ng@1.0.122",
+        "scope": null,
+        "escapedName": "lib-bb-i18n-ng",
+        "name": "lib-bb-i18n-ng",
+        "rawSpec": "1.0.122",
+        "spec": "1.0.122",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-i18n-ng@1.0.122",
+  "_id": "lib-bb-i18n-ng@1.0.122",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-i18n-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-i18n-ng@1.0.122",
+    "scope": null,
+    "escapedName": "lib-bb-i18n-ng",
+    "name": "lib-bb-i18n-ng",
+    "rawSpec": "1.0.122",
+    "spec": "1.0.122",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-start-ng",
+    "/ui-bb-i18n-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-i18n-ng/-/lib-bb-i18n-ng-1.0.122.tgz",
+  "_shasum": "e3d6137ca93a123aebefebba6eea73847e516dda",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-i18n-ng@1.0.122",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-i18n-ng/-/lib-bb-i18n-ng-1.0.122.tgz",
+    "shasum": "e3d6137ca93a123aebefebba6eea73847e516dda"
+  },
+  "main": "scripts/lib-bb-i18n-ng.js",
+  "name": "lib-bb-i18n-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.122"
+}

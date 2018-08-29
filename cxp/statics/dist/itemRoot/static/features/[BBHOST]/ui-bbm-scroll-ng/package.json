@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bbm-scroll-ng@^1.1.0",
+        "scope": null,
+        "escapedName": "ui-bbm-scroll-ng",
+        "name": "ui-bbm-scroll-ng",
+        "rawSpec": "^1.1.0",
+        "spec": ">=1.1.0 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bbm-notification-center-list-ng"
+    ]
+  ],
+  "_from": "ui-bbm-scroll-ng@>=1.1.0 <2.0.0",
+  "_id": "ui-bbm-scroll-ng@1.1.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bbm-scroll-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bbm-scroll-ng@^1.1.0",
+    "scope": null,
+    "escapedName": "ui-bbm-scroll-ng",
+    "name": "ui-bbm-scroll-ng",
+    "rawSpec": "^1.1.0",
+    "spec": ">=1.1.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bbm-notification-center-list-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bbm-scroll-ng/-/ui-bbm-scroll-ng-1.1.0.tgz",
+  "_shasum": "624972a32cd7a6516c97862618a554254d7f6e9d",
+  "_shrinkwrap": null,
+  "_spec": "ui-bbm-scroll-ng@^1.1.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bbm-notification-center-list-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bbm-scroll-ng/-/ui-bbm-scroll-ng-1.1.0.tgz",
+    "shasum": "624972a32cd7a6516c97862618a554254d7f6e9d"
+  },
+  "main": "scripts/ui-bbm-scroll-ng.js",
+  "name": "ui-bbm-scroll-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.0"
+}

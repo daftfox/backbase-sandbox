@@ -1,0 +1,4 @@
+---
+logging:
+  config: ${backbase.config.dir}/user-presentation-service/logback.xml
+

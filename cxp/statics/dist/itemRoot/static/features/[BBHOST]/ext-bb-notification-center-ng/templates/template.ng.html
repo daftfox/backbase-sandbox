@@ -1,0 +1,135 @@
+<div data-ng-controller="NotificationCenterController as $ctrl"
+  class="ext-bb-notification-center-ng">
+  <div class="empty-element-placeholder-relative" data-ng-if="$ctrl.state.isInitialLoading"></div>
+  <ui-bb-substitute-error-ng data-error="$ctrl.initialError"
+    data-message="$ctrl.initialError | i18n">
+    <div class="notifications col-sm-4">
+      <ui-bb-notification-stripe-ng data-ng-if="$ctrl.status"
+        data-timeout-second="{{ $ctrl.dismissTime }}"
+        data-message="{{ $ctrl.status.message | i18n }}"
+        data-on-close="$ctrl.status = null;"
+        data-type="bg-{{ $ctrl.status.class }}">
+      </ui-bb-notification-stripe-ng>
+    </div>
+    <div class="card"
+      x-ms-format-detection="none">
+      <div class="card-body p-0">
+        <ui-bb-notifications-filter-ng data-on-filter="$ctrl.filter(params)"
+          data-header-labels="{
+            date: ('notification.filter.header.date' | i18n),
+            level: ('notification.filter.header.level' | i18n),
+            status: ('notification.filter.header.status' | i18n),
+          }"
+          data-level-labels="{
+            all: ('notification.level.all' | i18n),
+            alert: ('notification.level.alert' | i18n),
+            info: ('notification.level.info' | i18n),
+            warning: ('notification.level.warning' | i18n),
+            success: ('notification.level.success' | i18n),
+          }"
+          data-status-labels="{
+            all: ('notification.filter.status.all' | i18n),
+            read: ('notification.filter.status.read' | i18n),
+            unread: ('notification.filter.status.unread' | i18n),
+          }"
+          data-button-labels="{
+            main: ('notification.filter.button.main' | i18n),
+            apply: ('notification.filter.button.apply' | i18n),
+            clear: ('notification.filter.button.clear' | i18n),
+            cancel: ('notification.filter.button.cancel' | i18n),
+          }">
+        </ui-bb-notifications-filter-ng>
+        <ui-bb-empty-state-ng data-icon-class="fa fa-4x fa-file-bell-o text-muted"
+          data-title="{{ ext.helpers.getEmptyMessage($ctrl.isFilterApplied) }}"
+          data-is-empty="!$ctrl.notifications.length && !$ctrl.isNotificationsLoading">
+          <ui-bb-loading-overlay-ng data-is-loading="$ctrl.isNotificationsLoading">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-action"
+                data-ng-class="{ 'list-group-item-info': !notification.read }"
+                data-ng-repeat="notification in $ctrl.notifications track by notification.id"
+                data-ng-click="ext.helpers.toggleDetails(notification, ext, $ctrl)">
+                <div class="d-flex align-items-center">
+                  <i class="fa mr-2"
+                    data-ng-class="ext.helpers.getLevelIcon(notification.level)"
+                    title="{{ ext.helpers.getLevelTitle(notification.level) }}">
+                  </i>
+                  <span class="small text-muted"
+                    data-ng-bind="ext.helpers.getDateLabel(notification)">
+                  </span>
+                  <div data-uib-dropdown data-dropdown-append-to-body class="ml-auto">
+                    <button data-uib-dropdown-toggle
+                      class="btn btn-xs btn-link py-0"
+                      data-ng-click="$event.stopPropagation()"
+                      data-container="body"
+                      data-uib-tooltip="{{ 'notification.label.actions' | i18n }}"
+                      data-tooltip-append-to-body="true"
+                      data-tooltip-placement="top-right">
+                      <i class="fa fa-ellipsis-v"
+                        aria-hidden="true"
+                        data-label="{{ 'notification.label.actions' | i18n }}">
+                      </i>
+                    </button>
+                    <div data-uib-dropdown-menu class="dropdown-menu-right">
+                      <a class="dropdown-item"
+                        data-ng-disabled="notification.isUpdating"
+                        data-ng-click="ext.helpers.confirmDeleteNotification(notification, ext)"
+                        data-i18n-key="notification.label.delete">
+                      </a>
+                      <a class="dropdown-item"
+                        data-ng-disabled="notification.isUpdating"
+                        data-ng-click="$ctrl.markNotification(notification.id, !notification.read)"
+                        data-ng-bind="ext.helpers.getReadBtnLabel(notification.read)">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="font-weight-bold"
+                  data-ng-class="{ 'text-truncate': ext.toggledId !== notification.id }">
+                  <span data-ng-if="notification.title"
+                    data-ng-bind="notification.origin">
+                  </span>
+                  <span data-ng-if="notification.title"
+                    data-ng-bind-html="' - ' + notification.title">
+                  </span>
+                </div>
+                <ui-bb-message-ng class="d-block"
+                  data-ng-class="{ 'text-truncate': ext.toggledId !== notification.id }"
+                  data-template="notification.message"
+                  data-link="notification.link">
+                </ui-bb-message-ng>
+              </li>
+            </ul>
+            <ui-bb-load-more-ng data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+              data-ng-show="$ctrl.hasMore()"
+              data-label="{{ 'label.load.more' | i18n }}"
+              data-on-load-more="$ctrl.loadMore(done)">
+            </ui-bb-load-more-ng>
+            <ui-bb-paginator-ng data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'pagination')"
+              data-page-navigation-text="{{ 'pagination.label.page_navigation' | i18n }}"
+              data-first-text="{{ 'pagination.label.first' | i18n }}"
+              data-last-text="{{ 'pagination.label.last' | i18n }}"
+              data-previous-text="{{ 'pagination.label.prev' | i18n }}"
+              data-next-text="{{ 'pagination.label.next' | i18n }}"
+              data-total-items="{{ $ctrl.totalItems }}"
+              data-items-per-page="{{ $ctrl.pageSize }}"
+              data-max-nav-pages="{{ $ctrl.maxNavPages }}"
+              data-current-page="{{ $ctrl.currentPage }}"
+              data-ng-disabled="$ctrl.isNotificationsLoading"
+              data-change-page="$ctrl.changePage(params)">
+            </ui-bb-paginator-ng>
+          </ui-bb-loading-overlay-ng>
+        </ui-bb-empty-state-ng>
+      </div>
+    </div>
+  </ui-bb-substitute-error-ng>
+  <ui-bb-confirm-ng
+    data-is-open="ext.deleteConfirmOpened"
+    data-on-confirm="$ctrl.deleteNotification(ext.deleteItemId)"
+    data-labels="{
+      heading: ('notification.dialog.delete.title' | i18n),
+      bodyHtml: ('notification.dialog.delete.body' | i18n),
+      confirm: ('notification.dialog.delete.yes' | i18n),
+      cancel: ('notification.dialog.delete.no' | i18n)
+    }">
+  </ui-bb-confirm-ng>
+</div>

@@ -1,0 +1,64 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "container-deck@~2.2.3",
+        "scope": null,
+        "escapedName": "container-deck",
+        "name": "container-deck",
+        "rawSpec": "~2.2.3",
+        "spec": ">=2.2.3 <2.3.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist"
+    ]
+  ],
+  "_from": "container-deck@>=2.2.3 <2.3.0",
+  "_id": "container-deck@2.2.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-deck",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "container-deck@~2.2.3",
+    "scope": null,
+    "escapedName": "container-deck",
+    "name": "container-deck",
+    "rawSpec": "~2.2.3",
+    "spec": ">=2.2.3 <2.3.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/container-deck/-/container-deck-2.2.3.tgz",
+  "_shasum": "76cea497db8af515601e21e784c76c36d6db4d00",
+  "_shrinkwrap": null,
+  "_spec": "container-deck@~2.2.3",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist",
+  "author": "",
+  "dependencies": {
+    "container-panel": "^2.0.0",
+    "template-deck": "^2.0.0"
+  },
+  "description": "Generic container for holding several panels which can be shown one at a time. Being inherited by Tabs and Launcher container.",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/container-deck/-/container-deck-2.2.3.tgz",
+    "shasum": "76cea497db8af515601e21e784c76c36d6db4d00"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "container-deck",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/container-deck.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.2.3"
+}

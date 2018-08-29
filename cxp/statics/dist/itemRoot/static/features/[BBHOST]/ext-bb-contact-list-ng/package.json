@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-contact-list-ng@^2.6.1",
+        "scope": null,
+        "escapedName": "ext-bb-contact-list-ng",
+        "name": "ext-bb-contact-list-ng",
+        "rawSpec": "^2.6.1",
+        "spec": ">=2.6.1 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-contact-ng"
+    ]
+  ],
+  "_from": "ext-bb-contact-list-ng@>=2.6.1 <3.0.0",
+  "_id": "ext-bb-contact-list-ng@2.7.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-contact-list-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-contact-list-ng@^2.6.1",
+    "scope": null,
+    "escapedName": "ext-bb-contact-list-ng",
+    "name": "ext-bb-contact-list-ng",
+    "rawSpec": "^2.6.1",
+    "spec": ">=2.6.1 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-contact-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-contact-list-ng/-/ext-bb-contact-list-ng-2.7.1.tgz",
+  "_shasum": "9deea9832cda669f8ef39325ec6f7aecc6a95b0a",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-contact-list-ng@^2.6.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-contact-ng",
+  "dependencies": {
+    "ui-bb-account-card-ng": "^2.5.1",
+    "ui-bb-confirm-ng": "^3.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-iban-ng": "^2.7.1",
+    "ui-bb-inline-status-ng": "^2.5.1",
+    "ui-bb-load-more-ng": "^2.5.1",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-loading-overlay-ng": "^2.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-search-box-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "ui-bb-track-form-changes-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-angular-ng-messages": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-contact-list-ng/-/ext-bb-contact-list-ng-2.7.1.tgz",
+    "shasum": "9deea9832cda669f8ef39325ec6f7aecc6a95b0a"
+  },
+  "main": "scripts/ext-bb-contact-list-ng.js",
+  "name": "ext-bb-contact-list-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.7.1"
+}

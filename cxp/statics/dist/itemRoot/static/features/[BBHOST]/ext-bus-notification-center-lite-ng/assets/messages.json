@@ -1,0 +1,41 @@
+{
+  "en-US": {
+    "header.notifications": "Latest notifications",
+
+    "notification.message.title.empty": "No Notifications",
+    "notification.message.empty": "There are currently no notifications here",
+    "notification.message.not.found": "There are no notifications matching your criteria. Please adjust filter parameters.",
+    "notification.message.deleted": "A notification has successfully been deleted",
+
+    "notification.level.all": "All",
+    "notification.level.info": "Info",
+    "notification.level.warning": "Warning",
+    "notification.level.alert": "Alert",
+    "notification.level.success": "Success",
+    "notification.label.delete": "Delete",
+    "notification.label.read": "Read",
+    "notification.label.unread": "Unread",
+
+    "notification.header.description": "Description",
+    "notification.header.status": "Severity",
+    "notification.header.date": "Date",
+
+    "notification.filter.header.date": "Date Range",
+    "notification.filter.header.level": "Severity level",
+    "notification.filter.header.status": "Status",
+
+    "notification.filter.status.all": "All",
+    "notification.filter.status.read": "Read",
+    "notification.filter.status.unread": "Unread",
+
+    "label.allNotifications": "View all notifications",
+
+    "message.loading": "Loading",
+    "message.error.connection": "Connection Error",
+    "message.error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later.",
+
+    "calendar.label.now": "Now",
+    "calendar.label.today": "Today",
+    "calendar.label.yesterday": "Yesterday"
+  }
+}

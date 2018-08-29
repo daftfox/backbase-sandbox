@@ -1,0 +1,57 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-batch-upload-ng@~2.3.0",
+        "scope": null,
+        "escapedName": "ext-bus-batch-upload-ng",
+        "name": "ext-bus-batch-upload-ng",
+        "rawSpec": "~2.3.0",
+        "spec": ">=2.3.0 <2.4.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-batch-upload-ng@>=2.3.0 <2.4.0",
+  "_id": "ext-bus-batch-upload-ng@2.3.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-batch-upload-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-batch-upload-ng@~2.3.0",
+    "scope": null,
+    "escapedName": "ext-bus-batch-upload-ng",
+    "name": "ext-bus-batch-upload-ng",
+    "rawSpec": "~2.3.0",
+    "spec": ">=2.3.0 <2.4.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-batch-upload-ng/-/ext-bus-batch-upload-ng-2.3.0.tgz",
+  "_shasum": "45b650144d255b197fee869fac0f1b1a194878a9",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-batch-upload-ng@~2.3.0",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-confirm-ng": "^3.0.56",
+    "ui-bb-file-size-ng": "^1.4.0",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-notification-stripe-ng": "^2.0.56",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-batch-upload-ng/-/ext-bus-batch-upload-ng-2.3.0.tgz",
+    "shasum": "45b650144d255b197fee869fac0f1b1a194878a9"
+  },
+  "main": "scripts/ext-bus-batch-upload-ng.js",
+  "name": "ext-bus-batch-upload-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.3.0"
+}

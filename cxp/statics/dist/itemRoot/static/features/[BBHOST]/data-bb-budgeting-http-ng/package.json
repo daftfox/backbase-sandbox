@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-budgeting-http-ng@^1.2.4",
+        "scope": null,
+        "escapedName": "data-bb-budgeting-http-ng",
+        "name": "data-bb-budgeting-http-ng",
+        "rawSpec": "^1.2.4",
+        "spec": ">=1.2.4 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-budget-ng"
+    ]
+  ],
+  "_from": "data-bb-budgeting-http-ng@>=1.2.4 <2.0.0",
+  "_id": "data-bb-budgeting-http-ng@1.2.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-budgeting-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-budgeting-http-ng@^1.2.4",
+    "scope": null,
+    "escapedName": "data-bb-budgeting-http-ng",
+    "name": "data-bb-budgeting-http-ng",
+    "rawSpec": "^1.2.4",
+    "spec": ">=1.2.4 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-bb-budget-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-budgeting-http-ng/-/data-bb-budgeting-http-ng-1.2.4.tgz",
+  "_shasum": "4a0cd94643462c52e4db0740987234dd50d5644a",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-budgeting-http-ng@^1.2.4",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-budget-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-budgeting-http-ng/-/data-bb-budgeting-http-ng-1.2.4.tgz",
+    "shasum": "4a0cd94643462c52e4db0740987234dd50d5644a"
+  },
+  "main": "scripts/data-bb-budgeting-http-ng.js",
+  "name": "data-bb-budgeting-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.2.4"
+}

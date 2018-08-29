@@ -1,0 +1,89 @@
+{
+  "en-US": {
+    "form.title": "New Payment",
+
+    "form.label.amount": "Amount",
+    "form.label.account.name": "Account name",
+    "form.label.account.number": "Account number",
+    "form.label.account.type": "Account type",
+    "form.label.message": "Description",
+    "form.label.optional": "(optional)",
+    "form.label.schedule": "Scheduling",
+    "form.label.no.accounts": "No accounts",
+    "form.label.search": "Search",
+    "form.label.continue": "Continue",
+    "form.label.save.contact": "Add as a new contact",
+
+    "form.label.ENTERED": "Payment successfully submitted",
+    "form.label.ACCEPTED": "Payment order is sent to bank",
+    "form.label.PROCESSED": "Payment is processed successfully by bank",
+    "form.label.REJECTED": "Payment order has been rejected",
+
+    "form.selector.placeholder": "Select account",
+    "form.search.placeholder": "Search",
+    "form.account.name.placeholder": "Enter account name",
+    "form.account.number.placeholder": "Enter account number",
+    "form.message.placeholder": "Enter description",
+
+    "form.search.result": "One result found",
+    "form.search.results": "results found",
+
+    "form.beneficiary.group.internal": "Own accounts",
+
+    "form.account.type.saving": "Saving",
+    "form.account.type.checking": "Checking",
+    "form.account.type.select": "Select account type",
+
+    "form.schedule.execution": "Execution",
+    "form.schedule.starting": "Starting",
+    "form.schedule.today": "Today",
+    "form.schedule.on": "On",
+    "form.schedule.until": "until",
+    "form.schedule.repeat.count": "times",
+    "form.schedule.ending": "Ending",
+    "form.schedule.never": "Never",
+    "form.schedule.after": "After",
+    "form.schedule.occurrences": "occurrences",
+    "form.schedule.frequency": "Frequency",
+    "form.schedule.frequency.once": "Once",
+    "form.schedule.frequency.daily": "Daily",
+    "form.schedule.frequency.weekly": "Weekly",
+    "form.schedule.frequency.monthly": "Monthly",
+    "form.schedule.frequency.quarterly": "Quarterly",
+    "form.schedule.frequency.annually": "Annually",
+
+    "review.title": "Review payment",
+
+    "review.label.from": "From",
+    "review.label.to": "To",
+    "review.label.message": "Description",
+    "review.label.schedule": "Scheduling",
+
+    "review.label.cancel": "Cancel",
+    "review.label.edit": "Edit",
+    "review.label.submit": "Confirm",
+    "review.label.new": "New Payment",
+
+    "dialog.cancel.title": "Cancel payment",
+    "dialog.cancel.body": "You are about to cancel the payment. All data will be cleared.<br>Do you wish to continue?",
+    "dialog.cancel.yes": "Yes, Cancel",
+    "dialog.cancel.no": "No, Continue",
+
+    "form.error.schedule.repeat.min": "Value is below the minimum allowed occurrences ({min})",
+    "form.error.schedule.repeat.max": "Value exceeds the maximum allowed occurrences ({max})",
+    "form.error.schedule.repeat.pattern": "Value has to be a whole number",
+    "form.error.schedule.repeat.number": "Value is not a valid number",
+
+    "form.error.message.pattern": "The description should not contain any of $^&%<> symbols",
+    "form.error.message.maxlength": "You are not allowed to enter more than 140 characters",
+
+    "ui-bb-currency-input-ng.label.currency": "Payment currency",
+    "ui-bb-currency-input-ng.label.amount": "Payment amount integer",
+    "ui-bb-currency-input-ng.label.decimals": "Payment amount decimal",
+
+    "payment.model.error.auth": "You are not authorized to perform payment submit",
+    "payment.model.error.connectivity": "There was a connection problem, please try again",
+    "payment.model.error.user": "There is a problem with the payment submit",
+    "payment.model.error.unexpected": "An unexpected error occurred while performing payment submit"
+  }
+}

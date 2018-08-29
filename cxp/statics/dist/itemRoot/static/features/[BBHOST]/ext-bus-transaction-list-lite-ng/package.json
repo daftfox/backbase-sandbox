@@ -1,0 +1,58 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-transaction-list-lite-ng@~2.33.1",
+        "scope": null,
+        "escapedName": "ext-bus-transaction-list-lite-ng",
+        "name": "ext-bus-transaction-list-lite-ng",
+        "rawSpec": "~2.33.1",
+        "spec": ">=2.33.1 <2.34.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-transaction-list-lite-ng@>=2.33.1 <2.34.0",
+  "_id": "ext-bus-transaction-list-lite-ng@2.33.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-transaction-list-lite-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-transaction-list-lite-ng@~2.33.1",
+    "scope": null,
+    "escapedName": "ext-bus-transaction-list-lite-ng",
+    "name": "ext-bus-transaction-list-lite-ng",
+    "rawSpec": "~2.33.1",
+    "spec": ">=2.33.1 <2.34.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-transaction-list-lite-ng/-/ext-bus-transaction-list-lite-ng-2.33.1.tgz",
+  "_shasum": "48cbf15a3100f7d94c3697db9634cd3e77badbba",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-transaction-list-lite-ng@~2.33.1",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-overlay-ng": "^2.5.1",
+    "ui-bb-navigate-to-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-transaction-list-lite-ng/-/ext-bus-transaction-list-lite-ng-2.33.1.tgz",
+    "shasum": "48cbf15a3100f7d94c3697db9634cd3e77badbba"
+  },
+  "main": "scripts/ext-bus-transaction-list-lite-ng.js",
+  "name": "ext-bus-transaction-list-lite-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.33.1"
+}

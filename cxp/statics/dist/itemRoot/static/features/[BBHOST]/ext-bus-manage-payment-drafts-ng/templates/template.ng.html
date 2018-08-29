@@ -1,0 +1,196 @@
+<div class="ext-bus-manage-payment-drafts-ng"
+     data-ng-controller="PaymentDraftController as $ctrl">
+  <div class="notifications col-lg-4">
+    <ui-bb-notification-stripe-ng
+      data-ng-repeat="notification in $ctrl.state.notifications"
+      data-timeout-second="{{ $ctrl.dismissTime }}"
+      data-message="{{ notification.message }}"
+      data-on-close="$ctrl.state.notifications = ext.helpers.removeNotification(notification, $ctrl.state.notifications);"
+      data-type="bg-{{ notification.level === 'ALERT' ? 'danger' : notification.level | lowercase }}">
+    </ui-bb-notification-stripe-ng>
+  </div>
+
+  <ui-bb-substitute-error-ng data-message="$ctrl.state.error | i18n">
+    <div class="card" x-ms-format-detection="none">
+      <div class="card-header" data-ng-hide="!$ctrl.state.paymentDrafts.data.length && !$ctrl.state.pageParams.query">
+        <div class="row">
+          <div class="col-6 col-lg-4">
+            <ui-bb-search-box-ng
+              data-config="{
+                hideButton: false,
+                showIcon: false,
+                labels: {
+                  title: ('label.search.title' | i18n),
+                  placeholder: ('label.search.placeholder' | i18n),
+                  clear: ('label.search.clear' | i18n),
+                  submit: ('label.search.submit' | i18n),
+                }
+              }"
+              data-ng-model="$ctrl.state.pageParams.query"
+              data-on-submit="ext.helpers.onApplyFilter($ctrl)"
+              data-on-clear="ext.helpers.onApplyFilter($ctrl)">
+            </ui-bb-search-box-ng>
+          </div>
+          <div class="col-6 col-lg-8" ng-if="ext.helpers.getSelectedDrafts($ctrl.state.paymentDrafts.data).length > 0">
+            <div class="float-right">
+              <span class="text-muted mr-2" ng-bind="ext.helpers.getSelectedDrafts($ctrl.state.paymentDrafts.data).length + ' ' + ('label.selected' | i18n)"></span>
+              <button class="btn btn-danger "
+                data-ng-click="ext.helpers.showDeleteDialog($ctrl, ext)"
+                data-role="authorize-all-batches">
+                {{'label.delete' | i18n}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <ui-bb-empty-state-ng
+          data-icon-classes="fa fa-4x {{$ctrl.state.pageParams.query ? 'fa-search' : 'fa-pencil-alt'}} text-muted"
+          data-title="{{$ctrl.state.pageParams.query ? ('label.noResultsFound' | i18n) : ('label.noItems' | i18n) }}"
+          data-subtitle="{{$ctrl.state.pageParams.query ? ('label.noItems.description' | i18n) : ('label.noResultsFound.description' | i18n)}}"
+          data-is-empty="!$ctrl.state.paymentDrafts.data.length && !$ctrl.state.paymentDrafts.loading">
+          <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.paymentDrafts.loading">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th>
+                      <input type="checkbox"
+                             data-ng-click="ext.helpers.toggleAllDrafts($ctrl.state.paymentDrafts.data, checkall)"
+                             data-ng-model="checkall"
+                             data-ng-checked="ext.helpers.isSelectedAll($ctrl.state.paymentDrafts.data)"
+                             data-ng-if="!ext.helpers.isPartiallySelected($ctrl.state.paymentDrafts.data)" />
+                      <span class="checkbox-indeterminate checkbox-small bg-primary"
+                        data-ng-if="ext.helpers.isPartiallySelected($ctrl.state.paymentDrafts.data)"
+                        data-ng-click="ext.helpers.toggleAllDrafts($ctrl.state.paymentDrafts.data, false)">
+                      </span>
+                    </th>
+                    <th data-ng-repeat="header in ext.helpers.headers"
+                        class="{{ header.class }}"
+                        data-ui-bb-sortable-column-ng
+                        data-options="header.sortable"
+                        data-active="ext.helpers.isSortableActive(header.sortable, $ctrl)"
+                        data-on-sort="$ctrl.onSort(key, direction)">
+                      <span data-i18n-key="{{ ::header.label }}"></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-ng-class="{'bg-info': payment.selected}"
+                      data-ui-bus-payment-order-details item="payment"
+                      data-toggler="toggle" data-helpers="ext.helpers"
+                      data-ng-repeat="payment in $ctrl.state.paymentDrafts.data track by payment.id">
+                    <td>
+                      <input type="checkbox" ng-model="payment.selected"/>
+                    </td>
+                    <td data-label="{{ ext.helpers.headers[0].label | i18n }}">
+                      <div class="table-small" data-role="debit-counter-party-name">
+                        {{ ::payment.debtor.name }}
+                      </div>
+                      <div class="table-small break-word" data-ng-class="{'small text-muted': payment.debtor.name}"
+                          data-role="debit-counter-party-identification">
+                        {{ ::payment.debtorAccount.identification.identification }}
+                      </div>
+                      <span data-ng-if="!payment.debtor.name && !payment.debtorAccount.identification.identification">---</span>
+                    </td>
+                    <td data-label="{{ ext.helpers.headers[1].label | i18n }}">
+                      <div class="table-small" data-role="credit-counter-party-name">
+                        {{ ::payment.creditTransferTransactionInformation[0].creditor.name }}
+                      </div>
+                      <div class="table-small break-word"
+                          data-ng-class="{'small text-muted': payment.creditTransferTransactionInformation[0].creditor.name}"
+                          data-role="credit-counter-party-identification">
+                        {{ ::payment.creditTransferTransactionInformation[0].creditorAccount.identification.identification }}
+                      </div>
+                      <span data-ng-if="!payment.creditTransferTransactionInformation[0].creditor.name && !payment.creditTransferTransactionInformation[0].creditorAccount.identification.identification">---</span>
+                    </td>
+                    <td data-label="{{ ext.helpers.headers[2].label | i18n }}"
+                        data-ng-bind="::payment.creditTransferTransactionInformation[0].instructedAmount.currencyCode || '---'"
+                        data-role="currency"></td>
+                    <td
+                        data-label="{{ ext.helpers.headers[3].label | i18n }}"
+                        data-role="amount"
+                        class="text-right">
+                      <span data-ng-if="payment.creditTransferTransactionInformation[0].instructedAmount.amount">
+                        {{ ::payment.creditTransferTransactionInformation[0].instructedAmount.amount | currency: '' }}
+                      </span>
+                      <span data-ng-if="!payment.creditTransferTransactionInformation[0].instructedAmount.amount">---</span>
+                    </td>
+
+                    <td>
+                      <div class="text-right">
+                        <div class="btn p-0 d-inline-table" role="group" data-uib-dropdown data-dropdown-append-to-body data-keyboard-nav>
+                          <button type="button" data-uib-tooltip="{{ 'actions.handledraft' | i18n }}" data-tooltip-placement="top-right"
+                              data-uib-dropdown-toggle class="btn btn-secondary btn-dropdown-toggle"
+                            data-role="actions-handledraft">
+                            <i class="fa fa-ellipsis-v" aria-hidden="true" data-label="{{ 'actions.handledraft' | i18n }}"></i>
+                          </button>
+                          <div data-uib-dropdown-menu class="uib-dropdown-menu dropdown-menu dropdown-menu-right dropdown-menu-small">
+                            <a href="" class="dropdown-item" data-ng-click="ext.helpers.initiatePayment(payment)">
+                              {{ 'label.view' | i18n }}
+                            </a>
+
+                            <a href="" class="dropdown-item"
+                              data-ng-click="ext.helpers.showDeleteDialog($ctrl, ext, payment)">
+                              {{ 'label.delete' | i18n }}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <ui-bb-confirm-ng
+              data-is-open="ext.confirmDeleteDrafts"
+              data-confirm-btn-class="'btn-danger'"
+              data-on-confirm="ext.helpers.deleteMultipleDrafts($ctrl, ext.draftsSelected)"
+              data-labels="{
+                  heading: ('dialog.delete.drafts.title' | i18n: { num:  ext.draftsSelected.length}),
+                  bodyHtml: ('dialog.delete.drafts.body' | i18n: { num:  ext.draftsSelected.length}),
+                  confirm: ('dialog.delete.drafts.yes' | i18n),
+                  cancel: ('dialog.delete.drafts.no' | i18n)
+                }">
+            </ui-bb-confirm-ng>
+
+            <ui-bb-confirm-ng
+              data-is-open="ext.confirmDeleteDraft"
+              data-confirm-btn-class="'btn-danger'"
+              data-on-confirm="ext.helpers.deleteDraft($ctrl, ext.draftsSelected[0].id)"
+              data-labels="{
+                heading: ('dialog.delete.draft.title' | i18n),
+                bodyHtml: ('dialog.delete.draft.body' | i18n),
+                confirm: ('dialog.delete.drafts.yes' | i18n),
+                cancel: ('dialog.delete.drafts.no' | i18n)
+              }">
+            </ui-bb-confirm-ng>
+
+            <ui-bb-load-more-ng
+              data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+              data-ng-show="$ctrl.state.paymentDrafts.hasMore"
+              data-label="{{ 'label.loadMore' | i18n }}"
+              data-on-load-more="$ctrl.loadMore(done)"
+            ></ui-bb-load-more-ng>
+
+            <ui-bb-paginator-ng
+              data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'pagination')"
+              data-page-navigation-text="{{ 'label.page_navigation' | i18n }}"
+              data-first-text="{{ 'label.first' | i18n }}"
+              data-last-text="{{ 'label.last' | i18n }}"
+              data-previous-text="{{ 'label.prev' | i18n }}"
+              data-next-text="{{ 'label.next' | i18n }}"
+              data-total-items="{{ $ctrl.state.pageParams.totalItems }}"
+              data-items-per-page="{{ $ctrl.state.pageParams.size }}"
+              data-max-nav-pages="{{ $ctrl.state.pageParams.maxNavPages }}"
+              data-current-page="{{ $ctrl.state.pageParams.currentPage }}"
+              data-ng-disabled="$ctrl.state.accounts.loading"
+              data-change-page="$ctrl.changePage(params)"
+            ></ui-bb-paginator-ng>
+          </ui-bb-loading-overlay-ng>
+        </ui-bb-empty-state-ng>
+      </div>
+    </div>
+  </ui-bb-substitute-error-ng>
+</div>

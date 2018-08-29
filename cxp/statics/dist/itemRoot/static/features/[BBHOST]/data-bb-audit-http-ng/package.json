@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-audit-http-ng@^2.1.0",
+        "scope": null,
+        "escapedName": "data-bb-audit-http-ng",
+        "name": "data-bb-audit-http-ng",
+        "rawSpec": "^2.1.0",
+        "spec": ">=2.1.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/model-bb-audit-query-ng"
+    ]
+  ],
+  "_from": "data-bb-audit-http-ng@>=2.1.0 <3.0.0",
+  "_id": "data-bb-audit-http-ng@2.1.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-audit-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-audit-http-ng@^2.1.0",
+    "scope": null,
+    "escapedName": "data-bb-audit-http-ng",
+    "name": "data-bb-audit-http-ng",
+    "rawSpec": "^2.1.0",
+    "spec": ">=2.1.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-bb-audit-query-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-audit-http-ng/-/data-bb-audit-http-ng-2.1.0.tgz",
+  "_shasum": "fb488dae5177b78f4c792ec9d7c92f20c64e6368",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-audit-http-ng@^2.1.0",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/model-bb-audit-query-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-audit-http-ng/-/data-bb-audit-http-ng-2.1.0.tgz",
+    "shasum": "fb488dae5177b78f4c792ec9d7c92f20c64e6368"
+  },
+  "main": "scripts/data-bb-audit-http-ng.js",
+  "name": "data-bb-audit-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.1.0"
+}

@@ -1,0 +1,13 @@
+---
+### Live profile
+spring:
+  profiles: live
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name}
+    username: ${spring.datasource.username.notifications-persistence-service}
+    password: ${spring.datasource.password.notifications-persistence-service}
+    url: ${spring.datasource.url.notifications-persistence-service}
+
+logging:
+  config: ${backbase.config.dir}/notifications-persistence-service/logback.xml
+

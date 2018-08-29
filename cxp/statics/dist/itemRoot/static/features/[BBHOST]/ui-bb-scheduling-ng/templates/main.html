@@ -1,0 +1,137 @@
+<!-- Indicate selected schedule -->
+<div data-ng-show="$ctrl.indicateSchedule">
+  {{ $ctrl.getScheduleText() }}
+</div>
+
+<!-- Select schedule controls -->
+<div data-ng-show="!$ctrl.indicateSchedule">
+  <h3>{{ ::$ctrl.config.labels.title | i18n }}</h3>
+  <hr/>
+  <div class="row">
+    <div class="col-md-9 col-12">
+      <!-- schedule -->
+      <ui-bb-expandable-ng data-chevron="true">
+        <ui-bb-expandable-summary-ng>
+          {{ $ctrl.getScheduleText() }}
+        </ui-bb-expandable-summary-ng>
+      <ui-bb-expandable-details-ng>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group row">
+            <div class="col-12">{{ ::$ctrl.config.labels.execution | i18n }}</div>
+            <div class="col-6">
+              <ui-bb-calendar-popup-ng
+                data-date="$ctrl.schedule.startDate"
+                aria-label="{{ ::$ctrl.config.labels.execution | i18n }}">
+              </ui-bb-calendar-popup-ng>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-12">{{ ::$ctrl.config.labels.frequency | i18n }}</div>
+            <div class="col-6">
+              <ui-bb-dropdown-select-ng name="repetition"
+                data-ng-change="$ctrl.setEndDate()"
+                data-ng-model="$ctrl.schedule.transferFrequency"
+                data-ng-disabled="!$ctrl.config.recurring"
+                data-selected-as="$option.name | i18n | lowercase">
+                <ui-bb-dropdown-option-ng
+                  data-option="repeatType"
+                  data-arrow-navigation="true"
+                  class="list-group-item-text"
+                  data-ng-repeat="repeatType in $ctrl.getFrequencies() track by $index">
+                  {{ :: $option.name | i18n }}
+                </ui-bb-dropdown-option-ng>
+              </ui-bb-dropdown-select-ng>
+            </div>
+          </div>
+          <div class="form-group"
+            data-ng-show="$ctrl.schedule.transferFrequency.value !== $ctrl.singleFrequency.value">
+            <div class="col-12 p-0 mb-2">{{ ::$ctrl.config.labels.ending | i18n }}</div>
+            <div class="row-fluid mb-4">
+              <div class="col-12 p-0 radio">
+                <label>
+                  <input type="radio" name="endingType"
+                    data-ng-model="$ctrl.payment.endingType"
+                    value="{{ $ctrl.recurrenceEnding.NEVER }}"
+                    data-ng-checked="$ctrl.payment.endingType === $ctrl.recurrenceEnding.NEVER">
+                    &nbsp;{{ :: $ctrl.config.labels.never | i18n }}
+                </label>
+              </div>
+            </div>
+            <div class="row-fluid mb-4">
+              <div class="col-lg-9 col-12 pl-0">
+                <div class="row justify-content-center align-items-center">
+                  <div class="col-4 radio">
+                    <label>
+                      <input type="radio" name="endingType"
+                        data-ng-model="$ctrl.payment.endingType"
+                        value="{{ $ctrl.recurrenceEnding.ON }}"
+                        data-ng-checked="$ctrl.payment.endingType === $ctrl.recurrenceEnding.ON">
+                        &nbsp;{{ :: $ctrl.config.labels.on | i18n }}
+                    </label>
+                  </div>
+                  <div class="col-8 pl-0">
+                    <div class="w-50">
+                      <ui-bb-calendar-popup-ng
+                        data-date="$ctrl.schedule.endDate"
+                        aria-label="$ctrl.config.labels.ending"
+                        data-disabled="$ctrl.payment.endingType !== $ctrl.recurrenceEnding.ON"
+                        data-config="{
+                          minDate: $ctrl.getMinDate($ctrl.schedule.startDate, $ctrl.schedule.transferFrequency)
+                        }">
+                      </ui-bb-calendar-popup-ng>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="col-lg-9 col-12 pl-0">
+                <div class="row justify-content-center align-items-center">
+                  <div class="col-4 radio">
+                    <label class="mb-0">
+                      <input type="radio" name="endingType"
+                        data-ng-model="$ctrl.payment.endingType"
+                        value="{{ $ctrl.recurrenceEnding.AFTER }}"
+                        data-ng-checked="$ctrl.payment.endingType === $ctrl.recurrenceEnding.AFTER">
+                      &nbsp;{{ :: $ctrl.config.labels.after | i18n }}
+                    </label>
+                  </div>
+                  <div class="col-8 pl-0">
+                    <input
+                      name="repeat"
+                      type="number"
+                      data-ng-min="{{ $ctrl.minOccurrences }}"
+                      data-ng-max="{{ $ctrl.maxOccurrences }}"
+                      data-ng-pattern="/^[0-9]\d*?$/"
+                      class="form-control occurence-field w-50"
+                      data-ng-required="$ctrl.payment.endingType === $ctrl.recurrenceEnding.AFTER"
+                      data-ng-disabled="$ctrl.payment.endingType !== $ctrl.recurrenceEnding.AFTER"
+                      data-ng-model="$ctrl.schedule.repeat"
+                      data-ng-init="$ctrl.setDefaultOcurrencesValue()">
+
+                      <span
+                        data-ng-class="{ 'text-muted': $ctrl.payment.endingType !== $ctrl.recurrenceEnding.AFTER }">
+                        {{ :: $ctrl.config.labels.occurrences | i18n }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                  <div data-ng-messages="paymentForm.repeat.$error" role="alert"
+                    class="text-danger row">
+                    <div data-ng-message="required">{{ $ctrl.config.labels.min | i18n: { min: $ctrl.minOccurrences } }}</div>
+                    <div data-ng-message="min">{{ $ctrl.config.labels.min | i18n: { min: $ctrl.minOccurrences } }}</div>
+                    <div data-ng-message="max">{{ $ctrl.config.labels.max | i18n: { max: $ctrl.maxOccurences } }}</div>
+                    <div data-ng-message="pattern">{{ $ctrl.config.labels.pattern | i18n }}</div>
+                    <div data-ng-message="number">{{ $ctrl.config.labels.number | i18n }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ui-bb-expandable-details-ng>
+      </ui-bb-expandable-ng>
+      <!-- end schedule -->
+    </div>
+  </div>
+</div>

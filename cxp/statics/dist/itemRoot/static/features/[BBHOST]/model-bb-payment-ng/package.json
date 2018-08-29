@@ -1,0 +1,57 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "model-bb-payment-ng@^1.8.118",
+        "scope": null,
+        "escapedName": "model-bb-payment-ng",
+        "name": "model-bb-payment-ng",
+        "rawSpec": "^1.8.118",
+        "spec": ">=1.8.118 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-bb-authorization-ng"
+    ]
+  ],
+  "_from": "model-bb-payment-ng@>=1.8.118 <2.0.0",
+  "_id": "model-bb-payment-ng@1.8.118",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/model-bb-payment-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "model-bb-payment-ng@^1.8.118",
+    "scope": null,
+    "escapedName": "model-bb-payment-ng",
+    "name": "model-bb-payment-ng",
+    "rawSpec": "^1.8.118",
+    "spec": ">=1.8.118 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-authorization-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-payment-ng/-/model-bb-payment-ng-1.8.118.tgz",
+  "_shasum": "07125bf07ef306faba9da0ce0fec0d0e5fe54457",
+  "_shrinkwrap": null,
+  "_spec": "model-bb-payment-ng@^1.8.118",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-bb-authorization-ng",
+  "dependencies": {
+    "data-bb-contact-http-ng": "^1.8.0",
+    "data-bb-payments-http-ng": "^1.6.0",
+    "data-bb-product-summary-http-ng": "^1.6.2",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-payment-ng/-/model-bb-payment-ng-1.8.118.tgz",
+    "shasum": "07125bf07ef306faba9da0ce0fec0d0e5fe54457"
+  },
+  "main": "scripts/model-bb-payment-ng.js",
+  "name": "model-bb-payment-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.8.118"
+}

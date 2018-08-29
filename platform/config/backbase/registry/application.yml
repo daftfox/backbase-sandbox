@@ -1,0 +1,6 @@
+logging:
+  config: ${backbase.config.dir}/registry/logback.xml
+  level:
+    com:
+      netflix: INFO
+

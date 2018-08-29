@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-ng-file-upload@12.2.4-bb.3",
+        "scope": null,
+        "escapedName": "vendor-bb-ng-file-upload",
+        "name": "vendor-bb-ng-file-upload",
+        "rawSpec": "12.2.4-bb.3",
+        "spec": "12.2.4-bb.3",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "vendor-bb-ng-file-upload@12.2.4-bb.3",
+  "_id": "vendor-bb-ng-file-upload@12.2.4-bb.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-ng-file-upload",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-ng-file-upload@12.2.4-bb.3",
+    "scope": null,
+    "escapedName": "vendor-bb-ng-file-upload",
+    "name": "vendor-bb-ng-file-upload",
+    "rawSpec": "12.2.4-bb.3",
+    "spec": "12.2.4-bb.3",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-ng-file-upload/-/vendor-bb-ng-file-upload-12.2.4-bb.3.tgz",
+  "_shasum": "b101ac8de6d7527bbba6f216a2cfdf06cd4bc53b",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-ng-file-upload@12.2.4-bb.3",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-ng-file-upload/-/vendor-bb-ng-file-upload-12.2.4-bb.3.tgz",
+    "shasum": "b101ac8de6d7527bbba6f216a2cfdf06cd4bc53b"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "scripts/vendor-bb-ng-file-upload.js",
+  "name": "vendor-bb-ng-file-upload",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "12.2.4-bb.3"
+}

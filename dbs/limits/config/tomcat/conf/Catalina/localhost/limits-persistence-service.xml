@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context useHttpOnly="false">
+
+    <Environment name="spring.config.location"
+                 value="${backbase.config.dir}/limits-persistence-service/application.yml"
+                 type="java.lang.String"
+                 override="false"/>
+
+</Context>

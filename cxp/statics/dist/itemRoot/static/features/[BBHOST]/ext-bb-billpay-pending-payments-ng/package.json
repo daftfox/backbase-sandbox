@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-billpay-pending-payments-ng@~5.11.0",
+        "scope": null,
+        "escapedName": "ext-bb-billpay-pending-payments-ng",
+        "name": "ext-bb-billpay-pending-payments-ng",
+        "rawSpec": "~5.11.0",
+        "spec": ">=5.11.0 <5.12.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bb-billpay-pending-payments-ng@>=5.11.0 <5.12.0",
+  "_id": "ext-bb-billpay-pending-payments-ng@5.11.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-billpay-pending-payments-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-billpay-pending-payments-ng@~5.11.0",
+    "scope": null,
+    "escapedName": "ext-bb-billpay-pending-payments-ng",
+    "name": "ext-bb-billpay-pending-payments-ng",
+    "rawSpec": "~5.11.0",
+    "spec": ">=5.11.0 <5.12.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-billpay-pending-payments-ng/-/ext-bb-billpay-pending-payments-ng-5.11.0.tgz",
+  "_shasum": "79669b1e676438b52705263c17a6a386a82520cd",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-billpay-pending-payments-ng@~5.11.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-overlay-ng": "^2.5.1",
+    "ui-bb-modal-ng": "^3.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-dropdown": "1.3.3-bb.4",
+    "vendor-bb-uib-tooltip": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-billpay-pending-payments-ng/-/ext-bb-billpay-pending-payments-ng-5.11.0.tgz",
+    "shasum": "79669b1e676438b52705263c17a6a386a82520cd"
+  },
+  "main": "scripts/ext-bb-billpay-pending-payments-ng.js",
+  "name": "ext-bb-billpay-pending-payments-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "5.11.0"
+}

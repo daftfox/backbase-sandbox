@@ -1,0 +1,78 @@
+{
+  "en-US": {
+    "label.loadMore": "Load more",
+
+    "message.loading": "Loading...",
+
+    "header.status": "Status",
+    "header.type": "Type",
+    "header.debtor": "From",
+    "header.creditor": "Creditor",
+    "header.description": "Description",
+    "header.currency": "Ccy",
+    "header.amount": "Amount",
+    "header.date": "Collection date",
+
+    "directDebit.label.noItems": "There are no Direct Debits to display",
+
+    "directDebit.status.announced": "Announced",
+    "directDebit.status.processed": "Processed",
+    "directDebit.status.rejected": "Rejected by bank",
+    "directDebit.status.refunded": "Refunded",
+    "directDebit.status.refused": "Refused",
+    "directDebit.status.refundRequested": "Refund requested",
+    "directDebit.status.refusalRequested": "Refusal requested",
+
+    "directDebit.status.A": "A",
+    "directDebit.status.P": "P",
+    "directDebit.status.R": "R",
+    "directDebit.status.RF": "RF",
+    "directDebit.status.RB": "RB",
+    "directDebit.status.RFR": "RFR",
+    "directDebit.status.RR": "RR",
+
+    "directDebit.action.refund": "Refund",
+    "directDebit.action.refuse": "Refuse",
+    "directDebit.action.blockCollector": "Block collector",
+    "directDebit.action.seeAllByCollector": "See all collections for this collector",
+    "directDebit.action.seeAllByAccount": "See all collections for this account",
+
+    "directDebit.dialog.refuse.title": "Refuse Incoming Direct Debit",
+    "directDebit.dialog.refuse.body": "You are about to refuse an incoming direct debit order. The action can't be undone.",
+    "directDebit.dialog.refuse.yes": "Refuse",
+    "directDebit.dialog.refund.title": "Refund Incoming Direct Debit",
+    "directDebit.dialog.refund.body": "You are about to request a refund of an incoming direct debit order. The action can't be undone.",
+    "directDebit.dialog.refund.yes": "Refund",
+    "directDebit.dialog.action.no": "Cancel",
+
+    "directDebit.frequency.once": "One time",
+    "directDebit.frequency.daily": "Recurring - Daily",
+    "directDebit.frequency.weekly": "Recurring - Weekly",
+    "directDebit.frequency.monthly": "Recurring - Monthly",
+    "directDebit.frequency.yearly": "Recurring - Yearly",
+
+    "directDebit.details.to": "Creditor",
+    "directDebit.details.creditor.id": "Creditor ID",
+    "directDebit.details.reference": "Direct Debit Reference",
+    "directDebit.details.mandate.id": "Mandate ID",
+    "directDebit.details.frequency": "Frequency",
+    "directDebit.details.refund.deadline": "Refund Deadline",
+    "directDebit.details.description": "Description",
+    "directDebit.details.rejection.reason": "Rejection Reason",
+
+    "directDebit.model.error.auth": "You are not authorised to perform this action.",
+    "directDebit.model.error.connection": "Connection Error",
+    "directDebit.model.error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later.",
+
+    "direct.debit.notification.refund.success": "Your Refund request was successfully submitted",
+    "direct.debit.notification.refuse.success": "Your Refuse request was successfully submitted",
+    "direct.debit.notification.action.fail": "There is a problem with the action you are trying to perform",
+
+    "pagination.label.loadMore": "Load More",
+    "pagination.label.first": "First",
+    "pagination.label.last": "Last",
+    "pagination.label.next": "Next",
+    "pagination.label.prev": "Previous",
+    "pagination.label.page_navigation": "Page navigation",
+  }
+}

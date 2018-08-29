@@ -1,0 +1,8 @@
+<div class="ext-bb-headings-ng" data-ng-controller="HeadingsController as $ctrl">
+  <ui-bb-header-ng
+    data-heading-type="$ctrl.pageConfig.headingType"
+    data-ng-if="$ctrl.pageConfig.heading != ''"
+  >
+    {{ $ctrl.pageConfig.heading }}
+  </ui-bb-header-ng>
+</div>

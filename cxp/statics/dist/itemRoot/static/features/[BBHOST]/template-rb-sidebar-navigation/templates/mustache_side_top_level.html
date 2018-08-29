@@ -1,0 +1,8 @@
+<ul class="nav flex-column">
+
+{{#links}}
+    <li class="nav-item{{#isInPath}} active{{/isInPath}}{{^children.isEmpty}} dropdown-submenu{{/children.isEmpty}}">
+        <a href="{{Url}}" class="nav-link{{^children.isEmpty}} dropdown-toggle{{/children.isEmpty}}"{{^children.isEmpty}} data-toggle="dropdown"{{/children.isEmpty}}>{{title}}</a>
+    </li>
+{{/links}}
+</ul>

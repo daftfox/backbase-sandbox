@@ -1,0 +1,27 @@
+<div class="ext-bus-account-select-ng"
+  data-ng-controller="AccountsOverviewController as $ctrl">
+  <div class="mb-4" x-ms-format-detection="none">
+    <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.initialLoading">
+      <ui-bb-account-selector-ng
+        data-placeholder="{{ 'accountSelect.placeholder' | i18n }}"
+        data-ng-model="$ctrl.state.accounts.selected"
+        data-accounts="$ctrl.state.accounts.data"
+        data-ng-change="$ctrl.selectAccount($item)"
+        data-labels="ext.helpers.labels"
+        data-total-items="$ctrl.state.accounts.totalItems"
+        data-on-accounts-load="$ctrl.filter(options)"
+        data-search-box="ext.helpers.searchBox"
+        data-format-amount-template-url="templates/format-amount-template.html"
+        data-select-all="$ctrl.state.accountsSelectorSelectAll"
+        data-required>
+      </ui-bb-account-selector-ng>
+    </ui-bb-loading-overlay-ng>
+  </div>
+</div>
+
+<script type="text/ng-template" id="templates/format-amount-template.html">
+  <ui-bus-format-amount-ng
+    data-amount="$option.amount"
+    data-currency="$option.currency">
+  </ui-bus-format-amount-ng>
+</script>

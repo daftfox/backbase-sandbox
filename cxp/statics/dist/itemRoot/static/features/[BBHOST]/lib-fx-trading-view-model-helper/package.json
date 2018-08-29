@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-fx-trading-view-model-helper@^1.19.0",
+        "scope": null,
+        "escapedName": "lib-fx-trading-view-model-helper",
+        "name": "lib-fx-trading-view-model-helper",
+        "rawSpec": "^1.19.0",
+        "spec": ">=1.19.0 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-fx-rate-table-details-ng"
+    ]
+  ],
+  "_from": "lib-fx-trading-view-model-helper@>=1.19.0 <2.0.0",
+  "_id": "lib-fx-trading-view-model-helper@1.19.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-fx-trading-view-model-helper",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-fx-trading-view-model-helper@^1.19.0",
+    "scope": null,
+    "escapedName": "lib-fx-trading-view-model-helper",
+    "name": "lib-fx-trading-view-model-helper",
+    "rawSpec": "^1.19.0",
+    "spec": ">=1.19.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-fx-rate-table-details-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-fx-trading-view-model-helper/-/lib-fx-trading-view-model-helper-1.19.0.tgz",
+  "_shasum": "d77d37064e160fb3ebead9453ed5d6580159ba34",
+  "_shrinkwrap": null,
+  "_spec": "lib-fx-trading-view-model-helper@^1.19.0",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/widget-fx-rate-table-details-ng",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-fx-trading-view-model-helper/-/lib-fx-trading-view-model-helper-1.19.0.tgz",
+    "shasum": "d77d37064e160fb3ebead9453ed5d6580159ba34"
+  },
+  "main": "scripts/lib-fx-trading-view-model-helper.js",
+  "name": "lib-fx-trading-view-model-helper",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.19.0"
+}

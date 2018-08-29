@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-load-more-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-load-more-ng",
+        "name": "ui-bb-load-more-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-load-more-ng@2.5.1",
+  "_id": "ui-bb-load-more-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-load-more-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-load-more-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-load-more-ng",
+    "name": "ui-bb-load-more-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-load-more-ng/-/ui-bb-load-more-ng-2.5.1.tgz",
+  "_shasum": "a95973a3657d1ff5026d3977a8d3a55377d83bb4",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-load-more-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-load-more-ng/-/ui-bb-load-more-ng-2.5.1.tgz",
+    "shasum": "a95973a3657d1ff5026d3977a8d3a55377d83bb4"
+  },
+  "main": "scripts/ui-bb-load-more-ng.js",
+  "name": "ui-bb-load-more-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

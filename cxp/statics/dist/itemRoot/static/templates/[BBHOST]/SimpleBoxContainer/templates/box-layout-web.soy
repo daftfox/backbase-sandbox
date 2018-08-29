@@ -1,0 +1,17 @@
+{namespace templates_SimpleBoxContainer}
+
+/**
+ * Div Layout
+ * @param item Item in context
+ */
+{template .SimpleBoxContainer}
+
+<div class="simple-box-layout {$item.preferences.layoutClasses.value} bp-container bp-ui-dragRoot bp-area --area" data-pid="{$item.name}">
+    {foreach $child in $item.children}
+        {if parseInt($child.preferences.area.value) == 0}
+            {include($child) |noAutoescape}
+        {/if}
+    {/foreach}
+</div>
+
+{/template}

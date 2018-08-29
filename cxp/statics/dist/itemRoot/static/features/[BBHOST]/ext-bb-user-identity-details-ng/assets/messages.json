@@ -1,0 +1,16 @@
+{
+  "en-US": {
+    "user-identity-details.return-to-user-list.link": "Back to user list",
+
+    "user-identity-details.actions.link": "Actions",
+    "user-identity-details.actions.aria-label": "Actions",
+
+    "user-identity-details.actions.view-audit-log.link": "View audit log",
+    "user-identity-details.actions.view-payments.link": "View payments",
+    "user-identity-details.actions.manage-entitlements.link": "Manage entitlements",
+
+    "user-identity-details.table.username.heading": "Username",
+    "user-identity-details.table.full-name.heading": "Full name",
+    "user-identity-details.table.legal-entity.heading": "Legal Entity"
+  }
+}

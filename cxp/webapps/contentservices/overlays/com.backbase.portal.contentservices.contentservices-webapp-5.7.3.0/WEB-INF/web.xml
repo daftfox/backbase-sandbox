@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <description>Backbase Content Services Project</description>
+    <display-name>Backbase Content Services</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!--Example of custom error page mapping-->
+    <error-page>
+        <!-- Uncaught exception -->
+        <error-code>500</error-code>
+        <location>/general-error.html</location>
+    </error-page>
+
+    <context-param>
+        <param-name>contextInitializerClasses</param-name>
+        <param-value>com.backbase.portal.contentservices.repository.configuration.BackbaseApplicationContextInitializer</param-value>
+    </context-param>
+
+    <!--
+        Specifies location of the configuration files for this application
+    -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:/META-INF/spring/optional/*.xml
+            classpath:/META-INF/spring/bb-contentservices.xml
+            classpath:/META-INF/spring/backbase-contentservices-administration-business.xml
+            classpath:/META-INF/spring/backbase-content-eventing-config.xml
+            classpath:/META-INF/spring/backbase-content-search-config.xml
+        </param-value>
+    </context-param>
+
+    <!--
+        Force the web server to  use UTF-8 in requests and responses.
+        WARNING: This filter should be the first to run, otherwise form login
+        with non-latin characters is broken.
+    -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Spring Security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Filtering cmis server responses (rewriting url)-->
+    <filter>
+        <filter-name>cmisAtomPubFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>cmisAtomPubFilterBean</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>cmisAtomPubFilter</filter-name>
+        <servlet-name>cmisatom</servlet-name>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>cmisAtomPubFilter</filter-name>
+        <servlet-name>cmisbrowser</servlet-name>
+    </filter-mapping>
+
+    <!-- Cache-Control response filtering-->
+    <filter>
+        <filter-name>cacheControlFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>cacheControlFilterBean</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>cacheControlFilter</filter-name>
+        <url-pattern>/atom/*</url-pattern>
+    </filter-mapping>
+    <!-- MAINT-4152 Also add cache headers to the bbp API -->
+    <filter-mapping>
+        <filter-name>cacheControlFilter</filter-name>
+        <url-pattern>/bbp/*</url-pattern>
+    </filter-mapping>
+    
+    <!--
+        Loads the Spring web application context from the configuration location above
+    -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.backbase.portal.contentservices.web.listener.LogbackContextListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.backbase.portal.contentservices.web.listener.ApplicationShutdownListener</listener-class>
+    </listener>
+
+    <!-- file upload -->
+    <servlet>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>com.backbase.portal.contentservices.web.fileupload.FileUploadController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>upload</servlet-name>
+        <url-pattern>/upload/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- CMIS AtomPub binding -->
+    <servlet>
+        <servlet-name>cmisatom</servlet-name>
+        <servlet-class>com.backbase.portal.contentservices.web.service.BackbaseCmisAtomPubServlet</servlet-class>
+        <init-param>
+            <param-name>callContextHandler</param-name>
+            <param-value>org.apache.chemistry.opencmis.server.shared.BasicAuthCallContextHandler</param-value>
+        </init-param>
+        <init-param>
+            <param-name>cmisVersion</param-name>
+            <param-value>1.1</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cmisatom</servlet-name>
+        <url-pattern>/atom/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- BBP endpoint -->
+    <servlet>
+        <servlet-name>bbp</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bbp</servlet-name>
+        <url-pattern>/bbp/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- CMIS Browser binding -->
+    <servlet>
+        <servlet-name>cmisbrowser</servlet-name>
+        <servlet-class>org.apache.chemistry.opencmis.server.impl.browser.CmisBrowserBindingServlet</servlet-class>
+        <init-param>
+            <param-name>callContextHandler</param-name>
+            <param-value>org.apache.chemistry.opencmis.server.impl.browser.token.TokenCallContextHandler</param-value>
+        </init-param>
+        <load-on-startup>6</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cmisbrowser</servlet-name>
+        <url-pattern>/browser/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin endpoint -->
+    <servlet>
+        <servlet-name>admin</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:/META-INF/spring/backbase-contentservices-administration-presentation.xml</param-value>
+        </init-param>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin</servlet-name>
+        <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Content API endpoint -->
+    <servlet>
+        <servlet-name>api</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>api</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- Health endpoint -->
+    <servlet>
+        <servlet-name>health</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>health</servlet-name>
+        <url-pattern>/health</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
+
+    <env-entry>
+        <env-entry-name>backbase/config</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+
+    <resource-ref>
+        <description>Content Repository datasource</description>
+        <res-ref-name>jdbc/content-datasource</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+</web-app>

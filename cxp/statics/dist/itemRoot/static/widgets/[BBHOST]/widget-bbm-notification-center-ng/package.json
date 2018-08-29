@@ -1,0 +1,67 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bbm-notification-center-ng@~2.7.2",
+        "scope": null,
+        "escapedName": "widget-bbm-notification-center-ng",
+        "name": "widget-bbm-notification-center-ng",
+        "rawSpec": "~2.7.2",
+        "spec": ">=2.7.2 <2.8.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bbm-notification-center-ng@>=2.7.2 <2.8.0",
+  "_id": "widget-bbm-notification-center-ng@2.7.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bbm-notification-center-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bbm-notification-center-ng@~2.7.2",
+    "scope": null,
+    "escapedName": "widget-bbm-notification-center-ng",
+    "name": "widget-bbm-notification-center-ng",
+    "rawSpec": "~2.7.2",
+    "spec": ">=2.7.2 <2.8.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bbm-notification-center-ng/-/widget-bbm-notification-center-ng-2.7.2.tgz",
+  "_shasum": "4fb835a7cbdbf3cb2e096e8d56d20a5d27790d1d",
+  "_shrinkwrap": null,
+  "_spec": "widget-bbm-notification-center-ng@~2.7.2",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bbm-notification-center-list-ng": "^2.7.2",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-extension-events-ng": "^1.0.44",
+    "lib-bb-extension-helpers-ng": "^1.0.44",
+    "lib-bb-extension-intents-ng": "^1.0.44",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-state-container-ng": "^1.0.22",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-notifications-ng": "^1.9.2",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bbm-notification-center-ng/-/widget-bbm-notification-center-ng-2.7.2.tgz",
+    "shasum": "4fb835a7cbdbf3cb2e096e8d56d20a5d27790d1d"
+  },
+  "main": "scripts/widget-bbm-notification-center-ng.js",
+  "name": "widget-bbm-notification-center-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.7.2"
+}

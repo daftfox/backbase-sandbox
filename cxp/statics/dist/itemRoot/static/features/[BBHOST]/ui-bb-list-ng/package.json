@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-list-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-list-ng",
+        "name": "ui-bb-list-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-list-ng@2.5.1",
+  "_id": "ui-bb-list-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-list-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-list-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-list-ng",
+    "name": "ui-bb-list-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng",
+    "/ui-bb-account-selector-ng",
+    "/ui-bb-autocomplete-search-ng",
+    "/ui-bb-select-items-modal-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-list-ng/-/ui-bb-list-ng-2.5.1.tgz",
+  "_shasum": "0a571c9da48a213780c3e2294bb2227ad5d52daa",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-list-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-list-ng/-/ui-bb-list-ng-2.5.1.tgz",
+    "shasum": "0a571c9da48a213780c3e2294bb2227ad5d52daa"
+  },
+  "main": "scripts/ui-bb-list-ng.js",
+  "name": "ui-bb-list-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

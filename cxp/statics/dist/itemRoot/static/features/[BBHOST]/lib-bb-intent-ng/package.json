@@ -1,0 +1,57 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-intent-ng@1.1.43",
+        "scope": null,
+        "escapedName": "lib-bb-intent-ng",
+        "name": "lib-bb-intent-ng",
+        "rawSpec": "1.1.43",
+        "spec": "1.1.43",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-intent-ng@1.1.43",
+  "_id": "lib-bb-intent-ng@1.1.43",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-intent-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-intent-ng@1.1.43",
+    "scope": null,
+    "escapedName": "lib-bb-intent-ng",
+    "name": "lib-bb-intent-ng",
+    "rawSpec": "1.1.43",
+    "spec": "1.1.43",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-challenge-ng",
+    "/lib-bb-extension-intents-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-intent-ng/-/lib-bb-intent-ng-1.1.43.tgz",
+  "_shasum": "b8eb4b54a241379c859ee204422595396f2dc8a6",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-intent-ng@1.1.43",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-storage-ng": "^1.0.98",
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-intent-ng/-/lib-bb-intent-ng-1.1.43.tgz",
+    "shasum": "b8eb4b54a241379c859ee204422595396f2dc8a6"
+  },
+  "main": "scripts/lib-bb-intent-ng.js",
+  "name": "lib-bb-intent-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.43"
+}

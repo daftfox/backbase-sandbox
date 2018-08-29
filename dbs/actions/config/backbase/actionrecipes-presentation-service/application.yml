@@ -1,0 +1,16 @@
+### Live profile
+spring:
+  profiles: live
+
+logging:
+  config: ${backbase.config.dir}/actionrecipes-presentation-service/logback.xml
+
+recipeSpecificationsUri: file:${backbase.config.dir}/actionrecipes-presentation-service/templates/action-recipe-specification.yml
+actionsUri: file:${backbase.config.dir}/actionrecipes-presentation-service/templates/actions-specification.yml
+triggersUri: file:${backbase.config.dir}/actionrecipes-presentation-service/templates/triggers-specification.yml
+
+backbase:
+  persistence:
+    enabled: false
+
+

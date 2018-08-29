@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean name="cmisAtomPubFilterBean" class="com.backbase.portal.contentservices.web.filter.CmisAtomPubFilterBean">
+        <constructor-arg ref="backbaseConfiguration"/>
+    </bean>
+
+    <bean name="cacheControlFilterBean"
+          class="com.backbase.portal.contentservices.web.filter.cachecontrol.CacheControlFilter">
+        <property name="cacheControlConfiguration" ref="cacheControlConfiguration"/>
+    </bean>
+
+    <bean id="cacheControlConfiguration"
+          class="com.backbase.portal.contentservices.web.filter.cachecontrol.CacheControlConfiguration">
+        <constructor-arg ref="cacheControlDefaults"/>
+    </bean>
+
+    <util:properties id="cacheControlDefaults"
+                     location="classpath:META-INF/com/backbase/portal/contentservics/web/filter/cachecontrol/cache-control.properties"/>
+    <!--util:properties id="cacheControlExtendsAndOverrides" location="classpath:contentservices.properties"/-->
+
+</beans>

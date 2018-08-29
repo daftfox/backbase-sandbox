@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-styles@^1.17.0",
+        "scope": null,
+        "escapedName": "lib-bb-styles",
+        "name": "lib-bb-styles",
+        "rawSpec": "^1.17.0",
+        "spec": ">=1.17.0 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-income-spending-analysis-category-ng"
+    ]
+  ],
+  "_from": "lib-bb-styles@>=1.17.0 <2.0.0",
+  "_id": "lib-bb-styles@1.17.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-styles",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-styles@^1.17.0",
+    "scope": null,
+    "escapedName": "lib-bb-styles",
+    "name": "lib-bb-styles",
+    "rawSpec": "^1.17.0",
+    "spec": ">=1.17.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bb-income-spending-analysis-category-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-styles/-/lib-bb-styles-1.17.0.tgz",
+  "_shasum": "60185e19552703f662139a1ceacdbcd54d6ed87c",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-styles@^1.17.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-income-spending-analysis-category-ng",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-styles/-/lib-bb-styles-1.17.0.tgz",
+    "shasum": "60185e19552703f662139a1ceacdbcd54d6ed87c"
+  },
+  "main": "scripts/lib-bb-styles.js",
+  "name": "lib-bb-styles",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.17.0"
+}

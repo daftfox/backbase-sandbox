@@ -1,0 +1,64 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-transaction-list-ng@~2.33.1",
+        "scope": null,
+        "escapedName": "ext-bus-transaction-list-ng",
+        "name": "ext-bus-transaction-list-ng",
+        "rawSpec": "~2.33.1",
+        "spec": ">=2.33.1 <2.34.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-transaction-list-ng@>=2.33.1 <2.34.0",
+  "_id": "ext-bus-transaction-list-ng@2.33.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-transaction-list-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-transaction-list-ng@~2.33.1",
+    "scope": null,
+    "escapedName": "ext-bus-transaction-list-ng",
+    "name": "ext-bus-transaction-list-ng",
+    "rawSpec": "~2.33.1",
+    "spec": ">=2.33.1 <2.34.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-transaction-list-ng/-/ext-bus-transaction-list-ng-2.33.1.tgz",
+  "_shasum": "bc4d7ecf76af9b8519179f4584181337d67a2661",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-transaction-list-ng@~2.33.1",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-load-more-ng": "^2.5.1",
+    "ui-bb-loading-overlay-ng": "^2.5.1",
+    "ui-bb-modal-ng": "^3.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-paginator-ng": "^2.5.1",
+    "ui-bb-sortable-column-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "ui-bb-transaction-search-filter-ng": "^3.33.1",
+    "ui-bus-format-amount-ng": "^2.5.1",
+    "vendor-bb-uib-dropdown": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-transaction-list-ng/-/ext-bus-transaction-list-ng-2.33.1.tgz",
+    "shasum": "bc4d7ecf76af9b8519179f4584181337d67a2661"
+  },
+  "main": "scripts/ext-bus-transaction-list-ng.js",
+  "name": "ext-bus-transaction-list-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.33.1"
+}

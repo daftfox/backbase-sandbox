@@ -1,0 +1,7 @@
+---
+logging:
+  config: ${backbase.config.dir}/product-summary-presentation-service/logback.xml
+
+backbase:
+  persistence:
+    enabled: false

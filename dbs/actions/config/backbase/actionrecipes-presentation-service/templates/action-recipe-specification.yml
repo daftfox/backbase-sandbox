@@ -1,0 +1,23 @@
+# An action recipe specification defines the action template used when a trigger is fired.
+# For example, a Notification, email or SMS. You can configure an action recipe specification so bank clients can
+# create their own action recipes from it.
+---
+-
+    id: "1"
+    name: "AccountBalanceLowThresholdAlert"
+    triggerId: "1"
+    isUserDefined: true
+    type: "Account balance under lower threshold."
+    actions:
+      "1": "1"
+      "2": "1"
+-
+    id: "2"
+    name: "AccountBalanceHighThresholdAlert"
+    triggerId: "1"
+    isUserDefined: true
+    type: "Account balance over higher threshold."
+    actions:
+      "1": "2"
+      "2": "2"
+

@@ -1,0 +1,59 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-wm-allocations-donut-ng@^2.12.2",
+        "scope": null,
+        "escapedName": "ext-wm-allocations-donut-ng",
+        "name": "ext-wm-allocations-donut-ng",
+        "rawSpec": "^2.12.2",
+        "spec": ">=2.12.2 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-wm-allocations-advanced-ng"
+    ]
+  ],
+  "_from": "ext-wm-allocations-donut-ng@>=2.12.2 <3.0.0",
+  "_id": "ext-wm-allocations-donut-ng@2.12.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-wm-allocations-donut-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-wm-allocations-donut-ng@^2.12.2",
+    "scope": null,
+    "escapedName": "ext-wm-allocations-donut-ng",
+    "name": "ext-wm-allocations-donut-ng",
+    "rawSpec": "^2.12.2",
+    "spec": ">=2.12.2 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-wm-allocations-advanced-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-wm-allocations-donut-ng/-/ext-wm-allocations-donut-ng-2.12.2.tgz",
+  "_shasum": "8af7b01f6daf0d9de73b889b7e9e1a6852f213eb",
+  "_shrinkwrap": null,
+  "_spec": "ext-wm-allocations-donut-ng@^2.12.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-wm-allocations-advanced-ng",
+  "dependencies": {
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-styles": "^1.15.0",
+    "lib-wm-colorset": "^1.12.2",
+    "ui-bb-chartjs-chart-donut-ng": "^2.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-indicator-ng": "^2.5.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-wm-allocations-donut-ng/-/ext-wm-allocations-donut-ng-2.12.2.tgz",
+    "shasum": "8af7b01f6daf0d9de73b889b7e9e1a6852f213eb"
+  },
+  "main": "scripts/ext-wm-allocations-donut-ng.js",
+  "name": "ext-wm-allocations-donut-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.12.2"
+}

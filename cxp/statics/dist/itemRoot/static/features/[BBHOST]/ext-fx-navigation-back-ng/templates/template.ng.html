@@ -1,0 +1,11 @@
+<div data-ng-controller="FXNavigationToController as $ctrl">
+  <button
+    class="btn btn-link"
+    aria-label="{{ back | i18n }}"
+    data-role="navigate-to"
+    data-ng-click="$ctrl.navigateTo();$event.stopPropagation();"
+  >
+    <i class="fas fa-chevron-left pr-2"></i>
+    <span data-i18n-key="back"></span>
+  </button>
+</div>

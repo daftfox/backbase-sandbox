@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-state-container-ng@1.0.22",
+        "scope": null,
+        "escapedName": "lib-bb-state-container-ng",
+        "name": "lib-bb-state-container-ng",
+        "rawSpec": "1.0.22",
+        "spec": "1.0.22",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-state-container-ng@1.0.22",
+  "_id": "lib-bb-state-container-ng@1.0.22",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-state-container-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-state-container-ng@1.0.22",
+    "scope": null,
+    "escapedName": "lib-bb-state-container-ng",
+    "name": "lib-bb-state-container-ng",
+    "rawSpec": "1.0.22",
+    "spec": "1.0.22",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-extension-events-ng",
+    "/lib-bb-extension-helpers-ng",
+    "/lib-bb-extension-intents-ng",
+    "/lib-bb-start-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-state-container-ng/-/lib-bb-state-container-ng-1.0.22.tgz",
+  "_shasum": "f623fe8ca1e3a4f8ce0df57252b6efcc2d1659d7",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-state-container-ng@1.0.22",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "lib-bb-state-container": "^1.0.44",
+    "lib-bb-storage": "^1.0.23",
+    "lib-bb-storage-ng": "^1.0.98",
+    "lib-bb-widget-ng": "^1.2.76",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-state-container-ng/-/lib-bb-state-container-ng-1.0.22.tgz",
+    "shasum": "f623fe8ca1e3a4f8ce0df57252b6efcc2d1659d7"
+  },
+  "main": "scripts/lib-bb-state-container-ng.js",
+  "name": "lib-bb-state-container-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.22"
+}

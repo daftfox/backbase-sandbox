@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-wm-pluralize-i18n-key-filter-ng@^1.15.2",
+        "scope": null,
+        "escapedName": "lib-wm-pluralize-i18n-key-filter-ng",
+        "name": "lib-wm-pluralize-i18n-key-filter-ng",
+        "rawSpec": "^1.15.2",
+        "spec": ">=1.15.2 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/ext-wm-portfolio-summary-extended-ng"
+    ]
+  ],
+  "_from": "lib-wm-pluralize-i18n-key-filter-ng@>=1.15.2 <2.0.0",
+  "_id": "lib-wm-pluralize-i18n-key-filter-ng@1.15.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-wm-pluralize-i18n-key-filter-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-wm-pluralize-i18n-key-filter-ng@^1.15.2",
+    "scope": null,
+    "escapedName": "lib-wm-pluralize-i18n-key-filter-ng",
+    "name": "lib-wm-pluralize-i18n-key-filter-ng",
+    "rawSpec": "^1.15.2",
+    "spec": ">=1.15.2 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-wm-portfolio-summary-extended-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-wm-pluralize-i18n-key-filter-ng/-/lib-wm-pluralize-i18n-key-filter-ng-1.15.2.tgz",
+  "_shasum": "ad286f5baaf9d0ab24aa1b1c3dcc5fff1d97071a",
+  "_shrinkwrap": null,
+  "_spec": "lib-wm-pluralize-i18n-key-filter-ng@^1.15.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/ext-wm-portfolio-summary-extended-ng",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-wm-pluralize-i18n-key-filter-ng/-/lib-wm-pluralize-i18n-key-filter-ng-1.15.2.tgz",
+    "shasum": "ad286f5baaf9d0ab24aa1b1c3dcc5fff1d97071a"
+  },
+  "main": "scripts/lib-wm-pluralize-i18n-key-filter-ng.js",
+  "name": "lib-wm-pluralize-i18n-key-filter-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.15.2"
+}

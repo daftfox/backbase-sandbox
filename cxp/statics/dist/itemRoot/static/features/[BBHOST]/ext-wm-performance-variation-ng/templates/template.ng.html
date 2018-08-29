@@ -1,0 +1,133 @@
+<div
+  data-ng-controller="PortfolioPerformanceVariationController as $ctrl"
+  data-ng-init="ext.helpers.memoCtrl($ctrl)"
+  class="clearfix pt-3"
+  data-role="performance-variation-wrapper"
+>
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+
+    <div class="clearfix px-3">
+      <h4 class="float-left mb-0" data-i18n-key="performanceVariation.title"></h4>
+
+      <div class="btn-group float-right ml-3">
+        <button
+          data-role="performance-variation-period-button"
+          data-ng-repeat="period in ext.helpers.periods"
+          class="btn btn-outline-secondary"
+          data-ng-class="{ 'active': period.active }"
+          data-ng-click="ext.helpers.setActivePeriod($index); $ctrl.setPeriod(period)"
+        >{{period.i18nKey | i18n}}</button>
+      </div>
+      <div class="clearfix d-xl-none mb-3"></div>
+      <div class="float-right col-4 p-0 ml-3">
+        <div class="row">
+          <ui-bb-calendar-popup-ng
+            class="col-6 pl-0"
+            data-config="ext.helpers.getStartDateConfig()"
+            data-role="performance-time-period-start"
+            data-date="ext.helpers.getDatePickerRange().startDate"
+          ></ui-bb-calendar-popup-ng>
+          <ui-bb-calendar-popup-ng
+            class="col-6 pl-0"
+            data-config="ext.helpers.getEndDateConfig()"
+            data-role="performance-time-period-end"
+            data-date="ext.helpers.getDatePickerRange().endDate"
+          ></ui-bb-calendar-popup-ng>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.portfolioPerformanceError).icon }} text-muted"
+        data-title="{{ ext.helpers.getError(state.errors.portfolioPerformanceError).title | i18n }}"
+        data-subtitle="{{ ext.helpers.getError(state.errors.portfolioPerformanceError).message | i18n }}"
+        data-is-empty="state.errors.portfolioPerformanceError"
+      >
+        <ui-bb-empty-state-ng
+          data-icon-classes="mt-5 fas fa-4x fa-search text-muted"
+          data-title="{{ 'performanceVariation.empty.title' | i18n }}"
+          data-subtitle="{{ 'performanceVariation.empty.message' | i18n }}"
+          data-is-empty="!ext.helpers.isDataAvailable()"
+        >
+          <div class="py-5">
+            <div class="row">
+                <ui-bb-chartjs-chart-bar-ng
+                  data-role="performance-variation-chart-hover"
+                  class="col-12 position-absolute"
+                  data-series="ext.helpers.getHoverSeries()"
+                  data-bar-percentage="1.0"
+                  data-category-percentage="1.0"
+                  data-options="ext.helpers.getHoverOptions()"
+                ></ui-bb-chartjs-chart-bar-ng>
+                <ui-bb-chartjs-chart-bar-ng
+                  class="col-12"
+                  data-role="performance-variation-chart"
+                  data-series="ext.helpers.getPerformanceVariationSeries()"
+                  data-bar-percentage="0.8"
+                  data-category-percentage="1.0"
+                  data-options="ext.helpers.getVariationOptions()"
+                  data-plugins="ext.helpers.chartPlugins"
+                ></ui-bb-chartjs-chart-bar-ng>
+                <chart-spiderweb-tooltip data-role="performance-variation-spiderweb-chart-tooltip">
+                  <div class="popover fade pointer-events-none bs-popover-right">
+                    <div class="arrow m-0"></div>
+                    <div class="popover-header">
+                      <small>
+                        <strong class="popover-title-content"></strong>
+                      </small>
+                    </div>
+                    <div class="popover-body">
+                      <table class="w-100 small">
+                        <tr>
+                          <td class="pr-4">
+                            <i class="fa fa-circle mr-1 popover-performance-dot" aria-hidden="true"></i>
+                            <span data-i18n-key="performanceVariation.cumulativePerformance"></span>
+                          </td>
+                          <td class="text-right">
+                            <span class="popover-performance"></span>%
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="pr-4">
+                            <i class="fa fa-circle mr-1 popover-variation-dot" aria-hidden="true"></i>
+                            <span data-i18n-key="performanceVariation.variation"></span>
+                          </td>
+                          <td class="text-right">
+                            <span class="popover-variation"></span>%
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </chart-spiderweb-tooltip>
+
+            </div>
+            <div class="row mt-4" data-role="performance-variation-legend">
+              <div class="col-12">
+                <p class="small">
+                  <i
+                    class="fa fa-circle mr-1 popover-title-circle chart-primary-color"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="mr-4" data-i18n-key="performanceVariation.cumulativePerformance"></span>
+                  <i
+                    class="fa fa-circle mr-1 popover-title-circle chart-positive-color"
+                    aria-hidden="true"
+                  ></i>
+                  <span data-i18n-key="performanceVariation.variation"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </ui-bb-empty-state-ng>
+      </ui-bb-empty-state-ng>
+
+    </div>
+
+  </ui-bb-loading-indicator-ng>
+</div>

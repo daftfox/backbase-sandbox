@@ -1,0 +1,801 @@
+<div class="ext-bb-billpay-pay-a-bill-ng">
+  <ui-bb-substitute-error-ng data-message="ext.helpers.getLoadingErrorMessageKey(state) | i18n">
+    <ng-include src="state.template"></ng-include>
+  </ui-bb-substitute-error-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/quickpay.ng.html">
+  <div data-ng-controller="PayABillController as $ctrl">
+    <div class="notifications">
+      <ui-bb-notification-stripe-ng
+        data-ng-if="$ctrl.notification.display"
+        data-message="{{$ctrl.notification.message}}"
+        data-on-close="$ctrl.notification.clear()"
+        data-type="{{ext.helpers.notificationCssClass($ctrl.notification.status)}}"
+        data-icon-classes="{{ext.helpers.notificationIconClasses($ctrl.notification.status)}} text-right"
+        data-role="billpay-pay-a-bill-notification"
+        data-timeout-second="5">
+      </ui-bb-notification-stripe-ng>
+    </div>
+
+    <div class="row justify-content-between">
+      <div class="col-md-auto">
+        <h2>
+          <span data-i18n-key="title"></span>
+          <span data-i18n-key="subtitle" class="small d-block"></span>
+        </h2>
+      </div>
+      <div class="col-md-auto">
+        <button type="button"
+          data-i18n-key="form.button.add-payee"
+          class="mb-2 btn btn-primary"
+          data-ng-click="ext.helpers.createPayeeIntent()"
+          data-role="billpay-pay-a-bill-add-payee-button">
+        </button>
+      </div>
+    </div>
+
+    <ui-bb-loading-overlay-ng data-is-loading="state.isLoadingPayees || state.isLoadingAccounts" data-loading-text="{{ 'loading.widget' | i18n }}">
+      <div class="card">
+        <div class="card-header">
+          <ng-include src="'#ext-bb-billpay-pay-a-bill-ng/header.ng.html'"></ng-include>
+        </div>
+        <div data-ng-if="$ctrl.viewState.payees.length"
+          data-role="billpay-pay-a-bill-payees"
+          data-ng-repeat="payee in $ctrl.viewState.payees track by payee.id"
+          class="py-2 px-3 border-bottom"
+          data-ng-class="ext.helpers.highlightPayee(payee, state.paymentsSummary, 'list-group-item-info', 'list-group-item-fade-success', 'list-group-item-danger')">
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <div data-ng-include="'#ext-bb-billpay-pay-a-bill-ng/quickpay-overview.ng.html'"
+                  data-role="billpay-pay-a-bill-quickpay-overview"></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <div data-ng-include="'#ext-bb-billpay-pay-a-bill-ng/quickpay-amount.ng.html'"
+                  data-role="billpay-pay-a-bill-quickpay-amount"></div>
+                <div data-ng-include="'#ext-bb-billpay-pay-a-bill-ng/quickpay-memo.ng.html'"
+                  data-role="billpay-pay-a-bill-quickpay-memo"></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <div data-ng-include="'#ext-bb-billpay-pay-a-bill-ng/quickpay-date.ng.html'"
+                  data-role="billpay-pay-a-bill-quickpay-date"></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-2">
+              <div class="form-group">
+                <div data-ng-include="'#ext-bb-billpay-pay-a-bill-ng/quickpay-account.ng.html'"
+                data-role="billpay-pay-a-bill-quickpay-account"></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-1">
+              <div class="form-group">
+                <div data-ng-include="'#ext-bb-billpay-pay-a-bill-ng/quickpay-actions-menu.ng.html'"
+                data-role="billpay-pay-a-bill-quickpay-actions-menu"></div>
+              </div>
+            </div>
+          </div>
+          <div class="text text-danger" data-ng-repeat="error in ext.helpers.getPaymentsSummaryErrors(state.paymentsSummary, payee.id)">
+            <div class="help-block">
+              {{ error.key | i18n }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ui-bb-loading-overlay-ng>
+
+    <ui-bb-modal-ng
+      data-is-open="state.showPaymentSummaryModal"
+      data-animation="true"
+      data-size="'lg'"
+      data-backdrop="'static'"
+      data-keyboard="true"
+      data-on-open="ext.helpers.summarisePayments($ctrl.viewState)"
+      data-role="billpay-pay-a-bill-payment-summary-modal">
+      <div data-ng-include="state.paymentModalTemplate"></div>
+    </ui-bb-modal-ng>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/review-payment.ng.html">
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ ext.helpers.i18nSingularPlural(state.paymentsSummary.payments, 'review-payments.title') }}
+    </h4>
+    <button
+      type="button"
+      class="close"
+      data-ng-click="ext.helpers.togglePaymentSummaryModal($ctrl.viewState)"
+      aria-label="{{ 'review-payments.aria-label.close' | i18n }}"
+      data-role="billpay-pay-a-bill-payment-summary-modal-close-button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div data-ng-form="reviewPaymentForm">
+    <div class="modal-body">
+      <ui-bb-loading-overlay-ng data-is-loading="state.isPostingPayment" data-loading-text="{{ 'loading.making-payment' | i18n }}">
+        <p data-i18n-key="review-payments.message"></p>
+
+        <!-- For each account  -->
+        <div data-ng-repeat="(key, accountGroup) in state.paymentsSummary.paymentsByAccount"
+          data-role="billpay-pay-a-bill-payment-summary-modal-review-payments">
+          <hr data-ng-if="$index > 0" />
+
+          <div class="card card-primary mb-3">
+            <div class="card-header" data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-number-of-payments">
+              {{accountGroup.payees.length}}
+              {{ ext.helpers.i18nSingularPlural(accountGroup.payees, 'review-payments.grouped.title') }}
+            </div>
+            <div class="card-body" data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-from-account">
+              From {{ext.helpers.accountNameAndNumber(accountGroup.paymentAccount)}}
+              <div>
+                <ui-bb-format-amount-ng
+                  data-wrap
+                  data-amount="accountGroup.total"
+                  data-currency="ext.helpers.getCurrencyCode()"
+                  data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-total-payment"
+                  class="amount-regular-color">
+                </ui-bb-format-amount-ng>
+                <span data-ng-if="ext.helpers.showRushNoticeForAccountGroup(accountGroup)" data-i18n-key="review-payments.grouped.rush.notice"
+                  data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-rush-notice"></span>
+              </div>
+            </div>
+          </div>
+          <!-- Each payment for account -->
+          <div data-ng-repeat="payee in accountGroup.payees"  data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-md-4" data-ng-bind="payee.displayName"  data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-name"></div>
+                  <div class="col-12 col-md-8">
+                    <div class="row">
+                      <div class="col-6 col-md-4" data-i18n-key="review-payments.grouped.amount"></div>
+                      <div class="col-6 col-md-8">
+                        <ui-bb-format-amount-ng
+                          data-wrap
+                          data-amount="payee.newPayment.paymentAmount.value"
+                          data-currency="ext.helpers.getCurrencyCode()"
+                          data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-amount"
+                          class="amount-regular-color">
+                        </ui-bb-format-amount-ng>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-md-4" data-i18n-key="review-payments.grouped.from"></div>
+                      <div class="col-6 col-md-8" data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-payment-account">
+                        {{ext.helpers.accountNameAndNumber(payee.newPayment.paymentAccount)}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-md-4" data-i18n-key="review-payments.grouped.delivery-by"></div>
+                      <div class="col-6 col-md-8" data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-payment-date">
+                        {{payee.newPayment.paymentDate | date}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-md-4" data-i18n-key="review-payments.grouped.memo"></div>
+                      <div class="col-6 col-md-8 break-word" data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-memo">
+                        {{payee.newPayment.paymentMemo}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- If this is a rush payment -->
+            <div class="card mb-3"
+              data-ng-if="ext.helpers.rushHasBeenChosen(payee) && ext.helpers.showRushNoticeForPayee(payee)"
+              data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-rush">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-md-4" data-i18n-key="review-payments.grouped.rush.payment-name"></div>
+                  <div class="col-12 col-md-8">
+                    <div class="row">
+                      <div class="col-6 col-md-4" data-i18n-key="review-payments.grouped.amount"></div>
+                      <div class="col-6 col-md-8">
+                        <ui-bb-format-amount-ng
+                          data-wrap
+                          data-amount="ext.helpers.rushFee(payee)"
+                          data-currency="ext.helpers.getCurrencyCode()"
+                          data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-rush-fee"
+                          class="amount-regular-color">
+                        </ui-bb-format-amount-ng>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-md-4" data-i18n-key="review-payments.grouped.from"></div>
+                      <div class="col-6 col-md-8" data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-rush-payment-account">
+                        {{ext.helpers.accountNameAndNumber(payee.newPayment.paymentAccount)}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-md-4" data-i18n-key="review-payments.grouped.rush.charged-date"></div>
+                      <div class="col-6 col-md-8" data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-payee-rush-payment-date">
+                        {{payee.newPayment.paymentDate | date}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div ng-init="payment = ext.helpers.matchingPayment(payee, $ctrl.viewState.paymentsSummary)"
+                  ng-if="ext.helpers.isOvernightPayment(payee)">
+                  <hr />
+                  <div data-i18n-key="rush.heading"></div>
+                  <p data-i18n-key="rush.description"></p>
+
+                  <!-- Address Line 1 -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-12 col-md-8">
+                        <label data-i18n-key="rush.label.address1.title"></label>
+                        <input name="billpay_pay_a_bill_rush_address1_{{$index}}"
+                          aria-label="rush.aria-label.address1.title"
+                          class="form-control"
+                          data-ng-class="ext.helpers.hasErrorClass('billpay_pay_a_bill_rush_address1_'+$index, reviewPaymentForm)"
+                          placeholder="{{ ::'rush.label.address1.placeholder' | i18n }}"
+                          data-ng-required="true"
+                          maxlength="40"
+                          data-ng-disabled="state.isPostingPayment"
+                          data-ng-model="payment.overnightDeliveryAddress.address1"
+                          data-ng-model-options="{ updateOn: 'blur'}"
+                          data-role="billpay-pay-a-bill-rush-address1-{{$index}}">
+                      </div>
+                    </div>
+                    <div class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasError('billpay_pay_a_bill_rush_address1_'+$index, reviewPaymentForm)">
+                      {{ ext.helpers.getError('billpay_pay_a_bill_rush_address1_'+$index, reviewPaymentForm) }}
+                    </div>
+                  </div>
+
+                  <!-- Address Line 2 -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-12 col-md-8">
+                        <label data-i18n-key="rush.label.address2.title"></label>
+                        <input name="billpay_pay_a_bill_rush_address2_{{$index}}"
+                          aria-label="rush.aria-label.address2.title"
+                          class="form-control"
+                          data-ng-class="ext.helpers.hasErrorClass('billpay_pay_a_bill_rush_address2_'+$index, reviewPaymentForm)"
+                          placeholder="{{ ::'rush.label.address2.placeholder' | i18n }}"
+                          maxlength="40"
+                          data-ng-disabled="state.isPostingPayment"
+                          data-ng-model="payment.overnightDeliveryAddress.address2"
+                          data-ng-model-options="{ updateOn: 'blur'}"
+                          data-role="billpay-pay-a-bill-rush-address2-{{$index}}">
+                      </div>
+                    </div>
+                    <div class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasError('billpay_pay_a_bill_rush_address2_'+$index, reviewPaymentForm)">
+                      {{ ext.helpers.getError('billpay_pay_a_bill_rush_address2_'+$index, reviewPaymentForm) }}
+                    </div>
+                  </div>
+
+                  <!-- City -->
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="col-12">
+                        <label data-i18n-key="rush.label.city.title"></label>
+                        <input name="billpay_pay_a_bill_rush_city_{{$index}}"
+                          aria-label="rush.aria-label.city.title"
+                          class="form-control"
+                          data-ng-class="ext.helpers.hasErrorClass('billpay_pay_a_bill_rush_city_'+$index, reviewPaymentForm)"
+                          placeholder="{{ ::'rush.label.city.placeholder' | i18n }}"
+                          data-ng-required="true"
+                          maxlength="32"
+                          data-ng-disabled="state.isPostingPayment"
+                          data-ng-model="payment.overnightDeliveryAddress.city"
+                          data-ng-model-options="{ updateOn: 'blur'}"
+                          data-role="billpay-pay-a-bill-rush-city-{{$index}}">
+                      </div>
+                      <div class="invalid-feedback d-flex col-12" data-ng-if="ext.helpers.hasError('billpay_pay_a_bill_rush_city_'+$index, reviewPaymentForm)">
+                        {{ ext.helpers.getError('billpay_pay_a_bill_rush_city_'+$index, reviewPaymentForm) }}
+                      </div>
+                    </div>
+
+                    <!-- State -->
+                    <div class="form-group">
+                      <div class="col-12">
+                        <label data-i18n-key="rush.label.state.title"></label>
+                        <!-- dropdown control requires a class -->
+                        <ui-bb-dropdown-select-ng
+                          class=""
+                          name="billpay_pay_a_bill_rush_state_{{$index}}"
+                          data-has-error="ext.helpers.hasError('billpay_pay_a_bill_rush_state_'+$index, reviewPaymentForm)"
+                          data-ng-model="payment.overnightDeliveryAddress.state"
+                          data-selected-as="$option"
+                          placeholder="{{'rush.label.state.placeholder' | i18n}}"
+                          data-role="billpay-pay-a-bill-rush-state-{{$index}}"
+                          data-ng-disabled="state.isPostingPayment"
+                          required>
+                          <ui-bb-dropdown-option-ng
+                            data-option="value"
+                            data-ng-repeat="value in ext.helpers.states track by $index">
+                            <a tabindex="0" role="button">
+                              {{$option}}
+                            </a>
+                          </ui-bb-dropdown-option-ng>
+                        </ui-bb-dropdown-select-ng>
+                      </div>
+                      <div class="invalid-feedback d-flex col-12" data-ng-if="ext.helpers.hasError('billpay_pay_a_bill_rush_state_'+$index, reviewPaymentForm)">
+                        {{ ext.helpers.getError('billpay_pay_a_bill_rush_state_'+$index, reviewPaymentForm) }}
+                      </div>
+                    </div>
+
+                    <!-- Zip code -->
+                    <div class="form-group">
+                      <div class="col-12">
+                        <label data-i18n-key="rush.label.zip-code.title"></label>
+                        <input class="form-control"
+                          aria-label="rush.aria-label.zip-code.title"
+                          name="billpay_pay_a_bill_rush_zip_{{$index}}"
+                          data-ng-class="ext.helpers.hasErrorClass('billpay_pay_a_bill_rush_zip_'+$index, reviewPaymentForm)"
+                          placeholder="{{ ::'rush.label.zip-code.placeholder' | i18n }}"
+                          data-ng-required="true"
+                          data-pattern="^\d{5}$|^\d{9}$"
+                          maxlength="9"
+                          data-ng-disabled="state.isPostingPayment"
+                          data-ng-model="payment.overnightDeliveryAddress.postalCode"
+                          data-ng-model-options="{ updateOn: 'blur'}"
+                          data-role="billpay-pay-a-bill-rush-zip-code-{{$index}}">
+                      </div>
+                      <div class="invalid-feedback d-flex col-12" data-ng-if="ext.helpers.hasError('billpay_pay_a_bill_rush_zip_'+$index, reviewPaymentForm)">
+                        {{ ext.helpers.getError('billpay_pay_a_bill_rush_zip_'+$index, reviewPaymentForm) }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- the below -->
+        <div data-ng-if="state.postPaymentsError" class="alert alert-danger" data-i18n-key="review-payments.error"
+          data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-error"></div>
+
+      </ui-bb-loading-overlay-ng>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-ng-click="ext.helpers.togglePaymentSummaryModal($ctrl.viewState)"
+        data-i18n-key="review-payments.button.cancel"
+        data-ng-disabled="state.isPostingPayment"
+        data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-cancel-button">
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-ng-click="ext.helpers.sendPayments($ctrl.viewState)"
+        data-i18n-key="review-payments.button.send"
+        data-ng-disabled="state.isPostingPayment || reviewPaymentForm.$invalid"
+        data-role="billpay-pay-a-bill-payment-summary-modal-review-payments-send-payments-button">
+      </button>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/successful-payment.ng.html">
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ :: ext.helpers.i18nSingularPlural(ext.helpers.successfulPayments(), 'completed-payments.title') }}
+    </h4>
+    <button
+      type="button"
+      class="close"
+      data-ng-click="ext.helpers.completePaymentSummaryModal($ctrl.viewState)"
+      aria-label="{{ 'completed-payments.aria-label.close' | i18n }}"
+      data-role="billpay-pay-a-bill-completed-payments-summary-modal-close-button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body"
+    data-role="billpay-pay-a-bill-completed-payments-summary-modal-sucessful-payments">
+
+    <!-- For each payment -->
+    <div data-ng-repeat="payment in ext.helpers.successfulPayments() track by payment.payeeID">
+      <p>
+        <ui-bb-format-amount-ng
+          data-wrap
+          data-amount="payment.paymentAmount"
+          data-currency="ext.helpers.getCurrencyCode()"
+          data-role="billpay-pay-a-bill-completed-payments-summary-modal-sucessful-payments-payment-amount"
+          class="amount-regular-color">
+        </ui-bb-format-amount-ng>
+        <span data-i18n-key="completed-payments.info.payment.prefix"></span>
+        <span data-ng-bind="payment.payeeDisplayName"
+          data-role="billpay-pay-a-bill-completed-payments-summary-modal-sucessful-payments-payee-name"></span>
+        <span data-i18n-key="completed-payments.info.payment.suffix"></span>
+        <span data-ng-bind="payment.paymentDate | date"
+          data-role="billpay-pay-a-bill-completed-payments-summary-modal-sucessful-payments-payment-date"></span>
+      </p>
+
+      <div
+        data-ng-if="ext.helpers.showRushNoticeForPayment(payment)"
+        data-role="billpay-pay-a-bill-completed-payments-summary-modal-sucessful-payments-rush">
+        <p>
+          <ui-bb-format-amount-ng
+            data-wrap
+            data-amount="payment.rush.paymentFee"
+            data-currency="ext.helpers.getCurrencyCode()"
+            data-role="billpay-pay-a-bill-completed-payments-summary-modal-sucessful-payments-rush-fee"
+            class="amount-regular-color">
+          </ui-bb-format-amount-ng>
+          <span data-i18n-key="completed-payments.info.rush"></span>
+          <span data-ng-bind="payment.paymentDate | date"
+            data-role="billpay-pay-a-bill-completed-payments-summary-modal-sucessful-payments-rush-payment-date"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-i18n-key="completed-payments.button"
+      data-ng-click="ext.helpers.completePaymentSummaryModal($ctrl.viewState)"
+      data-role="billpay-pay-a-bill-completed-payments-summary-modal-return-to-bill-pay-button">
+    </button>
+    <hr>
+    <a data-ng-href="#" data-ng-click="ext.helpers.createRecurringBillIntent()" data-i18n-key="completed-payments.footer.recurring-payments.title"
+      data-role="billpay-pay-a-bill-completed-payments-summary-modal-schedule-recurring-payments"></a>
+    <p data-i18n-key="completed-payments.footer.recurring-payments.body"></p>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/failed-payment.ng.html">
+  <div class="modal-header">
+    <h4 data-i18n-key="failed-payments.title" class="modal-title"></h4>
+    <button
+      type="button"
+      class="close"
+      data-ng-click="ext.helpers.togglePaymentSummaryModal($ctrl.viewState)"
+      aria-label="{{ 'failed-payments.aria-label.close' | i18n }}"
+      data-role="billpay-pay-a-bill-failed-payments-summary-modal-close-button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" data-role="billpay-pay-a-bill-failed-payments-modal-body">
+    <div class="alert alert-danger">
+      <span class="fa fa-exclamation-triangle"></span>
+      <span data-i18n-key="failed-payments.alert"></span>
+    </div>
+    <p>{{ ext.helpers.failedPaymentMessageKey() | i18n }}</p>
+    <ul>
+      <li class="text text-danger"
+        data-ng-bind="payment.payeeDisplayName"
+        data-role="billpay-pay-a-bill-failed-payments-payee-name"
+        data-ng-repeat="payment in ext.helpers.failedPayments() track by payment.payeeID">
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-i18n-key="failed-payments.button.ok"
+      data-ng-click="ext.helpers.togglePaymentSummaryModal($ctrl.viewState)"
+      data-role="billpay-pay-a-bill-failed-payments-summary-modal-OK-button">
+    </button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/quickpay-overview.ng.html">
+  <div>
+    <span data-role="billpay-pay-a-bill-quickpay-overview-payee-name"
+      data-ng-bind="payee.displayName"></span>
+    <span data-ng-if="payee.ebill.enabled"
+      class="badge badge-info"
+      data-role="billpay-pay-a-bill-quickpay-overview-payee-ebill-label">{{ 'ebills.message.on' | i18n }}</span>
+  </div>
+
+  <div>
+    <small data-ng-if="payee.nextPayment">
+      <span data-ng-if="payee.nextPayment.recurring">
+        <i class="fa fa-history fa-flip-horizontal" aria-hidden="true"></i>
+        {{ 'message.next-recurring' | i18n }}:
+      </span>
+      <span data-ng-if="!payee.nextPayment.recurring">
+        {{ 'message.next-payment' | i18n }}:
+      </span>
+      <span data-ng-bind="payee.nextPayment.paymentDate | date" data-role="billpay-pay-a-bill-quickpay-overview-next-payment-date"></span>
+      {{ 'message.for' | i18n }}
+      <ui-bb-format-amount-ng
+        data-wrap
+        data-amount="payee.nextPayment.paymentAmount"
+        data-currency="ext.helpers.getCurrencyCode()"
+        data-role="billpay-pay-a-bill-quickpay-overview-next-payment-amount"
+        class="amount-regular-color">
+      </ui-bb-format-amount-ng>
+    </small>
+  </div>
+
+  <div>
+    <small>
+      <span data-ng-if="payee.ebill.enabled" class="bg-info">
+        <div data-ng-if="payee.ebill.latestBill">
+          {{ 'ebills.message.due' | i18n }}
+          <span data-ng-bind="payee.ebill.latestBill.paymentDate | date"
+            data-role="billpay-pay-a-bill-quickpay-overview-latest-ebill-payment-date">
+          </span>
+          {{ 'message.for' | i18n }}
+          <ui-bb-format-amount-ng
+            data-wrap
+            data-amount="payee.ebill.latestBill.paymentAmount"
+            data-currency="ext.helpers.getCurrencyCode()"
+            data-role="billpay-pay-a-bill-quickpay-overview-latest-ebill-amount"
+            class="amount-regular-color">
+          </ui-bb-format-amount-ng>
+        </div>
+        <div data-ng-if="!payee.ebill.latestBill">
+          {{ 'ebills.message.not-due' | i18n }}
+        </div>
+      </span>
+
+      <div data-ng-if="payee.ebill.capable && !payee.ebill.enabled">
+        <a href="#" target="_blank" data-role="billpay-pay-a-bill-quickpay-overview-get-ebills-link">
+          <i class="fa fa-external-link-alt" aria-hidden="true"></i>
+          <span data-i18n-key="ebills.link.get"></span>
+        </a>
+      </div>
+    </small>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/quickpay-amount.ng.html">
+  <ui-bb-currency-input-ng
+    class="currency-input"
+    data-ng-model="payee.newPayment.paymentAmount"
+    data-max-length="5"
+    data-decimal-max-length="2"
+    data-placeholder="0,000"
+    data-messages="ext.helpers.currencyInputLabels"
+    data-role="billpay-pay-a-bill-quickpay-amount-payment-amount">
+  </ui-bb-currency-input-ng>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/quickpay-memo.ng.html">
+  <small>
+    <a href="#"
+      data-ng-click="ext.helpers.openMemo(payee)"
+      data-uib-popover-template="'#ext-bb-billpay-pay-a-bill-ng/quickpay-memo-inner.ng.html'"
+      data-popover-placement="bottom-left"
+      data-popover-trigger="none"
+      data-popover-is-open="payee.memoPopover.isOpen"
+      data-role="billpay-pay-a-bill-quickpay-memo-add-memo">
+      <span data-ng-if="payee.newPayment.paymentMemo">
+        <i class="far fa-file-alt" aria-hidden="true"></i>
+        <span data-i18n-key="form.button.memo.edit"></span>
+      </span>
+      <span data-ng-if="!payee.newPayment.paymentMemo" data-i18n-key="form.button.memo.add"></span>
+    </a>
+  </small>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/quickpay-memo-inner.ng.html">
+  <div class="popover-body" data-role="billpay-pay-a-bill-quickpay-memo-inner">
+    <h5 data-i18n-key="heading.memo"></h5>
+    <textarea
+      cols="40"
+      rows="5"
+      maxlength="255"
+      data-ng-model="payee.memoPopover.paymentMemo"
+      class="form-control popover-textarea"
+      data-role="billpay-pay-a-bill-quickpay-memo-inner-input">
+    </textarea>
+    <hr>
+    <button
+      type="button"
+      data-i18n-key="form.button.memo.discard"
+      class="btn btn-danger"
+      data-ng-click="ext.helpers.unsetMemo(payee)"
+      data-role="billpay-pay-a-bill-quickpay-memo-inner-discard-memo-button">
+    </button>
+    <button
+      type="button"
+      data-i18n-key="form.button.memo.save"
+      class="btn btn-primary"
+      data-ng-click="ext.helpers.setMemo(payee)"
+      data-role="billpay-pay-a-bill-quickpay-memo-inner-save-memo-button">
+    </button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/quickpay-date.ng.html">
+  <div data-ng-controller="DatepickerController as $datepicker" data-ng-form="datepickerForm" ng-init="$datepicker.setOptions($datepicker.rushDatepickerOptions(payee))">
+    <div class="input-group">
+      <input type="text" class="form-control"
+        name="datepicker"
+        data-ng-model-options="{ allowInvalid: true }"
+        data-ng-model="payee.newPayment.paymentDate"
+        data-datepicker-options="$datepicker.options"
+        data-show-button-bar="false"
+        data-on-open-focus="false"
+        data-is-open="payee.datepicker.isOpen"
+        data-uib-datepicker-popup="{{$datepicker.datepickerDateFormat}}"
+        data-datepicker-template-url="#ext-bb-billpay-pay-a-bill-ng/datepicker-template.ng.html"
+        data-ng-focus="$datepicker.openDatepicker(payee)"
+        data-ng-keydown="$datepicker.datepickerKeyDown($event)"
+        data-role="billpay-pay-a-bill-quickpay-date-text-input"
+        aria-label="{{ 'datepicker.aria-label.date-input' | i18n }}"
+      />
+      <span class="input-group-append">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-ng-click="$datepicker.openDatepicker(payee)"
+          aria-label="{{'datepicker.label.open' | i18n}}"
+          data-role="billpay-pay-a-bill-quickpay-date-open-date-picker">
+          <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+        </button>
+      </span>
+    </div>
+    <small data-ng-if="ext.helpers.showRushNoticeForPayee(payee)">
+      <span data-ng-if="$datepicker.rushHasBeenChosen(payee)">
+        <span data-i18n-key="rush.message.selected"
+          data-role="billpay-pay-a-bill-quickpay-date-rush-selected"></span> -
+        <ui-bb-format-amount-ng
+          data-wrap
+          data-amount="$datepicker.options.rush.fee"
+          data-currency="$datepicker.options.currencyCode"
+          data-role="billpay-pay-a-bill-quickpay-date-rush-fee"
+          class="amount-regular-color">
+        </ui-bb-format-amount-ng>
+        <span data-i18n-key="rush.price.suffix-full"></span>
+      </span>
+      <span data-ng-if="$datepicker.rushIsAvailable(payee)" data-i18n-key="rush.message.available"
+        data-role="billpay-pay-a-bill-quickpay-date-rush-available"></span>
+    </small>
+
+    <div class="input-group" data-ng-class="$datepicker.datepickerErrorClass(payee, datepickerForm)">
+      <small class="help-block" data-ng-if="$datepicker.datepickerHasError(payee, datepickerForm)"
+        data-role="billpay-pay-a-bill-quickpay-date-error">
+        {{ $datepicker.datepickerError(payee, datepickerForm) | i18n }}
+      </small>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/datepicker-template.ng.html">
+  <div data-role="billpay-pay-a-bill-datepicker">
+    <div class="text-center mt-2">
+      <span data-i18n-key="datepicker.today-prefix"></span>
+      <span data-ng-bind="datepickerOptions.todaysDate | date"></span>
+    </div>
+
+    <ng-include src="'uib/template/datepicker/datepicker.html'"></ng-include>
+
+    <div class="text-center mb-2"
+      data-ng-if="datepickerOptions.rush.available()"
+      data-role="billpay-pay-a-bill-datepicker-rush-available">
+      <hr class="mt-0 mb-2">
+      <span data-i18n-key="rush.price.title"></span> -
+      <span data-i18n-key="rush.price.prefix"></span>
+      <ui-bb-format-amount-ng
+        data-wrap
+        data-amount="datepickerOptions.rush.fee"
+        data-currency="datepickerOptions.currencyCode"
+        data-role="billpay-pay-a-bill-datepicker-rush-fee"
+        class="amount-regular-color">
+      </ui-bb-format-amount-ng>
+      <span data-i18n-key="rush.price.suffix"></span>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/quickpay-account.ng.html">
+  <div data-ng-class="ext.helpers.getLoadingErrorClass($ctrl.viewState)">
+    <!-- dropdown control requires a class -->
+    <ui-bb-dropdown-select-ng
+      class=""
+      data-selected-as="payee.newPayment.paymentAccount.displayName"
+      data-ng-model="payee.newPayment.paymentAccount"
+      data-role="billpay-pay-a-bill-quickpay-account-payment-account"
+      data-ng-init="payee.newPayment.paymentAccount = $ctrl.viewState.accounts[0]"
+      data-ng-if="$ctrl.viewState.accounts.length">
+      <ui-bb-dropdown-option-ng
+        data-ng-if="$ctrl.viewState.accounts.length"
+        data-option="account"
+        data-ng-repeat="account in $ctrl.viewState.accounts track by account.accountNumber">
+        <a tabindex="0" role="button">
+          {{$option.displayName}}
+        </a>
+      </ui-bb-dropdown-option-ng>
+    </ui-bb-dropdown-select-ng>
+
+    <small data-ng-if="ext.helpers.hasAvailableBalance(payee.newPayment.paymentAccount)">
+      {{ 'message.available-balance' | i18n }}:
+      <ui-bb-format-amount-ng
+        data-wrap
+        data-amount="payee.newPayment.paymentAccount.balance"
+        data-currency="ext.helpers.getCurrencyCode()"
+        data-role="billpay-pay-a-bill-quickpay-account-payment-account-balance"
+        class="amount-regular-color">
+      </ui-bb-format-amount-ng>
+    </small>
+    <small data-ng-if="ext.helpers.hasUnavailableBalance(payee.newPayment.paymentAccount)">
+      {{ 'message.unavailable-balance' | i18n }}
+    </small>
+    <div data-ng-class="ext.helpers.getLoadingErrorClass($ctrl.viewState)">
+      <small class="help-block" data-ng-if="ext.helpers.hasLoadingError($ctrl.viewState)">
+        {{ ext.helpers.getLoadingErrorKey('accounts') | i18n }}
+      </small>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/quickpay-actions-menu.ng.html">
+  <div class="float-right" uib-dropdown data-role="billpay-pay-a-bill-dropdown-button">
+    <button type="button" class="btn btn-secondary" uib-dropdown-toggle aria-label="{{ 'menu.aria-label' | i18n }}">
+      <i class="fa fa-ellipsis-v"></i>
+    </button>
+    <div uib-dropdown-menu class="dropdown-menu dropdown-menu-small dropdown-menu-right" role="menu">
+      <button role="button"
+        class="dropdown-item"
+        data-i18n-key="menu.edit-payee"
+        data-ng-click="ext.helpers.editPayeeIntent(payee)"
+        data-role="billpay-pay-a-bill-dropdown-edit-payee-button"></button>
+      <a href="#"
+        target="_blank"
+        class="dropdown-item"
+        data-i18n-key="ebills.link.get"
+        data-ng-if="payee.ebill.capable && !payee.ebill.enabled"
+        data-role="billpay-pay-a-bill-dropdown-get-ebills-link"></a>
+      <button role="button"
+        class="dropdown-item"
+        data-i18n-key="menu.setup-recurring-payment"
+        data-ng-click="ext.helpers.createRecurringBillIntent(payee.id)"
+        data-role="billpay-pay-a-bill-dropdown-setup-recurring-payment-button"></button>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-a-bill-ng/header.ng.html">
+  <div class="row justify-content-end align-items-center">
+    <div class="col-md-auto">
+      <strong>{{ ext.helpers.payeeSelectedCountMessage($ctrl.viewState.payees).count }}</strong>
+      <span>{{ ext.helpers.payeeSelectedCountMessage($ctrl.viewState.payees).key | i18n }}</span>
+    </div>
+    <div class="col-md-auto">
+      <span data-i18n-key="message.total"></span>:
+      <ui-bb-format-amount-ng
+        data-wrap
+        data-amount="ext.helpers.calculatePaymentTotal($ctrl.viewState.payees)"
+        data-currency="ext.helpers.getCurrencyCode()"
+        data-role="billpay-pay-a-bill-payment-total"
+        class="amount-regular-color">
+      </ui-bb-format-amount-ng>
+    </div>
+    <div class="col-md-auto">
+      <button type="button"
+        data-i18n-key="form.button.pay"
+        class="btn btn-primary float-right"
+        data-ng-disabled="ext.helpers.areAnyPayeesInvalidForPayment($ctrl.viewState.payees)"
+        data-ng-click="ext.helpers.openPaymentSummaryModal($ctrl.viewState)"
+        data-role="billpay-pay-a-bill-send-money">
+      </button>
+    </div>
+  </div>
+  <hr class="d-none d-md-block">
+  <div class="row d-none d-md-flex">
+    <div class="col-12 col-md-3">
+      <h5 class="card-title" data-i18n-key="heading.payee"></h5>
+    </div>
+    <div class="col-12 col-md-3">
+      <h5 class="card-title" data-i18n-key="heading.amount"></h5>
+    </div>
+    <div class="col-12 col-md-3">
+      <h5 class="card-title" data-i18n-key="heading.deliver-by"></h5>
+    </div>
+    <div class="col-12 col-md-2">
+      <h5 class="card-title" data-i18n-key="heading.pay-from"></h5>
+    </div>
+    <div class="col-12 col-md-1">
+    </div>
+  </div>
+</script>
+

@@ -1,0 +1,566 @@
+<div class="ext-bb-billpay-pay-recurring-bill-ng" ng-controller="RecurringController as $ctrl">
+  <ui-bb-substitute-error-ng data-message="ext.helpers.getLoadingErrorMessageKey() | i18n">
+    <ng-include src="state.mainTemplate"></ng-include>
+  </ui-bb-substitute-error-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-recurring-bill-ng/main.ng.html">
+  <ui-bb-confirm-ng
+    data-is-open="state.isModalOpen"
+    data-labels="ext.helpers.cancelModalLabels"
+    data-size="'lg'"
+    data-animation="true"
+    data-is-dismissible="false"
+    data-on-confirm="ext.helpers.cancelHandler.onConfirmCancel(state, $ctrl)">
+  </ui-bb-confirm-ng>
+
+  <h2>
+    <span data-i18n-key="title"></span>
+    <div data-i18n-key="subtitle" class="small"></div>
+  </h2>
+  <ui-bb-loading-overlay-ng data-is-loading="state.isPostingRecurringPayments">
+    <div class="card">
+      <ui-bb-stepper-ng
+        data-labels="ext.helpers.stepperLabels"
+        data-on-cancel="ext.helpers.cancelHandler.onCancel(state, ctrl)"
+        data-allow-back="ext.helpers.allowPreviousStep()"
+        data-allow-next="ext.helpers.allowNextStep($ctrl.newPayment)"
+        data-on-finish="ext.helpers.onFinish($ctrl)"
+        data-before-step-change="ext.helpers.onBeforeStepChange($ctrl)">
+        <!-- Keep the form inside the stepper so that the stepper buttons don't action the form -->
+        <form name="recurringPaymentForm">
+          <ui-bb-stepper-step-ng title="{{'steps.payment-details' | i18n}}">
+            <ng-include src="'#ext-bb-billpay-pay-recurring-bill-ng/step-1.ng.html'"></ng-include>
+          </ui-bb-stepper-step-ng>
+
+          <ui-bb-stepper-step-ng title="{{'steps.alert-options' | i18n}}">
+            <ng-include src="'#ext-bb-billpay-pay-recurring-bill-ng/step-2.ng.html'"></ng-include>
+          </ui-bb-stepper-step-ng>
+
+          <ui-bb-stepper-step-ng title="{{'steps.review' | i18n}}">
+            <ng-include src="'#ext-bb-billpay-pay-recurring-bill-ng/step-3.ng.html'"></ng-include>
+          </ui-bb-stepper-step-ng>
+        </form>
+      </ui-bb-stepper-ng>
+    </div>
+  </ui-bb-loading-overlay-ng>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-recurring-bill-ng/step-1.ng.html">
+  <ui-bb-loading-indicator-ng data-is-loading="ext.helpers.initialPageIsLoading()" data-loading-text="{{'loading.accounts-payees' | i18n}}">
+    <div class="card border-0">
+      <div class="card-body">
+        <div data-ng-if="!ext.helpers.initialPageIsLoading()">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-12"
+              data-ng-class="ext.helpers.hasErrorClass('billpay_payment_payee', recurringPaymentForm)">
+              <div class="form-group" data-ng-class="ext.helpers.getLoadingErrorClass($ctrl.payees)">
+                <label data-i18n-key="payment.pay-to.label"></label>
+                <!-- dropdown control requires a class -->
+                <ui-bb-dropdown-select-ng
+                  class=""
+                  name="billpay_payment_payee"
+                  data-role="billpay-pay-recurring-bill-step1-pay-to"
+                  data-ng-init="$ctrl.initPayee($ctrl)"
+                  data-ng-change="ext.helpers.onPayeeChange($ctrl)"
+                  data-has-error="ext.helpers.hasError('billpay_payment_payee', recurringPaymentForm)"
+                  data-ng-model="$ctrl.newPayment.payee"
+                  data-selected-as="$option.displayName"
+                  placeholder="{{ 'payment.pay-to.options.default' | i18n }}">
+                  <ui-bb-dropdown-option-ng
+                    data-option="payee"
+                    data-ng-repeat="payee in $ctrl.payees() track by payee.id">
+                    <a tabindex="0" role="button">
+                      {{$option.displayName}}
+                    </a>
+                  </ui-bb-dropdown-option-ng>
+                </ui-bb-dropdown-select-ng>
+                <div data-ng-class="ext.helpers.getLoadingErrorClass($ctrl.payees)">
+                  <small class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasLoadingError($ctrl.payees)">
+                    {{ ext.helpers.getLoadingErrorKey('payees') | i18n }}
+                  </small>
+                </div>
+                <div class="invalid-feedback d-flex"  data-ng-if="ext.helpers.hasError('billpay_payment_payee', recurringPaymentForm)">
+                  {{ ext.helpers.getError('billpay_payment_payee', recurringPaymentForm) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-12">
+              <div  data-ng-class="ext.helpers.hasErrorClass('billpay_payment_account', recurringPaymentForm)">
+                <div class="form-group" data-ng-class="ext.helpers.getLoadingErrorClass($ctrl.accounts)">
+                  <label data-i18n-key="payment.pay-from.label"></label>
+                  <!-- dropdown control requires a class -->
+                  <ui-bb-dropdown-select-ng
+                    class=""
+                    data-role="billpay-pay-recurring-bill-step1-pay-from"
+                    data-has-error="ext.helpers.hasError('billpay_payment_account', recurringPaymentForm)"
+                    name="billpay_payment_account"
+                    data-ng-model="$ctrl.newPayment.account"
+                    data-selected-as="$option.longDisplayName"
+                    data-ng-init="$ctrl.newPayment.account = $ctrl.newPayment.account || $ctrl.firstAccount()"
+                    data-ng-change="ext.helpers.onPaymentAccountChange($ctrl)">
+                    <ui-bb-dropdown-option-ng
+                      data-option="account"
+                      data-ng-repeat="account in $ctrl.accounts() track by account.accountNumber">
+                      <a tabindex="0" role="button">
+                        {{$option.longDisplayName}}
+                      </a>
+                    </ui-bb-dropdown-option-ng>
+                  </ui-bb-dropdown-select-ng>
+                  <div data-ng-class="ext.helpers.getLoadingErrorClass($ctrl.accounts)">
+                    <small class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasLoadingError($ctrl.accounts)">
+                      {{ ext.helpers.getLoadingErrorKey('accounts') | i18n }}
+                    </small>
+                    <div class="invalid-feedback d-flex"  data-ng-if="ext.helpers.hasError('billpay_payment_account', recurringPaymentForm)">
+                      {{ ext.helpers.getError('billpay_payment_account', recurringPaymentForm) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-4 col-lg-5 col-md-7 col-12 form-group"
+            data-ng-class="ext.helpers.hasErrorClass('billpay_payment_amount', recurringPaymentForm)">
+              <label data-i18n-key="payment.amount.label"></label>
+              <ui-bb-currency-input-ng
+                name="billpay_payment_amount"
+                data-role="billpay-pay-recurring-bill-step1-amount"
+                class="currency-input"
+                data-ng-model="$ctrl.newPayment.paymentAmount"
+                data-max-length="5"
+                data-decimal-max-length="2"
+                data-placeholder="0,000"
+                data-messages="ext.helpers.currencyInputLabels"
+                data-ng-change="ext.helpers.onAmountChange($ctrl)">
+              </ui-bb-currency-input-ng>
+              <div class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasError('billpay_payment_amount', recurringPaymentForm)">
+                  {{ ext.helpers.getError('billpay_payment_amount', recurringPaymentForm) }}
+                </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-4 col-lg-5 col-md-7 col-12">
+              <div class="form-group">
+                <label data-i18n-key="payment.deliver-first-by.label"></label>
+                  <div
+                    data-role="billpay-pay-recurring-bill-step1-first-date"
+                    data-ng-include="'#ext-bb-billpay-pay-recurring-bill-ng/datepicker.ng.html'">
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-4 col-lg-5 col-md-7 col-12">
+              <div class="form-group">
+                <label data-i18n-key="payment.regularity.label"></label>
+                <!-- dropdown control requires a class -->
+                <ui-bb-dropdown-select-ng
+                  class=""
+                  data-role="billpay-pay-recurring-bill-step1-frequency"
+                  data-ng-model="$ctrl.newPayment.frequency"
+                  data-selected-as="$option ? ('payment.regularity.options.' + $option | i18n) : ''"
+                  placeholder="{{ 'payment.regularity.options.default' | i18n }}">
+                  <ui-bb-dropdown-option-ng
+                    data-option="option"
+                    data-ng-repeat="option in ext.helpers.paymentFrequencyOptions">
+                    <a tabindex="0" role="button">
+                      {{ 'payment.regularity.options.' + $option | i18n }}
+                    </a>
+                  </ui-bb-dropdown-option-ng>
+                </ui-bb-dropdown-select-ng>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="form-inline mb-4">
+                <div class="radio">
+                  <label>
+                    <input
+                      data-role="billpay-pay-recurring-bill-step1-frequency-manual"
+                      type="radio"
+                      name="frequency-end"
+                      data-ng-model="$ctrl.newPayment.frequencyEnd"
+                      aria-label="{{ 'aria-label.payment.regularity.until.manual-change' | i18n }}"
+                      value="manual" />
+                    <span class="pl-md-1" data-i18n-key="payment.regularity.until.manual-change"></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-inline mb-4 pr-4 pr-md-0">
+                <div class="radio">
+                  <label>
+                    <input
+                      id="ext-bb-billpay-pay-recurring-bill-ng-final-payment-end-number"
+                      data-role="billpay-pay-recurring-bill-step1-frequency-number"
+                      type="radio"
+                      name="frequency-end"
+                      data-ng-model="$ctrl.newPayment.frequencyEnd"
+                      aria-label="{{ 'aria-label.payment.regularity.until.n-payments-sent' | i18n }}"
+                      value="number" />
+                    <span class="pl-md-1 pr-md-1" data-i18n-key="payment.regularity.until.n-payments-sent.prefix"></span>
+                  </label>
+                </div>
+                <div class="form-group mb-0">
+                  <ui-bb-number-input-ng
+                    data-role="billpay-pay-recurring-bill-step1-instances"
+                    aria-label="{{ 'aria-label.payment.regularity.instances' | i18n }}"
+                    class="form-control occurence-field ml-4 ml-md-0"
+                    data-ng-model="$ctrl.newPayment.numberOfInstances"
+                    data-ng-disabled="ext.helpers.disableNumInstancesInput($ctrl.newPayment)"
+                    data-min-value="1"
+                    data-max-value="999">
+                  </ui-bb-number-input-ng>
+                </div>
+                <div class="form-group radio">
+                  <label for="ext-bb-billpay-pay-recurring-bill-ng-final-payment-end-number">
+                    <span class="pl-md-1" data-i18n-key="payment.regularity.until.n-payments-sent.suffix"></span>
+                  </label>
+                </div>
+                <div class="form-group radio text-muted" data-ng-if="ext.helpers.showFinalPaymentDate($ctrl.newPayment)">
+                  <span>
+                    <span data-i18n-key="payment.regularity.until.n-payments-sent.note"></span>
+                    <span data-ng-bind="ext.helpers.getFinalPaymentDateForNumberedInstances($ctrl.newPayment) | date"></span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-inline"
+                data-ng-controller="DatepickerController as $datepicker"
+                data-ng-form="finalDateDatepickerForm"
+                ng-init="$datepicker.setOptions($datepicker.finalPaymentDatepickerOptions())">
+                <div class="radio">
+                  <label>
+                    <input
+                      data-role="billpay-pay-recurring-bill-step1-frequency-end"
+                      type="radio"
+                      name="frequency-end"
+                      data-ng-model="$ctrl.newPayment.frequencyEnd"
+                      aria-label="{{ 'aria-label.payment.regularity.until.date' | i18n }}"
+                      value="date" />
+                    <span class="pl-md-1 pr-md-1" data-i18n-key="payment.regularity.until.date.label"></span>
+                  </label>
+                </div>
+                <div class="form-group mb-0">
+                  <div class="input-group ml-4 ml-md-0">
+                    <input
+                      data-role="billpay-pay-recurring-bill-step1-final-date"
+                      type="text"
+                      class="form-control"
+                      name="datepicker"
+                      data-uib-datepicker-popup="{{$datepicker.datepickerDateFormat}}"
+                      data-ng-model="$ctrl.newPayment.finalPaymentDate"
+                      data-is-open="$ctrl.newPayment.toDate.datepicker.isOpen"
+                      data-datepicker-options="ext.helpers.datepickerOptions($datepicker.options, {
+                        minDate: $ctrl.newPayment.paymentDate
+                      })"
+                      data-on-open-focus="false"
+                      data-ng-required="true"
+                      data-ng-keydown="$datepicker.datepickerKeyDown($event)"
+                      placeholder="{{ 'payment.regularity.until.date.placeholder' | i18n }}"
+                      data-ng-focus="$datepicker.openDatepicker($ctrl.newPayment.toDate)"
+                      data-ng-disabled="ext.helpers.disableEndDateInput($ctrl.newPayment)"
+                      data-show-button-bar="false"/>
+                    <span class="input-group-append">
+                      <button
+                        data-role="billpay-pay-recurring-bill-step1-button-final-date"
+                        type="button"
+                        class="btn btn-secondary"
+                        data-ng-click="$datepicker.openDatepicker($ctrl.newPayment.toDate)"
+                        data-ng-disabled="ext.helpers.disableEndDateInput($ctrl.newPayment)"
+                        aria-label="{{'datepicker.label.open' | i18n}}">
+                        <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="form-group radio"
+                  data-ng-if="$ctrl.newPayment.frequencyEnd === 'date'
+                  && ext.helpers.datepickerHasError(finalDateDatepickerForm, $ctrl.newPayment.paymentDate, false)">
+                  <div class="input-group"
+                    data-ng-if="ext.helpers.datepickerHasError(finalDateDatepickerForm, $ctrl.newPayment.paymentDate, false)"
+                    data-ng-class="ext.helpers.datepickerErrorClass(finalDateDatepickerForm, $ctrl.newPayment.paymentDate, false)">
+                    <small class="invalid-feedback d-flex">
+                      {{ ext.helpers.finalDateDatepickerError(finalDateDatepickerForm, $ctrl.newPayment.paymentDate, false) | i18n }}
+                    </small>
+                  </div>
+                </div>
+
+                <div class="form-group radio text-muted" data-ng-if="ext.helpers.showFinalPaymentDateAndNumInstances($ctrl.newPayment)">
+                  <span>
+                    <span data-i18n-key="payment.regularity.until.date.note.num-payments.before"></span>
+                    <span data-ng-bind="ext.helpers.calculateNumberOfInstances($ctrl.newPayment)"></span>
+                    <span
+                      data-ng-bind="ext.helpers.i18nSingularPlural(
+                        ext.helpers.calculateNumberOfInstances($ctrl.newPayment),
+                        'payment.regularity.until.date.note.num-payments.after'
+                      )">
+                    </span>.
+                    <span data-i18n-key="payment.regularity.until.date.note.last-payment-date.before"></span>
+                    <span data-ng-bind="ext.helpers.getFinalPaymentDateGivenEndDate($ctrl.newPayment) | date"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- errors -->
+          <div class="row">
+            <div class="col-12">
+              <div class="was-validated is-invalid" data-ng-repeat="errorKey in ext.helpers.generalErrorMessages track by $index">
+                <div class="invalid-feedback d-flex">
+                  {{ ext.helpers.getError(errorKey) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ui-bb-loading-indicator-ng>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-recurring-bill-ng/datepicker.ng.html">
+  <!-- Workaround field as the datepicker has a set name inside a different form -->
+  <input type="hidden" data-ng-model="$ctrl.newPayment.paymentDate" name="billpay_payment_date"/>
+  <div data-ng-controller="DatepickerController as $datepicker"
+    data-ng-form="datepickerForm"
+    ng-init="$datepicker.setOptions($datepicker.firstPaymentDatepickerOptions())"
+    data-ng-class="ext.helpers.hasErrorClass('billpay_payment_date', recurringPaymentForm)">
+    <div class="input-group">
+      <input
+        data-role="billpay-pay-recurring-bill-step1-from-date"
+        type="text"
+        class="form-control"
+        name="datepicker"
+        data-ng-disabled="!$ctrl.newPayment.payee"
+        data-uib-datepicker-popup="{{$datepicker.datepickerDateFormat}}"
+        data-ng-model="$ctrl.newPayment.paymentDate"
+        data-is-open="$ctrl.newPayment.fromDate.datepicker.isOpen"
+        data-datepicker-options="ext.helpers.datepickerOptions($datepicker.options, {
+          minDate: $ctrl.newPayment.minPaymentDate
+        })"
+        data-ng-change="ext.helpers.onPaymentDateChange($ctrl.newPayment)"
+        data-on-open-focus="false"
+        data-ng-required="true"
+        data-ng-keydown="$datepicker.datepickerKeyDown($event)"
+        data-ng-focus="$datepicker.openDatepicker($ctrl.newPayment.fromDate)"
+        placeholder="{{ 'datepicker.placeholder' | i18n }}"
+        data-show-button-bar="false"/>
+      <span class="input-group-append">
+        <button
+          data-role="billpay-pay-recurring-bill-step1-button-from-date"
+          type="button"
+          class="btn btn-secondary"
+          data-ng-click="$datepicker.openDatepicker($ctrl.newPayment.fromDate)"
+          aria-label="{{'datepicker.label.open' | i18n}}"
+          data-ng-disabled="!$ctrl.newPayment.payee">
+          <i class="fa fa-calendar-alt" aria-hidden="true"></i>
+        </button>
+      </span>
+    </div>
+    <div class="input-group" data-ng-class="ext.helpers.datepickerErrorClass(datepickerForm, $ctrl.newPayment.minPaymentDate, true)">
+      <small class="invalid-feedback d-flex" data-ng-if="ext.helpers.datepickerHasError(datepickerForm, $ctrl.newPayment.minPaymentDate, true)">
+        {{ ext.helpers.datepickerError(datepickerForm, $ctrl.newPayment.minPaymentDate, true) | i18n }}
+      </small>
+    </div>
+
+    <div class="invalid-feedback d-flex" data-ng-if="ext.helpers.hasError('billpay_payment_date', recurringPaymentForm)">
+      {{ ext.helpers.getError('billpay_payment_date', recurringPaymentForm) }}
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-recurring-bill-ng/step-2.ng.html">
+  <div class="card border-0">
+    <div class="card-body">
+      <p data-i18n-key="alerts.message"></p>
+
+      <div class="checkbox" data-ng-repeat="option in ext.helpers.alertOptions track by option.modelKey">
+        <label>
+          <input
+            data-role="billpay-pay-recurring-bill-step2-alert{{$index}}"
+            type="checkbox"
+            data-ng-model="$ctrl.newPayment.alert[option.modelKey]" />
+          {{ option.i18nKey | i18n}}
+        </label>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-billpay-pay-recurring-bill-ng/step-3.ng.html">
+  <div class="card border-0">
+    <div class="card-body">
+      <h4 class="mt-0 mt-md-4">
+        <span data-i18n-key="review.title.pay-from"></span>
+        <span data-ng-bind="$ctrl.newPayment.account.longDisplayName"
+          data-role="billpay-pay-recurring-bill-step3-pay-from"></span>
+      </h4>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <strong data-role="billpay-pay-recurring-bill-step3-pay-to" data-ng-bind="$ctrl.newPayment.payee.displayName"></strong>
+        </div>
+        <div class="col-12 col-md-8">
+          <div class="row mb-1">
+            <div class="col-6 col-md-3">
+              <strong data-i18n-key="review.fields.amount"></strong>
+            </div>
+            <div class="col-6 col-md-9">
+              <ui-bb-format-amount-ng
+                data-role="billpay-pay-recurring-bill-step3-amount"
+                data-wrap
+                data-amount="$ctrl.newPayment.paymentAmount.value"
+                data-currency="ext.helpers.getCurrencyCode()"
+                class="amount-regular-color">
+              </ui-bb-format-amount-ng>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-6 col-md-3">
+              <strong data-i18n-key="review.fields.deliver-by"></strong>
+            </div>
+            <div class="col-6 col-md-9"
+              data-role="billpay-pay-recurring-bill-step3-first-date"
+              data-ng-bind="$ctrl.newPayment.paymentDate | date"></div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-6 col-md-3">
+              <strong data-i18n-key="review.fields.how-often"></strong>
+            </div>
+            <div class="col-6 col-md-9">
+              <div data-ng-if="$ctrl.newPayment.frequencyEnd === 'manual'">
+                <span
+                  data-role="billpay-pay-recurring-bill-step3-frequency-manual"
+                  data-ng-bind="ext.helpers.i18nPaymentFrequencyOption($ctrl.newPayment.frequency)">
+                </span>,
+                <span data-i18n-key="review.frequency.manual"></span>
+              </div>
+
+              <div data-ng-if="$ctrl.newPayment.frequencyEnd === 'number'">
+                <div>
+                  <span
+                    data-role="billpay-pay-recurring-bill-step3-frequency-number"
+                    data-ng-bind="$ctrl.newPayment.numberOfInstances">
+                  </span>
+                  <span data-ng-bind="ext.helpers.i18nSingularPlural($ctrl.newPayment.numberOfInstances, 'review.frequency.numTimes')"></span>,
+                  <span
+                    data-role="billpay-pay-recurring-bill-step3-frequency-number-option"
+                    data-ng-bind="ext.helpers.i18nPaymentFrequencyOption($ctrl.newPayment.frequency)"
+                    class="text-lowercase">
+                  </span>
+                </div>
+                <div>
+                  <span data-i18n-key="review.frequency.final-date.last-payment-date.before"></span>
+                  <span
+                    data-role="billpay-pay-recurring-bill-step3-final-date"
+                    data-ng-bind="ext.helpers.getFinalPaymentDateForNumberedInstances($ctrl.newPayment) | date">
+                  </span>
+                </div>
+              </div>
+
+              <div data-ng-if="$ctrl.newPayment.frequencyEnd === 'date'">
+                <div>
+                  <span data-ng-bind="ext.helpers.i18nPaymentFrequencyOption($ctrl.newPayment.frequency)"></span>,
+                  <span data-i18n-key="review.frequency.date"></span>
+                  <span data-ng-bind="$ctrl.newPayment.finalPaymentDate | date"></span>
+                </div>
+                <div>
+                  <span data-i18n-key="review.frequency.final-date.num-payments.before"></span>
+                  <span data-ng-bind="ext.helpers.calculateNumberOfInstances($ctrl.newPayment)"></span>
+                  <span
+                    data-ng-bind="ext.helpers.i18nSingularPlural(
+                      ext.helpers.calculateNumberOfInstances($ctrl.newPayment),
+                      'review.frequency.final-date.num-payments.after'
+                    )">
+                  </span>.
+                  <span data-i18n-key="review.frequency.final-date.last-payment-date.before"></span>
+                  <span data-ng-bind="ext.helpers.getFinalPaymentDateGivenEndDate($ctrl.newPayment) | date"></span>.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-6 col-md-3">
+              <strong data-i18n-key="review.fields.alert-me"></strong>
+            </div>
+            <div class="col-6 col-md-9">
+              <div data-ng-repeat="option in ext.helpers.alertOptions track by option.modelKey">
+                <div data-ng-if="$ctrl.newPayment.alert[option.modelKey]" data-ng-bind="option.i18nKey | i18n"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <hr>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-4"></div>
+        <div class="col-12 col-md-8">
+          <div class="row">
+            <div class="col-6 col-md-3">
+              <strong data-i18n-key="review.fields.total-amount"></strong>
+            </div>
+            <div class="col-6 col-md-9">
+              <span class="lead">
+                <ui-bb-format-amount-ng
+                  data-role="billpay-pay-recurring-bill-step3-total-amount"
+                  data-wrap
+                  data-amount="$ctrl.newPayment.paymentAmount.value"
+                  data-currency="ext.helpers.getCurrencyCode()"
+                  class="amount-regular-color">
+                </ui-bb-format-amount-ng>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- errors -->
+      <div class="row" data-ng-if="ext.helpers.errorsExist()">
+        <div class="col-12">
+          <!-- If there is an unrecoverable page error -->
+          <div class="was-validated is-invalid mt-4"
+            data-ng-if="ext.helpers.unrecoverablePageErrorExists()">
+            <div class="invalid-feedback d-flex">
+              {{ ext.helpers.getError('billpay_page_error') }}
+            </div>
+          </div>
+
+          <!--  Unrecoverable other errors -->
+          <div class="was-validated is-invalid mt-4"
+            data-ng-if="ext.helpers.unrecoverableErrorsExist()"
+            data-ng-repeat="errorKey in ext.helpers.unrecoverableErrorMessages track by $index">
+            <div class="invalid-feedback d-flex">
+              {{ ext.helpers.getError(errorKey) }}
+            </div>
+          </div>
+
+          <!-- Show the page error when there are recoverable errors -->
+          <div class="was-validated is-invalid mt-4"
+            data-ng-if="ext.helpers.errorsExist() && !ext.helpers.unrecoverableErrorsExist()">
+            <div class="invalid-feedback d-flex">
+              {{ 'billpay.model.error.default.step-3' | i18n }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>

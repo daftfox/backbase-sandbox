@@ -1,0 +1,20 @@
+{
+  "en-US": {
+    "header.transactions": "Latest transactions",
+
+    "details.label.product": "From",
+    "details.label.counterParty": "To",
+    "details.label.currency": "Ccy",
+    "details.label.amount": "Amount",
+    "details.label.bookingDate": "Book Date",
+
+    "label.allTransactions": "View all transactions",
+
+    "message.label.loading": "Loading",
+    "message.no.transactions": "No transactions",
+    "message.no.transactions.subtitle": "There are no transactions to display.",
+    "message.noTransactionsForAccount": "There are no transactions to display.<br>Try selecting an account using the account selector.",
+
+    "model.error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later."
+  }
+}

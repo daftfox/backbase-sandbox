@@ -1,0 +1,241 @@
+<div class="ext-bus-batch-upload-ng" data-ng-controller="BatchUploadController as $ctrl">
+  <div class="notifications col-lg-4">
+    <ui-bb-notification-stripe-ng
+      data-ng-if="$ctrl.state.status"
+      data-message="{{ $ctrl.state.status.message | i18n: $ctrl.state.status.data }}"
+      data-on-close="$ctrl.clearStatus()"
+      data-timeout-second="{{ $ctrl.state.dismissTime || 3 }}"
+      data-type="bg-{{
+        $ctrl.state.status.type === 'SUCCESS' && 'success' ||
+        $ctrl.state.status.type === 'ERROR' && 'danger'
+      }}">
+    </ui-bb-notification-stripe-ng>
+  </div>
+
+  <div data-ng-switch="$ctrl.state.step">
+    <div data-ng-switch-when="SELECT_TYPE">
+      <div data-ng-include="'ext-bus-batch-upload-ng/select-type.ng.html'"></div>
+    </div>
+    <div data-ng-switch-when="UPLOAD_FILES">
+      <div data-ng-include="'ext-bus-batch-upload-ng/upload-files.ng.html'"></div>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="ext-bus-batch-upload-ng/select-type.ng.html">
+   <form class="batch-upload card border-0">
+    <div class="batch-upload-menu-body card-body text-center container-fluid">
+      <div class="batch-upload-options-form">
+        <div class="batch-upload-title mt-5">
+          <h5 class="batch-upload-title" data-i18n-key="label.select_type_titile_1"></h5>
+          <h6 class="batch-upload-subtitle text-muted" data-i18n-key="label.select_type_titile_2"></h6>
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+          <div
+            data-ng-repeat="option in ext.helpers.uploadOptions track by option.code"
+            class="batch-upload-type-wrapper card col-2 p-0 m-3">
+            <button
+              role="button" class="btn btn-outline-primary batch-upload-type card-body"
+              data-ng-click="$ctrl.state.selectedUploadOption = option"
+              data-ng-class="{'selected': $ctrl.state.selectedUploadOption == option }">
+              <i class="fa fa-check-circle position-absolute" aria-hidden="true"></i>
+              <div class="batch-upload-type-content" title="{{option.title | i18n}} - {{option.code}}">
+                <div class="text-truncate" data-i18n-key="{{option.title}}"></div>
+                <div class="batch-upload-subtitle small text-truncate" data-ng-bind="option.code"></div>
+              </div>
+              <input
+                type="radio"
+                name="type-option"
+                class="d-none"
+                data-ng-value="$ctrl.state.selectedUploadOption"
+                data-ng-model="$ctrl.state.selectedUploadOption">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="batch-upload-footer text-center card-footer">
+      <button
+        class="btn"
+        data-ng-disabled="!$ctrl.state.selectedUploadOption"
+        data-ng-class="$ctrl.state.selectedUploadOption ? 'btn-primary' : 'btn-outline-secondary'"
+        data-ng-click="$ctrl.state.step = 'UPLOAD_FILES'"
+        data-i18n-key="label.continue">
+      </button>
+    </div>
+  </form>
+</script>
+
+<script type="text/ng-template" id="ext-bus-batch-upload-ng/upload-files.ng.html">
+  <div class="batch-upload-wrapper">
+    <div class="batch-upload-files-header card-header">
+      <div class="batch-upload-queue-status row">
+        <div class="col-8">
+          <h6 class="batch-upload-type-title">
+            <span data-i18n-key="{{$ctrl.state.selectedUploadOption.title}}"></span>
+            <a href="#"
+              data-ng-click="ext.helpers.handleChangesLinkClick(ext, $ctrl)"
+              data-i18n-key="label.change"
+              data-ng-hide="ext.helpers.isChangeUnavailable($ctrl)">
+            </a>
+          </h6>
+          <span class="batch-upload-subtitle-status">
+            <span data-ng-if="!$ctrl.state.uploadedFilesNumber && !$ctrl.state.failedUploadFilesNumber">
+              <strong data-ng-bind="ext.helpers.getQueueStatus($ctrl) | i18n: { filesCount: $ctrl.state.files.length }"></strong>
+              <span
+                data-ng-if="!$ctrl.isUploading()"
+                data-i18n-key="label.added_in_queue">
+              </span>
+            </span>
+            <span
+              data-ng-bind="ext.helpers.getUploadedFilesStatus($ctrl) | i18n: { filesCount: $ctrl.state.uploadedFilesNumber }"
+              data-ng-if="$ctrl.state.uploadedFilesNumber">
+            </span>
+            <span
+              data-ng-bind="ext.helpers.getUploadFilesFailedStatus($ctrl) | i18n: { filesCount: $ctrl.state.failedUploadFilesNumber }"
+              data-ng-if="$ctrl.state.failedUploadFilesNumber">
+            </span>
+          </span>
+        </div>
+
+        <div class="batch-upload-queue-actions col-4 text-right" data-ng-if="$ctrl.state.files.length">
+          <button
+            class="btn btn-outline-secondary"
+            tabindex="3"
+            data-ng-disabled="$ctrl.ctrl.isUploading() || !ext.helpers.isContinueEnabled($ctrl)"
+            data-ng-click="$ctrl.finishUploadSession()"
+            data-ng-if="ext.helpers.isContinueEnabled($ctrl)"
+            data-i18n-key="{{ext.helpers.getContinueButtonLabel($ctrl)}}"
+          >
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            tabindex="2"
+            data-ngf-select="$ctrl.addFiles($files, $invalidFiles)"
+            data-ngf-multiple="true"
+            data-ngf-accept="::$ctrl.state.selectedUploadOption.acceptMIMETypes"
+            data-ngf-max-size="::$ctrl.config.maxFileSize"
+            data-ngf-pattern="::$ctrl.state.selectedUploadOption.acceptMIMETypes"
+            data-ng-if="!ext.helpers.isContinueEnabled($ctrl)"
+            data-i18n-key="label.add_files">
+          </button>
+          <button
+            class="btn btn-primary"
+            tabindex="1"
+            data-ng-click="$ctrl.uploadFiles()"
+            data-ng-if="!ext.helpers.isContinueEnabled($ctrl)"
+            data-i18n-key="label.upload_files">
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="batch-upload-body">
+      <div
+        class="batch-upload-drop-zone"
+        data-ngf-drop
+        data-ngf-drop-disabled="!ext.helpers.isUploadAvailable($ctrl)"
+        data-ngf-change="$ctrl.addFiles($files, $invalidFiles)"
+        data-ngf-max-size="::$ctrl.config.maxFileSize"
+        data-ngf-pattern="::$ctrl.state.selectedUploadOption.acceptMIMETypes"
+        data-ngf-multiple="true"
+        data-ngf-allow-dir="true"
+        data-ngf-drag-over-class="{pattern: $ctrl.state.selectedUploadOption.acceptMIMETypes, accept:'batch-upload-dragover', reject:'batch-upload-dragover-error'}"
+      >
+        <div
+          class="batch-upload-empty-queue text-center"
+          data-ng-if="!$ctrl.state.files.length"
+          data-ng-include="'ext-bus-batch-upload-ng/file-upload-input.ng.html'">
+        </div>
+        <div
+          class="batch-upload-files-queue"
+          data-ng-if="$ctrl.state.files.length"
+          data-ng-include="'ext-bus-batch-upload-ng/file-upload-files.ng.html'">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.changeConfirmOpened"
+    data-labels="{
+      heading: ('label.change.batch.type' | i18n),
+      bodyText: ('label.change.batch.type.msg' | i18n),
+      confirm: ('label.change.batch.type.change' | i18n),
+      cancel: ('label.change.batch.type.cancel' | i18n),
+    }"
+    data-on-confirm="$ctrl.showSelectTypePage()"
+    data-size="'lg'">
+  </ui-bb-confirm-ng>
+</script>
+
+<script type="text/ng-template" id="ext-bus-batch-upload-ng/file-upload-input.ng.html">
+  <div class="batch-upload-drop-message card-body p-5 align-self-center">
+    <h4 data-i18n-key="label.drop_files_1"></h4>
+    <div data-i18n-key="label.drop_files_2"></div>
+    <div class="small text-muted">
+      <span data-i18n-key="label.drop_files_3"></span>
+      <span data-ng-bind="$ctrl.state.selectedUploadOption.supportedExtensions"></span>
+    </div>
+    <br>
+    <button
+      class="btn btn-outline-secondary"
+      data-ngf-select="$ctrl.addFiles($files, $invalidFiles)"
+      data-ngf-multiple="true"
+      data-ngf-accept="::$ctrl.state.selectedUploadOption.acceptMIMETypes"
+      data-ngf-max-size="::$ctrl.config.maxFileSize"
+      data-ngf-pattern="::$ctrl.state.selectedUploadOption.acceptMIMETypes"
+      data-i18n-key="label.browse_files">
+    </button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="ext-bus-batch-upload-ng/file-upload-files.ng.html">
+  <div class="batch-upload-files-list container-fluid">
+    <div
+      class="row batch-upload-file"
+      data-ng-class="{ 'success': file.uploaded, 'danger': file.uploadFailed }"
+      data-ng-repeat="file in $ctrl.state.files track by $index">
+      <div class="col-12">
+        <div
+          class="batch-upload-file-progress position-absolute"
+          data-ng-if="!file.uploaded"
+          data-ng-style="{ width: file.progress + '%' }">
+        </div>
+        <div class="row py-2 border-bottom">
+          <div class="batch-upload-file-data col-11 d-flex flex-column align-items-middle">
+            <span class="file-name" data-ng-bind="file.data.name"></span>
+            <small class="file-size" data-ng-if="!file.uploadFailed">
+              <span data-ng-if="file.uploaded" data-i18n-key="label.uploaded"></span>
+              <span data-ng-bind="file.data.size | fileSize"></span>
+            </small>
+            <small class="file-size" data-ng-if="file.uploadFailed && file.uploadError">
+              <span data-i18n-key="label.upload_fail_status"></span>
+              <span data-i18n-key="{{file.uploadError}}"></span>
+            </small>
+          </div>
+          <div class="batch-upload-file-buttons col-1 d-flex flex-column align-items-middle">
+            <button
+              class="btn btn-link"
+              data-ng-if="file.uploadFailed"
+              data-ng-click="$ctrl.uploadFile(file)">
+              <i class="fa fa-redo" aria-hidden="true"></i>
+            </button>
+            <button
+              class="btn btn-link"
+              data-ng-disabled="file.uploading"
+              data-ng-if="!file.uploaded"
+              data-ng-click="$ctrl.removeFile(file)">
+              <i class="far fa-trash-alt" aria-hidden="true"></i>
+            </button>
+            <button
+              class="text-success btn btn-link"
+              disabled="disabled"
+              data-ng-if="file.uploaded">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>

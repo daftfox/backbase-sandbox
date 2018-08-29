@@ -1,0 +1,56 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-create-new-ng@~2.4.2",
+        "scope": null,
+        "escapedName": "ext-bb-create-new-ng",
+        "name": "ext-bb-create-new-ng",
+        "rawSpec": "~2.4.2",
+        "spec": ">=2.4.2 <2.5.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bb-create-new-ng@>=2.4.2 <2.5.0",
+  "_id": "ext-bb-create-new-ng@2.4.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-create-new-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-create-new-ng@~2.4.2",
+    "scope": null,
+    "escapedName": "ext-bb-create-new-ng",
+    "name": "ext-bb-create-new-ng",
+    "rawSpec": "~2.4.2",
+    "spec": ">=2.4.2 <2.5.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-create-new-ng/-/ext-bb-create-new-ng-2.4.2.tgz",
+  "_shasum": "886290d08fb5e4b334e59175e565c8441b6b422c",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-create-new-ng@~2.4.2",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-is-permitted-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-dropdown": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-create-new-ng/-/ext-bb-create-new-ng-2.4.2.tgz",
+    "shasum": "886290d08fb5e4b334e59175e565c8441b6b422c"
+  },
+  "main": "scripts/ext-bb-create-new-ng.js",
+  "name": "ext-bb-create-new-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.4.2"
+}

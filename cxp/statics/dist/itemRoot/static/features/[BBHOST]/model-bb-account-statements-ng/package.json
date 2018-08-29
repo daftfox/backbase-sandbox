@@ -1,0 +1,56 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "model-bb-account-statements-ng@^2.2.0",
+        "scope": null,
+        "escapedName": "model-bb-account-statements-ng",
+        "name": "model-bb-account-statements-ng",
+        "rawSpec": "^2.2.0",
+        "spec": ">=2.2.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-account-statements-ng"
+    ]
+  ],
+  "_from": "model-bb-account-statements-ng@>=2.2.0 <3.0.0",
+  "_id": "model-bb-account-statements-ng@2.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/model-bb-account-statements-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "model-bb-account-statements-ng@^2.2.0",
+    "scope": null,
+    "escapedName": "model-bb-account-statements-ng",
+    "name": "model-bb-account-statements-ng",
+    "rawSpec": "^2.2.0",
+    "spec": ">=2.2.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-account-statements-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-account-statements-ng/-/model-bb-account-statements-ng-2.2.0.tgz",
+  "_shasum": "cb130743ee3806c31a134db476f7aee435b7888c",
+  "_shrinkwrap": null,
+  "_spec": "model-bb-account-statements-ng@^2.2.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-account-statements-ng",
+  "dependencies": {
+    "data-bb-account-statements-http-ng": "^1.3.0",
+    "data-bb-product-summary-http-ng": "^1.6.3",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-storage-ng": "^1.0.98",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/model-bb-account-statements-ng/-/model-bb-account-statements-ng-2.2.0.tgz",
+    "shasum": "cb130743ee3806c31a134db476f7aee435b7888c"
+  },
+  "main": "scripts/model-bb-account-statements-ng.js",
+  "name": "model-bb-account-statements-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.2.0"
+}

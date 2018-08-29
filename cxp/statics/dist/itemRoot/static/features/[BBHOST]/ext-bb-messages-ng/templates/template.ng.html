@@ -1,0 +1,377 @@
+<div data-ng-controller="MessagesController as $ctrl"
+  class="ext-bb-messages-ng"
+  data-ng-init="views = $ctrl.statics.views; $ctrl.fetchUnreadMessagesCount()">
+  <div class="notifications col-md-4">
+    <ui-bb-notification-stripe-ng
+      data-ng-if="$ctrl.state.status.data"
+      data-timeout-second="{{ $ctrl.state.status.dismissTime }}"
+      data-message="{{ ext.helpers.statusMessage($ctrl.state.status.data) }}"
+      data-on-close="$ctrl.state.status.data = null;"
+      data-type="bg-{{ $ctrl.state.status.data.isError ? 'danger' : 'success' }}">
+    </ui-bb-notification-stripe-ng>
+  </div>
+  <uib-tabset data-active="activeTab" class="mb-4">
+    <uib-tab data-index="0"
+      data-select="$ctrl.openFolder(views.inbox)">
+      <uib-tab-heading>
+        <span data-i18n-key="label.messages"></span>
+        <span data-ng-bind-html="'(' + $ctrl.countUnreadItems() + ')'"
+          data-ng-if="$ctrl.config.showUnreadConversationsCount && $ctrl.countUnreadItems() > 0">
+        </span>
+      </uib-tab-heading>
+    </uib-tab>
+    <uib-tab data-index="1"
+      data-heading="{{'label.sent' | i18n }}"
+      data-select="$ctrl.openFolder(views.sent)">
+    </uib-tab>
+  </uib-tabset>
+  <div data-ng-if="$ctrl.state.showMailbox">
+    <div class="empty-element-placeholder-relative" data-ng-if="$ctrl.state.initialLoading"></div>
+    <ui-bb-substitute-error-ng data-message="$ctrl.state.globalError.message | i18n"
+      data-ng-if="!$ctrl.state.initialLoading">
+      <div class="card" x-ms-format-detection="none">
+        <div class="card-header text-right bg-white d-none d-md-block">
+          <button type="button"
+            class="btn btn-secondary conversation-list-item-remove-btn fade"
+            data-ng-click="ext.removeMultipleConfirmOpened = true"
+            data-ng-class="{ 'in': $ctrl.state.selectedConversations.length > 0 }"
+            data-i18n-key="label.delete">
+          </button>
+        </div>
+        <div class="card-body p-0">
+          <ui-bb-empty-state-ng data-icon-classes="fa fa-3x far fa-envelope text-muted"
+            data-title="{{ 'label.messages.empty.title' | i18n }}"
+            data-subtitle="{{ 'label.messages.empty.description' | i18n }}"
+            data-is-empty="!$ctrl.state.currentFolder.items.length && !$ctrl.state.currentFolder.totalCount">
+            <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.currentFolder.loading">
+              <ul class="list-group list-group-flush d-md-none">
+                <li class="list-group-item list-group-item-action"
+                  data-ng-class-even="'list-group-item-secondary'"
+                  data-ng-repeat="conversation in $ctrl.state.currentFolder.items track by conversation.id"
+                  data-ng-click="$ctrl.openItem(conversation)"
+                  data-ng-class="{'bg-info': ext.helpers.isSelected(conversation, $ctrl.state.selectedConversations)}">
+                  <div class="row justify-content-between">
+                    <div class="col-9">
+                      <div class="text-truncate"
+                        data-ng-class="{ 'font-weight-bold': conversation.containsUnread }"
+                        data-role="conversation-subject"
+                        data-ng-bind="conversation.subject">
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <span class="text-muted small"
+                        data-ng-bind="conversation.timestamp | date: 'shortDate'"
+                        data-role="conversation-date">
+                      </span>
+                    </div>
+                    <div class="col-9">
+                      <div class="text-truncate"
+                        data-role="conversation-body"
+                        data-ng-bind="conversation.body">
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <button type="button"
+                        class="btn btn-link p-0"
+                        data-ng-click="conversation.favorite = !conversation.favorite;$event.stopPropagation();">
+                        <i class="fa-star"
+                          aria-hidden="true"
+                          data-ng-class="{'fas': conversation.favorite, 'far': !conversation.favorite }"
+                          aria-label="{{ 'label.mark.as.favorite' | i18n }}">
+                        </i>
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="table-responsive d-none d-md-block">
+                <table class="table table-hover table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="align-middle">
+                        <input type="checkbox"
+                          data-indeterminate-ng="ext.helpers.isSelectedPart($ctrl.state.currentFolder.items, $ctrl.state.selectedConversations)"
+                          data-ng-checked="ext.helpers.isSelectedAll($ctrl.state.currentFolder.items, $ctrl.state.selectedConversations)"
+                          data-ng-click="ext.helpers.toggleAllConversations($ctrl.state.currentFolder.items, $ctrl.state.selectedConversations)"
+                          data-role="select-all-conversations"/>
+                      </th>
+                      <th data-ng-repeat="header in ext.helpers.headers"
+                        class="{{ header.class }}">
+                        <span data-ng-if="::!header.hidden" data-i18n-key="{{ ::header.label }}"></span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr colspan="7"
+                      data-ng-class-odd="'table-row-odd'"
+                      data-ng-class-even="'table-row-even'"
+                      data-ng-repeat="conversation in $ctrl.state.currentFolder.items track by conversation.id"
+                      data-ng-click="$ctrl.openItem(conversation);"
+                      data-ng-class="{'bg-info': ext.helpers.isSelected(conversation, $ctrl.state.selectedConversations)}">
+                      <td class="align-middle">
+                        <input type="checkbox"
+                          data-ng-checked="ext.helpers.isSelected(conversation, $ctrl.state.selectedConversations)"
+                          data-ng-click="ext.helpers.toggleSelection(conversation, $ctrl.state.selectedConversations, $event)"
+                          data-role="select-conversation"/>
+                      </td>
+                      <td data-label="{{ ext.helpers.headers[0].label | i18n }}" class="align-middle">
+                        <div class="table-small text-truncate"
+                          data-ng-class="{ 'font-weight-bold': conversation.containsUnread }"
+                          data-role="conversation-sender"
+                          data-ng-bind="conversation.sender">
+                        </div>
+                      </td>
+                      <td data-label="{{ ext.helpers.headers[1].label | i18n }}" class="align-middle">
+                        <div class="table-small text-truncate"
+                          data-ng-class="{ 'font-weight-bold': conversation.containsUnread }"
+                          data-role="conversation-subject"
+                          data-ng-bind="conversation.subject">
+                        </div>
+                      </td>
+                      <td data-label="{{ ext.helpers.headers[2].label | i18n }}" class="align-middle">
+                        <ng-include src="'#ext-bb-messages-ng/topic.html'"></ng-include>
+                      </td>
+                      <td data-label="{{ ext.helpers.headers[3].label | i18n }}" class="align-middle">
+                        <button type="button"
+                          class="btn btn-link p-0"
+                          data-ng-click="conversation.favorite = !conversation.favorite;$event.stopPropagation();">
+                          <i class="fa-star"
+                            aria-hidden="true"
+                            data-ng-class="{'fas': conversation.favorite, 'far': !conversation.favorite }"
+                            aria-label="{{ 'label.mark.as.favorite' | i18n }}">
+                          </i>
+                        </button>
+                      </td>
+                      <td data-label="{{ ext.helpers.headers[4].label | i18n }}" class="align-middle">
+                        <span class="text-muted"
+                          data-ng-bind="conversation.timestamp | date: 'shortDate'"
+                          data-role="conversation-date">
+                        </span>
+                      </td>
+                      <td data-label="{{ ext.helpers.headers[5].label | i18n }}" class="text-right">
+                        <div data-uib-dropdown data-dropdown-append-to-body>
+                          <button data-uib-dropdown-toggle
+                            class="btn btn-sm btn-secondary"
+                            data-ng-click="$event.stopPropagation()"
+                            data-container="body"
+                            data-uib-tooltip="{{ 'header.actions' | i18n }}"
+                            data-tooltip-append-to-body="true"
+                            data-tooltip-placement="top-right">
+                            <i class="fa fa-ellipsis-v fa-fw"
+                              aria-hidden="true"
+                              data-label="{{ 'header.actions' | i18n }}">
+                            </i>
+                          </button>
+                          <div data-uib-dropdown-menu class="dropdown-menu-right">
+                            <a class="dropdown-item"
+                              data-ng-click="ext.helpers.confirmConversationRemove(conversation, ext, $event)"
+                              data-i18n-key="label.delete">
+                            </a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <ui-bb-load-more-ng class="d-block my-3"
+                data-ng-show="$ctrl.state.currentFolder.items.length < $ctrl.state.currentFolder.totalCount"
+                data-label="{{ 'label.loadMore' | i18n }}"
+                data-on-load-more="$ctrl.loadItems($ctrl.state.currentView, $ctrl.state.currentFolder.items.length, done)">
+              </ui-bb-load-more-ng>
+            </ui-bb-loading-overlay-ng>
+          </ui-bb-empty-state-ng>
+        </div>
+      </div>
+    </ui-bb-substitute-error-ng>
+  </div>
+
+  <div data-ng-controller="ConversationController as $conversationCtrl">
+    <ng-include data-ng-if="$conversationCtrl.state.open && !$ctrl.state.showMailbox"
+      src="'#ext-bb-messages-ng/conversation-view.html'">
+    </ng-include>
+  </div>
+
+  <ui-bb-confirm-ng data-is-open="ext.removeMultipleConfirmOpened"
+    data-on-confirm="$ctrl.removeSelectedItems()"
+    data-labels="{
+      heading: ('label.delete.multiple.confim.header' | i18n),
+      bodyText: ('label.delete.multiple.confim.body' | i18n),
+      confirm: ('label.confim.yes' | i18n),
+      cancel: ('label.confim.no' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+
+  <ui-bb-confirm-ng data-is-open="ext.removeConfirmOpened"
+    data-on-confirm="$ctrl.removeItem(ext.conversationToRemove)"
+    data-labels="{
+      heading: ('label.delete.single.confim.header' | i18n),
+      bodyText: ('label.delete.single.confim.body' | i18n),
+      confirm: ('label.confim.yes' | i18n),
+      cancel: ('label.confim.no' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bb-messages-ng/conversation-view.html">
+  <div class="card">
+    <div class="card-header bg-white">
+      <div class="form-row align-items-center">
+        <div class="col-auto mr-auto">
+          <button type="button" class="btn btn-link" data-ng-click="$conversationCtrl.close()">
+            <i class="fas fa-arrow-left mr-1" aria-hidden="true"></i>
+            <span data-i18n-key="label.back.to.inbox"></span>
+          </button>
+        </div>
+        <div class="col-auto">
+          <button type="button"
+            class="btn btn-link px-2 d-none d-md-inline-block"
+            data-ng-click="$conversationCtrl.conversation.favorite = !$conversationCtrl.conversation.favorite">
+            <i class="fa-star"
+              aria-hidden="true"
+              data-ng-class="{
+                'fas': $conversationCtrl.conversation.favorite,
+                'far': !$conversationCtrl.conversation.favorite,
+              }"
+              aria-label="{{ 'label.mark.as.favorite' | i18n }}">
+            </i>
+          </button>
+        </div>
+        <div class="col-auto">
+          <button type="button"
+            class="btn btn-secondary d-none d-md-inline-block"
+            data-ng-click="ext.helpers.confirmConversationRemove($conversationCtrl.conversation, ext, $event)"
+            data-i18n-key="label.delete">
+          </button>
+          <div data-uib-dropdown data-dropdown-append-to-body class="d-md-none">
+            <button data-uib-dropdown-toggle
+              class="btn btn-sm btn-secondary"
+              data-ng-click="$event.stopPropagation()"
+              data-container="body"
+              data-uib-tooltip="{{ 'header.actions' | i18n }}"
+              data-tooltip-append-to-body="true"
+              data-tooltip-placement="top-right">
+              <i class="fa fa-ellipsis-v fa-fw"
+                aria-hidden="true"
+                data-label="{{ 'header.actions' | i18n }}">
+              </i>
+            </button>
+            <div data-uib-dropdown-menu class="dropdown-menu-right">
+              <a class="dropdown-item"
+                data-ng-click="ext.helpers.confirmConversationRemove(conversation, ext, $event)"
+                data-i18n-key="label.delete">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <!-- conversation title -->
+      <li class="list-group-item py-3 py-md-4">
+        <div class="row justify-content-between align-items-center">
+          <h5 class="mb-0 col-9 col-md-auto" data-ng-bind="$conversationCtrl.conversation.subject"></h5>
+          <div class="col-auto d-md-none">
+            <button type="button"
+              class="btn btn-link p-0"
+              data-ng-click="$conversationCtrl.conversation.favorite = !$conversationCtrl.conversation.favorite">
+              <i class="fa-star"
+                aria-hidden="true"
+                data-ng-class="{
+                  'fas': $conversationCtrl.conversation.favorite,
+                  'far': !$conversationCtrl.conversation.favorite,
+                }"
+                aria-label="{{ 'label.mark.as.favorite' | i18n }}">
+              </i>
+            </button>
+          </div>
+          <ng-include src="'#ext-bb-messages-ng/topic.html'"
+            class="col col-md-auto"
+            data-ng-init="conversation = $conversationCtrl.conversation;">
+          </ng-include>
+        </div>
+      </li>
+      <!-- end conversation title -->
+
+      <!-- messages list -->
+      <li class="list-group-item list-group-item-action py-3"
+        data-ng-repeat="message in $conversationCtrl.messages | orderBy: '+deliveredOn' track by message.id"
+        data-ng-click="message.opened = !message.opened;"
+        data-ng-init="$last && (message.opened = true)">
+        <div class="d-flex flex-column flex-md-row justify-content-between">
+          <h6 data-ng-bind="message.senderName" data-role="message-sender"></h6>
+          <span class="mb-2" data-role="message-date">
+            <span data-ng-bind="message.deliveredOn | date: 'fullDate'"></span>
+            <span data-ng-bind="message.deliveredOn | date: 'shortTime'"></span>
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-12" data-ng-class="{ 'col-md-8': !message.opened }">
+            <div data-ng-if="message.opened"
+              data-ng-bind-html="message.body"
+              class="message-body html-content-formatter">
+            </div>
+            <div data-ng-if="!message.opened"
+              data-ng-bind-html="message.text"
+              class="text-truncate">
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- end messages list -->
+    </ul>
+
+    <div class="card-footer bg-white border-top-0">
+      <!-- reply section -->
+      <div class="d-flex justify-content-end"
+        data-ng-if="!$conversationCtrl.state.replyForm.open">
+        <button type="button"
+          class="btn btn-primary"
+          data-ng-click="$conversationCtrl.toggleReplyForm()"
+          data-i18n-key="label.reply">
+        </button>
+      </div>
+      <form name="replyMessageForm"
+        data-ng-if="$conversationCtrl.state.replyForm.open"
+        data-ng-submit="$conversationCtrl.sendReply($conversationCtrl.conversation.id, $conversationCtrl.draft)">
+        <div class="form-group">
+          <label class="font-weight-bold" data-i18n-key="label.message" aria-hidden="true"></label>
+          <ui-bb-rich-text-editor-ng name="message"
+            class="form-control d-flex flex-row flex-wrap"
+            data-ng-model="$conversationCtrl.draft.body"
+            tabindex="0"
+            required>
+          </ui-bb-rich-text-editor-ng>
+        </div>
+        <div class="form-row justify-content-end">
+          <div class="col-auto">
+            <button type="button"
+              class="btn btn-secondary"
+              data-ng-click="$conversationCtrl.toggleReplyForm()"
+              data-i18n-key="label.cancel">
+            </button>
+          </div>
+          <div class="col-auto">
+            <button type="submit"
+              class="btn btn-primary"
+              data-ng-disabled="!replyMessageForm.$valid"
+              data-i18n-key="label.send">
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- end reply section -->
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="#ext-bb-messages-ng/topic.html">
+  <span class="badge badge-pill badge-{{ ext.helpers.getTopicType(conversation.category) }} py-1 px-3"
+    data-ng-bind="ext.helpers.getTopicLabel($ctrl.topics, conversation.category)"
+    data-role="conversation-topic">
+  </span>
+</script>

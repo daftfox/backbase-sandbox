@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "theme-bbm-default@1.0.6",
+        "scope": null,
+        "escapedName": "theme-bbm-default",
+        "name": "theme-bbm-default",
+        "rawSpec": "1.0.6",
+        "spec": "1.0.6",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "theme-bbm-default@1.0.6",
+  "_id": "theme-bbm-default@1.0.6",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/theme-bbm-default",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "theme-bbm-default@1.0.6",
+    "scope": null,
+    "escapedName": "theme-bbm-default",
+    "name": "theme-bbm-default",
+    "rawSpec": "1.0.6",
+    "spec": "1.0.6",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/theme-bbm-default/-/theme-bbm-default-1.0.6.tgz",
+  "_shasum": "47cfc8861c54e8dd9b3cf80507951017238bae29",
+  "_shrinkwrap": null,
+  "_spec": "theme-bbm-default@1.0.6",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/theme-bbm-default/-/theme-bbm-default-1.0.6.tgz",
+    "shasum": "47cfc8861c54e8dd9b3cf80507951017238bae29"
+  },
+  "main": "scripts/theme-bbm-default.js",
+  "name": "theme-bbm-default",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.6"
+}

@@ -1,0 +1,252 @@
+<div class="ext-bb-income-spending-analysis-category-ng" data-ng-init="monthsRange = 1" ng-controller="IncomeSpendingAnalysisCategoryController as $ctrl">
+  <ui-bb-loading-indicator-ng data-is-loading="$ctrl.loading"
+    data-loading-text="{{ 'message.label.loading' | i18n }}">
+    <ui-bb-substitute-error-ng data-message="$ctrl.error | i18n">
+      <div class="row m-0 rounded-top border border-bottom-0">
+        <div class="col-12 p-3 bg-white">
+          <div class="btn-group float-right" data-ng-show="$ctrl.selectedProducts.length">
+            <button
+              class="btn btn-outline-secondary px-4 px-lg-5"
+              data-ng-model="monthsRange"
+              uib-btn-radio="1"
+              data-ng-change="ext.helpers.updatePeriod($ctrl, monthsRange)">
+              {{ "analysis.label.period.one.month" | i18n }}
+            </button>
+            <button
+              class="btn btn-outline-secondary px-4 px-lg-5"
+              data-ng-disabled="$ctrl.selectedParentCategory"
+              data-ng-model="monthsRange"
+              uib-btn-radio="6"
+              data-ng-change="ext.helpers.updatePeriod($ctrl, monthsRange)">
+              {{ "analysis.label.period.six.months" | i18n }}
+            </button>
+            <button
+              class="btn btn-outline-secondary px-4 px-lg-5"
+              data-ng-disabled="$ctrl.selectedParentCategory"
+              data-ng-model="monthsRange"
+              uib-btn-radio="12"
+              data-ng-change="ext.helpers.updatePeriod($ctrl, monthsRange)">
+              {{ "analysis.label.period.twelve.months" | i18n }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div data-ng-if="$ctrl.selectedProducts.length && monthsRange === 1" class="row m-0 border">
+        <div class="col-12 py-3 px-0 bg-white">
+          <ui-bb-change-period-ng
+            data-period-start="$ctrl.periodStartDate"
+            data-period-end="$ctrl.periodEndDate"
+            data-period-step="1"
+            data-on-period-start-change="ext.helpers.onPeriodStartChange($ctrl)"
+            data-on-period-end-change="ext.helpers.onPeriodEndChange($ctrl)"
+            data-period-start-formatter="ext.helpers.periodStartLabelFormatter"
+            data-period-end-formatter="ext.helpers.periodEndLabelFormatter"
+          ></ui-bb-change-period-ng>
+        </div>
+      </div>
+      <div class="row m-0 rounded-bottom border border-top-0">
+        <div class="col-12 p-3 bg-white">
+          <a href="javascript:void(0);"
+            data-ng-if="$ctrl.selectedParentCategory"
+            data-ng-click="ext.helpers.loadFirstLevelCategories($ctrl)"
+          >
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            {{ "analysis.label.back.to.overview" | i18n }}
+          </a>
+
+          <ui-bb-empty-state-ng
+            data-icon-classes="{{
+              !$ctrl.products.length ?
+                'fa fa-4x fa-credit-card text-muted' :
+                'fa fa-4x fa-bar-chart text-muted'
+            }}"
+            data-title="{{
+              (!$ctrl.products.length ?
+                'analysis.label.no.products.title' :
+                'analysis.label.empty.dataset.title')
+                | i18n
+            }}"
+            data-subtitle="{{
+              (!$ctrl.products.length ?
+                ($ctrl.isSpendingAnalysis() ? 'analysis.label.no.products.spending.subtitle' : 'analysis.label.no.products.income.subtitle') :
+                'analysis.label.empty.dataset.subtitle')
+                | i18n
+            }}"
+            data-is-empty="!ext.helpers.isSeriesDataAvailable($ctrl.series) || !$ctrl.selectedProducts.length">
+
+            <h4 class="text-center" data-ng-if="$ctrl.selectedParentCategory">
+              <i class="fa bb-transaction-category-{{ext.helpers.categoryToIconClass($ctrl.selectedParentCategory)}}"></i>
+              {{$ctrl.selectedParentCategory}}
+            </h4>
+
+            <ui-bb-chartjs-chart-donut-ng
+              class="chart-donut d-block position-relative"
+              data-ng-if="monthsRange === 1"
+              data-series="$ctrl.series"
+              data-tooltip="ext.helpers.customizeTooltip"
+              data-plugins="ext.helpers.chartPlugins"
+              data-options="ext.helpers.donutChartOptions($ctrl)"
+              data-click-getter="ext.helpers.getClickHandler($ctrl)"
+            >
+              <div class="absolute-center">
+                <div class="text-center chart-donut-center-word"
+                  data-ng-bind="($ctrl.isSpendingAnalysis() ? 'analysis.label.spending.total' : 'analysis.label.income.total') | i18n">
+                </div>
+                <div class="h5 text-center my-2">
+                  <ui-bb-format-amount-ng
+                    class="amount-regular-color"
+                    data-amount="$ctrl.items.total.amount"
+                    data-currency="$ctrl.items.total.currencyCode"
+                    data-wrap
+                  ></ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </ui-bb-chartjs-chart-donut-ng>
+            <div data-ng-if="monthsRange > 1">
+              <ui-bb-chartjs-chart-bar-ng class="d-block col-12"
+                data-series="$ctrl.turnoversSeries"
+                data-category-percentage="0.6"
+                data-bar-percentage="1"
+                data-tooltip="ext.helpers.customizeTurnoversTooltip"
+                data-plugins="ext.helpers.chartPlugins"
+                data-options="ext.helpers.barChartOptions"
+                data-x-formatter="ext.helpers.formatX"
+                data-y-formatter="ext.helpers.formatY"
+              ></ui-bb-chartjs-chart-bar-ng>
+            </div>
+          </ui-bb-empty-state-ng>
+        </div>
+        <!-- Flat level categories -->
+        <div class="transaction-group col-12 p-0 list-group" data-ng-if="monthsRange > 1 && !$ctrl.isSubCategories()">      
+          <div class="list-group-item rounded-0 border-left-0 border-right-0 list-item-transaction-accordion py-3"
+            data-ng-repeat="item in $ctrl.items.items track by item.category">
+            <div class="transaction-item row align-items-center" role="row">
+              <div class="transaction-category-icon col-6">
+                <span aria-hidden="true"
+                  class="bb-transaction-category bb-transaction-category-large bb-transaction-category-icon fa bb-transaction-category-{{ ext.helpers.categoryToIconClass(item.category) }}">
+                </span>
+                <strong><span class="bb-transaction-category-name px-3" data-ng-bind="item.category"></span></strong>
+              </div>
+              <div class="col-6">
+                <div class="transaction-amount text-right">
+                  <ui-bb-format-amount-ng
+                    class="amount-regular-color"
+                    data-amount="item.totalAmount.amount"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Subcategories -->
+        <div class="transaction-group col-12 p-0 list-group" data-ng-if="monthsRange > 1 && $ctrl.isSubCategories()">
+          <div class="list-group-item rounded-0 border-left-0 border-right-0 list-item-transaction-accordion py-3">
+            <div class="transaction-item row align-items-center" role="row">
+              <div class="col-6">
+                <span class="h5" data-ng-bind="($ctrl.isSpendingAnalysis() ? 'analysis.label.spending.category' : 'analysis.label.income.category') | i18n"></span>
+              </div>
+              <div class="col-6">
+                <div class="transaction-amount text-right h5">
+                  {{ "analysis.label.spending.total.amount" | i18n }}
+                  <ui-bb-format-amount-ng
+                    class="amount-regular-color"
+                    data-amount="$ctrl.items.total.amount"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <uib-accordion class="list-group transaction-group" data-ng-if="monthsRange > 1">
+    
+            <uib-accordion-group
+              class="list-group-item rounded-0 border-left-0 border-right-0 list-item-transaction-accordion p-0"
+              data-ng-repeat="item in $ctrl.items.items track by item.category"
+              data-template-url="#ext-bb-income-spending-analysis-category-ng/group-template.html"
+              data-is-open="item.open">
+
+              <uib-accordion-heading>
+                <div
+                  class="transaction-item py-3 row align-items-center"
+                  role="row"
+                  data-ng-click="$ctrl.onCategorySelected(item.category, item.open)">
+                  <div class="col-6">
+                    <span aria-hidden="true"
+                      class="bb-transaction-category
+                        bb-transaction-category-large
+                        transaction-category-icon
+                        bb-transaction-category-icon
+                        fa bb-transaction-category-{{ ext.helpers.categoryToIconClass(item.category)}}">
+                    </span>
+                    <span
+                      class="bb-transaction-category-name pl-2 font-weight-bold" data-ng-bind="item.category">
+                    </span>
+                  </div>
+                  <div class="col-6 text-right">
+                    <ui-bb-format-amount-ng
+                      class="amount-regular-color transaction-amount pr-4"
+                      data-amount="item.totalAmount.amount"
+                      data-wrap>
+                    </ui-bb-format-amount-ng>
+                    <div
+                      class="text-secondary fa fa-angle-{{item.open ? 'up' : 'down'}}">
+                    </div>
+                  </div>
+                </div>
+              </uib-accordion-heading>
+              <div class="list-group">
+                <div
+                  data-ng-repeat="subcategory in $ctrl.subcategories.items"
+                  class="list-group-item list-group-item-action p-0 rounded-0 border-right-0 border-left-0"
+                  data-ng-class="{
+                    'border-top-0': $first,
+                    'border-bottom-0': $last
+                  }"
+                >
+                  <div class="row align-items-center py-3">
+                    <div class="col-6">
+                      <span
+                      class="bb-transaction-category-label
+                        bb-transaction-category-name
+                        font-weight-bold
+                        pl-5 ml-3"
+                      data-ng-bind="subcategory.category"></span>
+                    </div>
+                    
+                    <div class="col-6 text-right">
+                      <ui-bb-format-amount-ng
+                        class="amount-regular-color
+                          transaction-amount
+                          pr-5 mr-1"
+                        data-amount="subcategory.totalAmount.amount"
+                        data-wrap>
+                      </ui-bb-format-amount-ng>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </uib-accordion-group>
+
+          </uib-accordion>
+        </div>
+      </div>
+    </ui-bb-substitute-error-ng>
+  </ui-bb-loading-indicator-ng>
+
+  <script type="text/ng-template" id="#ext-bb-income-spending-analysis-category-ng/group-template.html">
+    <div class="card card-hover card-open-darker">
+      <div class="card-header card-header-collapse p-0 border-light bg-transparent" data-ng-click="toggleOpen()">
+        <div class="col-12" data-uib-accordion-transclude="heading">
+          <uib-accordion-header>
+            <span data-ng-bind="heading"></span>
+          </uib-accordion-header>
+        </div>
+      </div>
+      <div class="card-collapse collapse" data-uib-collapse="!isOpen">
+        <div class="card-body p-0" data-ng-transclude></div>
+      </div>
+    </div>
+  </script>
+</div>

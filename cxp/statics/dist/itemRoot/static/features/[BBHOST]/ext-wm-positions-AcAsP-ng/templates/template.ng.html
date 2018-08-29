@@ -1,0 +1,136 @@
+<div
+  data-ng-controller="PositionsController as $ctrl"
+  class="container-fluid ext-wm-positions-ng"
+>
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+    data-ui-bb-scroll-to-view="{{state.positions.assetToScrollTo}}"
+    data-on-finish-scroll="$ctrl.onFinishScroll()"
+  >
+    <div class="clearfix py-3 border-bottom mb-3">
+      <h3 class="float-left mb-0" data-i18n-key="positions.title"></h3>
+      <ui-wm-portfolio-collapse-expand-all-actions
+        class="float-right"
+        data-data="ext.helpers.positionsData()"
+        data-children-path="['assetClasses']"
+      ></ui-wm-portfolio-collapse-expand-all-actions>
+    </div>
+
+    <ui-bb-empty-state-ng
+      data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.positionsError).icon }} text-muted"
+      data-title="{{ ext.helpers.getError(state.errors.positionsError).title | i18n }}"
+      data-subtitle="{{ ext.helpers.getError(state.errors.positionsError).message | i18n }}"
+      data-is-empty="state.errors.positionsError"
+    >
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+        data-title="{{ 'positions.empty.title' | i18n }}"
+        data-subtitle="{{ 'positions.empty.message' | i18n }}"
+        data-is-empty="!ext.helpers.isPositionsAvailable()"
+      >
+        <uib-accordion data-close-others="false">
+          <uib-accordion-group
+            data-ng-repeat="account in ext.helpers.positionsData()"
+            data-template-url="#ext-wm-positions-ng/group-template.html"
+            data-is-open="account.isOpen"
+          >
+            <uib-accordion-heading>
+              <ui-wm-positions-portfolio-row
+                data-portfolio="account"
+                data-labels="{
+                    valuation: ('positions.valuation' | i18n),
+                    performance: ('positions.performance' | i18n),
+                    parent: ('positions.parent' | i18n)
+                  }"
+              ></ui-wm-positions-portfolio-row>
+            </uib-accordion-heading>
+            <uib-accordion data-close-others="false">
+              <uib-accordion-group
+                data-ng-repeat="asset in account.assetClasses"
+                data-template-url="#ext-wm-positions-ng/group-template.html"
+                data-is-open="asset.isOpen"
+              >
+                <uib-accordion-heading>
+                  <div data-scroll-to="{{asset.name}}">
+                    <ui-wm-positions-asset-class-row
+                      data-asset-class="asset"
+                      data-labels="{
+                          accruedInterest: ('positions.accruedInterest' | i18n),
+                          valuation: ('positions.valuation' | i18n),
+                          unrealizedPL: ('positions.unrealizedPL' | i18n),
+                          portfolio: ('positions.portfolio' | i18n),
+                          parent: ('positions.parent' | i18n)
+                        }"
+                    ></ui-wm-positions-asset-class-row>
+                  </div>
+                </uib-accordion-heading>
+                <table class="table table-responsive mb-0">
+                  <tbody
+                    data-ui-wm-positions-positions-table=""
+                    data-positions="asset.positions"
+                    on-transaction-icon-click="$ctrl.viewTransactions(
+                          $accountId,
+                          $positionId,
+                          $positionInstrumentName)"
+                    data-account-id="account.id"
+                    data-labels="{
+                        quantity: ('positions.quantity' | i18n),
+                        price: ('positions.price' | i18n),
+                        exchangeRate: ('positions.exchangeRate' | i18n),
+                        valuation: ('positions.valuation' | i18n),
+                        accruedInterest: ('positions.accruedInterest' | i18n),
+                        costPrice: ('positions.costPrice' | i18n),
+                        costExchangeRate: ('positions.costExchangeRate' | i18n),
+                        unrealizedPL: ('positions.unrealizedPL' | i18n),
+                        unrealizedPlLocal: ('positions.unrealizedPlLocal' | i18n),
+                        assetClass: ('positions.assetClass' | i18n),
+                        portfolio: ('positions.portfolio' | i18n),
+                        parent: ('positions.parent' | i18n)
+                      }"
+                  ></tbody>
+                </table>
+              </uib-accordion-group>
+            </uib-accordion>
+          </uib-accordion-group>
+        </uib-accordion>
+      </ui-bb-empty-state-ng>
+    </ui-bb-empty-state-ng>
+  </ui-bb-loading-indicator-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-wm-positions-ng/group-template.html">
+  <div
+    data-ng-class="{
+                      'bg-secondary': isOpen && !$parent.asset, 
+                      'bg-white': $parent.asset,
+                      'card mb-4': !$parent.asset
+                   }"
+  >
+    <div
+      data-uib-accordion-transclude="heading"
+      data-ng-click="toggleOpen()"
+    >
+      <div
+        class="row p-2 mx-0 align-items-center border-bottom border-secondary"
+      >
+        <div class="col-11">
+          <uib-accordion-header>
+          </uib-accordion-header>
+        </div>
+        <div class="col-1 px-0">
+          <button class="btn btn-link float-right">
+            <i class="fa"
+                data-ng-class="isOpen ? 'fa-chevron-up' :'fa-chevron-down'"
+                data-role="toggle-position-panel"
+                aria-hidden="true"
+            ></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div data-uib-collapse="!isOpen">
+      <div data-ng-transclude></div>
+    </div>
+  </div>
+</script>

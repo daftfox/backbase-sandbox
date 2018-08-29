@@ -1,0 +1,56 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-view-model-ng@1.0.44",
+        "scope": null,
+        "escapedName": "lib-bb-view-model-ng",
+        "name": "lib-bb-view-model-ng",
+        "rawSpec": "1.0.44",
+        "spec": "1.0.44",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "lib-bb-view-model-ng@1.0.44",
+  "_id": "lib-bb-view-model-ng@1.0.44",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-view-model-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-view-model-ng@1.0.44",
+    "scope": null,
+    "escapedName": "lib-bb-view-model-ng",
+    "name": "lib-bb-view-model-ng",
+    "rawSpec": "1.0.44",
+    "spec": "1.0.44",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-extension-events-ng",
+    "/lib-bb-extension-helpers-ng",
+    "/lib-bb-extension-intents-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-view-model-ng/-/lib-bb-view-model-ng-1.0.44.tgz",
+  "_shasum": "7810d6f545ba578d7392bec197d12969d50f1608",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-view-model-ng@1.0.44",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {
+    "lib-bb-state-container": "^1.0.44",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-view-model-ng/-/lib-bb-view-model-ng-1.0.44.tgz",
+    "shasum": "7810d6f545ba578d7392bec197d12969d50f1608"
+  },
+  "main": "scripts/lib-bb-view-model-ng.js",
+  "name": "lib-bb-view-model-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.44"
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jboss-web>
+    <resource-ref>
+        <description>Orchestrator Datasource</description>
+        <res-ref-name>jdbc/orchestratorDS</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <mapped-name>jdbc/orchestratorDS</mapped-name>
+        <res-auth>Container</res-auth>
+        <jndi-name>java:/jdbc/orchestratorDS</jndi-name>
+    </resource-ref>
+
+
+    <!-- If you use auditing, uncomment the following resource-ref -->
+    <!--
+    <resource-ref>
+        <res-ref-name>jdbc/auditDS</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <mapped-name>jdbc/auditDS</mapped-name>
+        <res-auth>Container</res-auth>
+        <jndi-name>java:/jdbc/auditDS</jndi-name>
+    </resource-ref>
+    -->
+
+    <resource-env-ref>
+        <resource-env-ref-name>backbase/config</resource-env-ref-name>
+        <jndi-name>java:/backbase/config</jndi-name>
+    </resource-env-ref>
+</jboss-web>

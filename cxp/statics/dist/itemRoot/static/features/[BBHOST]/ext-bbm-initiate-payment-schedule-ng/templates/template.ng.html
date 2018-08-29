@@ -1,0 +1,89 @@
+<div class="ext-bbm-initiate-payment-schedule-ng">
+  <form
+    name="paymentScheduleForm"
+    data-role="payment-schedule-form"
+    data-ng-if="ext.helpers.hasPayment()"
+    data-ng-submit="ext.helpers.onScheduleFormSubmit(scheduleForm)">
+    <div class="bbm-layout bbm-layout-with-sticky-footer">
+      <div class="bbm-layout-body">
+        <!-- Frequency -->
+        <div
+          class="form-group"
+          data-role="payment-schedule-frequency"
+          data-ng-if="ext.helpers.isRecurringPaymentAllowed()">
+          <ui-bbm-dropdown-ng
+            data-label="'form.label.frequency' | i18n"
+            data-title="'form.title.selectFrequency' | i18n"
+            data-ng-model="ext.helpers.getSchedule().transferFrequency"
+            data-options="ext.helpers.getFrequencyOptions()">
+          </ui-bbm-dropdown-ng>
+        </div>
+
+        <!-- Start date -->
+        <div class="form-group" data-role="payment-schedule-start-date">
+          <ui-bbm-datepicker-ng
+            data-label="ext.helpers.getStartDateLabel()"
+            data-title="ext.helpers.getStartDateTitle()"
+            data-ng-model="ext.helpers.getSchedule().startDate"
+            data-min-date="ext.helpers.getMinimumRecurrenceStartDate()"
+            data-date-labels="ext.helpers.dateLabels">
+          </ui-bbm-datepicker-ng>
+        </div>
+
+        <!-- Ending -->
+        <div
+          class="form-group"
+          data-role="payment-schedule-ending"
+          data-ng-if="ext.helpers.showEndingControl()">
+          <ui-bbm-dropdown-ng
+            data-label="'form.label.end' | i18n"
+            data-title="'form.title.selectEnd' | i18n"
+            data-ng-model="ext.helpers.getSchedule().end"
+            data-options="ext.helpers.getRecurrenceEndingOptions()">
+          </ui-bbm-dropdown-ng>
+        </div>
+
+        <!-- End date -->
+        <div
+          class="form-group"
+          data-role="payment-schedule-end-date"
+          data-ng-if="ext.helpers.showEndDateControl()">
+          <ui-bbm-datepicker-ng
+            data-label="'form.label.endDate' | i18n"
+            data-title="'form.title.selectEndDate' | i18n"
+            data-placeholder="'form.placeholder.endDate' | i18n"
+            data-ng-model="ext.helpers.getSchedule().endDate"
+            data-min-date="ext.helpers.getMinimumRecurrenceEndDate()"
+            data-date-labels="ext.helpers.dateLabels">
+          </ui-bbm-datepicker-ng>
+        </div>
+
+        <!-- Repeat -->
+        <div
+          class="form-group"
+          data-role="payment-schedule-repeat"
+          data-ng-if="ext.helpers.showRepeatControl()">
+          <ui-bbm-textfield-ng
+            data-name="repeat"
+            data-type="number"
+            data-label="{{'form.label.repeat' | i18n}}"
+            data-placeholder="{{'form.placeholder.repeat' | i18n}}"
+            data-role="repeat"
+            data-ng-model="ext.helpers.getSchedule().repeat"
+            data-clear-button="true">
+          </ui-bbm-textfield-ng>
+        </div>
+      </div>
+
+      <div class="bbm-layout-footer">
+        <!-- Submit -->
+        <button
+          class="btn btn-primary btn-block"
+          type="submit"
+          data-role="payment-schedule-submit-button"
+          data-i18n-key="form.label.save">
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+08-22 12:28:32 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "OBJECT_DATA" not found; SQL statement:
+ 
+ alter table OBJECT_DATA
+ drop constraint FK_mhp750onsg14deqsc5mkp4dx [42102-154]
+08-22 12:28:32 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "OBJECT_DATA" not found; SQL statement:
+ 
+ alter table OBJECT_DATA
+ drop constraint FK_i6hwfpq7ppvktiim2thpqxiac [42102-154]
+08-22 12:28:32 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "PROPERTY_DATA" not found; SQL statement:
+ 
+ alter table PROPERTY_DATA
+ drop constraint FK_r5pfq0qmo565nb85q01q6r5og [42102-154]
+08-22 12:28:32 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "RELATIONSHIPS" not found; SQL statement:
+ 
+ alter table RELATIONSHIPS
+ drop constraint FK_cwor9qcw8nm14qawhqtatfhbc [42102-154]
+08-22 12:28:32 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "RENDITION" not found; SQL statement:
+ 
+ alter table RENDITION
+ drop constraint FK_aw8vtq9lh7ehwfu0oc30q0hqn [42102-154]
+08-22 12:28:32 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Table "RENDITION" not found; SQL statement:
+ 
+ alter table RENDITION
+ drop constraint FK_l7rl4ulhh823p0t9oswg761c9 [42102-154]

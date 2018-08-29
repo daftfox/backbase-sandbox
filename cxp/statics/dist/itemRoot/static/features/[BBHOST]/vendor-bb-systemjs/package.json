@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vendor-bb-systemjs@0.19.38-bb.1",
+        "scope": null,
+        "escapedName": "vendor-bb-systemjs",
+        "name": "vendor-bb-systemjs",
+        "rawSpec": "0.19.38-bb.1",
+        "spec": "0.19.38-bb.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "vendor-bb-systemjs@0.19.38-bb.1",
+  "_id": "vendor-bb-systemjs@0.19.38-bb.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/vendor-bb-systemjs",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vendor-bb-systemjs@0.19.38-bb.1",
+    "scope": null,
+    "escapedName": "vendor-bb-systemjs",
+    "name": "vendor-bb-systemjs",
+    "rawSpec": "0.19.38-bb.1",
+    "spec": "0.19.38-bb.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-start"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-systemjs/-/vendor-bb-systemjs-0.19.38-bb.1.tgz",
+  "_shasum": "c58f1805be2dbfa37934c42643a6df0d6964f6db",
+  "_shrinkwrap": null,
+  "_spec": "vendor-bb-systemjs@0.19.38-bb.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/vendor-bb-systemjs/-/vendor-bb-systemjs-0.19.38-bb.1.tgz",
+    "shasum": "c58f1805be2dbfa37934c42643a6df0d6964f6db"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "scripts/vendor-bb-systemjs.js",
+  "name": "vendor-bb-systemjs",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "0.19.38-bb.1"
+}

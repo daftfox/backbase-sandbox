@@ -1,0 +1,50 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-iban@^1.14.1",
+        "scope": null,
+        "escapedName": "lib-bb-iban",
+        "name": "lib-bb-iban",
+        "rawSpec": "^1.14.1",
+        "spec": ">=1.14.1 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ui-bb-iban-ng"
+    ]
+  ],
+  "_from": "lib-bb-iban@>=1.14.1 <2.0.0",
+  "_id": "lib-bb-iban@1.14.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-iban",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-iban@^1.14.1",
+    "scope": null,
+    "escapedName": "lib-bb-iban",
+    "name": "lib-bb-iban",
+    "rawSpec": "^1.14.1",
+    "spec": ">=1.14.1 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ui-bb-iban-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-iban/-/lib-bb-iban-1.14.1.tgz",
+  "_shasum": "c33d2a33c08263f68eeb0b46cb556f2b4603d531",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-iban@^1.14.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ui-bb-iban-ng",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-iban/-/lib-bb-iban-1.14.1.tgz",
+    "shasum": "c33d2a33c08263f68eeb0b46cb556f2b4603d531"
+  },
+  "main": "scripts/lib-bb-iban.js",
+  "name": "lib-bb-iban",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.14.1"
+}

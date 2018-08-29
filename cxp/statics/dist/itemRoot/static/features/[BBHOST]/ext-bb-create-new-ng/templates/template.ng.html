@@ -1,0 +1,22 @@
+<div class="ext-bb-create-new-ng" ng-controller="CreateNewController as $ctrl">
+  <div data-ng-if="$ctrl.state.isPermitted" uib-dropdown keyboard-nav>
+    <button uib-dropdown-toggle
+      class="btn btn-primary">
+      <span class="dropdown-option placeholder" data-i18n-key="label.create" data-role="create-button"></span>
+      <i class="fas fa-chevron-down ml-2" aria-hidden="true"></i>
+    </button>
+    <ul
+      class="dropdown-menu dropdown-menu-left"
+      role="menu"
+      uib-dropdown-menu
+      aria-labelledby="simple-btn-keyboard-nav">
+      <li role="menuitem"
+        class="dropdown-item"
+        data-ng-repeat="action in $ctrl.state.actions"
+        data-bb-is-permitted="action.permission"
+        data-ng-click="$ctrl.navigateTo(action.action)">
+        <a href="javascript:void(0)" data-i18n-key="{{ action.key }}" data-role="{{ action.key }}"></a>
+      </li>
+    </ul>
+  </div>
+</div>

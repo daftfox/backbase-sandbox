@@ -1,0 +1,43 @@
+<div class="ext-bbm-contact-details-ng">
+  <div class="bbm-layout bbm-layout-scroll">
+    <div class="bbm-user-card">
+      <div class="bbm-user-card-avatar">
+        <ui-bb-avatar-ng
+          data-ng-if="ext.helpers.showAvatar()"
+          class="bbm-avatar bbm-avatar-lg img-circle"
+          data-name="ext.helpers.getSelectedContact().name"
+          data-image="ext.helpers.getSelectedContact().imageAvatar">
+        </ui-bb-avatar-ng>
+      </div>
+      <h2 class="bbm-user-card-title">
+        <span
+          data-role="contact-name"
+          data-ng-bind="ext.helpers.getSelectedContact().name"></span>
+      </h2>
+    </div>
+
+    <div class="bbm-form-view">
+      <div class="bbm-form-view-group">
+        <ul class="bbm-form-view-group-items">
+          <li class="bbm-form-view-item" data-ng-if="ext.helpers.getSelectedContact().accounts[0].IBAN">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-ng-bind="'label.accountNumber' | i18n">
+                </div>
+                <div class="bbm-data-value">
+                  <span
+                    class="prevent-ios-click"
+                    data-role="contact-iban"
+                    data-ng-bind="ext.helpers.getSelectedContact().accounts[0].IBAN">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

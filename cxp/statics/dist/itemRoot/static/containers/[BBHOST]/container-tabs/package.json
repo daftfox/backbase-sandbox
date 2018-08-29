@@ -1,0 +1,67 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "container-tabs@~3.0.2",
+        "scope": null,
+        "escapedName": "container-tabs",
+        "name": "container-tabs",
+        "rawSpec": "~3.0.2",
+        "spec": ">=3.0.2 <3.1.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist"
+    ]
+  ],
+  "_from": "container-tabs@>=3.0.2 <3.1.0",
+  "_id": "container-tabs@3.0.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-tabs",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "container-tabs@~3.0.2",
+    "scope": null,
+    "escapedName": "container-tabs",
+    "name": "container-tabs",
+    "rawSpec": "~3.0.2",
+    "spec": ">=3.0.2 <3.1.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/container-tabs/-/container-tabs-3.0.2.tgz",
+  "_shasum": "c3f74b4bd587b828cab8a01eb38d4c1628047d9e",
+  "_shrinkwrap": null,
+  "_spec": "container-tabs@~3.0.2",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist",
+  "author": "",
+  "dependencies": {
+    "container-deck": "^2.0.0",
+    "template-tabs": "^3.0.0"
+  },
+  "description": "Generic container for holding several panels which can be shown one at a time",
+  "devDependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/container-tabs/-/container-tabs-3.0.2.tgz",
+    "shasum": "c3f74b4bd587b828cab8a01eb38d4c1628047d9e"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "container-tabs",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/container-tabs.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "3.0.2"
+}

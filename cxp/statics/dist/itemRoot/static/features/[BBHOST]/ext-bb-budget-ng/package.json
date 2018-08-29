@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-budget-ng@^2.7.0",
+        "scope": null,
+        "escapedName": "ext-bb-budget-ng",
+        "name": "ext-bb-budget-ng",
+        "rawSpec": "^2.7.0",
+        "spec": ">=2.7.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-budget-ng"
+    ]
+  ],
+  "_from": "ext-bb-budget-ng@>=2.7.0 <3.0.0",
+  "_id": "ext-bb-budget-ng@2.8.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-budget-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-budget-ng@^2.7.0",
+    "scope": null,
+    "escapedName": "ext-bb-budget-ng",
+    "name": "ext-bb-budget-ng",
+    "rawSpec": "^2.7.0",
+    "spec": ">=2.7.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-budget-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-budget-ng/-/ext-bb-budget-ng-2.8.0.tgz",
+  "_shasum": "406d62042079dbdb4ac975ffd9d3076b7a5abe8c",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-budget-ng@^2.7.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-budget-ng",
+  "dependencies": {
+    "ui-bb-budget-card-ng": "^2.8.0",
+    "ui-bb-currency-input-ng": "^2.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-modal-ng": "^3.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-stepper-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-budget-ng/-/ext-bb-budget-ng-2.8.0.tgz",
+    "shasum": "406d62042079dbdb4ac975ffd9d3076b7a5abe8c"
+  },
+  "main": "scripts/ext-bb-budget-ng.js",
+  "name": "ext-bb-budget-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.8.0"
+}

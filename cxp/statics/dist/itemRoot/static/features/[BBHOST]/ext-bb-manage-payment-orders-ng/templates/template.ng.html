@@ -1,0 +1,173 @@
+<div class="ext-bb-manage-payment-orders-ng"
+  data-ng-controller="ManagePaymentOrderController as $ctrl">
+  <div data-ng-if="!state.isHidden">
+    <div data-ng-if="state.initialLoading"
+      class="empty-element-placeholder-relative">
+    </div>
+    <ui-bb-substitute-error-ng data-ng-if="!state.initialLoading"
+      data-message="state.error | i18n">
+      <div class="notifications col-lg-4">
+        <ui-bb-notification-stripe-ng data-ng-repeat="notification in state.notifications.data track by $index"
+          data-timeout-second="{{ state.notifications.dismissMessageTime }}"
+          data-message="{{ notification.message }}"
+          data-on-close="$ctrl.deleteNotification(notification)"
+          data-type="bg-{{ notification.level === 'ALERT' ? 'danger' : notification.level | lowercase }}">
+        </ui-bb-notification-stripe-ng>
+      </div>
+      <ui-bb-loading-overlay-ng data-is-loading="state.products.loading">
+        <ui-bb-account-selector-ng class="d-block bb-account-selector drop-shadow mb-4"
+          data-ng-model="state.selectedProduct"
+          data-accounts="state.products.data"
+          data-ng-change="$ctrl.onProductChange($item)"
+          placeholder="{{:: 'form.credit.placeholder' | i18n }}"
+          data-labels="{
+            noAccounts: ('form.label.noAccounts' | i18n),
+          }"
+          required>
+        </ui-bb-account-selector-ng>
+      </ui-bb-loading-overlay-ng>
+      <div class="card"
+        x-ms-format-detection="none">
+        <div class="card-body p-0">
+          <ui-bb-empty-state-ng data-icon-classes="fa fa-4x fa-money text-muted"
+            data-title="{{ 'label.noItems.title' | i18n }}"
+            data-subtitle="{{ 'label.noItems.description' | i18n }}"
+            data-is-empty="!state.paymentOrders.rawData.length">
+            <ui-bb-loading-overlay-ng data-is-loading="state.paymentOrders.loading || state.paymentOrder.deleting">
+              <div class="list-group">
+                <uib-accordion class="list-items-wrapper"
+                  data-ng-repeat="(date, paymentOrders) in state.paymentOrders.data track by date">
+                  <div class="hidden list-item"></div>
+                  <div class="card card-line-header list-item px-3"
+                    data-ng-bind="ext.helpers.dateLabel(date | date: ext.helpers.dateFormat | dateLabel)">
+                  </div>
+                  <uib-accordion-group class="list-item"
+                    data-ng-repeat="paymentOrder in paymentOrders track by paymentOrder.id"
+                    data-template-url="#ext-bb-manage-payment-orders-ng/group-template.html"
+                    data-is-open="false">
+                    <uib-accordion-heading>
+                      <div class="d-flex flex-row align-items-center justify-content-between">
+                        <div class="d-block">
+                          <div><strong data-ng-bind="paymentOrder.transactionInformation.creditor.name"></strong></div>
+                          <div class="text-muted" data-ng-bind="ext.helpers.getPaymentModeLabel(paymentOrder.paymentMode)"></div>
+                        </div>
+                        <div class="d-block">
+                          <span class="media-middle" data-ng-bind="paymentOrder.transactionInformation.instructedAmount.currencyCode"></span>
+                          <ui-bb-format-amount-ng
+                            class="d-inline amount-regular-color"
+                            data-amount="paymentOrder.transactionInformation.instructedAmount.amount"
+                            data-wrap>
+                          </ui-bb-format-amount-ng>
+                        </div>
+                      </div>
+                    </uib-accordion-heading>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row mb-3"
+                          data-ng-if="!!paymentOrder.transactionInformation.creditorAccount.identification">
+                          <strong class="col-md-5" data-ng-bind="'header.account.number' | i18n"></strong>
+                          <div class="col-md-7 text-muted" data-ng-bind="paymentOrder.transactionInformation.creditorAccount.identification.identification"></div>
+                        </div>
+                        <div data-ng-if="ext.helpers.showExchangeRate(paymentOrder.transactionInformation.instructedAmount, state.rate)">
+                          <div class="row mb-3">
+                            <strong class="col-md-5" data-ng-bind="'header.indicative.amount' | i18n"></strong>
+                            <div class="col-md-7 text-muted">
+                              <span data-ng-bind="paymentOrder.transactionInformation.instructedAmount.amount"></span>
+                              <span data-ng-bind="paymentOrder.transactionInformation.instructedAmount.currencyCode"></span>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <strong class="col-md-5" data-ng-bind="'header.indicative.rate' | i18n"></strong>
+                            <div class="col-md-7 text-muted" data-ng-bind="ext.helpers.getRateLabel(state.rate)"></div>
+                          </div>
+                        </div>
+                        <div class="row mb-3"
+                          data-ng-if="!!paymentOrder.transactionInformation.endToEndIdentification">
+                          <strong class="col-md-5" data-ng-bind="'header.reference' | i18n"></strong>
+                          <div class="col-md-7 text-muted" data-ng-bind="paymentOrder.transactionInformation.endToEndIdentification"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6"
+                        data-ng-if="paymentOrder.paymentMode === 'RECURRING'">
+                        <div class="row mb-3">
+                          <strong class="col-md-5" data-ng-bind="'header.recurring.start.date' | i18n"></strong>
+                          <div class="col-md-7 text-muted" data-ng-bind="paymentOrder.schedule.startDate | date: ext.helpers.dateFormat"></div>
+                        </div>
+                        <div class="row mb-3"
+                          data-ng-if="!!paymentOrder.schedule.endDate">
+                          <strong class="col-md-5" data-ng-bind="'header.recurring.end.date' | i18n"></strong>
+                          <div class="col-md-7 text-muted" data-ng-bind="paymentOrder.schedule.endDate | date: ext.helpers.dateFormat"></div>
+                        </div>
+                        <div class="row mb-3"
+                          data-ng-if="!!paymentOrder.schedule.transferFrequency">
+                          <strong class="col-md-5" data-ng-bind="'header.recurring.frequency' | i18n"></strong>
+                          <div class="col-md-7 text-muted" data-ng-bind="ext.helpers.getFrequencyLabel(paymentOrder.schedule.transferFrequency)"></div>
+                        </div>
+                        <div class="row mb-3" data-ng-if="!!paymentOrder.schedule.repeat">
+                          <strong class="col-md-5" data-ng-bind="'header.recurring.occurances' | i18n"></strong>
+                          <div class="col-md-7 text-muted" data-ng-bind="paymentOrder.schedule.repeat"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6"
+                        data-ng-if="!!paymentOrder.transactionInformation.remittanceInformation">
+                        <div class="row mb-3">
+                          <strong class="col-md-5" data-ng-bind="'header.description' | i18n"></strong>
+                          <div class="col-md-7 text-muted" data-ng-bind="paymentOrder.transactionInformation.remittanceInformation.content"></div>
+                        </div>
+                      </div>
+                      <div class="col-12 text-right">
+                        <button class="btn btn-secondary"
+                          data-ng-click="state.paymentOrder.data = paymentOrder;state.paymentOrder.deleteConfirmOpened = true;"
+                          data-i18n-key="action.cancel.payment">
+                        </button>
+                        <button class="btn btn-primary"
+                          data-ng-click="$ctrl.edit(paymentOrder)"
+                          data-i18n-key="action.edit.payment">
+                        </button>
+                      </div>
+                    </div>
+                  </uib-accordion-group>
+                  <div data-ng-if="!$last" class="hidden"></div>
+                </uib-accordion>
+              </div>
+              <ui-bb-load-more-ng data-ng-show="!state.paymentOrders.loadedAll"
+                class="d-block mb-4"
+                data-label="{{ 'label.loadMore' | i18n }}"
+                data-on-load-more="$ctrl.loadMore(done)">
+              </ui-bb-load-more-ng>
+            </ui-bb-loading-overlay-ng>
+          </ui-bb-empty-state-ng>
+        </div>
+      </div>
+    </ui-bb-substitute-error-ng>
+    <ui-bb-confirm-ng data-is-open="state.paymentOrder.deleteConfirmOpened"
+      data-on-confirm="$ctrl.cancel(state.paymentOrder.data)"
+      data-labels="{
+        heading: ('dialog.cancel.title' | i18n),
+        bodyHtml: ('dialog.cancel.body' | i18n),
+        confirm: ('dialog.cancel.yes' | i18n),
+        cancel: ('dialog.cancel.no' | i18n)
+      }">
+    </ui-bb-confirm-ng>
+  </div>
+</div>
+
+<script type="text/ng-template"
+  id="#ext-bb-manage-payment-orders-ng/group-template.html">
+  <div class="card card-hover card-open-darker">
+    <div class="card-header card-header-collapse"
+      data-ng-click="toggleOpen()">
+      <div class="card-title card-title-smaller">
+        <div data-uib-accordion-transclude="heading">
+          <uib-accordion-header data-ng-bind="heading"></uib-accordion-header>
+        </div>
+      </div>
+    </div>
+    <div class="card-collapse collapse"
+      data-uib-collapse="!isOpen">
+      <div class="card-body"
+        data-ng-transclude>
+      </div>
+    </div>
+  </div>
+</script>

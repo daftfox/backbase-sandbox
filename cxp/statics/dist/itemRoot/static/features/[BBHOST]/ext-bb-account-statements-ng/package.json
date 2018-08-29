@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-account-statements-ng@~3.2.0",
+        "scope": null,
+        "escapedName": "ext-bb-account-statements-ng",
+        "name": "ext-bb-account-statements-ng",
+        "rawSpec": "~3.2.0",
+        "spec": ">=3.2.0 <3.3.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bb-account-statements-ng@>=3.2.0 <3.3.0",
+  "_id": "ext-bb-account-statements-ng@3.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-account-statements-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-account-statements-ng@~3.2.0",
+    "scope": null,
+    "escapedName": "ext-bb-account-statements-ng",
+    "name": "ext-bb-account-statements-ng",
+    "rawSpec": "~3.2.0",
+    "spec": ">=3.2.0 <3.3.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-account-statements-ng/-/ext-bb-account-statements-ng-3.2.0.tgz",
+  "_shasum": "7f973f449422b62ab0e8be06f8b65e86c9a16571",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-account-statements-ng@~3.2.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "ui-bb-account-selector-ng": "^2.0.56",
+    "ui-bb-account-statements-filter-ng": "^2.4.0",
+    "ui-bb-checkbox-indeterminate-ng": "^2.4.0",
+    "ui-bb-ellipsis-tooltip-ng": "^2.0.56",
+    "ui-bb-empty-state-ng": "^2.0.56",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-loading-overlay-ng": "^2.0.55",
+    "ui-bb-modal-ng": "^3.0.56",
+    "ui-bb-notification-stripe-ng": "^2.0.56",
+    "ui-bb-paginator-ng": "^2.0.56",
+    "ui-bb-sortable-column-ng": "^2.0.56",
+    "ui-bb-substitute-error-ng": "^2.0.56",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-dropdown": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-account-statements-ng/-/ext-bb-account-statements-ng-3.2.0.tgz",
+    "shasum": "7f973f449422b62ab0e8be06f8b65e86c9a16571"
+  },
+  "main": "scripts/ext-bb-account-statements-ng.js",
+  "name": "ext-bb-account-statements-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.2.0"
+}

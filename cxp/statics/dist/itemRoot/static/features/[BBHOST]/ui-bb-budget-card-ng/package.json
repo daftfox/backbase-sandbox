@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-budget-card-ng@^2.8.0",
+        "scope": null,
+        "escapedName": "ui-bb-budget-card-ng",
+        "name": "ui-bb-budget-card-ng",
+        "rawSpec": "^2.8.0",
+        "spec": ">=2.8.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-budget-ng"
+    ]
+  ],
+  "_from": "ui-bb-budget-card-ng@>=2.8.0 <3.0.0",
+  "_id": "ui-bb-budget-card-ng@2.8.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-budget-card-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-budget-card-ng@^2.8.0",
+    "scope": null,
+    "escapedName": "ui-bb-budget-card-ng",
+    "name": "ui-bb-budget-card-ng",
+    "rawSpec": "^2.8.0",
+    "spec": ">=2.8.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bb-budget-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-budget-card-ng/-/ui-bb-budget-card-ng-2.8.0.tgz",
+  "_shasum": "46c153787137600a69b5a64fdf74818b0dacf361",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-budget-card-ng@^2.8.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bb-budget-ng",
+  "dependencies": {
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-budget-card-ng/-/ui-bb-budget-card-ng-2.8.0.tgz",
+    "shasum": "46c153787137600a69b5a64fdf74818b0dacf361"
+  },
+  "main": "scripts/ui-bb-budget-card-ng.js",
+  "name": "ui-bb-budget-card-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.8.0"
+}

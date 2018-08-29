@@ -1,0 +1,60 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "template-deck@^2.0.0",
+        "scope": null,
+        "escapedName": "template-deck",
+        "name": "template-deck",
+        "rawSpec": "^2.0.0",
+        "spec": ">=2.0.0 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist/node_modules/container-deck"
+    ]
+  ],
+  "_from": "template-deck@>=2.0.0 <3.0.0",
+  "_id": "template-deck@2.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-deck/template-deck",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "template-deck@^2.0.0",
+    "scope": null,
+    "escapedName": "template-deck",
+    "name": "template-deck",
+    "rawSpec": "^2.0.0",
+    "spec": ">=2.0.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/container-deck"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/template-deck/-/template-deck-2.0.0.tgz",
+  "_shasum": "484e1d4f03e478761a76c2c5ced4d2ed87b7cea0",
+  "_shrinkwrap": null,
+  "_spec": "template-deck@^2.0.0",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist/node_modules/container-deck",
+  "author": "",
+  "dependencies": {},
+  "description": "",
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/template-deck/-/template-deck-2.0.0.tgz",
+    "shasum": "484e1d4f03e478761a76c2c5ced4d2ed87b7cea0"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "template-deck",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/template-deck.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.0.0"
+}

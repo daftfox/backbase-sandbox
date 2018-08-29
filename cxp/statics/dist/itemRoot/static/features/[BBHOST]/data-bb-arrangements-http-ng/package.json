@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-arrangements-http-ng@^2.2.4",
+        "scope": null,
+        "escapedName": "data-bb-arrangements-http-ng",
+        "name": "data-bb-arrangements-http-ng",
+        "rawSpec": "^2.2.4",
+        "spec": ">=2.2.4 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-product-summary-ng"
+    ]
+  ],
+  "_from": "data-bb-arrangements-http-ng@>=2.2.4 <3.0.0",
+  "_id": "data-bb-arrangements-http-ng@2.2.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-arrangements-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-arrangements-http-ng@^2.2.4",
+    "scope": null,
+    "escapedName": "data-bb-arrangements-http-ng",
+    "name": "data-bb-arrangements-http-ng",
+    "rawSpec": "^2.2.4",
+    "spec": ">=2.2.4 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-bb-product-summary-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-arrangements-http-ng/-/data-bb-arrangements-http-ng-2.2.4.tgz",
+  "_shasum": "588310b516518484728656c0d6335673a326f852",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-arrangements-http-ng@^2.2.4",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-product-summary-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-arrangements-http-ng/-/data-bb-arrangements-http-ng-2.2.4.tgz",
+    "shasum": "588310b516518484728656c0d6335673a326f852"
+  },
+  "main": "scripts/data-bb-arrangements-http-ng.js",
+  "name": "data-bb-arrangements-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.2.4"
+}

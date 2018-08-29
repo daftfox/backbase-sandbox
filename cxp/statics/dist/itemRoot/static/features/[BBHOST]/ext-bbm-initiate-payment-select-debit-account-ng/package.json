@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bbm-initiate-payment-select-debit-account-ng@~2.36.11",
+        "scope": null,
+        "escapedName": "ext-bbm-initiate-payment-select-debit-account-ng",
+        "name": "ext-bbm-initiate-payment-select-debit-account-ng",
+        "rawSpec": "~2.36.11",
+        "spec": ">=2.36.11 <2.37.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bbm-initiate-payment-select-debit-account-ng@>=2.36.11 <2.37.0",
+  "_id": "ext-bbm-initiate-payment-select-debit-account-ng@2.36.20",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bbm-initiate-payment-select-debit-account-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bbm-initiate-payment-select-debit-account-ng@~2.36.11",
+    "scope": null,
+    "escapedName": "ext-bbm-initiate-payment-select-debit-account-ng",
+    "name": "ext-bbm-initiate-payment-select-debit-account-ng",
+    "rawSpec": "~2.36.11",
+    "spec": ">=2.36.11 <2.37.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-initiate-payment-select-debit-account-ng/-/ext-bbm-initiate-payment-select-debit-account-ng-2.36.20.tgz",
+  "_shasum": "4e52cb13eb346d153fecc7ec2aa0e50214c51ff0",
+  "_shrinkwrap": null,
+  "_spec": "ext-bbm-initiate-payment-select-debit-account-ng@~2.36.11",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "ui-bb-avatar-ng": "^2.5.1",
+    "ui-bb-format-amount-ng": "^3.5.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-initiate-payment-select-debit-account-ng/-/ext-bbm-initiate-payment-select-debit-account-ng-2.36.20.tgz",
+    "shasum": "4e52cb13eb346d153fecc7ec2aa0e50214c51ff0"
+  },
+  "main": "scripts/ext-bbm-initiate-payment-select-debit-account-ng.js",
+  "name": "ext-bbm-initiate-payment-select-debit-account-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.36.20"
+}

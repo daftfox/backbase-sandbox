@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-navigate-to-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-navigate-to-ng",
+        "name": "ui-bb-navigate-to-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-navigate-to-ng@2.5.1",
+  "_id": "ui-bb-navigate-to-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-navigate-to-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-navigate-to-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-navigate-to-ng",
+    "name": "ui-bb-navigate-to-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-navigate-to-ng/-/ui-bb-navigate-to-ng-2.5.1.tgz",
+  "_shasum": "5bf00969add3a565e7b587c649c30822ae5966b7",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-navigate-to-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "lib-bb-intent-ng": "^1.1.43",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-navigate-to-ng/-/ui-bb-navigate-to-ng-2.5.1.tgz",
+    "shasum": "5bf00969add3a565e7b587c649c30822ae5966b7"
+  },
+  "main": "scripts/ui-bb-navigate-to-ng.js",
+  "name": "ui-bb-navigate-to-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

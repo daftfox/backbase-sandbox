@@ -1,0 +1,67 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-manage-payment-drafts-ng@~2.36.20",
+        "scope": null,
+        "escapedName": "ext-bus-manage-payment-drafts-ng",
+        "name": "ext-bus-manage-payment-drafts-ng",
+        "rawSpec": "~2.36.20",
+        "spec": ">=2.36.20 <2.37.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-manage-payment-drafts-ng@>=2.36.20 <2.37.0",
+  "_id": "ext-bus-manage-payment-drafts-ng@2.36.20",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-manage-payment-drafts-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-manage-payment-drafts-ng@~2.36.20",
+    "scope": null,
+    "escapedName": "ext-bus-manage-payment-drafts-ng",
+    "name": "ext-bus-manage-payment-drafts-ng",
+    "rawSpec": "~2.36.20",
+    "spec": ">=2.36.20 <2.37.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-manage-payment-drafts-ng/-/ext-bus-manage-payment-drafts-ng-2.36.20.tgz",
+  "_shasum": "f28b0b896f42fc19d8cce732ce85a24cc616c50d",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-manage-payment-drafts-ng@~2.36.20",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist",
+  "dependencies": {
+    "ui-bb-confirm-ng": "^3.5.1",
+    "ui-bb-ellipsis-tooltip-ng": "^2.5.1",
+    "ui-bb-empty-state-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-inline-status-ng": "^2.5.1",
+    "ui-bb-load-more-ng": "^2.5.1",
+    "ui-bb-loading-indicator-ng": "^2.5.1",
+    "ui-bb-notification-stripe-ng": "^2.5.1",
+    "ui-bb-paginator-ng": "^2.5.1",
+    "ui-bb-search-box-ng": "^2.5.1",
+    "ui-bb-sortable-column-ng": "^2.5.1",
+    "ui-bb-substitute-error-ng": "^2.5.1",
+    "ui-bus-payment-order-details-ng": "^4.36.20",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1",
+    "vendor-bb-uib-dropdown": "1.3.3-bb.4"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-manage-payment-drafts-ng/-/ext-bus-manage-payment-drafts-ng-2.36.20.tgz",
+    "shasum": "f28b0b896f42fc19d8cce732ce85a24cc616c50d"
+  },
+  "main": "scripts/ext-bus-manage-payment-drafts-ng.js",
+  "name": "ext-bus-manage-payment-drafts-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.36.20"
+}

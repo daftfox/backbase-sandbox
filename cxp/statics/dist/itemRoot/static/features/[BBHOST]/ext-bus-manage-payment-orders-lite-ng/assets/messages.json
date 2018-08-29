@@ -1,0 +1,32 @@
+{
+  "en-US": {
+    "header.paymentOrders": "Payment Orders",
+    "header.status": "Status",
+    "header.debtor": "From",
+    "header.creditor": "To",
+    "header.currency": "Ccy",
+    "header.amount": "Amount",
+    "header.exec": "Exec. date",
+
+    "payment.status.entered": "Entered",
+    "payment.status.ready": "Ready",
+    "payment.status.accepted": "Accepted",
+    "payment.status.processed": "Processed",
+    "payment.status.rejected": "Rejected",
+    "payment.status.cancelled": "Cancelled",
+    "payment.status.cancellation-pending": "Cancellation Pending",
+
+    "payment.status.entered.short": "E",
+    "payment.status.ready.short": "R",
+    "payment.status.accepted.short": "A",
+    "payment.status.processed.short": "P",
+    "payment.status.rejected.short": "R",
+    "payment.status.cancelled.short": "C",
+    "payment.status.cancellation-pending.short": "C",
+
+    "label.loading": "Loading...",
+    "label.noItems.title": "No Payments",
+    "label.noItems.description": "You don't have any new payments to display yet.<br>Try creating a new payment using the \"New Payment\" button.",
+    "label.allPaymentOrders": "View all payment orders"
+  }
+}

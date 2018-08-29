@@ -1,0 +1,4 @@
+---
+### Live profile
+logging:
+  config: ${backbase.config.dir}/transaction-integration-mock/logback.xml

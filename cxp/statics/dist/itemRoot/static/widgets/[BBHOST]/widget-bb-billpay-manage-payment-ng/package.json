@@ -1,0 +1,67 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-billpay-manage-payment-ng@~8.11.0",
+        "scope": null,
+        "escapedName": "widget-bb-billpay-manage-payment-ng",
+        "name": "widget-bb-billpay-manage-payment-ng",
+        "rawSpec": "~8.11.0",
+        "spec": ">=8.11.0 <8.12.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-billpay-manage-payment-ng@>=8.11.0 <8.12.0",
+  "_id": "widget-bb-billpay-manage-payment-ng@8.11.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-billpay-manage-payment-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-billpay-manage-payment-ng@~8.11.0",
+    "scope": null,
+    "escapedName": "widget-bb-billpay-manage-payment-ng",
+    "name": "widget-bb-billpay-manage-payment-ng",
+    "rawSpec": "~8.11.0",
+    "spec": ">=8.11.0 <8.12.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-billpay-manage-payment-ng/-/widget-bb-billpay-manage-payment-ng-8.11.0.tgz",
+  "_shasum": "455c5d38ec3eb675c2f29c0edce6cf6edc09f32e",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-billpay-manage-payment-ng@~8.11.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-billpay-pay-a-bill-ng": "^11.14.0",
+    "lib-bb-billpay-errors": "^2.11.0",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-extension-helpers-ng": "^1.0.44",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-state-container-ng": "^1.0.22",
+    "lib-bb-storage-ng": "^1.0.98",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-billpay-ng": "^0.23.0",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-billpay-manage-payment-ng/-/widget-bb-billpay-manage-payment-ng-8.11.0.tgz",
+    "shasum": "455c5d38ec3eb675c2f29c0edce6cf6edc09f32e"
+  },
+  "main": "scripts/widget-bb-billpay-manage-payment-ng.js",
+  "name": "widget-bb-billpay-manage-payment-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "8.11.0"
+}

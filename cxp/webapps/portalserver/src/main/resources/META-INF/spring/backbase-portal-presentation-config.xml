@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:view-controller path="/index.html"/>
+    <mvc:view-controller path="/" view-name="index"/>
+
+    <bean
+            class="com.backbase.portal.foundation.integration.configuration.impl.ConfigurationPropertiesPlaceholderResolver">
+        <constructor-arg ref="backbaseConfiguration"/>
+        <property name="order" value="0"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+
+    <bean name="resourceHandler"
+          class="com.backbase.portal.foundation.presentation.override.FoundationResourceHttpRequestHandler"/>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="urlMap">
+            <map>
+                <entry key="/static/**" value-ref="resourceHandler"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- add MultipartResolver to handle resource bundle uploads (TRADE-29).
+        only perform multipart handling for the included URI patterns to prevent
+        proxy controllers from breaking. -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="${foundation.upload.maxsize}"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
+    <bean id="multipartInclusions" class="java.util.HashSet">
+        <constructor-arg>
+            <set>
+                <value>import/bundles</value>
+                <value>import/package.xml</value>
+                <value>bb-admin-api/resources</value>
+                <value>bb-admin-api/itemresource</value>
+                <value>import/package(/(.+))?$</value>
+                <value>publishing/import/bundles</value>
+                <value>publishing/import/package.xml</value>
+                <value>publishing/import/package(/(.+))?$</value>
+            </set>
+        </constructor-arg>
+    </bean>
+
+    <!-- Internationalization, do not set the defaultLocale, the browser default
+        is used when there is no locale in session see the BiDiUtils -->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- reload bundles every 10 minutes -->
+        <property name="cacheSeconds" value="600"/>
+        <!-- read bundles located under /resources folder for project structure
+            (which will be copied under /WEB-INF/classes folder) -->
+        <property name="basenames">
+            <list>
+                <value>/WEB-INF/classes/ResourceBundle</value>
+                <value>/WEB-INF/classes/i18n/languages</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Used to change locale based on a request parameter -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/content/**"/>
+            <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+                <property name="paramName" value="lang"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- configuration for controller classes -->
+    <context:component-scan
+            base-package="com.backbase.portal.foundation.presentation.controller"/>
+    <context:component-scan base-package="com.backbase.portal.foundation.presentation.resolvers"/>
+
+    <bean id="importMarshaller" parent="jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>com.backbase.portal.foundation.presentation.model.ImportResponse</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean name="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+
+    <!-- Default stax html parser implementation which relies on java XMLInputFactory FactoryFinder
+     To search for "javax.xml.stream.XMLInputFactory" which default implementation
+     "com.sun.xml.internal.stream.XMLInputFactoryImpl".
+     Use this bean if you want to rely e.g. on the default implementation.
+
+    Stax Parser implementation that doesn't unescapes escaped html -->
+    <bean name="xmlInputFactory"
+          class="com.backbase.portal.foundation.commons.parser.impl.CustomWstxInputFactory"/>
+
+    <bean name="htmlParser"
+          class="com.backbase.portal.foundation.commons.parser.impl.HTMLStaxStreamParserImpl">
+        <constructor-arg ref="xmlInputFactory"/>
+    </bean>
+
+    <!-- Turn on @Autowired, @PostConstruct etc support -->
+    <context:annotation-config/>
+
+    <!-- Registering Message Converters -->
+    <mvc:annotation-driven
+            ignore-default-model-on-redirect="true">
+        <mvc:message-converters register-defaults="true">
+            <bean id="marshallingHttpMessageConverter"
+                  class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+                <property name="marshaller" ref="jaxb2Marshaller"/>
+                <property name="unmarshaller" ref="jaxb2Unmarshaller"/>
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/xml;charset=UTF-8</value>
+                        <value>text/xml;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <bean id="stringHttpMessageConverter"
+                  class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- Registering cache warm-up components -->
+    <context:component-scan base-package="com.backbase.portal.foundation.presentation.urllevelcache.warmUp.impl"/>
+
+    <bean id="cacheWarmUpDispatcherAsyncTaskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor"/>
+
+    <bean id="cacheWarmUpTaskExecutor"
+          class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="maxPoolSize" value="${foundation.cacheWarmUp.poolSize:5}"/>
+    </bean>
+
+    <bean id="healthAggregator" class="org.springframework.boot.actuate.health.OrderedHealthAggregator"/>
+    <bean id="healthIndicator" class="org.springframework.boot.actuate.health.CompositeHealthIndicator">
+        <constructor-arg name="healthAggregator" ref="healthAggregator"/>
+        <constructor-arg name="indicators">
+            <map>
+                <entry key="database" value-ref="dbHealthIndicator"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="rootMappingHandlerNamingBeanFactoryPostProcessor"
+          class="com.backbase.portal.foundation.presentation.postprocessor.RootMappingHandlerNamingBeanFactoryPostProcessor"/>
+</beans>

@@ -1,0 +1,51 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-wm-portfolio-view-model-helper@^1.15.2",
+        "scope": null,
+        "escapedName": "lib-wm-portfolio-view-model-helper",
+        "name": "lib-wm-portfolio-view-model-helper",
+        "rawSpec": "^1.15.2",
+        "spec": ">=1.15.2 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-wm-allocations-advanced-ng"
+    ]
+  ],
+  "_from": "lib-wm-portfolio-view-model-helper@>=1.15.2 <2.0.0",
+  "_id": "lib-wm-portfolio-view-model-helper@1.15.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-wm-portfolio-view-model-helper",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-wm-portfolio-view-model-helper@^1.15.2",
+    "scope": null,
+    "escapedName": "lib-wm-portfolio-view-model-helper",
+    "name": "lib-wm-portfolio-view-model-helper",
+    "rawSpec": "^1.15.2",
+    "spec": ">=1.15.2 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/lib-wm-portfolio-router-ng",
+    "/widget-wm-allocations-advanced-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-wm-portfolio-view-model-helper/-/lib-wm-portfolio-view-model-helper-1.15.2.tgz",
+  "_shasum": "5d2151b8ada3c22d0fd3a9c1faa87ed1d706671b",
+  "_shrinkwrap": null,
+  "_spec": "lib-wm-portfolio-view-model-helper@^1.15.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/widget-wm-allocations-advanced-ng",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-wm-portfolio-view-model-helper/-/lib-wm-portfolio-view-model-helper-1.15.2.tgz",
+    "shasum": "5d2151b8ada3c22d0fd3a9c1faa87ed1d706671b"
+  },
+  "main": "scripts/lib-wm-portfolio-view-model-helper.js",
+  "name": "lib-wm-portfolio-view-model-helper",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.15.2"
+}

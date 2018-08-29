@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bb-login-ng@^2.4.2",
+        "scope": null,
+        "escapedName": "ext-bb-login-ng",
+        "name": "ext-bb-login-ng",
+        "rawSpec": "^2.4.2",
+        "spec": ">=2.4.2 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-login-ng"
+    ]
+  ],
+  "_from": "ext-bb-login-ng@>=2.4.2 <3.0.0",
+  "_id": "ext-bb-login-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bb-login-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bb-login-ng@^2.4.2",
+    "scope": null,
+    "escapedName": "ext-bb-login-ng",
+    "name": "ext-bb-login-ng",
+    "rawSpec": "^2.4.2",
+    "spec": ">=2.4.2 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-login-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-login-ng/-/ext-bb-login-ng-2.5.1.tgz",
+  "_shasum": "fb12972d99b3b1e01c8c6904e2e7f92a116842fa",
+  "_shrinkwrap": null,
+  "_spec": "ext-bb-login-ng@^2.4.2",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-login-ng",
+  "dependencies": {
+    "ui-bb-focus-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bb-login-ng/-/ext-bb-login-ng-2.5.1.tgz",
+    "shasum": "fb12972d99b3b1e01c8c6904e2e7f92a116842fa"
+  },
+  "main": "scripts/ext-bb-login-ng.js",
+  "name": "ext-bb-login-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

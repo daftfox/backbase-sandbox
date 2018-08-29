@@ -1,0 +1,10 @@
+{
+  "en-US": {
+    "label.create": "Create",
+    "menu.item.label.payment": "New Payment",
+    "menu.item.label.contact": "New Contact",
+    "menu.item.label.action": "New Action",
+    "menu.item.label.message": "New Message",
+    "menu.item.label.batch": "Import a Batch"
+  }
+}

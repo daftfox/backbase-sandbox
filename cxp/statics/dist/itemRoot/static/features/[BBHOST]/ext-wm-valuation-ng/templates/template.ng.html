@@ -1,0 +1,113 @@
+<div data-ng-controller="ValuationController as $ctrl"
+     class="container-fluid clearfix">
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+    data-ng-init="$ctrl.setGranularity(ext.helpers.GRANULARITY[2].value);
+                  $ctrl.setPeriod(ext.helpers.PERIOD[0].value);
+                  granularity = ext.helpers.GRANULARITY[2];
+                  period = ext.helpers.PERIOD[0];
+                  $ctrl.loadValuationData()"
+  >
+
+    <div>
+      <div
+        class="card border-0 clearfix">
+        <div class="card-body pl-0 pr-0">
+          <h4 class="float-left">
+            {{ ext.helpers.isValuation(state.route) ? 'valuation.valuationTitle' : 'valuation.variationTitle' | i18n }}
+          </h4>
+          <div class="btn-group float-right ml-2"
+               data-ng-if="ext.helpers.areBothChartsDisplayed()"
+               aria-label="{{ allocations.switcher | i18n }}">
+            <button
+              class="btn btn-outline-secondary"
+              data-ng-class="{ 'active': !ext.helpers.isValuation(state.route) }"
+              data-ng-click="$ctrl.switchDisplayMode()"
+              type="button"
+            >
+              <i class="fa fa-percent" aria-hidden="true"></i>
+            </button>
+            <button
+              class="btn btn-outline-secondary"
+              data-ng-class="{ 'active': ext.helpers.isValuation(state.route) }"
+              data-ng-click="$ctrl.switchDisplayMode()"
+              type="button"
+            >
+              <i class="far fa-money-bill-alt" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="float-right ml-2">
+            <ui-bb-dropdown-select-ng
+              class="dropdown-select-wide"
+              data-ng-model="period"
+              data-selected-as="$option.i18nKey | i18n"
+              data-ng-change="$ctrl.setPeriod(period.value); $ctrl.loadValuationData();">
+              <ui-bb-dropdown-option-ng
+                data-option="item"
+                data-ng-repeat="item in ext.helpers.PERIOD"
+                class="list-group-item-text">
+                <a href="javascript:void(0)"
+                   class="clearfix cursor-pointer text-muted">
+                  {{::($option.i18nKey | i18n)}}
+                </a>
+              </ui-bb-dropdown-option-ng>
+            </ui-bb-dropdown-select-ng>
+          </div>
+          <div class="float-right">
+            <ui-bb-dropdown-select-ng
+              class="dropdown-select-wide"
+              data-ng-model="granularity"
+              data-selected-as="$option.i18nKey | i18n"
+              data-ng-change="$ctrl.setGranularity(granularity.value);
+                                  $ctrl.loadValuationData()">
+              <ui-bb-dropdown-option-ng
+                data-option="item"
+                data-ng-repeat="item in ext.helpers.GRANULARITY"
+                class="list-group-item-text">
+                <a href="javascript:void(0)" class="clearfix cursor-pointer text-muted">
+                  {{::($option.i18nKey | i18n)}}
+                </a>
+              </ui-bb-dropdown-option-ng>
+            </ui-bb-dropdown-select-ng>
+          </div>
+        </div>
+      </div>
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.valuationError).icon }} text-muted"
+        data-title="{{ ext.helpers.getError(state.errors.valuationError).title | i18n }}"
+        data-subtitle="{{ ext.helpers.getError(state.errors.valuationError).message | i18n }}"
+        data-is-empty="state.errors.valuationError"
+      >
+
+        <ui-bb-empty-state-ng
+          data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+          data-title="{{ 'valuation.empty.title' | i18n }}"
+          data-subtitle="{{ 'valuation.empty.message' | i18n }}"
+          data-is-empty="!state.valuation.data"
+        >
+          <div class="row">
+            <ui-bb-chartjs-chart-bar-ng
+              data-ng-show="!ext.helpers.isValuation(state.route)"
+              class="col-12"
+              data-series="ext.helpers.valuationData().variation"
+              data-bar-percentage="0.8"
+              data-category-percentage="1.0"
+              data-options="ext.helpers.getVariationOptions()"
+            ></ui-bb-chartjs-chart-bar-ng>
+            <ui-bb-chartjs-chart-bar-ng
+              data-ng-if="ext.helpers.isValuation(state.route)"
+              class="col-12"
+              data-series="ext.helpers.valuationData().valuation"
+              data-options="ext.helpers.chartValuationOptions"
+              data-bar-percentage="0.8"
+              data-category-percentage="1.0"
+            ></ui-bb-chartjs-chart-bar-ng>
+          </div>
+        </ui-bb-empty-state-ng>
+
+      </ui-bb-empty-state-ng>
+    </div>
+
+  </ui-bb-loading-indicator-ng>
+</div>

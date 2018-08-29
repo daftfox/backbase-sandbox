@@ -1,0 +1,54 @@
+<div data-ng-controller="PortfolioPerformanceController as $ctrl"
+     class="container-fluid">
+  <ui-bb-loading-indicator-ng data-is-loading="state.initialLoading"
+                              data-loading-text="{{ 'message.loading' | i18n }}"
+                              data-ng-init="$ctrl.setPeriod(ext.helpers.PERIOD[0].value);
+                selectedPeriod = ext.helpers.PERIOD[0];">
+    <div class="card border-0">
+      <div class="card-body pl-0 pr-0">
+        <div class="float-left">
+          <h4 data-i18n-key="performance.title"></h4>
+        </div>
+        <div class="float-right">
+          <ui-bb-dropdown-select-ng
+            data-ng-init="ext.helpers.changeDropdownSide()"
+            class="dropdown-select-wide"
+            data-ng-model="selectedPeriod"
+            data-selected-as="$option.i18nKey | i18n"
+            data-ng-change="$ctrl.setPeriod(selectedPeriod.value)">
+            <ui-bb-dropdown-option-ng
+              data-option="item"
+              data-ng-repeat="item in ext.helpers.PERIOD"
+              class="list-group-item-text">
+              <a href="javascript:void(0)"
+                 class="clearfix cursor-pointer text-muted">
+                {{::($option.i18nKey | i18n)}}
+              </a>
+            </ui-bb-dropdown-option-ng>
+          </ui-bb-dropdown-select-ng>
+        </div>
+      </div>
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.portfolioPerformanceError).icon }} text-muted"
+        data-title="{{ ext.helpers.getError(state.errors.portfolioPerformanceError).title | i18n }}"
+        data-subtitle="{{ ext.helpers.getError(state.errors.portfolioPerformanceError).message | i18n }}"
+        data-is-empty="state.errors.portfolioPerformanceError"
+      >
+        <ui-bb-empty-state-ng
+          data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+          data-title="{{ 'performance.empty.title' | i18n }}"
+          data-subtitle="{{ 'performance.empty.message' | i18n }}"
+          data-is-empty="!state.portfolioPerformance.data"
+        >
+          <div class="row">
+            <ui-bb-chartjs-chart-line-ng
+              class="col-12"
+              data-series="ext.helpers.performanceData()"
+              data-options="ext.helpers.getChartPerformanceOptions()"
+            ></ui-bb-chartjs-chart-line-ng>
+          </div>
+        </ui-bb-empty-state-ng>
+      </ui-bb-empty-state-ng>
+    </div>
+  </ui-bb-loading-indicator-ng>
+</div>

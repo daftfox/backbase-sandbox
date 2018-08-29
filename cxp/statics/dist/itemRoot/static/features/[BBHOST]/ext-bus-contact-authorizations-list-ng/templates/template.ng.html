@@ -1,0 +1,242 @@
+<div data-ng-controller="ContactApprovalsController as $ctrl"
+  class="ext-bus-contact-authorizations-list-ng container-fluid card">
+  <div class="empty-element-placeholder-relative" data-ng-if="$ctrl.state.initialLoading" data-role="spinner"></div>
+
+  <div class="notifications col-md-4">
+    <ui-bb-notification-stripe-ng
+      data-ng-repeat="notification in $ctrl.state.notifications"
+      data-timeout-second="{{ $ctrl.dismissTime || 3 }}"
+      data-message="{{ notification.message }}"
+      data-on-close="$ctrl.state.notifications = ext.helpers.filterNotification(notification, $ctrl.state.notifications);"
+      data-type="bg-{{ notification.level === 'ALERT' ? 'danger' : notification.level | lowercase }}">
+    </ui-bb-notification-stripe-ng>
+  </div>
+
+  <ui-bb-substitute-error-ng data-message="$ctrl.state.error.message | i18n">
+    <div class="row" data-ng-if="!$ctrl.state.initialLoading">
+      <div class="col-lg-6 col-12 pr-0 border-right">
+        <ui-bb-loading-overlay-ng data-is-loading="$ctrl.state.approvals.loading">
+          <div data-ng-include="'#ext-bus-contact-authorizations-list-ng/approval-list.ng.html'"
+            data-ng-class="{ 'd-none d-lg-block': $ctrl.state.page !== 'list' }">
+          </div>
+        </ui-bb-loading-overlay-ng>
+      </div>
+
+      <div class="col-lg-6 col-12">
+        <div data-ng-switch="$ctrl.state.page">
+          <div class="d-none d-lg-block" data-ng-switch-when="list">
+            <div data-ng-include="'#ext-bus-contact-authorizations-list-ng/approval-details.ng.html'"></div>
+          </div>
+          <div data-ng-switch-when="details">
+            <div data-ng-include="'#ext-bus-contact-authorizations-list-ng/approval-details.ng.html'"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ui-bb-substitute-error-ng>
+</div>
+
+<script type="text/ng-template" id="#ext-bus-contact-authorizations-list-ng/approval-details.ng.html">
+  <div class="contacts-empty" data-ng-if="!$ctrl.hasApprovals() && !$ctrl.state.approval.data">
+    <span class="contacts-empty-label" data-i18n-key="contact-approvals.detail.empty" data-role="contact-approvals-empty"></span>
+  </div>
+  <div data-ng-if="$ctrl.hasApprovals() || $ctrl.state.approval.data">
+    <div class="row d-block d-lg-none contact-details-row">
+      <div class="col-12">
+        <span data-ng-click="$ctrl.closeContactApprovalDetails()" data-i18n-key="label.back" data-role="label-back"></span>
+      </div>
+    </div>
+
+    <div class="contact-details-separator d-block d-lg-none"></div>
+    <div class="row contact-details-row">
+      <div class="col-12 contact-details-col">
+        <div class="separate-block text-muted small" data-role="contact-approvals-requested-created-by">
+          {{ 'contact-approvals.request.created.by' | i18n: {
+            name: $ctrl.state.approval.data.creatorBbId,
+            createdDate: ($ctrl.state.approval.data.creationTime | date: 'shortDate'),
+            createdTime: ($ctrl.state.approval.data.creationTime | date: 'shortTime')}
+          }}
+        </div>
+        <div class="contact-buttons">
+          <button class="btn btn-primary btn-authorize"
+            data-i18n-key="label.authorize"
+            data-ng-disabled="$ctrl.state.approval.updating"
+            data-ng-click="$ctrl.authorize($ctrl.state.approval.data.id)"
+            data-role="contact-approvals-authorize">
+          </button>
+          <button class="btn btn-secondary btn-danger"
+            data-ng-click="ext.rejectConfirmOpened = true"
+            data-i18n-key="label.reject"
+            data-ng-disabled="$ctrl.state.approval.updating"
+            data-role="contact-approvals-reject">
+          </button>
+        </div>
+        <h4 data-ng-bind="$ctrl.state.approval.data.data.name" class="ellipsis contact-name"
+          title="{{$ctrl.state.approval.data.data.name}}" data-role="contact-approvals-name"></h4>
+        <div class="text-muted ellipsis">
+          <span data-ng-bind="$ctrl.state.approval.data.data.alias" title="{{$ctrl.state.approval.data.data.alias}}" data-role="contact-approvals-alias"></span>
+          <span data-ng-if="$ctrl.state.approval.data.data.alias && $ctrl.state.approval.data.data.category">&sdot;</span>
+          <span data-ng-bind="$ctrl.state.approval.data.data.category" title="{{$ctrl.state.approval.data.data.category}}" data-role="contact-approvals-category"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-details-separator"
+      data-ng-if="ext.helpers.showContactBlock($ctrl, ['phoneNumber', 'emailId', 'contactPerson'])"></div>
+    <div class="row contact-details-row"
+      data-ng-if="ext.helpers.showContactBlock($ctrl, ['phoneNumber', 'emailId', 'contactPerson'])">
+      <div class="col-6 contact-details-col" data-ng-if="$ctrl.state.approval.data.data.phoneNumber">
+        <strong data-i18n-key="label.phoneNumber" data-role="label-phone-number"></strong>
+        <div data-ng-bind="$ctrl.state.approval.data.data.phoneNumber" class="ellipsis"
+          title="{{$ctrl.state.approval.data.data.phoneNumber}}" data-role="contact-approvals-phone-number">
+        </div>
+      </div>
+      <div class="col-6 contact-details-col" data-ng-if="$ctrl.state.approval.data.data.emailId">
+        <strong data-i18n-key="label.emailAddress" data-role="label-email-address"></strong>
+        <div data-ng-bind="$ctrl.state.approval.data.data.emailId" class="ellipsis"
+          title="{{$ctrl.state.approval.data.data.emailId}}" data-role="contact-approvals-email-address">
+        </div>
+      </div>
+      <div class="col-6 contact-details-col" data-ng-if="$ctrl.state.approval.data.data.contactPerson">
+        <strong data-i18n-key="label.contactPerson" data-role="label-contact-person"></strong>
+        <div data-ng-bind="$ctrl.state.approval.data.data.contactPerson" class="ellipsis"
+          title="{{$ctrl.state.approval.data.data.contactPerson}}" data-role="contact-approvals-contact-person">
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-details-separator"
+      data-ng-if="ext.helpers.showContactBlock($ctrl, ['country', 'address'])"></div>
+    <div class="row contact-details-row"
+      data-ng-if="ext.helpers.showContactBlock($ctrl, ['country', 'address'])">
+      <div class="col-12 contact-details-col"
+        data-ng-if="ext.helpers.showContactBlock($ctrl, ['address'])">
+        <strong data-i18n-key="label.address" data-role="label-address"></strong>
+        <div class="ellipsis"
+          data-ng-bind="ext.helpers.getContactAddress($ctrl.state.approval.data.data, 'address')"
+          title="{{ext.helpers.getContactAddress($ctrl.state.approval.data.data, 'address')}}"
+          data-role="contact-approvals-address">
+        </div>
+      </div>
+      <div class="col-6 contact-details-col"
+        data-ng-if="$ctrl.state.approval.data.data.country">
+        <strong data-i18n-key="label.country" data-role="label-country"></strong>
+        <div data-ng-bind="$ctrl.state.approval.data.data.country | country" class="ellipsis"
+          title="{{$ctrl.state.approval.data.data.country | country}}"
+          data-role="contact-approvals-country">
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-details-separator"></div>
+    <div class="row contact-details-row">
+      <div class="col-12">
+        <h4 class="float-left" data-role="label-accounts">{{'label.accounts'|i18n}}</h4>
+        <span class="float-right text-muted contact-accounts-count">
+          <span data-ng-if="$ctrl.state.approval.data.data.accounts.length === 1" data-i18n-key="label.oneAccount" data-role="contact-approvals-one-acount"></span>
+          <span data-ng-if="$ctrl.state.approval.data.data.accounts.length !== 1"
+            data-i18n-key="label.multipleAccounts"
+            data-i18n-data="{ count: $ctrl.state.approval.data.data.accounts.length }"
+            data-role="contact-approvals-multiple-accounts">
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row contact-account-block" data-ng-repeat="account in $ctrl.state.approval.data.data.accounts track by $index">
+      <p data-ng-if="account.alias || account.name">
+        <strong data-ng-bind="account.alias || account.name" class="ellipsis"
+          title="{{account.alias || account.name}}"
+          data-role="contact-approvals-account-alias-name">
+        </strong>
+      </p>
+      <div class="text-muted small ellipsis"
+        data-ng-bind="account.IBAN || account.accountNumber"
+        title="{{account.IBAN || account.accountNumber}}"
+        data-role="contact-approvals-account-iban">
+      </div>
+      <div class="contact-account-bank-block"
+        data-ng-if="ext.helpers.showAccountBlock(account, ['address', 'bankCountry', 'bankName', 'bankCode', 'BIC'])">
+        <div data-ng-bind="ext.helpers.getAccountBank(account)" class="ellipsis"
+          title="{{ext.helpers.getAccountBank(account)}}"
+          data-role="contact-request-account-bank-name">
+        </div>
+        <div data-ng-bind="ext.helpers.getAccountAddress(account)" class="ellipsis"
+          title="{{ext.helpers.getAccountAddress(account)}}"
+          data-role="contact-request-account-address">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ui-bb-confirm-ng
+    data-is-open="ext.rejectConfirmOpened"
+    data-on-confirm="$ctrl.reject($ctrl.state.approval.data.id)"
+    data-labels="{
+      heading: ('dialog.reject.title' | i18n),
+      bodyText: ('dialog.reject.body' | i18n),
+      confirm: ('dialog.reject.yes' | i18n),
+      cancel: ('dialog.reject.no' | i18n)
+    }"
+    data-confirm-btn-class="'btn-danger'">
+  </ui-bb-confirm-ng>
+</script>
+
+<script type="text/ng-template" id="#ext-bus-contact-authorizations-list-ng/approval-list.ng.html">
+  <div class="contacts-empty" data-ng-if="!$ctrl.hasApprovals() && !$ctrl.state.approval.data">
+    <span class="contacts-empty-label" data-i18n-key="contact-approvals.list.empty" data-role="contact-approvals-list-empty"></span>
+  </div>
+  <div data-ng-if="$ctrl.hasApprovals() || $ctrl.state.approval.data">
+    <div class="list-group" data-ng-click="ext.helpers.onListClick(ext, $ctrl)">
+      <div class="list-group-item contact-list-item contact-group-char"
+        data-ng-repeat-start="group in $ctrl.state.approvals.data track by group.char"
+        data-ng-click="ext.selectedApproval = null">
+        <div class="row">
+          <div class="col-4" data-ng-bind="group.char"></div>
+          <div class="col-8"><span data-ng-if="$index === 0" data-role="contact-request-label-action">{{ ::'label.action' | i18n }}</span></div>
+        </div>
+      </div>
+      <div class="list-group-item contact-list-item hover-item"
+        data-ng-class="{ striped: ($index + 1) % 2 , 'contact-list-item-selected': $ctrl.state.approval.data.id === approval.id }"
+        data-ng-repeat="approval in group.approvals track by approval.id"
+        data-ng-repeat-end
+        data-ng-click="ext.selectedApproval = approval">
+        <div class="row list-group-item-row">
+          <div class="col-4 text-overflow" data-ng-bind="approval.data.name" title="{{ approval.data.name }}" data-role="approval-data-name"></div>
+          <div class="col-4 text-overflow text-muted" data-ng-bind="'{{ 'action.' + approval.action | i18n }}'"
+            title="{{ 'action.' + approval.action | i18n }}"
+            data-role="approval-action"></div>
+          <div class="col-4 text-right">
+            <span class="badge badge-{{ approval.status | lowercase }}"
+              title="{{ 'status.' + approval.status | i18n }}"
+              data-ng-bind="'status.' + approval.status | i18n"
+              data-role="approval-status">
+            </span>
+          </div>
+        </div>
+      </div>
+      <!--<ui-bb-load-more-ng
+        data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'load-more')"
+        data-ng-show="$ctrl.state.approvals.hasMore"
+        data-label="{{ 'label.loadMore' | i18n }}"
+        data-on-load-more="$ctrl.loadMore(done)">
+      </ui-bb-load-more-ng>
+
+      <ui-bb-paginator-ng
+        data-ng-if="ext.helpers.isPaginationTypeMatch($ctrl, 'pagination')"
+        data-page-navigation-text="{{ 'pagination.label.page_navigation' | i18n }}"
+        data-first-text="{{ 'pagination.label.first' | i18n }}"
+        data-last-text="{{ 'pagination.label.last' | i18n }}"
+        data-previous-text="{{ 'pagination.label.prev' | i18n }}"
+        data-next-text="{{ 'pagination.label.next' | i18n }}"
+        data-total-items="{{ $ctrl.state.pageParams.totalItems }}"
+        data-items-per-page="{{ $ctrl.state.pageParams.size }}"
+        data-max-nav-pages="{{ $ctrl.state.pageParams.maxNavPages }}"
+        data-current-page="{{ $ctrl.state.pageParams.currentPage }}"
+        data-ng-disabled="$ctrl.state.approvals.loading"
+        data-change-page="$ctrl.changePage(params)">
+      </ui-bb-paginator-ng>-->
+    </div>
+  </div>
+</script>

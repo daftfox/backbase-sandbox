@@ -1,0 +1,652 @@
+<div
+  data-ng-controller="PortfolioTransactionsController as $ctrl"
+  class="container-fluid ext-wm-portfolio-transactions-ng"
+  data-role="portfolio-transactions"
+>
+  <ui-bb-loading-indicator-ng
+    data-ng-init="$ctrl.switchPositionType(ext.helpers.POSITION_TYPES.ALL)"
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+    <ui-bb-empty-state-ng
+      data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError($ctrl.errors.portfolioTransactionsError).icon }} text-muted"
+      data-title="{{ ext.helpers.getError($ctrl.errors.portfolioTransactionsError).title | i18n }}"
+      data-subtitle="{{ ext.helpers.getError($ctrl.errors.portfolioTransactionsError).message | i18n }}"
+      data-is-empty="$ctrl.errors.portfolioTransactionsError"
+    >
+
+      <div class="clearfix pt-3 pb-2">
+        <h3
+          class="float-left"
+          data-i18n-key="portfolioTransactions.title"
+          data-role="portfolio-transactions-title"
+        ></h3>
+
+        <button
+          class="btn btn-outline-secondary float-right ml-3"
+          data-ng-class="{ 'active': ext.helpers.isFilterApplied() }"
+          data-ng-click="ext.helpers.toggleFilter()"
+          data-role="portfolio-transactions-toggle-filter"
+        >
+          <i class="fa fa-sliders-h"></i>
+          <span data-i18n-key="portfolioTransactions.filter.btnLabel"></span>
+        </button>
+
+        <div
+          class="btn-group float-right"
+          aria-label="{{ 'allocations.switcher' | i18n }}"
+          data-role="portfolio-transactions-position-type-btn-group"
+        >
+          <button
+            class="btn btn-outline-secondary"
+            data-ng-class="{ 'active': ext.helpers.isAllSelected() }"
+            data-ng-click="$ctrl.switchPositionType(ext.helpers.POSITION_TYPES.ALL)"
+            type="button"
+            data-i18n-key="portfolioTransactions.positionType.all"
+            data-role="portfolio-transactions-position-type-all"
+          ></button>
+          <button
+            class="btn btn-outline-secondary"
+            data-ng-class="{ 'active': ext.helpers.isSecuritySelected() }"
+            data-ng-click="$ctrl.switchPositionType(ext.helpers.POSITION_TYPES.SECURITY)"
+            type="button"
+            data-i18n-key="portfolioTransactions.positionType.security"
+            data-role="portfolio-transactions-position-type-security"
+          ></button>
+          <button
+            class="btn btn-outline-secondary"
+            data-ng-class="{ 'active': ext.helpers.isCashSelected() }"
+            data-ng-click="$ctrl.switchPositionType(ext.helpers.POSITION_TYPES.CASH)"
+            type="button"
+            data-i18n-key="portfolioTransactions.positionType.cash"
+            data-role="portfolio-transactions-position-type-cash"
+          ></button>
+        </div>
+      </div>
+
+      <hr class="mb-3"/>
+
+      <div data-ng-show="ext.helpers.isFilterOpen()">
+        <ui-wm-portfolio-transactions-filter
+          data-on-filter-apply="$ctrl.applyFilter($filter); ext.helpers.closeFilter()"
+          data-on-filter-cancel="ext.helpers.closeFilter()"
+          data-filter-time-period-config="ext.helpers.filterTimePeriodConfig"
+          data-filter-transaction-categories="state.filterOptions.categories"
+          data-filter-accounts="state.filterOptions.accounts"
+          data-set-filter-on-event="update.transactions.filter"
+          data-filter-asset-classes="state.filterOptions.assetClasses"
+          data-filter-btn-label="portfolioTransactions.filter"
+          data-initial-filter-state="state.initialFilterState"
+          data-filter-labels="{
+            instrumentName: ('portfolioTransactions.filter.instrumentName' | i18n),
+            counterpartyName: ('portfolioTransactions.filter.counterpartyName' | i18n),
+            counterpartyNameExample: ('portfolioTransactions.filter.counterpartyNameExample' | i18n),
+            counterpartyAccount: ('portfolioTransactions.filter.counterpartyAccount' | i18n),
+            counterpartyAccountExample: ('portfolioTransactions.filter.counterpartyAccountExample' | i18n),
+            instrumentNameExample: ('portfolioTransactions.filter.instrumentNameExample' | i18n),
+            ISIN: ('portfolioTransactions.filter.ISIN' | i18n),
+            ISINExample: ('portfolioTransactions.filter.ISINExample' | i18n),
+            timePeriod: ('portfolioTransactions.filter.timePeriod' | i18n),
+            assetClass: ('portfolioTransactions.filter.assetClass' | i18n),
+            transactionCategory: ('portfolioTransactions.filter.transactionCategory' | i18n),
+            account: ('portfolioTransactions.filter.account' | i18n),
+            amountRange: ('portfolioTransactions.filter.amountRange' | i18n),
+            amountRangeFrom: ('portfolioTransactions.filter.amountRangeFrom' | i18n),
+            amountRangeTo: ('portfolioTransactions.filter.amountRangeTo' | i18n),
+            amountRangeExample: ('portfolioTransactions.filter.amountRangeExample' | i18n),
+            clearSelected: ('portfolioTransactions.filter.clearSelected' | i18n),
+            cancel: ('portfolioTransactions.filter.cancel' | i18n),
+            applyFilters: ('portfolioTransactions.filter.applyFilters' | i18n),
+          }"
+          data-filter-errors="{
+            instrumentName: ('portfolioTransactions.filter.errors.instrumentName' | i18n),
+            isin: ('portfolioTransactions.filter.errors.isin' | i18n),
+            counterpartyName: ('portfolioTransactions.filter.errors.counterpartyName' | i18n),
+            counterpartyAccount: ('portfolioTransactions.filter.errors.counterpartyAccount' | i18n),
+            amountRange: ('portfolioTransactions.filter.errors.amountRange' | i18n),
+            maxLength: ('portfolioTransactions.filter.errors.maxLength' | i18n),
+            onlyNumbers: ('portfolioTransactions.filter.errors.onlyNumbers' | i18n),
+          }"
+        ></ui-wm-portfolio-transactions-filter>
+
+        <hr class="mb-3"/>
+      </div>
+
+      <div data-ng-if="state.appliedFilter">
+          <span
+            class="badge badge-pill badge-secondary"
+            data-ng-bind="state.appliedFilter.instrumentName"
+            data-role="portfolio-transactions-badge-instrument-name"
+          ></span>
+        <span
+          class="badge badge-pill badge-secondary"
+          data-ng-bind="state.appliedFilter.isin"
+          data-role="portfolio-transactions-badge-isin"
+        ></span>
+        <span
+          class="badge badge-pill badge-secondary"
+          data-ng-bind="state.appliedFilter.counterpartyName"
+          data-role="portfolio-transactions-badge-counterparty-name"
+        ></span>
+        <span
+          class="badge badge-pill badge-secondary"
+          data-ng-bind="state.appliedFilter.counterpartyAccount"
+          data-role="portfolio-transactions-badge-counterparty-account"
+        ></span>
+        <span
+          class="badge badge-pill badge-secondary"
+          data-role="portfolio-transactions-badge-dates"
+        >
+        {{state.appliedFilter.timePeriod.startDate | date:'shortDate'}}
+        - {{state.appliedFilter.timePeriod.endDate | date:'shortDate'}}
+      </span>
+        <span
+          class="badge badge-pill badge-secondary"
+          data-ng-if="ext.helpers.isAssetClassShown()"
+          data-ng-bind="state.appliedFilter.assetClass.name"
+          data-role="portfolio-transactions-badge-asset-class-name"
+        ></span>
+        <span
+          class="badge badge-pill badge-secondary"
+          data-ng-if="ext.helpers.isTransactionCategoryShown()"
+          data-ng-bind="state.appliedFilter.transactionCategory.name"
+          data-role="portfolio-transactions-badge-transaction-category-name"
+        ></span>
+        <span
+          class="badge badge-pill badge-secondary"
+          data-ng-if="ext.helpers.isAccountShown()"
+          data-ng-bind="state.appliedFilter.account.name"
+          data-role="portfolio-transactions-badge-account-name"
+        ></span>
+        <span
+          class="badge badge-pill badge-secondary"
+          data-ng-if="state.appliedFilter.amountRangeFrom"
+          data-role="portfolio-transactions-badge-amount-range"
+        >
+        {{state.appliedFilter.amountRangeFrom}}
+        - {{state.appliedFilter.amountRangeTo}}
+      </span>
+      </div>
+      <div data-ng-if="!state.appliedFilter">
+          <span
+            class="badge badge-pill badge-secondary"
+            data-role="portfolio-transactions-badge-dates-default"
+          >
+            {{state.initialFilterState.timePeriod.startDate | date:'shortDate'}}
+            - {{state.initialFilterState.timePeriod.endDate | date:'shortDate'}}
+          </span>
+      </div>
+
+
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-5x fa-exchange text-muted"
+        data-title="{{ 'portfolioTransactions.empty.title' | i18n }}"
+        data-subtitle="{{ 'portfolioTransactions.empty.message.noTransactions' | i18n }}"
+        data-is-empty="!state.portfolioTransactions.data.length"
+      >
+        <div class="table-responsive">
+          <table
+            class="table small mt-3"
+            data-role="portfolio-transactions-table"
+          >
+            <thead>
+            <tr>
+              <th data-i18n-key="portfolioTransactions.date"></th>
+              <th data-i18n-key="portfolioTransactions.description"></th>
+              <th
+                class="text-right"
+                data-i18n-key="portfolioTransactions.quantity"
+                data-ng-if="ext.helpers.columnsConfigByPositionType[state.positionType].quantity"
+              ></th>
+              <th
+                class="text-right"
+                data-i18n-key="portfolioTransactions.price"
+                data-ng-if="ext.helpers.columnsConfigByPositionType[state.positionType].price"
+              ></th>
+              <th class="text-right" data-i18n-key="portfolioTransactions.amount"></th>
+              <th data-i18n-key="portfolioTransactions.ccy"></th>
+              <th class="text-right" data-i18n-key="portfolioTransactions.balance"></th>
+              <th class="text-center" data-i18n-key="portfolioTransactions.status"></th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+              data-ng-repeat-start="
+                item in ext.helpers.transactions() |
+                filter: ext.helpers.transactionsFilterFn() track by item.id
+              "
+              tabindex="0"
+              data-ng-click="ext.helpers.onToggle(item, $ctrl)"
+              data-ng-class-odd="'bg-light'"
+              data-role="portfolio-transactions-item-head"
+            >
+              <td
+                class="align-middle"
+                data-ng-bind="item.transactionDate | date:'shortDate'"
+                data-role="portfolio-transactions-item-date"
+              ></td>
+              <td class="align-middle">
+                <b
+                  data-ng-bind="item.category"
+                  data-role="portfolio-transactions-item-category"
+                ></b> -
+                <b
+                  data-ng-bind="item.assetClass"
+                  data-role="portfolio-transactions-item-asset-class"
+                ></b> -
+                <span
+                  data-ng-bind="item.instrumentName"
+                  data-role="portfolio-transactions-item-instrument-name"
+                ></span>
+              </td>
+              <td
+                class="text-right align-middle"
+                data-ng-if="ext.helpers.columnsConfigByPositionType[state.positionType].quantity"
+                data-role="portfolio-transactions-item-quantity-wrap"
+              >
+              <span
+                class="text-nowrap"
+                data-ng-bind="ext.helpers.showSign(item.quantity)"
+                data-role="portfolio-transactions-item-quantity"
+              ></span>
+                <span
+                  data-ng-show="ext.helpers.isUndefined(item.quantity)"
+                  data-role="portfolio-transactions-item-quantity-empty"
+                >&mdash;</span>
+              </td>
+              <td
+                class="text-right align-middle"
+                data-ng-if="ext.helpers.columnsConfigByPositionType[state.positionType].price"
+                data-role="portfolio-transactions-item-price-wrap"
+              >
+                <ui-bb-format-amount-ng
+                  data-no-map
+                  data-amount="item.price.amount"
+                  data-role="portfolio-transactions-item-price-amount"
+                ></ui-bb-format-amount-ng>
+              </td>
+              <td class="text-right align-middle">
+                <ui-bb-format-amount-ng
+                  data-no-map
+                  data-amount="item.amount.amount"
+                  data-role="portfolio-transactions-item-amount"
+                ></ui-bb-format-amount-ng>
+              </td>
+              <td
+                class="align-middle"
+                data-ng-bind="item.amount.currencyCode"
+                data-role="portfolio-transactions-item-amount-currency-code"
+              ></td>
+              <td class="text-right align-middle">
+                <ui-bb-format-amount-ng
+                  data-no-map
+                  data-amount="item.balanceAmount.amount"
+                  data-role="portfolio-transactions-item-balance-amount"
+                ></ui-bb-format-amount-ng>
+              </td>
+              <td class="text-center align-middle">
+              <span
+                class="badge badge-pill badge-secondary py-1"
+                data-ng-class="ext.helpers.getStatusBackground(item.statusName)"
+                data-uib-tooltip="{{item.statusName}}"
+                data-tooltip-placement="top"
+                data-role="portfolio-transactions-item-status-abbr"
+              >{{item.statusAbbr}}</span>
+              </td>
+              <td class="text-right text-muted align-middle">
+                <i
+                  class="fa"
+                  data-ng-class="ext.helpers.isOpen(item.id) ? 'fa-chevron-up' :'fa-chevron-down'"
+                  aria-hidden="true"
+                  data-role="portfolio-transactions-item-chevron"
+                ></i>
+              </td>
+            </tr>
+            <tr
+              data-ng-repeat-end=""
+              data-ng-class="{ 'd-none': !ext.helpers.isOpen(item.id) }"
+              data-role="portfolio-transactions-item-body"
+            >
+              <td class="p-3" colspan="9">
+                <h6
+                  class="mb-3"
+                  data-ng-bind="item.details.instrumentNameLong || '&nbsp;'"
+                  data-role="portfolio-transactions-item-instrument-name-long"
+                ></h6>
+
+                <div class="row">
+                  <div class="col-4">
+                    <table class="table table-sm">
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.transactionDate' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-ng-bind="item.transactionDate | date:'short'"
+                          data-role="portfolio-transactions-item-details-date"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.valueDate' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-ng-bind="item.details.valueDate | date:'short'"
+                          data-role="portfolio-transactions-item-details-value-date"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.transactionCategory' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-ng-bind="item.category"
+                          data-role="portfolio-transactions-item-details-category"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.exchange' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-ng-bind="item.details.market"
+                          data-role="portfolio-transactions-item-details-market"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.orderType' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-ng-bind="item.details.orderType"
+                          data-role="portfolio-transactions-item-details-order-type"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.counterpartyName' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-ng-bind="item.counterpartyName"
+                          data-role="portfolio-transactions-item-details-counterparty-name"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.counterpartyAccount' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-ng-bind="item.counterpartyAccount"
+                          data-role="portfolio-transactions-item-details-counterparty-account"
+                        ></td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <div class="col-4">
+                    <table class="table table-sm">
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.quantity' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.quantity"
+                            data-role="portfolio-transactions-item-details-quantity"
+                          ></ui-bb-format-amount-ng>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.price' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.price.amount"
+                            data-role="portfolio-transactions-item-details-price"
+                          ></ui-bb-format-amount-ng>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.amount' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.amount.amount"
+                            data-role="portfolio-transactions-item-details-amount"
+                          ></ui-bb-format-amount-ng>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.assetCurrency' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.details.assetCurrency"
+                            data-role="portfolio-transactions-item-details-asset-currency"
+                          ></ui-bb-format-amount-ng>
+                          <span
+                            data-ng-show="ext.helpers.isUndefined(item.details.assetCurrency)"
+                            data-role="portfolio-transactions-item-details-asset-currency-empty"
+                          >&mdash;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.amountGross' | i18n}}
+                          </strong>:
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.details.grossAmount.amount"
+                            data-role="portfolio-transactions-item-details-gross-amount"
+                          ></ui-bb-format-amount-ng>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.fxRate' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.details.exchangeRate"
+                            data-role="portfolio-transactions-item-details-exchange-rate"
+                          ></ui-bb-format-amount-ng>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.localTaxes' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.details.taxesLocal.amount"
+                            data-currency="item.details.taxesLocal.currencyCode"
+                            data-role="portfolio-transactions-item-details-taxes-local-currency-code"
+                          ></ui-bb-format-amount-ng>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.foreignTaxes' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.details.taxesForeign.amount"
+                            data-currency="item.details.taxesForeign.currencyCode"
+                            data-role="portfolio-transactions-item-details-taxes-foreign-currency-code"
+                          ></ui-bb-format-amount-ng>
+                          <span
+                            data-ng-show="ext.helpers.isUndefined(item.details.taxesForeign)"
+                            data-role="portfolio-transactions-item-details-taxes-foreign-empty"
+                          >&mdash;</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <div class="col-4">
+                    <table class="table table-sm">
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.foreignFees' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.details.feesForeign.amount"
+                            data-currency="item.details.feesForeign.currencyCode"
+                            data-role="portfolio-transactions-item-details-fees-foreign-currency-code"
+                          ></ui-bb-format-amount-ng>
+                          <span
+                            data-ng-show="ext.helpers.isUndefined(item.details.feesForeign)"
+                            data-role="portfolio-transactions-item-details-fees-foreign-empty"
+                          >&mdash;</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.bankFees' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-format-amount-ng
+                            data-no-map
+                            data-amount="item.details.feesLocal.amount"
+                            data-currency="item.details.feesLocal.currencyCode"
+                            data-role="portfolio-transactions-item-details-fees-local-currency-code"
+                          ></ui-bb-format-amount-ng>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.officialCode' | i18n}}:
+                          </strong>
+                        </td>
+                        <td class="border-top-0 align-middle">
+                          <ui-bb-ellipsis-tooltip-ng
+                            data-tooltip="{{item.details.officialCode}}"
+                            data-role="portfolio-transactions-item-details-official-code"
+                          >
+                            {{item.details.officialCode}}
+                          </ui-bb-ellipsis-tooltip-ng>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.isin' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-role="portfolio-transactions-item-details-isin"
+                          data-ng-bind="item.iSIN"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.assetCategory' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-role="portfolio-transactions-item-details-asset-class"
+                          data-ng-bind="item.assetClass"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted border-top-0 align-middle">
+                          <strong>
+                            {{'portfolioTransactions.assetSubCategory' | i18n}}:
+                          </strong>
+                        </td>
+                        <td
+                          class="border-top-0 align-middle"
+                          data-role="portfolio-transactions-item-details-asset-sub-class"
+                          data-ng-bind="item.details.assetSubClass"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td class="border-top-0 align-middle" colspan="2">
+                          <strong class="text-muted">
+                            {{'portfolioTransactions.notes' | i18n}}:
+                          </strong>
+                          <span
+                            data-ng-bind="item.details.notes"
+                            data-role="portfolio-transactions-item-details-notes"
+                          ></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mb-3" data-ng-show="!state.allTransactionsLoaded">
+          <ui-bb-load-more-ng
+            data-label="{{ 'portfolioTransactions.loadMore.message' | i18n }}"
+            data-on-load-more="$ctrl.loadMore(done)"
+          ></ui-bb-load-more-ng>
+        </div>
+      </ui-bb-empty-state-ng>
+    </ui-bb-empty-state-ng>
+
+  </ui-bb-loading-indicator-ng>
+</div>

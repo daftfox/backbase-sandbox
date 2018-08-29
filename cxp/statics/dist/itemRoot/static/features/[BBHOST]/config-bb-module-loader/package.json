@@ -1,0 +1,51 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "config-bb-module-loader@1.1.69",
+        "scope": null,
+        "escapedName": "config-bb-module-loader",
+        "name": "config-bb-module-loader",
+        "rawSpec": "1.1.69",
+        "spec": "1.1.69",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks"
+    ]
+  ],
+  "_from": "config-bb-module-loader@1.1.69",
+  "_id": "config-bb-module-loader@1.1.69",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/config-bb-module-loader",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "config-bb-module-loader@1.1.69",
+    "scope": null,
+    "escapedName": "config-bb-module-loader",
+    "name": "config-bb-module-loader",
+    "rawSpec": "1.1.69",
+    "spec": "1.1.69",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-blocks",
+    "/lib-bb-start"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/config-bb-module-loader/-/config-bb-module-loader-1.1.69.tgz",
+  "_shasum": "d09664c5fbe950843c1ddb39b693336601919634",
+  "_shrinkwrap": null,
+  "_spec": "config-bb-module-loader@1.1.69",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-blocks",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/config-bb-module-loader/-/config-bb-module-loader-1.1.69.tgz",
+    "shasum": "d09664c5fbe950843c1ddb39b693336601919634"
+  },
+  "main": "scripts/config-bb-module-loader.js",
+  "name": "config-bb-module-loader",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.69"
+}

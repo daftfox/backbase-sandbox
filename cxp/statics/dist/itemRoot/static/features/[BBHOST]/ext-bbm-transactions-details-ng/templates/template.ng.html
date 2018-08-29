@@ -1,0 +1,198 @@
+<div
+  class="ext-bbm-transactions-details-ng"
+  data-ng-controller="TransactionsDetailsController as $ctrl">
+  <div class="bbm-layout bbm-layout-scroll">
+    <div
+      class="bbm-transaction bbm-transaction-bordered">
+      <div class="bbm-transaction-information prevent-ios-click">
+        <h5
+          class="bbm-transaction-title"
+          data-role="transaction-counter-party-name"
+          data-ng-bind="ext.helpers.getTransaction().counterPartyName">
+        </h5>
+        <span
+          class="bbm-transaction-subtitle"
+          data-role="transaction-type"
+          data-ng-bind="ext.helpers.getTransaction().type">
+      </span>
+      </div>
+      <div class="bbm-transaction-amount">
+        <ui-bb-format-amount
+          class="pull-right"
+          data-ng-if="ext.helpers.getTransaction()"
+          data-ng-class="{ 'amount-neutral': ext.helpers.getTransaction().creditDebitIndicator === 'DBIT' }"
+          data-amount="ext.helpers.getTransaction().amount"
+          data-wrap
+          data-show-plus-sign>
+        </ui-bb-format-amount>
+      </div>
+    </div>
+
+    <div class="bbm-list bbm-list-transparent">
+      <div class="bbm-list-group">
+        <ul class="bbm-list-group-items">
+          <!-- Currency -->
+          <li class="bbm-list-item" data-ng-if="ext.helpers.getTransaction().currency">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.transactionCurrency">
+                </div>
+                <div class="bbm-data-value">
+                  <span
+                    data-role="transaction-currency"
+                    data-ng-bind="ext.helpers.getTransaction().currency">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Exchange rate -->
+          <li
+            class="bbm-list-item"
+            data-ng-if="ext.helpers.getTransaction().currencyExchangeRate">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.exchangeRate">
+                </div>
+                <div
+                  class="bbm-data-value"
+                  data-role="transaction-exchange-rate">
+                  <span data-ng-bind="'1'"></span>
+                  <span data-ng-bind="ext.helpers.getTransaction().currency"></span>
+                  <span data-ng-bind="'='"></span>
+                  <span data-ng-bind="ext.helpers.getTransaction().currencyExchangeRate"></span>
+                  <span data-ng-bind="ext.helpers.getTransaction().instructedCurrency"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Instructed amount -->
+          <li
+            class="bbm-list-item"
+            data-ng-if="ext.helpers.getTransaction().instructedAmount">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.instructedAmount">
+                </div>
+                <div
+                  class="bbm-data-value"
+                  data-role="transaction-instructed-amount">
+                  <span data-ng-bind="ext.helpers.getTransaction().instructedAmount"></span>
+                  <span data-ng-bind="ext.helpers.getTransaction().instructedCurrency"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Transaction date -->
+          <li
+            class="bbm-list-item"
+            data-ng-if="ext.helpers.getTransaction().bookingDate">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.transactionDate">
+                </div>
+                <div class="bbm-data-value">
+                  <span
+                    data-role="transaction-booking-date"
+                    data-ng-bind="ext.helpers.getTransaction().bookingDate | date">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Processing date -->
+          <li
+            class="bbm-list-item"
+            data-ng-if="ext.helpers.getTransaction().valueDate">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.processingDate">
+                </div>
+                <div class="bbm-data-value">
+                  <span
+                    data-role="transaction-value-date"
+                    data-ng-bind="ext.helpers.getTransaction().valueDate | date">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Beneficiary -->
+          <li
+            class="bbm-list-item"
+            data-ng-if="ext.helpers.getTransaction().counterPartyAccountNumber">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.beneficiaryAccount">
+                </div>
+                <div class="bbm-data-value">
+                  <span
+                    data-role="transaction-counter-party-account-iban"
+                    data-ng-bind="ext.helpers.getTransaction().counterPartyAccountNumber">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Description -->
+          <li
+            class="bbm-list-item"
+            data-ng-if="ext.helpers.getTransaction().description">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.description">
+                </div>
+                <div class="bbm-data-value">
+                  <span
+                    data-role="transaction-description"
+                    data-ng-bind="ext.helpers.getTransaction().description">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- Reference -->
+          <li
+            class="bbm-list-item"
+            data-ng-if="ext.helpers.getTransaction().reference">
+            <div class="bbm-data">
+              <div class="bbm-data-content">
+                <div
+                  class="bbm-data-label"
+                  data-i18n-key="label.reference">
+                </div>
+                <div class="bbm-data-value">
+                  <span
+                    data-role="transaction-reference"
+                    data-ng-bind="ext.helpers.getTransaction().reference">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

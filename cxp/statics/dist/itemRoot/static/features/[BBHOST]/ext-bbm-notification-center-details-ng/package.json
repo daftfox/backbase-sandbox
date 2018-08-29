@@ -1,0 +1,56 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bbm-notification-center-details-ng@~2.7.2",
+        "scope": null,
+        "escapedName": "ext-bbm-notification-center-details-ng",
+        "name": "ext-bbm-notification-center-details-ng",
+        "rawSpec": "~2.7.2",
+        "spec": ">=2.7.2 <2.8.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bbm-notification-center-details-ng@>=2.7.2 <2.8.0",
+  "_id": "ext-bbm-notification-center-details-ng@2.7.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bbm-notification-center-details-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bbm-notification-center-details-ng@~2.7.2",
+    "scope": null,
+    "escapedName": "ext-bbm-notification-center-details-ng",
+    "name": "ext-bbm-notification-center-details-ng",
+    "rawSpec": "~2.7.2",
+    "spec": ">=2.7.2 <2.8.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-notification-center-details-ng/-/ext-bbm-notification-center-details-ng-2.7.2.tgz",
+  "_shasum": "5e6e43e810536b2f81b5658692236160e1d1238f",
+  "_shrinkwrap": null,
+  "_spec": "ext-bbm-notification-center-details-ng@~2.7.2",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "lib-bbm-plugins": "^1.0.122",
+    "ui-bb-date-label-filter-ng": "^2.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bb-list-ng": "^2.5.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-notification-center-details-ng/-/ext-bbm-notification-center-details-ng-2.7.2.tgz",
+    "shasum": "5e6e43e810536b2f81b5658692236160e1d1238f"
+  },
+  "main": "scripts/ext-bbm-notification-center-details-ng.js",
+  "name": "ext-bbm-notification-center-details-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.7.2"
+}

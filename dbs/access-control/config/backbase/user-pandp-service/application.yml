@@ -1,0 +1,12 @@
+---
+### Live profile
+spring:
+  profiles: live
+  datasource:
+    driver-class-name: ${spring.datasource.driver-class-name}
+    username: ${spring.datasource.username.user-pandp-service}
+    password: ${spring.datasource.password.user-pandp-service}
+    url: ${spring.datasource.url.user-pandp-service}
+
+logging:
+  config: ${backbase.config.dir}/user-pandp-service/logback.xml

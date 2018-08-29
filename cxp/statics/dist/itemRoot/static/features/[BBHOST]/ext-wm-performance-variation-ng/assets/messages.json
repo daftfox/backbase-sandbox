@@ -1,0 +1,42 @@
+{
+  "en-US": {
+    "message.loading": "Loading",
+    "performanceVariation.title": "Performance of portfolio",
+    "performanceVariation.ytd": "YTD",
+    "performanceVariation.year": "1 year",
+    "performanceVariation.3years": "3 years",
+    "performanceVariation.all": "All",
+    "performanceVariation.cumulativePerformance": "Cumulative Performance",
+    "performanceVariation.variation": "Variation",
+    "performanceVariation.empty.message": "We can't find what you're looking for. Please try a different criteria.",
+    "performanceVariation.empty.title": "No Results Found",
+    "model.error.auth.message": "You are not authorized to perform this action",
+    "model.error.auth.title": "Not authorized",
+    "model.error.connectivity.message": "Are you connected to the internet? Please check your connection and try again.",
+    "model.error.connectivity.title": "You`re offline",
+    "model.error.user.message": "There is a problem with the action you are trying to perform.",
+    "model.error.user.title": "Problem with access rights",
+    "model.error.unexpected.message": "Something`s gone wrong with our server. Please try again later.",
+    "model.error.unexpected.title": "System error"
+  },
+  "fr-FR": {
+    "message.loading": "Chargement",
+    "performanceVariation.title": "Performance du portefeuille",
+    "performanceVariation.ytd": "YTD",
+    "performanceVariation.year": "1 an",
+    "performanceVariation.3years": "3 ans",
+    "performanceVariation.all": "Tout",
+    "performanceVariation.cumulativePerformance": "Performance cumulée",
+    "performanceVariation.variation": "Variation",
+    "performanceVariation.empty.message": "Nous ne pouvons pas trouver ce que vous cherchez. S'il vous plaît essayez un critère différent.",
+    "performanceVariation.empty.title": "Aucune résultat trouvé",
+    "model.error.auth.message": "Vous n'êtes pas autorisé à procéder",
+    "model.error.auth.title": "Pas autorisé",
+    "model.error.connectivity.message": "Êtes vous connecté à Internet? Veuillez vérifier votre connection et réessayer.",
+    "model.error.connectivity.title": "Vous n'êtes pas en ligne",
+    "model.error.user.message": "L'action que vous essayer de faire n'abouti pas",
+    "model.error.user.title": "Problème de droit d'accès",
+    "model.error.unexpected.message": "Une erreur au niveau de nos serveur. Veuillez réessayer plus tard.",
+    "model.error.unexpected.title": "Erreur système"
+  }
+}

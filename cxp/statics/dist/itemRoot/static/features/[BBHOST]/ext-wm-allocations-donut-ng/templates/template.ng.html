@@ -1,0 +1,179 @@
+<div
+  data-ng-controller="AllocationsController as $ctrl"
+  data-ng-init="ext.helpers.registerScope($parent)"
+  class="clearfix ext-wm-allocations-donut-ng pt-3"
+>
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+
+    <div class="clearfix px-3">
+      <h3 class="float-left mb-0" data-i18n-key="allocations.title"></h3>
+      <div
+        class="btn-group float-right"
+        data-role="allocations-switcher-group"
+        aria-label="{{ 'allocations.switcher' | i18n }}"
+      >
+        <button
+          class="btn btn-outline-secondary"
+          data-ng-class="{ 'active': ext.helpers.isClass() }"
+          data-ng-click="ext.helpers.clearOpenAllocations(); $ctrl.switchAllocations()"
+          type="button"
+          data-role="allocations-asset-class-button"
+          data-i18n-key="allocations.class"
+        ></button>
+        <button
+          class="btn btn-outline-secondary"
+          data-ng-class="{ 'active': !ext.helpers.isClass() }"
+          data-ng-click="ext.helpers.clearOpenAllocations(); $ctrl.switchAllocations()"
+          type="button"
+          data-role="allocations-currency-button"
+          data-i18n-key="allocations.currency"
+        ></button>
+      </div>
+    </div>
+
+    <hr class="my-4"/>
+
+    <ui-bb-empty-state-ng
+      data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.allocationsError).icon }} text-muted"
+      data-title="{{ ext.helpers.getError(state.errors.allocationsError).title | i18n }}"
+      data-subtitle="{{ ext.helpers.getError(state.errors.allocationsError).message | i18n }}"
+      data-is-empty="state.errors.allocationsError"
+    >
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+        data-title="{{ 'allocations.empty.title' | i18n }}"
+        data-subtitle="{{ 'allocations.empty.message' | i18n }}"
+        data-is-empty="!ext.helpers.isAllocationsAvailable()"
+      >
+
+        <div class="container-fluid">
+          <div class="row mb-4">
+            <div class="col-6">
+              <ui-bb-chartjs-chart-donut-ng
+                data-series="ext.helpers.getChartDataSeries()"
+                data-options="ext.helpers.chartOptions"
+                data-plugins="ext.helpers.chartPlugins"
+                data-role="allocations-donut-chart"
+                data-click-getter="ext.helpers.createSectionClickHandler($ctrl.viewAssetsInPositions)"
+              ></ui-bb-chartjs-chart-donut-ng>
+
+              <div
+                class="absolute-center text-center"
+                data-role="allocations-performance-data"
+              >
+                <div class="small">Performance YTD</div>
+                <div class="h5 mt-2">
+                  <ui-bb-format-amount-ng
+                    class="amount-regular-color"
+                    data-no-map
+                    data-role="portfolio-performance"
+                    data-currency="ext.helpers.getSymbol(state.portfolioDetails.data.performanceYTD.currencyCode)"
+                    data-amount="state.portfolioDetails.data.performanceYTD.amount">
+                  </ui-bb-format-amount-ng>
+                </div>
+                <h6
+                  class="mt-2"
+                  data-ng-class="state.portfolioDetails.data.performanceYTDpct > 0 ? 'text-success' : 'text-danger' "
+                  data-role="item-performance-ytd-pct"
+                >
+                  {{ext.helpers.showSign(state.portfolioDetails.data.performanceYTDpct)}}%
+                </h6>
+              </div>
+            </div>
+
+            <div
+              class="col-6"
+              data-role="allocations-donut-legend"
+            >
+              <div class="px-3">
+                <div
+                  class="row small mb-3"
+                  data-role="allocations-donut-legend-header"
+                >
+                  <div
+                    class="col-5"
+                    data-role="type-column-header"
+                  >
+                    {{(ext.helpers.isClass() ? 'allocations.assetClass' : 'allocations.currency') | i18n}}
+                  </div>
+                  <div
+                    class="col-4 text-right"
+                    data-role="column-currency-code-header"
+                  >
+                    {{
+                    'allocations.valuation' |
+                    i18n : {currency: ext.helpers.getAllocations()[0] &&
+                    ext.helpers.getAllocations()[0].valuation.currencyCode}
+                    }}
+                  </div>
+                  <div class="col-3 text-right" data-i18n-key="allocations.percentOfPortfolio"></div>
+                </div>
+
+                <div
+                  class="row"
+                  data-role="allocations-donut-legend-body"
+                >
+                  <button
+                    class="col-12 d-flex btn btn-light text-left px-0 mb-2"
+                    data-ng-repeat="allocation in ext.helpers.getAllocations()"
+                    data-ng-mouseenter="ext.helpers.onMouseLegendEnter($index)"
+                    data-ng-click="ext.helpers.onDetailsClick($ctrl.viewAssetsInPositions, $index)"
+                    data-ng-mouseleave="ext.helpers.onMouseLegendLeave()"
+                    data-role="allocations-donut-legend-item"
+                    data-ng-class="{ active: ext.helpers.isSectorSelected($index) }"
+                  >
+                    <div class="col-5 small">
+                      <i
+                        class="fa fa-circle mr-1"
+                        data-ng-class="ext.helpers.getColorClassByIndex($index + 1)"
+                        data-role="allocations-donut-legend-item-circle"
+                        aria-hidden="true"
+                      ></i>
+                      <strong>{{allocation.name}}</strong>
+                    </div>
+                    <div
+                      class="col-4 text-right small"
+                      data-role="allocations-donut-legend-item-valuation"
+                    >
+                      {{ext.helpers.formatAmount(allocation.valuation.amount)}}
+                    </div>
+                    <div
+                      class="col-3 text-right small"
+                      data-role="allocations-donut-legend-item-percentage"
+                    >
+                      <strong>{{ext.helpers.formatAmount(allocation.allocationPct)}}%</strong>
+                    </div>
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <h6
+            data-i18n-key="allocations.portfolioReport.title"
+            data-role="allocations-create-report-header"
+          ></h6>
+          <p
+            data-i18n-key="allocations.portfolioReport.message"
+            data-role="allocations-create-report-message"
+          ></p>
+
+          <button
+            class="btn btn-secondary float-right mb-3"
+            data-i18n-key="allocations.portfolioReport.create"
+            data-role="allocations-create-report-button"
+          ></button>
+
+        </div>
+
+      </ui-bb-empty-state-ng>
+    </ui-bb-empty-state-ng>
+
+  </ui-bb-loading-indicator-ng>
+</div>

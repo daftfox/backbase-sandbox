@@ -1,0 +1,62 @@
+{
+  "en-US": {
+    "details.title": "Transaction details",
+    "details.label.counterParty": "To",
+    "details.label.product": "From",
+    "details.label.description": "Description",
+    "details.label.currency": "Ccy",
+    "details.label.amount": "Amount",
+    "details.label.bookingDate": "Book Date",
+    "details.label.loadMore": "Load more",
+    "details.label.transactionReference": "Transaction Reference",
+    "details.label.creditorId": "Creditor ID",
+    "details.label.mandateReference": "Mandate Reference",
+    "details.label.transactionType": "Transaction Type",
+    "details.label.instructedAmount": "Instructed Amount",
+    "details.label.conversionRate": "Conversion Rate",
+    "details.label.instructedCurrency": "Instructed Currency",
+
+    "details.button.close" : "Close",
+    "details.button.print" : "Print",
+
+
+    "label.export_transactions": "Export Today's Transactions",
+    "label.export_filtered_transactions": "Export Filtered Transactions",
+    "label.matches_found": "{amount} matches found",
+
+    "notification.export.fail": "No transactions to export",
+
+    "pagination.label.first": "First",
+    "pagination.label.last": "Last",
+    "pagination.label.next": "Next",
+    "pagination.label.prev": "Previous",
+    "pagination.label.pageNavigation": "Page navigation",
+
+    "filter.button.main": "Filters",
+    "filter.button.apply": "Apply",
+    "filter.button.closePanel": "Close panel",
+    "filter.button.clearAll": "Clear all",
+    "filter.label.amountFrom": "From",
+    "filter.label.amountTo": "To",
+    "filter.label.credit": "Credit",
+    "filter.label.debit": "Debit",
+    "filter.label.dateRange": "Date range",
+    "filter.label.amountRange": "Amount range",
+    "filter.label.transaction": "Transaction",
+    "filter.label.currency": "Currency",
+    "filter.label.placeholder": "Search",
+    "filter.label.clearSearch": "Clear search",
+    "filter.label.submitSearch": "Submit search",
+    "filter.label.select": "Select",
+
+    "message.label.loading": "Loading",
+    "message.no.transactions": "No transactions",
+    "message.no.transactions.subtitle": "There are no transactions to display.",
+    "message.noTransactionsForAccount": "There are no transactions to display.<br>Try selecting an account using the account selector.",
+
+    "search.no.results.title": "No results found",
+    "search.no.results.subtitle": "We can't find what you are looking for.<br>Please try a different criteria.",
+
+    "model.error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later."
+  }
+}

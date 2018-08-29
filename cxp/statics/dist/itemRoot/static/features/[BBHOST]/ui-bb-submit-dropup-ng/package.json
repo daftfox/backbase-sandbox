@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-submit-dropup-ng@^2.37.9",
+        "scope": null,
+        "escapedName": "ui-bb-submit-dropup-ng",
+        "name": "ui-bb-submit-dropup-ng",
+        "rawSpec": "^2.37.9",
+        "spec": ">=2.37.9 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bus-initiate-payment-us-domestic-wire-ng"
+    ]
+  ],
+  "_from": "ui-bb-submit-dropup-ng@>=2.37.9 <3.0.0",
+  "_id": "ui-bb-submit-dropup-ng@2.37.9",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-submit-dropup-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-submit-dropup-ng@^2.37.9",
+    "scope": null,
+    "escapedName": "ui-bb-submit-dropup-ng",
+    "name": "ui-bb-submit-dropup-ng",
+    "rawSpec": "^2.37.9",
+    "spec": ">=2.37.9 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bus-initiate-payment-us-domestic-wire-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-submit-dropup-ng/-/ui-bb-submit-dropup-ng-2.37.9.tgz",
+  "_shasum": "1a3847f38d833fc4546dee38e59c5e66819974d5",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-submit-dropup-ng@^2.37.9",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/ext-bus-initiate-payment-us-domestic-wire-ng",
+  "dependencies": {
+    "ui-bb-button-spinner-ng": "^1.5.9",
+    "ui-bb-ellipsis-tooltip-ng": "^2.5.1",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-submit-dropup-ng/-/ui-bb-submit-dropup-ng-2.37.9.tgz",
+    "shasum": "1a3847f38d833fc4546dee38e59c5e66819974d5"
+  },
+  "main": "scripts/ui-bb-submit-dropup-ng.js",
+  "name": "ui-bb-submit-dropup-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.37.9"
+}

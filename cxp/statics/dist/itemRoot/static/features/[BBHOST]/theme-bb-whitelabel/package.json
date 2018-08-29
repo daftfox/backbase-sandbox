@@ -1,0 +1,51 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "theme-bb-whitelabel@~1.2.1",
+        "scope": null,
+        "escapedName": "theme-bb-whitelabel",
+        "name": "theme-bb-whitelabel",
+        "rawSpec": "~1.2.1",
+        "spec": ">=1.2.1 <1.3.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "theme-bb-whitelabel@>=1.2.1 <1.3.0",
+  "_id": "theme-bb-whitelabel@1.2.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/theme-bb-whitelabel",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "theme-bb-whitelabel@~1.2.1",
+    "scope": null,
+    "escapedName": "theme-bb-whitelabel",
+    "name": "theme-bb-whitelabel",
+    "rawSpec": "~1.2.1",
+    "spec": ">=1.2.1 <1.3.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/theme-bb-whitelabel/-/theme-bb-whitelabel-1.2.1.tgz",
+  "_shasum": "08392d929b5b7e97cb403b345a8d7c0993398b45",
+  "_shrinkwrap": null,
+  "_spec": "theme-bb-whitelabel@~1.2.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {},
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/theme-bb-whitelabel/-/theme-bb-whitelabel-1.2.1.tgz",
+    "shasum": "08392d929b5b7e97cb403b345a8d7c0993398b45"
+  },
+  "main": "styles/theme-bb-whitelabel.css",
+  "name": "theme-bb-whitelabel",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.2.1"
+}

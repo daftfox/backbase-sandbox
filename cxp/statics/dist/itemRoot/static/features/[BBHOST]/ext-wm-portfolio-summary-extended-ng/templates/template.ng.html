@@ -1,0 +1,638 @@
+<div data-ng-controller="PortfolioSummaryController as $ctrl">
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+    <div class="notifications">
+      <ui-bb-notification-stripe-ng
+        data-ng-if="ext.helpers.getNotifications().status.isOpen"
+        data-timeout-second="{{ ext.helpers.getNotifications().dismissMessageTime }}"
+        data-icon-classes="fas fa-check-circle"
+        data-should-transclude="true"
+        data-on-close="ext.helpers.closeNotification()"
+        data-type="{{ext.helpers.getNotifications().status.success ? 'bg-success' : 'bg-danger'}}"
+      >
+        <div
+          class="pl-2"
+          data-ng-if="ext.helpers.getNotificationWithLink()"
+        >
+            <span>{{'favoritesList.add' | i18n}}
+              <a
+                href=""
+                data-ng-click="ext.helpers.goToFavorites($ctrl)"
+              >
+                {{'favoritesList' | i18n}}
+              </a>.
+            </span>
+        </div>
+        <div
+          class="pl-2"
+          data-ng-if="!ext.helpers.getNotificationWithLink()"
+        >
+          {{ext.helpers.getNotifications().status.i18n }}
+        </div>
+      </ui-bb-notification-stripe-ng>
+    </div>
+    <ui-bb-confirm-ng
+      data-is-open="ext.deleteConfirmOpened"
+      data-on-confirm="ext.helpers.onCustomListDelete($ctrl, $ctrl.load, $ctrl.deleteCustomList)"
+      data-labels="{
+                  heading: ('portfolios.customlist.delete.title' | i18n),
+                  bodyHtml: ('portfolios.customlist.delete.body' | i18n: { listName: state.portfolios.selectedList.name}),
+                  confirm: ('dialog.delete.yes' | i18n),
+                  cancel: ('dialog.delete.no' | i18n)
+                }"
+      data-confirm-btn-class="'btn-danger'"
+      data-size="'sm'"
+    ></ui-bb-confirm-ng>
+    <ui-bb-modal-ng
+      data-is-open="ext.helpers.getModalData().isOpen"
+      data-size="'sm'"
+    >
+      <div data-ng-include="'#custom-list-modal.html'"></div>
+    </ui-bb-modal-ng>
+
+    <ui-bb-loading-overlay-ng data-is-loading="state.portfolios.loading">
+
+      <div class="d-flex flex-row p-3 border-bottom">
+        <ui-bb-dropdown-select-ng
+          data-menu-class="col-auto"
+          data-ng-init="state.portfolios.selectedList = ext.helpers.getCustomListDefault()"
+          data-ng-model="state.portfolios.selectedList"
+          data-selected-as="$option.name"
+          data-ng-change="!state.initialLoading && $ctrl.setSelectedList(state.portfolios.selectedList)"
+        >
+          <ui-bb-dropdown-option-ng data-option="ext.helpers.allPortfoliosCustomListItem">
+            <a href="">{{$option.name}}</a>
+          </ui-bb-dropdown-option-ng>
+          <ui-bb-dropdown-option-ng data-option="ext.helpers.favoritesPortfolios">
+            <a href="">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              {{::$option.name}}
+            </a>
+          </ui-bb-dropdown-option-ng>
+          <hr class="mt-1 mb-1">
+          <ui-bb-dropdown-option-ng
+            data-option="item"
+            data-role="custom-list-item"
+            data-ng-repeat="item in ext.helpers.getCustomLists() track by item.name"
+          >
+            <a href="">{{::$option.name}}</a>
+          </ui-bb-dropdown-option-ng>
+        </ui-bb-dropdown-select-ng>
+        <div
+          class="ml-auto"
+          data-ng-if="ext.helpers.isCustomListSelected()"
+        >
+          <button
+            class="btn btn-outline-secondary btn-sm"
+            data-ng-click="ext.helpers.showEditListModal()"
+          >
+            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+          </button>
+          <button
+            class="btn btn-outline-secondary btn-sm"
+            data-ng-click="ext.deleteConfirmOpened = true"
+          >
+            <i class="fas fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="d-flex p-3 flex-lg-row align-items-end align-items-lg-center flex-column align border-bottom"
+      >
+        <div
+          class="col pl-0 pr-0 d-flex flex-row align-self-start align-self-lg-center justify-content-between"
+        >
+          <div>
+            <ui-bb-search-box-ng
+              class="col-4 col-lg-3 px-0"
+              data-config="{
+                      labels: {
+                        placeholder: ('portfolios.searchForPortfolios' | i18n),
+                        clear: ('portfolios.clearSearch' | i18n),
+                        submit: ('portfolios.submitSearch' | i18n),
+                      }
+                    }"
+              data-ng-model="state.pageParams.query"
+              data-on-submit="ext.helpers.searchPortfolios($ctrl)"
+              data-on-clear="ext.helpers.searchPortfolios($ctrl)"
+            >
+            </ui-bb-search-box-ng>
+          </div>
+          <div>
+            <div
+              class="form-control-plaintext"
+              data-ng-if="ext.helpers.selectedPortfoliosAmount() > 0"
+            >
+              <strong data-ng-bind="ext.helpers.selectedPortfoliosAmount()"></strong>
+              <strong>
+                {{'portfolios.amountSelected' | i18nPluralize:
+                ext.helpers.selectedPortfoliosAmount() | i18n}}
+              </strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-row pt-lg-0 pt-3 ml-3">
+          <div class="mr-3">
+            <button
+              class="btn btn-danger"
+              data-ng-click="ext.removePortfolioConfirmOpened = true"
+              data-ng-disabled="!ext.helpers.arePortfoliosSelected()"
+              data-ng-if="ext.helpers.isCustomListSelected()"
+            >
+              <span data-i18n-key="portfolios.removeFromList"></span>
+            </button>
+            <ui-bb-confirm-ng
+              data-is-open="ext.removePortfolioConfirmOpened"
+              data-on-confirm="ext.helpers.onPortfolioFromListDelete($ctrl, ext.helpers.getSelectedPortfolios())"
+              data-labels="{
+                    heading: ('portfolios.customlist.portfolio.delete.title' | i18n),
+                    bodyHtml: ('portfolios.customlist.portfolio.delete.body' | i18nPluralize: ext.helpers.selectedPortfoliosAmount() | i18n: {
+                      listName: state.portfolios.selectedList.name,
+                      portfoliosNumber: ext.helpers.selectedPortfoliosAmount()
+                    }),
+                    confirm: ('dialog.remove.yes' | i18n),
+                    cancel: ('dialog.delete.no' | i18n)
+                  }"
+              data-confirm-btn-class="'btn-danger'"
+              data-size="'sm'"
+            ></ui-bb-confirm-ng>
+          </div>
+
+          <div class="mr-3">
+            <ui-bb-dropdown-select-ng
+              data-menu-class="col-auto"
+              data-ng-init="$ctrl.selectedExistingList = ext.helpers.getCustomListFilterState()"
+              data-ng-model="$ctrl.selectedExistingList"
+              data-selected-as="$option.name"
+              data-ng-change="ext.helpers.onExistingListSelect($ctrl, ext.helpers.getSelectedPortfolios())"
+              data-ng-disabled="ext.helpers.shouldDisableAddToCustomListDropdown()"
+            >
+              <ui-bb-dropdown-option-ng
+                data-option="item"
+                data-role="custom-list-item"
+                data-ng-repeat="item in ext.helpers.getExistingCustomLists() track by item.name"
+                data-ng-hide="item.uuid === state.portfolios.selectedList.uuid"
+              >
+                <a href="">
+                  <small>{{::$option.name}}</small>
+                </a>
+              </ui-bb-dropdown-option-ng>
+            </ui-bb-dropdown-select-ng>
+          </div>
+
+          <button
+            class="btn btn-primary"
+            data-ng-click="ext.helpers.showCreateNewListModal()"
+            data-ng-disabled="!ext.helpers.arePortfoliosSelected()"
+          >
+            <span data-i18n-key="portfolios.createNewList"></span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="px-3 py-2 border-bottom d-flex flex-row justify-content-between align-items-center"
+      >
+        <input
+          class="m-2"
+          data-ng-checked="ext.helpers.isAllChecked()"
+          data-ng-click='ext.helpers.toggleAll()' type="checkbox"/>
+
+        <div class="col pl-0 pr-0 d-flex flex-row">
+          <div
+            data-ng-repeat="header in ext.helpers.headers"
+            class="{{ header.class }}"
+          >
+                <span
+                  data-role="button"
+                  class="text-nowrap align-middle small font-weight-bold"
+                  data-ui-bb-sortable-column-ng
+                  data-ng-hide="header.isHidden($ctrl)"
+                  data-options="header.sortable"
+                  data-active="ext.helpers.isSortableActive(header.sortable, state.pageParams.orderBy)"
+                  data-on-sort="$ctrl.onSort(key, direction)"
+                  data-ng-class="ext.helpers.isSortableActive(header.sortable, state.pageParams.orderBy) ? '' : 'empty-state-icon' "
+                >
+                  <span data-i18n-key="{{ ::header.label }}"></span>
+                </span>
+          </div>
+        </div>
+
+        <div class="m-4"></div>
+      </div>
+
+
+      <ui-bb-empty-state-ng
+        data-message="state.errors.portfoliosError.message | i18n"
+        data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.portfoliosError).icon }} text-muted"
+        data-title="{{ ext.helpers.getError(state.errors.portfoliosError).title | i18n }}"
+        data-subtitle="{{ ext.helpers.getError(state.errors.portfoliosError).message | i18n }}"
+        data-is-empty="state.errors.portfoliosError"
+      >
+        <ui-bb-empty-state-ng
+          data-icon-classes="mt-5 fas fa-4x {{ ext.helpers.getMessageForNoPortfolio().icon }} text-muted"
+          data-title="{{ ext.helpers.getMessageForNoPortfolio().title | i18n }}"
+          data-subtitle="{{ ext.helpers.getMessageForNoPortfolio().subtitle | i18n }}"
+          data-is-empty="!ext.helpers.isPortfoliosAvailable(state.portfolios)"
+        >
+          <div
+            data-role="portfolio-panel"
+            data-ng-repeat="item in ext.helpers.portfolios() track by item.IBAN"
+          >
+            <div
+              data-ng-class="{
+                                'bg-light': $even && !item.isChecked,
+                                'bg-secondary': item.isChecked,
+                              }"
+              class="p-3 border-bottom d-flex flex-row justify-content-between"
+            >
+              <input
+                class="align-self-center m-2"
+                type="checkbox"
+                data-ng-model="item.isChecked"
+                data-role="portfolio-selection"
+                data-ng-checked="ext.helpers.isChecked(item.IBAN)"
+                data-ng-change="ext.helpers.onPortfolioChecked(item.IBAN, item.isChecked)"/>
+
+              <div class="col pl-0 pr-0 d-flex">
+                <div class="col-3 align-self-center small">
+                  <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ ::item.clientName }}">
+                      <span
+                        class="font-weight-bold"
+                        data-ng-bind="item.clientName"
+                        data-role="item-alias"
+                      ></span>
+                  </ui-bb-ellipsis-tooltip-ng>
+                  <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ ::item.IBAN }}">
+                    <small
+                      class="text-muted d-block"
+                      data-ng-bind="item.IBAN"
+                      data-role="item-iban"
+                    ></small>
+                  </ui-bb-ellipsis-tooltip-ng>
+                </div>
+
+                <div class="col-1 d-none d-lg-block align-self-center text-muted">
+                  <ui-bb-ellipsis-tooltip-ng data-tooltip="{{ ::item.alias }}">
+                    <small
+                      data-ng-bind="item.alias"
+                      data-role="item-alias"
+                    ></small>
+                  </ui-bb-ellipsis-tooltip-ng>
+                </div>
+
+                <div class="col-1 align-self-center text-muted">
+                  <small class="d-block" data-ng-bind="item.riskClass"></small>
+                </div>
+
+                <div class="col-2 col-lg-1 align-self-center text-nowrap">
+                    <span
+                      class="mb-0 amount-negative font-weight-bold"
+                      data-ng-class="item.performanceYTDpct > 0 ? 'text-success' : 'text-danger' "
+                      data-role="item-performance-ytd-pct"
+                    >
+                      <small>
+                        {{ext.helpers.showSign(item.performanceYTDpct)}}%
+                      </small>
+                    </span>
+                </div>
+
+                <div class="col-2 align-self-center text-right text-nowrap small">
+                  <ui-bb-format-amount-ng
+                    data-no-map
+                    data-role="item-valuation-amount"
+                    data-amount="item.valuation.amount"
+                  ></ui-bb-format-amount-ng>
+                </div>
+
+                <div class="col-1 align-self-center text-muted text-nowrap">
+                  <small
+                    data-ng-bind="item.valuation.currencyCode"
+                    data-role="item-valuation-currency-code"
+                  ></small>
+                </div>
+
+                <div class="col-3 row align-self-center text-nowrap">
+                  <button
+                    class="btn btn-sm btn-outline-primary col-9 col-lg-7"
+                    aria-label="{{ portfolio.details | i18n }}"
+                    data-role="view-details"
+                    data-ng-click="$ctrl.viewPortfolioDetails(item.IBAN);$event.stopPropagation();"
+                  >
+                    <span data-i18n-key="portfolio.details"></span>
+                  </button>
+                  <button
+                    class="btn btn-link col-3 col-lg-5"
+                    aria-label="{{ portfolios.addFavourite | i18n }}"
+                    data-ng-click="ext.helpers.togglePortfolioAsFavorite($ctrl.togglePortfolioAsFavorite, item.IBAN, item.isFavorite)"
+                    data-role="portfolio-favorite-toggle"
+                  >
+                    <i class="fa-star"
+                       data-ng-class="{'far': !item.isFavorite, 'fas': item.isFavorite}"
+                       aria-hidden="true">
+                    </i>
+                  </button>
+                </div>
+              </div>
+
+              <button
+                class="btn btn-link"
+                data-ng-click="ext.helpers.onToggle(item.IBAN)"
+                data-role="toggle-portfolio-panel"
+              >
+                <i class="fas"
+                   data-ng-class="ext.helpers.isOpen(item.IBAN) ? 'fa-chevron-up' :'fa-chevron-down text-muted'"
+                   aria-hidden="true">
+                </i>
+              </button>
+            </div>
+
+            <div data-ng-if="ext.helpers.isOpen(item.IBAN)">
+              <div class="row small p-3 border-bottom">
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-6 col-xl-5 py-3">
+                      <div
+                        class="row"
+                        data-ng-if="!item.assetClasses.length"
+                      >
+                        <div class="col-12 text-center">
+                              <span
+                                class="text-muted"
+                                data-i18n-key="portfolios.empty.message.noChartData"
+                              ></span>
+                        </div>
+                      </div>
+                      <div
+                        class="row"
+                        data-ng-if="item.assetClasses.length"
+                      >
+                        <div class="col-6 chart">
+                          <ui-bb-chartjs-chart-donut-ng
+                            data-series="item.dataseries"
+                            data-options="ext.helpers.chartOptions"
+                            data-plugins="ext.helpers.plugins"
+                          ></ui-bb-chartjs-chart-donut-ng>
+                        </div>
+                        <div class="col-6">
+                          <div
+                            class="asset colorset-item-container-legend"
+                            data-ng-repeat="asset in item.assetClasses"
+                          >
+                            <div class="row">
+                              <div class="col-8 font-size-small">
+                                <i
+                                  class="fa fa-circle mr-1 mt-1 small float-left"
+                                  data-ng-class="ext.helpers.getColorClassByIndex($index + 1)"
+                                ></i>
+                                <ui-bb-ellipsis-tooltip-ng
+                                  data-tooltip="{{asset.name}}"
+                                >
+                                  <strong>{{asset.name}}</strong>
+                                </ui-bb-ellipsis-tooltip-ng>
+                              </div>
+                              <div class="col-4 text-right font-size-small percent">
+                                <ui-bb-ellipsis-tooltip-ng
+                                  data-tooltip="{{ext.helpers.localizeNumber(asset.valuePct)}}"
+                                >
+                                  {{ext.helpers.localizeNumber(asset.valuePct)}} %
+                                </ui-bb-ellipsis-tooltip-ng>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 col-xl-7">
+                      <div class="row">
+                        <div class="col-12 col-xl-8 border-left py-3">
+                          <div class="row mb-4">
+                            <div class="col-6 pr-0">
+                              <strong data-i18n-key="portfolio.ytd.performance.value"></strong>
+                            </div>
+                            <div class="col-2 text-right text-muted pr-0">
+                                <span
+                                  class="text-muted text-nowrap"
+                                  data-ng-bind="item.performanceYTD.currencyCode"
+                                  data-role="item-performance-ytd-currency-code"
+                                ></span>
+                            </div>
+                            <div class="col-4 text-right text-nowrap">
+                              <ui-bb-format-amount-ng
+                                data-no-map
+                                data-role="item-performance-ytd-amount"
+                                data-amount="item.performanceYTD.amount"
+                              ></ui-bb-format-amount-ng>
+                            </div>
+                          </div>
+                          <div class="mb-4">
+                            <div class="row">
+                              <div class="col-6 pr-0">
+                                <strong
+                                  data-i18n-key="portfolio.mtd.performance.value"
+                                ></strong>
+                              </div>
+                              <div class="col-2 text-right text-muted text-nowrap pr-0">
+                                  <span
+                                    data-ng-bind="item.performanceMTD.currencyCode"
+                                    data-role="item-performance-mtd-currency-code"
+                                  ></span>
+                              </div>
+                              <div class="col-4 text-right text-nowrap">
+                                <ui-bb-format-amount-ng
+                                  data-no-map
+                                  data-role="item-performance-mtd-amount"
+                                  data-amount="item.performanceMTD.amount"
+                                ></ui-bb-format-amount-ng>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">
+                                <strong data-i18n-key="portfolio.mtd.performance"></strong>
+                              </div>
+                              <div class="col-6 text-right">
+                                <strong
+                                  class="font-weight-bold amount-negative text-nowrap"
+                                  data-ng-class="item.performanceMTDpct > 0 ? 'text-success' : 'text-danger' "
+                                >
+                                    <span
+                                      data-ng-bind="ext.helpers.showSign(item.performanceMTDpct)"
+                                      data-role="item-performance-mtd-pct"
+                                    ></span>%
+                                </strong>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 pr-0">
+                              <strong data-i18n-key="portfolio.inCashTotal"></strong>
+                            </div>
+                            <div class="col-2 text-right text-muted text-nowrap pr-0">
+                                <span
+                                  data-ng-bind="item.inCashTotal.currencyCode"
+                                  data-role="portfolio-in-cash-total-currency-code"
+                                ></span>
+                            </div>
+                            <div class="col-4 text-right text-nowrap">
+                              <ui-bb-format-amount-ng
+                                data-no-map
+                                data-role="item-in-cash-total-amount"
+                                data-amount="item.inCashTotal.amount"
+                              ></ui-bb-format-amount-ng>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 pr-0">
+                              <strong data-i18n-key="portfolio.outCashTotal"></strong>
+                            </div>
+                            <div class="col-2 text-right text-muted text-nowrap pr-0">
+                                <span
+                                  data-ng-bind="item.outCashTotal.currencyCode"
+                                  data-role="portfolio-out-cash-total-currency-code"
+                                ></span>
+                            </div>
+                            <div class="col-4 text-right text-nowrap">
+                              <ui-bb-format-amount-ng
+                                data-no-map
+                                data-role="portfolio-out-cash-total-amount"
+                                data-amount="item.outCashTotal.amount"
+                              ></ui-bb-format-amount-ng>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6 pr-0">
+                              <strong data-i18n-key="portfolio.netCashTotal"></strong>
+                            </div>
+                            <div class="col-2 text-right text-muted text-nowrap pr-0">
+                                <span
+                                  data-ng-bind="item.inCashTotal.currencyCode"
+                                  data-role="portfolio-net-cash-total-currency-code"
+                                ></span>
+                            </div>
+                            <div class="col-4 text-right text-nowrap">
+                              <ui-bb-format-amount-ng
+                                data-no-map
+                                data-role="net-cash-total-amount"
+                                data-amount="ext.helpers.getNetCashTotalAmount(item.inCashTotal.amount, item.outCashTotal.amount)"
+                              ></ui-bb-format-amount-ng>
+                            </div>
+                          </div>
+                          <div class="d-md-none mb-4"></div>
+                        </div>
+
+                        <div class="col-12 col-xl-4 border-left py-3">
+                          <div class="row">
+                            <div class="col-6 col-xl-12">
+                              <strong data-i18n-key="portfolio.managers"></strong>
+                              <div data-ng-repeat="manager in item.managers">
+                                <a
+                                  href=""
+                                  class="btn-link"
+                                  data-ng-bind="manager.name"
+                                  data-role="manager-name"
+                                ></a>
+                              </div>
+                              <div class="d-none d-xl-block mb-4"></div>
+                            </div>
+                            <div class="col-6 col-xl-12">
+                              <strong data-i18n-key="portfolio.attorneys"></strong>
+                              <div data-ng-repeat="attorney in item.attorneys">
+                                <a
+                                  href=""
+                                  class="btn-link"
+                                  data-ng-bind="attorney.name"
+                                  data-role="attorney-name">
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          </uib-accordion>
+
+          <ui-bb-paginator-ng
+            data-ng-if="state.pageParams.totalItems > state.pageParams.size"
+            data-total-items="{{ state.pageParams.totalItems }}"
+            data-items-per-page="{{ state.pageParams.size }}"
+            data-max-nav-pages="{{ state.pageParams.maxNavPages }}"
+            data-current-page="{{ state.pageParams.from + 1 }}"
+            data-ng-disabled="state.portfolios.loading"
+            data-change-page="$ctrl.load({page: params.currentPage - 1, customListUuid: state.pageParams.customListUuid})"
+          ></ui-bb-paginator-ng>
+        </ui-bb-empty-state-ng>
+      </ui-bb-empty-state-ng>
+
+    </ui-bb-loading-overlay-ng>
+  </ui-bb-loading-indicator-ng>
+</div>
+
+<script type="text/ng-template" id="#custom-list-modal.html">
+  <div class="modal-header text-center">
+    <h5 class="modal-title">
+      {{ext.helpers.getModalData().title}}
+    </h5>
+  </div>
+
+  <div class="modal-body small">
+    <strong>
+      <label data-i18n-key="portfolios.dialog.label">
+      </label>
+    </strong>
+    <br/>
+    <form name="renameForm">
+      <input
+        type="text"
+        class="form-control"
+        name="listName"
+        data-required
+        data-ng-minlength="3"
+        data-ng-maxlength="30"
+        data-ng-pattern="ext.helpers.validation.nameInputValidationPattern"
+        data-ng-model="ext.helpers.getModalData().list.name"/>
+    </form>
+    <div
+      data-ng-if="renameForm.listName.$valid
+                 && renameForm.listName.$dirty
+                 && ext.helpers.isNameDuplicate(ext.helpers.getModalData().list.name, state.portfolios.customLists)"
+      data-role="alert"
+      class="text-danger pt-2"
+      data-i18n-key="portfolios.customlist.alreadyExist"
+    ></div>
+    <div
+      data-ng-messages="renameForm.listName.$error"
+      class="text-danger pt-2"
+      data-role="alert"
+    >
+      <div data-ng-message="minlength" data-i18n-key="portfolios.customlist.minLength"></div>
+      <div data-ng-message="maxlength" data-i18n-key="portfolios.customlist.maxLength"></div>
+      <div data-ng-message="pattern" data-i18n-key="portfolios.customlist.inputError"></div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-default"
+      data-i18n-key="portfolios.dialog.cancel"
+      data-ng-click="ext.helpers.cancel()"
+    ></button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-i18n-key="portfolios.dialog.save"
+      data-ng-click="ext.helpers.getModalData().onSubmit($ctrl, ext.helpers.getModalData().list, state.portfolios.selectedList.uuid)"
+      data-ng-disabled="!renameForm.listName.$valid || ext.helpers.isNameDuplicate(ext.helpers.getModalData().list.name, state.portfolios.customLists)"
+    ></button>
+  </div>
+</script>

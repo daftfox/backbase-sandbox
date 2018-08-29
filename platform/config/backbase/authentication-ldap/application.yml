@@ -1,0 +1,23 @@
+---
+spring:
+  profiles: editorial
+auth:
+# Loading LDAP live users
+  ldap:
+    ldif: file:///${backbase.config.dir}/authentication-ldap/users.ldif
+    base: dc=backbase,dc=com
+    user:
+      filter: uid={0},ou=users
+      roles:
+        filter: (&(cn=ROLE_*)(member=uid={0},ou=users,dc=backbase,dc=com))
+        attribute: cn
+      groups:
+        base: ou=groups
+        filter: (member=uid={0},ou=users,dc=backbase,dc=com)
+        attribute: cn
+        roles:
+          base: ou=group_roles
+          filter: (member=cn={0},ou=groups,dc=backbase,dc=com)
+          attribute: cn
+logging:
+  config: ${backbase.config.dir}/authentication-ldap/logback.xml

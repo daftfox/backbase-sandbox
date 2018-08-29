@@ -1,0 +1,8 @@
+---
+### Live profile
+spring:
+  profiles: live
+
+logging:
+  config: ${backbase.config.dir}/payment-order-pandp-service/logback.xml
+

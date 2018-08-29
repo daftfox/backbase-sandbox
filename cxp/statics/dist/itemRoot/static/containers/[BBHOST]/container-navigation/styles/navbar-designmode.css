@@ -1,0 +1,39 @@
+html.bd-designMode-true .bp-NavigationContainer .bp-area {
+    background: repeating-linear-gradient( 45deg, #fafafa, #fafafa 10px, #eee 10px, #eee 20px );
+    min-height: 50px;
+    min-width: 150px;
+    border: 1px solid #bbb;
+}
+
+html.bd-designMode-true .bp-NavigationContainer .bp-area:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 1.5rem;
+  color: #bbb;
+}
+
+html.bd-designMode-true .bp-NavigationContainer .rb-brand:before {
+  content: "brand area";
+}
+
+html.bd-designMode-true .bp-NavigationContainer .rb-content:before {
+  content: "content area";
+}
+
+html.bd-designMode-true .bp-NavigationContainer .rb-sidebar-area:before {
+  content: "sidebar area";
+}
+
+html.bd-designMode-true .bp-NavigationContainer .rb-nav-top:before {
+  content: "navbar area";
+}
+
+html.bd-designMode-true .bp-NavigationContainer .rb-notifications-area:before {
+  content: "user area";
+}
+
+html.bd-designMode-true .bp-NavigationContainer .navbar-fixed-top{
+  position: relative;
+}

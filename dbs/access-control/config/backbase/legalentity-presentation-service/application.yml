@@ -1,0 +1,3 @@
+---
+logging:
+  config: ${backbase.config.dir}/legalentity-presentation-service/logback.xml

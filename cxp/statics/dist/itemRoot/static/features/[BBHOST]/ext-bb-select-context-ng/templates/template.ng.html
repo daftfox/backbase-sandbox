@@ -1,0 +1,84 @@
+<div class="ext-bb-select-context-ng" ng-controller="SelectContextController as $ctrl">
+  <div data-ng-if="$ctrl.showContextSelector" class="card select-context-box-container">
+    <div class="card-body p-4">
+      <ui-bb-loading-overlay-ng data-is-loading="$ctrl.loading">
+        <div class="bb-logo"></div>
+        <form
+          data-role="form"
+          data-ng-show="$ctrl.state.showServiceAgreements || !$ctrl.state.disableLegalEntities"
+          data-ng-submit="$ctrl.selectUserContext($ctrl.state.serviceAgreementId, $ctrl.state.legalEntityId)">
+          <div data-ng-if="$ctrl.fetchError || $ctrl.selectContextError" class="text-danger">
+            <div data-ng-if="$ctrl.fetchError" data-i18n-key="context.error.failedFetchData"></div>
+            <div data-ng-if="$ctrl.selectContextError" data-i18n-key="context.error.invalidContext"></div>
+          </div>
+          <div class="form-group" data-ng-if="!$ctrl.state.showServiceAgreements && $ctrl.currentUser.username && $ctrl.state.serviceAgreementName"
+            data-i18n-key="context.message.selectLegalEntity"
+            data-i18n-data="{ username: $ctrl.currentUser.username, serviceAgreementName: $ctrl.state.serviceAgreementName }">
+          </div>
+          <div class="form-group" data-ng-if="$ctrl.state.showServiceAgreements && $ctrl.currentUser.username"
+            data-i18n-key="context.message.selectOneOfOptions"
+            data-i18n-data="{ username: $ctrl.currentUser.username }">
+          </div>
+          <div class="form-group" data-ng-show="$ctrl.state.showServiceAgreements">
+            <label data-i18n-key="context.label.selectServiceAgreement"></label>
+            <ui-bb-autocomplete-search-ng
+              data-ng-model="$ctrl.state.serviceAgreementName"
+              data-label-key="name"
+              data-load-result="$ctrl.getServiceAgreements(options)"
+              data-on-select="$ctrl.selectServiceAgreement($model)"
+              data-on-clear="$ctrl.resetServiceAgreements(true)"
+              search-box-config="{
+                debounce: $ctrl.debounce,
+                labels: { placeholder: ('context.placeholder.enterContractName' | i18n) }
+              }"
+              data-messages="{
+                result: ('context.label.oneResultFound' | i18n),
+                results: ('context.label.resultsFound' | i18n),
+                noResults: ('context.label.noResultsFound' | i18n)
+              }">
+            </ui-bb-autocomplete-search-ng>
+          </div>
+          <div>
+            <label data-i18n-key="context.label.selectLegalEntity"></label>
+            <ui-bb-autocomplete-search-ng
+              data-ng-model="$ctrl.state.legalEntityName"
+              data-label-key="name"
+              data-load-result="$ctrl.getLegalEntities($ctrl.state.serviceAgreementId, options)"
+              data-on-select="$ctrl.selectLegalEntity($model)"
+              data-on-clear="$ctrl.state.legalEntityId = null"
+              data-disabled="$ctrl.state.disableLegalEntities"
+              search-box-config="{
+                debounce: $ctrl.debounce,
+                labels: { placeholder: ('context.placeholder.enterCompanyName' | i18n) }
+              }"
+              data-messages="{
+                result: ('context.label.oneResultFound' | i18n),
+                results: ('context.label.resultsFound' | i18n),
+                noResults: ('context.label.noResultsFound' | i18n)
+              }">
+            </ui-bb-autocomplete-search-ng>
+          </div>
+          <div data-ng-show="$ctrl.state.showServiceAgreements || !$ctrl.state.disableLegalEntities">
+            <div class="form-group float-right">
+              <div class="row">
+                <div class="col-12 mt-4">
+                  <button class="btn btn-secondary"
+                    type="button"
+                    data-i18n-key="context.button.cancel"
+                    aria-label="{{:: 'context.button.cancel' | i18n }}"
+                    data-ng-click="$ctrl.logout()">
+                  </button>
+                  <button class="btn btn-primary"
+                    data-i18n-key="context.button.login"
+                    aria-label="{{:: 'context.button.login' | i18n }}"
+                    data-ng-disabled="!ext.helpers.isContextSelected($ctrl.state)">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </ui-bb-loading-overlay-ng>
+    </div>
+  </div>
+</div>

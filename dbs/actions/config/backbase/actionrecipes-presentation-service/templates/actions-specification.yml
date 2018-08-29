@@ -1,0 +1,14 @@
+# An action specification defines the destination the message defined in an action template is sent to
+# when the conditions in a DBS event are matched in a trigger.
+
+---
+  -
+    id: "1"
+    name: "Action via Notification"
+    type: "notification"
+  -
+    id: "2"
+    name: "Action via Email"
+    type: "email"
+    destination:
+      emailAddress: "email"

@@ -1,0 +1,67 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bbm-contact-ng@~1.12.0",
+        "scope": null,
+        "escapedName": "widget-bbm-contact-ng",
+        "name": "widget-bbm-contact-ng",
+        "rawSpec": "~1.12.0",
+        "spec": ">=1.12.0 <1.13.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bbm-contact-ng@>=1.12.0 <1.13.0",
+  "_id": "widget-bbm-contact-ng@1.12.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bbm-contact-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bbm-contact-ng@~1.12.0",
+    "scope": null,
+    "escapedName": "widget-bbm-contact-ng",
+    "name": "widget-bbm-contact-ng",
+    "rawSpec": "~1.12.0",
+    "spec": ">=1.12.0 <1.13.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bbm-contact-ng/-/widget-bbm-contact-ng-1.12.1.tgz",
+  "_shasum": "1d79c10855df0c77cbce6622abf4f41289632991",
+  "_shrinkwrap": null,
+  "_spec": "widget-bbm-contact-ng@~1.12.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bbm-contact-list-ng": "^3.6.1",
+    "lib-bb-event-bus-ng": "^1.1.77",
+    "lib-bb-extension-events-ng": "^1.0.44",
+    "lib-bb-extension-helpers-ng": "^1.0.44",
+    "lib-bb-extension-intents-ng": "^1.0.44",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-model-errors": "^1.0.122",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-state-container-ng": "^1.0.22",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-contact-ng": "^4.13.1",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bbm-contact-ng/-/widget-bbm-contact-ng-1.12.1.tgz",
+    "shasum": "1d79c10855df0c77cbce6622abf4f41289632991"
+  },
+  "main": "scripts/widget-bbm-contact-ng.js",
+  "name": "widget-bbm-contact-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.12.1"
+}

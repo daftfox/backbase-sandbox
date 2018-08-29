@@ -1,0 +1,26 @@
+{
+  "en-US": {
+    "context.label.selectServiceAgreement": "Select Contract",
+    "context.label.selectLegalEntity": "Select Company",
+    "context.label.rememberMyChoice": "Remember my choice next time I log in",
+    "context.label.oneResultFound": "One result found",
+    "context.label.resultsFound": "results found",
+    "context.label.noResultsFound": "No results found",
+
+    "context.message.selectOneOfOptions": "You are logged in as <b>{username}</b>. To continue, select one of the options below.",
+    "context.message.selectLegalEntity": "You are logged in as <b>{username}</b> in the company <b>{serviceAgreementName}</b>. To continue, select a company below.",
+
+    "context.placeholder.selectServiceAgreement": "Select contract name",
+    "context.placeholder.selectLegalEntity": "Select company name",
+
+    "context.button.login": "Log in",
+    "context.button.cancel": "Cancel",
+
+    "context.placeholder.enterContractName": "Enter contract name",
+    "context.placeholder.enterCompanyName": "Enter company name",
+
+    "context.error.failedFetchData": "An error has occurred while fetching data",
+    "context.error.invalidContext": "The User context is invalid"
+  }
+}
+

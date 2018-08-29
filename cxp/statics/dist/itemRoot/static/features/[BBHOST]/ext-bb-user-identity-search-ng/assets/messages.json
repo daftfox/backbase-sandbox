@@ -1,0 +1,22 @@
+{
+  "en-US": {
+    "find-user-identity.search.aria-label": "Search",
+    "find-user-identity.search.placeholder": "Find a user",
+    "find-user-identity.search-clear.aria-label": "Clear user search text",
+    "find-user-identity.search-submit.aria-label": "Submit user search",
+
+    "find-user-identity.results.not-found.title": "No users found",
+
+    "find-user-identity.results.counter-suffix": "users",
+
+    "find-user-identity.results-table.username.heading": "Username",
+    "find-user-identity.results-table.full-name.heading": "Full name",
+    "find-user-identity.results-table.legal-entity.heading": "Legal entity",
+
+    "find-user-identity.results-pager.first.aria-label": "First",
+    "find-user-identity.results-pager.last.aria-label": "Last",
+    "find-user-identity.results-pager.previous.aria-label": "Previous",
+    "find-user-identity.results-pager.next.aria-label": "Next"
+
+  }
+}

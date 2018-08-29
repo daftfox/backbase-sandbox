@@ -1,0 +1,55 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bbm-initiate-payment-review-ng@~3.36.11",
+        "scope": null,
+        "escapedName": "ext-bbm-initiate-payment-review-ng",
+        "name": "ext-bbm-initiate-payment-review-ng",
+        "rawSpec": "~3.36.11",
+        "spec": ">=3.36.11 <3.37.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bbm-initiate-payment-review-ng@>=3.36.11 <3.37.0",
+  "_id": "ext-bbm-initiate-payment-review-ng@3.36.20",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bbm-initiate-payment-review-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bbm-initiate-payment-review-ng@~3.36.11",
+    "scope": null,
+    "escapedName": "ext-bbm-initiate-payment-review-ng",
+    "name": "ext-bbm-initiate-payment-review-ng",
+    "rawSpec": "~3.36.11",
+    "spec": ">=3.36.11 <3.37.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-initiate-payment-review-ng/-/ext-bbm-initiate-payment-review-ng-3.36.20.tgz",
+  "_shasum": "de78a9a7d0dc6dde4554b9cb4f91672ea1f71edc",
+  "_shrinkwrap": null,
+  "_spec": "ext-bbm-initiate-payment-review-ng@~3.36.11",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "lib-bbm-plugins": "^1.0.122",
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-initiate-payment-review-ng/-/ext-bbm-initiate-payment-review-ng-3.36.20.tgz",
+    "shasum": "de78a9a7d0dc6dde4554b9cb4f91672ea1f71edc"
+  },
+  "main": "scripts/ext-bbm-initiate-payment-review-ng.js",
+  "name": "ext-bbm-initiate-payment-review-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.36.20"
+}

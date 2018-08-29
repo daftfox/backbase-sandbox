@@ -1,0 +1,64 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bus-action-recipes-ng@~1.3.2",
+        "scope": null,
+        "escapedName": "ext-bus-action-recipes-ng",
+        "name": "ext-bus-action-recipes-ng",
+        "rawSpec": "~1.3.2",
+        "spec": ">=1.3.2 <1.4.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-business-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "ext-bus-action-recipes-ng@>=1.3.2 <1.4.0",
+  "_id": "ext-bus-action-recipes-ng@1.3.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bus-action-recipes-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bus-action-recipes-ng@~1.3.2",
+    "scope": null,
+    "escapedName": "ext-bus-action-recipes-ng",
+    "name": "ext-bus-action-recipes-ng",
+    "rawSpec": "~1.3.2",
+    "spec": ">=1.3.2 <1.4.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-action-recipes-ng/-/ext-bus-action-recipes-ng-1.3.2.tgz",
+  "_shasum": "bab1cc5e11e0fc038d7da8a3647be2c72b63fa46",
+  "_shrinkwrap": null,
+  "_spec": "ext-bus-action-recipes-ng@~1.3.2",
+  "_where": "/opt/jobs/collection-business-banking-release/workspace/dist",
+  "dependencies": {
+    "ui-bb-account-selector-ng": "~2.8.2",
+    "ui-bb-confirm-ng": "~3.8.2",
+    "ui-bb-currency-input-ng": "~2.8.2",
+    "ui-bb-dropdown-select-ng": "~2.8.2",
+    "ui-bb-empty-state-ng": "~2.8.2",
+    "ui-bb-format-amount-ng": "~2.8.2",
+    "ui-bb-i18n-ng": "~1.0.34",
+    "ui-bb-load-more-ng": "~2.8.2",
+    "ui-bb-loading-indicator-ng": "~2.8.2",
+    "ui-bb-substitute-error-ng": "~2.8.2",
+    "ui-bb-switcher-ng": "~2.8.2",
+    "vendor-bb-angular-ng-aria": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bus-action-recipes-ng/-/ext-bus-action-recipes-ng-1.3.2.tgz",
+    "shasum": "bab1cc5e11e0fc038d7da8a3647be2c72b63fa46"
+  },
+  "main": "scripts/ext-bus-action-recipes-ng.js",
+  "name": "ext-bus-action-recipes-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.3.2"
+}

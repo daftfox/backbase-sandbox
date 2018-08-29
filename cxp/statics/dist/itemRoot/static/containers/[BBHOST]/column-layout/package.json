@@ -1,0 +1,66 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "container-column@~2.2.0",
+        "scope": null,
+        "escapedName": "container-column",
+        "name": "container-column",
+        "rawSpec": "~2.2.0",
+        "spec": ">=2.2.0 <2.3.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-banking-containers-release/workspace/dist"
+    ]
+  ],
+  "_from": "container-column@>=2.2.0 <2.3.0",
+  "_id": "container-column@2.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/container-column",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "container-column@~2.2.0",
+    "scope": null,
+    "escapedName": "container-column",
+    "name": "container-column",
+    "rawSpec": "~2.2.0",
+    "spec": ">=2.2.0 <2.3.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/container-column/-/container-column-2.2.0.tgz",
+  "_shasum": "527ce1e4ff7b5328522a0d541cd593d275dd0d57",
+  "_shrinkwrap": null,
+  "_spec": "container-column@~2.2.0",
+  "_where": "/opt/jobs/collection-banking-containers-release/workspace/dist",
+  "author": "",
+  "dependencies": {
+    "template-column": "^3.0.0"
+  },
+  "description": "Simple column container",
+  "devDependencies": {},
+  "directories": {
+    "doc": "docs"
+  },
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/container-column/-/container-column-2.2.0.tgz",
+    "shasum": "527ce1e4ff7b5328522a0d541cd593d275dd0d57"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "name": "container-column",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.backbase.com:7999/pl/container-column.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.2.0"
+}

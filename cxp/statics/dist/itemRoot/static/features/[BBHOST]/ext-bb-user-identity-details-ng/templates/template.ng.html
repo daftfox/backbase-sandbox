@@ -1,0 +1,75 @@
+<ng-include src="ext.helpers.template"></ng-include>
+<script type="text/ng-template" id="#ext-bb-user-identity-details-ng/view-details.html">
+  <div class="ext-bb-user-identity-details-ng"
+    data-ng-controller="UserIdentityDetailsController as $ctrl">
+    <div class="row">
+      <div class="col-12 pb-3">
+        <a href="#"
+          data-ng-click="$ctrl.goToUserIdentitySearch()"
+          data-role="user-identity-details-return-to-search">
+          <i class="fas fa-chevron-left pr-2"></i>
+          <span data-i18n-key="user-identity-details.return-to-user-list.link"></span>
+        </a>
+      </div>
+    </div>
+    <ui-bb-loading-overlay-ng class="d-block p-5"
+      data-ng-if="state.loadingUserIdentity || state.loadingLegalEntity"
+      data-is-loading="state.loadingUserIdentity || state.loadingLegalEntity">
+    </ui-bb-loading-overlay-ng>
+    <div data-ng-if="!state.loadingUserIdentity && !state.loadingLegalEntity && state.userIdentity">
+      <div class="row pb-3">
+        <h2 class="col-md-8"
+          data-ng-bind="state.userIdentity.fullName"
+          data-role="user-identity-details-heading"></h2>
+        <div class="col-md-4 text-right">
+            <div uib-dropdown data-role="user-identity-details-actions-menu">
+              <button uib-dropdown-toggle type="button" class="btn btn-primary py-2 px-3" aria-label="{{ 'user-identity-details.actions.aria-label' | i18n  }}">
+                <span data-i18n-key="user-identity-details.actions.link"></span>
+                <i class="px-1 fas fa-caret-down"></i>
+              </button>
+              <div uib-dropdown-menu class="dropdown-menu dropdown-menu-small dropdown-menu-right" role="menu">
+                <button
+                  type="button"
+                  class="dropdown-item py-2"
+                  data-i18n-key="user-identity-details.actions.view-audit-log.link"
+                  data-role="user-identity-details-actions-menu-audit"
+                  data-ng-click="$ctrl.goToAuditLog(ext.helpers.auditLogIntentDefaultParams(state.userIdentity))">
+                </button>
+
+                <button
+                  type="button"
+                  class="dropdown-item py-2"
+                  data-i18n-key="user-identity-details.actions.view-payments.link"
+                  data-role="user-identity-details-actions-menu-audit-payments"
+                  data-ng-click="$ctrl.goToAuditLog(ext.helpers.auditLogIntentPaymentsParams(state.userIdentity))">
+                </button>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <dl class="row mb-0">
+            <dt class="col-3"
+              data-i18n-key="user-identity-details.table.username.heading"></dt>
+            <dd class="col-9"
+              data-ng-bind="state.userIdentity.externalId"
+              data-role="user-identity-details-external-id"></dd>
+
+            <dt class="col-3"
+              data-i18n-key="user-identity-details.table.full-name.heading"></dt>
+            <dd class="col-9"
+              data-ng-bind="state.userIdentity.fullName"
+              data-role="user-identity-details-full-name"></dd>
+
+            <dt class="col-3"
+              data-i18n-key="user-identity-details.table.legal-entity.heading"></dt>
+            <dd class="col-9"
+              data-ng-bind="state.userIdentityLegalEntity.name"
+              data-role="user-identity-details-legal-entity-name"></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>

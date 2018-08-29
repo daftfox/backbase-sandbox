@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-switcher-ng@2.5.1",
+        "scope": null,
+        "escapedName": "ui-bb-switcher-ng",
+        "name": "ui-bb-switcher-ng",
+        "rawSpec": "2.5.1",
+        "spec": "2.5.1",
+        "type": "version"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng"
+    ]
+  ],
+  "_from": "ui-bb-switcher-ng@2.5.1",
+  "_id": "ui-bb-switcher-ng@2.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-switcher-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-switcher-ng@2.5.1",
+    "scope": null,
+    "escapedName": "ui-bb-switcher-ng",
+    "name": "ui-bb-switcher-ng",
+    "rawSpec": "2.5.1",
+    "spec": "2.5.1",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "/collection-bb-ui-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-switcher-ng/-/ui-bb-switcher-ng-2.5.1.tgz",
+  "_shasum": "557e20ba0bc6724f05c6f74b6befd41feae35635",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-switcher-ng@2.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/collection-bb-ui-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-switcher-ng/-/ui-bb-switcher-ng-2.5.1.tgz",
+    "shasum": "557e20ba0bc6724f05c6f74b6befd41feae35635"
+  },
+  "main": "scripts/ui-bb-switcher-ng.js",
+  "name": "ui-bb-switcher-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.5.1"
+}

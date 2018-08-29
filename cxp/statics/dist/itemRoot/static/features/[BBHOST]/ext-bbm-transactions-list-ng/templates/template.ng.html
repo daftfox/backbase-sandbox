@@ -1,0 +1,326 @@
+<div
+  class="ext-bbm-transactions-list-ng"
+  data-ng-controller="TransactionsListController as $ctrl">
+
+  <div class="bbm-layout">
+
+    <!-- Normal list -->
+    <ui-bbm-scroll-ng
+      data-ng-if="ext.helpers.showList()"
+      data-on-scroll-to-end="ext.helpers.loadMore()">
+      <!-- Account -->
+      <div
+        class="bbm-account-compact"
+        data-ng-if="ext.helpers.hasSelectedProduct()"
+        data-role="product">
+        <div class="bbm-account-compact-primary-information">
+          <h4
+            class="bbm-account-compact-name"
+            data-role="product-name"
+            data-ng-bind="ext.helpers.getSelectedProduct().alias || ext.helpers.getSelectedProduct().name">
+          </h4>
+          <div
+            class="bbm-account-compact-primary-amount"
+            data-ng-if="ext.helpers.getSelectedProduct().primaryValue">
+            <ui-bb-format-amount-ng
+              data-amount="ext.helpers.getSelectedProduct().primaryValue"
+              data-currency="ext.helpers.getSelectedProduct().currency"
+              data-wrap>
+            </ui-bb-format-amount-ng>
+          </div>
+        </div>
+        <div class="bbm-account-compact-secondary-information">
+          <div class="bbm-account-compact-identifier">
+            <span
+              class="prevent-ios-click"
+              data-role="product-identifier"
+              data-ng-bind="ext.helpers.getSelectedProduct().identifier">
+            </span>
+          </div>
+          <div class="bbm-account-compact-other-amounts">
+            <div
+              class="bbm-account-compact-secondary-amount"
+              data-ng-if="ext.helpers.getSelectedProduct().secondaryValue">
+              <span data-ng-bind="ext.helpers.getSelectedProduct().secondaryLabel | i18n"></span>
+              <span>
+                <ui-bb-format-amount-ng
+                  data-amount="ext.helpers.getSelectedProduct().secondaryValue"
+                  data-currency="ext.helpers.getSelectedProduct().currency"
+                  data-wrap>
+                </ui-bb-format-amount-ng>
+              </span>
+            </div>
+            <div
+              class="bbm-account-compact-tertiary-amount"
+              data-ng-if="ext.helpers.getSelectedProduct().tertiaryValue">
+              <span data-ng-bind="ext.helpers.getSelectedProduct().tertiaryLabel | i18n"></span>
+              <span>
+                <ui-bb-format-amount-ng
+                  data-amount="ext.helpers.getSelectedProduct().tertiaryValue"
+                  data-currency="ext.helpers.getSelectedProduct().currency"
+                  data-wrap>
+                </ui-bb-format-amount-ng>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bbm-account-compact-actions"
+          data-ng-if="ext.helpers.isIOS() && ext.helpers.showAccountActions()">
+          <div class="bbm-account-compact-action">
+            <button
+              class="btn btn-block btn-secondary"
+              data-ng-click="ext.helpers.initiatePayment()"
+              data-i18n-key="label.initiatePayment"
+              data-role="account-action-initiate-payment">
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- List of transactions -->
+      <div
+        class="bbm-list"
+        data-ng-if="ext.helpers.hasTransactions()"
+        data-role="transactions">
+        <div
+          class="bbm-list-group"
+          data-role="transactions-group"
+          data-index="{{ $index }}"
+          data-ng-repeat="group in ext.helpers.getTransactions() track by $index">
+          <div class="bbm-list-group-header">
+            <h4
+              class="bbm-list-group-title"
+              data-role="transactions-group-date"
+              data-ng-bind="group.date | date">
+            </h4>
+          </div>
+          <ul class="bbm-list-group-items">
+            <li
+              class="bbm-list-item"
+              data-role="transaction"
+              data-index="{{ $index }}"
+              data-ng-repeat="transaction in group.transactions">
+              <div
+                class="bbm-transaction"
+                data-ng-click="ext.helpers.selectTransaction(transaction)"
+                data-transaction-id="{{ transaction.id }}">
+                <div class="bbm-transaction-information prevent-ios-click">
+                  <h5
+                    class="bbm-transaction-title"
+                    data-role="transaction-counter-party-name"
+                    data-ng-bind="transaction.counterPartyName">
+                  </h5>
+                  <span
+                    class="bbm-transaction-subtitle"
+                    data-role="transaction-type"
+                    data-ng-bind="transaction.type">
+                  </span>
+                </div>
+                <div class="bbm-transaction-amount">
+                  <ui-bb-format-amount-ng
+                    ng-class="{ 'amount-neutral': transaction.creditDebitIndicator === 'DBIT' }"
+                    class="pull-right"
+                    data-amount="ext.helpers.getSignedAmount(transaction)"
+                    data-wrap
+                    data-show-plus-sign>
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- No data state -->
+      <div
+        class="bbm-empty-state"
+        data-ng-if="ext.helpers.showEmptyState()">
+        <div class="bbm-empty-state-icon">
+          <i class="fa fa-exchange"></i>
+        </div>
+        <h2
+          class="bbm-empty-state-title"
+          data-i18n-key="no.transactions.title">
+        </h2>
+        <p
+          class="bbm-empty-state-message"
+          data-i18n-key="no.transactions.message">
+        </p>
+      </div>
+
+      <!-- Error state -->
+      <div
+        class="bbm-error-state"
+        data-ng-if="ext.helpers.showErrorState()">
+        <div class="bbm-error-state-icon">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        </div>
+        <h2
+          class="bbm-error-state-title"
+          data-i18n-key="message.loading.failed.title">
+        </h2>
+        <p
+          class="bbm-error-state-message"
+          data-i18n-key="message.loading.failed.body">
+        </p>
+      </div>
+
+      <!-- Loading state -->
+      <div
+        class="bbm-loading-state"
+        data-ng-if="ext.helpers.showLoadingState()">
+        <div class="bbm-loading-state-spinner">
+        </div>
+        <p
+          class="bbm-loading-state-message"
+          data-i18n-key="message.loading">
+        </p>
+      </div>
+
+      <!-- Load more -->
+      <div
+        class="bbm-load-more"
+        data-ng-if="ext.helpers.showLoadMore()">
+        <p
+          class="bbm-load-more-message"
+          data-i18n-key="message.loadMore.loading"
+          data-ng-if="ext.helpers.showLoadMoreLoading()">
+        </p>
+      </div>
+
+    </ui-bbm-scroll-ng>
+
+    <!-- Search list -->
+    <ui-bbm-scroll-ng
+      data-ng-if="ext.helpers.showSearch()"
+      data-on-scroll-to-end="ext.helpers.searchMore()">
+      <!-- List of transactions -->
+      <div
+        class="bbm-list"
+        data-ng-if="ext.helpers.hasSearchTransactions()"
+        data-role="transactions-search">
+        <div
+          class="bbm-list-group"
+          data-role="transactions-group"
+          data-index="{{ $index }}"
+          data-ng-repeat="group in ext.helpers.getSearchTransactions() track by $index">
+          <div class="bbm-list-group-header">
+            <h4
+              class="bbm-list-group-title"
+              data-role="transactions-group-date"
+              data-ng-bind="group.date | date">
+            </h4>
+          </div>
+          <ul class="bbm-list-group-items">
+            <li
+              class="bbm-list-item"
+              data-role="transaction"
+              data-index="{{ $index }}"
+              data-ng-repeat="transaction in group.transactions track by transaction.id">
+              <div
+                class="bbm-transaction"
+                data-ng-click="ext.helpers.selectTransaction(transaction)">
+                <div class="bbm-transaction-information">
+                  <h5
+                    class="bbm-transaction-title"
+                    data-role="transaction-counter-party-name"
+                    data-ng-bind="transaction.counterPartyName">
+                  </h5>
+                  <span
+                    class="bbm-transaction-subtitle"
+                    data-role="transaction-type"
+                    data-ng-bind="transaction.type">
+                  </span>
+                </div>
+                <div class="bbm-transaction-amount">
+                  <ui-bb-format-amount-ng
+                    data-ng-class="{ 'amount-neutral': transaction.creditDebitIndicator === 'DBIT' }"
+                    class="pull-right"
+                    data-amount="ext.helpers.getSignedAmount(transaction)"
+                    data-wrap
+                    data-show-plus-sign>
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- No data state -->
+      <div
+        class="bbm-empty-state"
+        data-ng-if="ext.helpers.showSearchEmptyState()">
+        <div class="bbm-empty-state-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <h2
+          class="bbm-empty-state-title"
+          data-i18n-key="no.search-results.title">
+        </h2>
+        <p
+          class="bbm-empty-state-message"
+          data-i18n-key="no.search-results.message">
+        </p>
+      </div>
+
+      <!-- Error state -->
+      <div
+        class="bbm-error-state"
+        data-ng-if="ext.helpers.showSearchErrorState()">
+        <div class="bbm-error-state-icon">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        </div>
+        <h2
+          class="bbm-error-state-title"
+          data-i18n-key="message.loading.failed.title">
+        </h2>
+        <p
+          class="bbm-error-state-message"
+          data-i18n-key="message.loading.failed.body">
+        </p>
+      </div>
+
+      <!-- Loading state -->
+      <div
+        class="bbm-loading-state"
+        data-ng-if="ext.helpers.showSearchLoadingState()">
+        <div class="bbm-loading-state-spinner">
+        </div>
+        <p
+          class="bbm-loading-state-message"
+          data-i18n-key="message.loading">
+        </p>
+      </div>
+
+      <!-- Load more -->
+      <div
+        class="bbm-load-more"
+        data-ng-if="ext.helpers.showSearchLoadMore()">
+        <p
+          class="bbm-load-more-message"
+          data-i18n-key="message.loadMore.loading"
+          data-ng-if="ext.helpers.showSearchLoadMoreLoading()">
+        </p>
+      </div>
+    </ui-bbm-scroll-ng>
+
+    <!-- Floating action buttons for Android -->
+    <div
+      class="bbm-fab"
+      data-ng-if="ext.helpers.showFAB()">
+      <div class="bbm-fab-actions">
+        <div class="bbm-fab-action">
+          <button
+            class="btn btn-icon btn-primary"
+            data-ng-click="ext.helpers.initiatePayment()"
+            data-role="account-action-initiate-payment">
+            <i class="bbm-icon bbm-icon-initiate-payment fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

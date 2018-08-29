@@ -1,0 +1,181 @@
+<div
+  data-ng-controller="AllocationsController as $ctrl"
+  class="ext-wm-allocations-ng pt-3"
+>
+  <ui-bb-loading-indicator-ng
+    data-is-loading="state.initialLoading"
+    data-loading-text="{{ 'message.loading' | i18n }}"
+  >
+
+    <div class="clearfix px-3">
+      <h3 class="float-left mb-0" data-i18n-key="allocations.title"></h3>
+      <div
+        class="btn-group float-right"
+        data-role="allocations-switcher-group"
+        aria-label="{{ 'allocations.switcher' | i18n }}"
+      >
+        <button
+          class="btn btn-outline-secondary"
+          data-ng-class="{ 'active': ext.helpers.isClass() }"
+          data-ng-click="ext.helpers.clearOpenAllocations(); $ctrl.switchAllocations()"
+          type="button"
+          data-role="allocations-asset-class-button"
+          data-i18n-key="allocations.class"
+        ></button>
+        <button
+          class="btn btn-outline-secondary"
+          data-ng-class="{ 'active': !ext.helpers.isClass() }"
+          data-ng-click="ext.helpers.clearOpenAllocations(); $ctrl.switchAllocations()"
+          type="button"
+          data-role="allocations-currency-button"
+          data-i18n-key="allocations.currency"
+        ></button>
+      </div>
+    </div>
+
+    <hr class="my-4"/>
+
+    <ui-bb-empty-state-ng
+      data-icon-classes="mt-5 fas fa-5x {{ ext.helpers.getError(state.errors.allocationsError).icon }} text-muted"
+      data-title="{{ ext.helpers.getError(state.errors.allocationsError).title | i18n }}"
+      data-subtitle="{{ ext.helpers.getError(state.errors.allocationsError).message | i18n }}"
+      data-is-empty="state.errors.allocationsError"
+    >
+
+      <ui-bb-empty-state-ng
+        data-icon-classes="mt-5 fas fa-4x fa-exclamation-triangle text-muted"
+        data-title="{{ 'allocations.empty.title' | i18n }}"
+        data-subtitle="{{ 'allocations.empty.message' | i18n }}"
+        data-is-empty="!ext.helpers.isAllocationsAvailable()"
+      >
+
+        <div class="container-fluid" data-role="allocations-list" >
+          <div
+            class="card mb-4"
+            data-ng-repeat="allocation in ext.helpers.allocations()"
+            data-role="allocations-item"
+          >
+            <button
+              class="btn card-header position-relative border-0"
+              data-ng-click="ext.helpers.toggleItem(allocation)"
+              data-role="toggle-allocations-item"
+            >
+              <div
+                class="card-img-overlay p-0"
+                data-role="allocations-item-bar"
+                data-ng-style="{
+                  'width': allocation.barData.width + '%',
+                  'left': allocation.barData.x + '%',
+                  'background-color': ext.helpers.getAllocationColorByIndex($index)
+                }"
+              ></div>
+
+              <div class="row">
+                <h6
+                  class="col-5 align-self-center mb-0 text-left"
+                  data-ng-bind="allocation.name"
+                  data-role="allocations-item-name"
+                ></h6>
+                <div class="col-3 text-right align-self-center">
+                  <span class="small" data-i18n-key="allocations.totalPortfolio"></span>
+                  <h6
+                    class="mb-0"
+                    data-role="allocations-item-percentage"
+                  >
+                    <ui-bb-format-amount-ng
+                      data-no-map
+                      data-amount="allocation.allocationPct"
+                    ></ui-bb-format-amount-ng>
+                    <span
+                      data-ng-class="allocation.allocationPct > 0 ? 'amount-positive' : 'amount-negative'"
+                    >%</span>
+                  </h6>
+                </div>
+                <div class="col-3 text-right align-self-center">
+                  <span class="small" data-i18n-key="allocations.eurValuation"></span>
+                  <h6
+                    class="mb-0"
+                    data-role="allocations-item-valuation"
+                  >
+                    <ui-bb-format-amount-ng
+                      data-no-map
+                      data-amount="allocation.valuation.amount"
+                    ></ui-bb-format-amount-ng>
+                  </h6>
+                </div>
+                <div class="col-1 text-right align-self-center text-muted">
+                  <i
+                    class="fa"
+                    data-ng-class="ext.helpers.isOpen(allocation) ? 'fa-chevron-up' :'fa-chevron-down'"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+              </div>
+            </button>
+
+            <div
+              class="card-body collapse p-0"
+              data-ng-class="{'show': ext.helpers.isOpen(allocation)}"
+              data-role="allocations-item-body"
+            >
+
+              <table class="table table-striped small mb-0">
+                <thead>
+                <tr class="row px-3">
+                  <th
+                    class="col-5 d-inline-block">{{ext.helpers.getHeaderTranslationKey(ext.helpers.isClass()) | i18n}}
+                  </th>
+                  <th class="col-3 d-inline-block text-right" data-i18n-key="allocations.allocation"></th>
+                  <th class="col-3 d-inline-block text-right" data-i18n-key="allocations.eurValuation"></th>
+                  <th class="col-1 d-inline-block"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="asset in allocation.allocations">
+                  <td colspan="4" class="position-relative">
+                    <div class="row">
+                      <div
+                        class="card-img-overlay"
+                        data-role="allocation-bar"
+                        data-ng-style="{
+                          'width': asset.barData.width + '%',
+                          'left': asset.barData.x + '%',
+                          'background-color': ext.helpers.getColorByIndex($index)
+                        }"
+                      ></div>
+                      <div
+                        class="col-5"
+                        data-ng-bind="asset.name"
+                        data-role="asset-name"
+                      ></div>
+                      <div class="col-3 text-right">
+                        <ui-bb-format-amount-ng
+                          data-no-map
+                          data-amount="asset.allocationPct"
+                          data-role="asset-allocation-pct"
+                        ></ui-bb-format-amount-ng>
+                        <span
+                          data-ng-class="asset.allocationPct > 0 ? 'amount-positive' : 'amount-negative'"
+                        >%</span>
+                      </div>
+                      <div class="col-3 text-right">
+                        <ui-bb-format-amount-ng
+                          data-no-map
+                          data-amount="asset.valuation.amount"
+                          data-role="asset-valuation-amount"
+                        ></ui-bb-format-amount-ng>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </ui-bb-empty-state-ng>
+    </ui-bb-empty-state-ng>
+  </ui-bb-loading-indicator-ng>
+</div>

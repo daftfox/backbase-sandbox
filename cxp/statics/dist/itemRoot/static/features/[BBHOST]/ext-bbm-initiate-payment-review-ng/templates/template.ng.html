@@ -1,0 +1,170 @@
+<div class="ext-bbm-initiate-payment-review-ng">
+  <div class="bbm-layout bbm-layout-scroll bbm-layout-with-sticky-footer">
+    <!-- Layout body -->
+    <div class="bbm-layout-body">
+      <div class="bbm-form-view">
+        <div class="bbm-form-view-group">
+          <ul class="bbm-form-view-group-items">
+            <!-- Debit account-->
+            <li
+              class="bbm-form-view-item bbm-form-view-item-account"
+              data-ng-if="ext.helpers.showDebitAccount()">
+              <div class="bbm-account bbm-account-compact">
+                <div class="bbm-account-compact-primary-information">
+                  <h3
+                    class="bbm-account-compact-name"
+                    data-ng-bind="ext.helpers.getDebitAccountDisplayName()">
+                  </h3>
+                  <div class="bbm-account-compact-primary-amount">
+                    <ui-bb-format-amount-ng
+                      data-amount="ext.helpers.getDebitAccountDisplayAmount()"
+                      data-currency="ext.helpers.getDebitAccountCurrency()"
+                      data-wrap>
+                    </ui-bb-format-amount-ng>
+                  </div>
+                </div>
+                <div class="bbm-account-compact-secondary-information">
+                  <div class="bbm-account-compact-identifier">
+                    <span
+                      class="prevent-ios-click"
+                      data-role="product-id"
+                      data-ng-bind="ext.helpers.getDebitAccountIdentifier()">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Amount and currency -->
+            <li class="bbm-form-view-item bbm-form-view-item-amount">
+              <div class="bbm-amount bbm-amount-md">
+                <div
+                  class="bbm-amount-currency"
+                  data-ng-bind="ext.helpers.getPaymentCurrency()">
+                </div>
+                <div class="bbm-amount-value">
+                  <ui-bb-format-amount-ng
+                    data-amount="ext.helpers.getPaymentAmount()"
+                    data-role="payment-review-amount"
+                    data-wrap>
+                  </ui-bb-format-amount-ng>
+                </div>
+              </div>
+            </li>
+
+            <!-- Beneficiary name -->
+            <li
+              class="bbm-form-view-item"
+              data-ng-if="ext.helpers.showBeneficiaryName()">
+              <div class="bbm-data">
+                <div class="bbm-data-content">
+                  <div
+                    class="bbm-data-label"
+                    data-i18n-key="label.beneficiaryName">
+                  </div>
+                  <div
+                    class="bbm-data-value"
+                    data-role="payment-review-to-account-name"
+                    data-ng-bind="ext.helpers.getBeneficiaryDisplayName()">
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Beneficiary identifier -->
+            <li
+              class="bbm-form-view-item"
+              data-ng-if="ext.helpers.showBeneficiaryIdentifier()">
+              <div class="bbm-data">
+                <div class="bbm-data-content">
+                  <div
+                    class="bbm-data-label"
+                    data-i18n-key="label.beneficiaryAccountNumber">
+                  </div>
+                  <div class="bbm-data-value">
+                    <span
+                      class="prevent-ios-click"
+                      data-role="payment-review-to-account-iban"
+                      data-ng-bind="ext.helpers.getBeneficiaryIdentifier()">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Description -->
+            <li
+              class="bbm-form-view-item"
+              data-ng-if="ext.helpers.showDescription()">
+              <div class="bbm-data">
+                <div class="bbm-data-content">
+                  <div
+                    class="bbm-data-label"
+                    data-i18n-key="label.description">
+                  </div>
+                  <div
+                    class="bbm-data-value"
+                    data-ng-bind="ext.helpers.getDescription()"
+                    data-role="payment-review-description">
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- Schedule -->
+            <li class="bbm-form-view-item">
+              <div class="bbm-data">
+                <div class="bbm-data-content">
+                  <div
+                    class="bbm-data-label"
+                    data-i18n-key="label.schedule">
+                  </div>
+                  <div class="bbm-data-value">
+                    <span
+                      class="prevent-ios-click"
+                      data-role="payment-review-schedule"
+                      data-ng-bind="ext.helpers.getScheduleSummary()">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Save contact -->
+      <div
+        class="bbm-footnote"
+        data-ng-if="ext.helpers.showSaveContact()">
+        <p
+          class="bbm-footnote-paragraph"
+          data-i18n-key="message.contactSave"
+          data-role="payment-review-contact-save">
+        </p>
+      </div>
+
+      <!-- Urgent payment -->
+      <div
+        class="bbm-footnote"
+        data-ng-if="ext.helpers.showUrgentPayment()">
+        <p
+          class="bbm-footnote-paragraph"
+          data-i18n-key="message.urgentPayment"
+          data-role="payment-review-urgent">
+        </p>
+      </div>
+    </div>
+
+    <!-- Layout footer -->
+    <div class="bbm-layout-footer">
+      <!-- Save button -->
+      <button
+        class="btn btn-primary btn-block"
+        data-i18n-key="label.submit"
+        data-role="payment-review-pay-button"
+        data-ng-click="ext.helpers.submitPayment()">
+      </button>
+    </div>
+  </div>
+</div>

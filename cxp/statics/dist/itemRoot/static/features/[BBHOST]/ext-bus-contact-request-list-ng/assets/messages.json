@@ -1,0 +1,49 @@
+{
+  "en-US": {
+    "label.back": "Back",
+    "label.loadMore": "Load more",
+    "label.phoneNumber": "Phone number",
+    "label.emailAddress": "Email address",
+    "label.contactPerson": "Contact person",
+    "label.address": "Address",
+    "label.country": "Country",
+    "label.accounts": "Accounts",
+    "label.oneAccount": "1 account",
+    "label.multipleAccounts": "{count} accounts",
+    "label.alias": "Alias",
+    "label.action": "Action",
+    "contact-request.loadMore.loading": "Loading contact actions",
+    "contact-request.list.empty": "No contact actions",
+    "contact-request.detail.empty": "No contact action selected",
+    "contact-request.request.action.new": "This contact is pending authorization and cannot be used to create payments yet.",
+    "contact-request.request.created.on": "Created on {createdDate} at {createdTime}",
+
+    "message.loading": "Loading",
+
+    "contact-request.model.error.auth": "You are not authorized to perform that contact action request",
+    "contact-request.model.error.connectivity": "There was a connection problem, please try again",
+    "contact-request.model.error.user": "There is a problem with the contact action request",
+    "contact-request.model.error.unexpected": "An unexpected error occurred while performing contact action request",
+
+    "country.nl": "Netherlands",
+    "country.in": "India",
+    "country.uk": "United Kingdom",
+    "country.us": "United States of America",
+    "country.es": "Spain",
+
+    "action.CREATE": "New contact",
+    "action.DELETE": "Deletion",
+    "action.UPDATE": "Contact update",
+
+    "status.PENDING": "Pending",
+    "status.REJECTED": "Rejected",
+
+    "pagination.label.first": "First",
+    "pagination.label.last": "Last",
+    "pagination.label.next": "Next",
+    "pagination.label.prev": "Previous",
+    "pagination.label.page_navigation": "Page navigation",
+
+    "notification.server.error": "Unable to process server request"
+  }
+}

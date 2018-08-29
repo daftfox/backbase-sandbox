@@ -1,0 +1,64 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-bb-user-menu-ng@~5.6.1",
+        "scope": null,
+        "escapedName": "widget-bb-user-menu-ng",
+        "name": "widget-bb-user-menu-ng",
+        "rawSpec": "~5.6.1",
+        "spec": ">=5.6.1 <5.7.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist"
+    ]
+  ],
+  "_from": "widget-bb-user-menu-ng@>=5.6.1 <5.7.0",
+  "_id": "widget-bb-user-menu-ng@5.6.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-bb-user-menu-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-bb-user-menu-ng@~5.6.1",
+    "scope": null,
+    "escapedName": "widget-bb-user-menu-ng",
+    "name": "widget-bb-user-menu-ng",
+    "rawSpec": "~5.6.1",
+    "spec": ">=5.6.1 <5.7.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-user-menu-ng/-/widget-bb-user-menu-ng-5.6.2.tgz",
+  "_shasum": "8c58deff5113c199ccb99cf3ff4a9afd51fa3101",
+  "_shrinkwrap": null,
+  "_spec": "widget-bb-user-menu-ng@~5.6.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-bb-user-menu-ng": "^5.4.2",
+    "lib-bb-intent-ng": "^1.1.43",
+    "lib-bb-login-logout-notifier-ng": "^1.4.2",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-storage-ng": "^1.0.98",
+    "lib-bb-user-data-ng": "^1.4.2",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-bb-widget-ng": "^1.2.76",
+    "model-bb-login-ng": "^3.5.2",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-bb-user-menu-ng/-/widget-bb-user-menu-ng-5.6.2.tgz",
+    "shasum": "8c58deff5113c199ccb99cf3ff4a9afd51fa3101"
+  },
+  "main": "scripts/widget-bb-user-menu-ng.js",
+  "name": "widget-bb-user-menu-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "5.6.2"
+}

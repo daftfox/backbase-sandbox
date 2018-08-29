@@ -1,0 +1,33 @@
+<div class="ext-bb-places-list-ng ext-bb-places-ng" 
+  data-ng-controller="PlacesController as $ctrl" 
+  data-ng-init="$ctrl.loadingPlaces = true;">
+  <div class="places-container places-list-container">
+    <ui-bb-loading-indicator-ng data-is-loading="$ctrl.loadingPlaces" data-loading-text="{{ 'places.message.loading' | i18n }}">
+      <ui-bb-substitute-error-ng data-message="$ctrl.error.message | i18n">
+      </ui-bb-substitute-error-ng>
+    </ui-bb-loading-indicator-ng>
+    <g-map-api data-preferences="$ctrl.getPlacesPreferences()" class="d-flex no-gutters">
+      <div class="col-4">
+        <!-- Places List area -->
+        <place-list
+          data-places="$ctrl.loadPlaces"
+          data-messages="{
+            list: ('places.message.setup.list' | i18n),
+            error: ('places.message.setup.error' | i18n),
+            empty: ('places.message.setup.empty' | i18n),
+          }">
+          <div class="has-feedback" role="search">
+            <g-map-search></g-map-search>
+            <span class="sr-only" data-i18n-key="places.input.search"></span>
+          </div>
+        </place-list>
+      </div>
+
+      <!-- Map area -->
+      <div class="col-8">
+        <g-map-api preferences="$ctrl.getPlacesPreferences()">
+          <g-map data-places="$ctrl.loadPlaces"></g-map>
+        </g-map-api>
+      </div>
+  </div>
+</div>

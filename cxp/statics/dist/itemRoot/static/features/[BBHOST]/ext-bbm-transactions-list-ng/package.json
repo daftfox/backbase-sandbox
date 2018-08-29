@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ext-bbm-transactions-list-ng@^2.33.1",
+        "scope": null,
+        "escapedName": "ext-bbm-transactions-list-ng",
+        "name": "ext-bbm-transactions-list-ng",
+        "rawSpec": "^2.33.1",
+        "spec": ">=2.33.1 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bbm-transactions-ng"
+    ]
+  ],
+  "_from": "ext-bbm-transactions-list-ng@>=2.33.1 <3.0.0",
+  "_id": "ext-bbm-transactions-list-ng@2.34.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ext-bbm-transactions-list-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ext-bbm-transactions-list-ng@^2.33.1",
+    "scope": null,
+    "escapedName": "ext-bbm-transactions-list-ng",
+    "name": "ext-bbm-transactions-list-ng",
+    "rawSpec": "^2.33.1",
+    "spec": ">=2.33.1 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bbm-transactions-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-transactions-list-ng/-/ext-bbm-transactions-list-ng-2.34.0.tgz",
+  "_shasum": "bc4966a3d6e800acf8c90092d9f8c17557953fb6",
+  "_shrinkwrap": null,
+  "_spec": "ext-bbm-transactions-list-ng@^2.33.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bbm-transactions-ng",
+  "dependencies": {
+    "ui-bb-format-amount-ng": "^3.5.1",
+    "ui-bb-i18n-ng": "^1.0.34",
+    "ui-bbm-scroll-ng": "^1.1.0"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ext-bbm-transactions-list-ng/-/ext-bbm-transactions-list-ng-2.34.0.tgz",
+    "shasum": "bc4966a3d6e800acf8c90092d9f8c17557953fb6"
+  },
+  "main": "scripts/ext-bbm-transactions-list-ng.js",
+  "name": "ext-bbm-transactions-list-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.34.0"
+}

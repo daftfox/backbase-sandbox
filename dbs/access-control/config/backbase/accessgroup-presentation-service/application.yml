@@ -1,0 +1,3 @@
+---
+logging:
+  config: ${backbase.config.dir}/accessgroup-presentation-service/logback.xml

@@ -1,0 +1,5 @@
+<configuration scan="true" scanPeriod="30 seconds" >
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <logger name="com.backbase" level="INFO"/>
+    <logger name="org.springframework.security" level="INFO"/>
+</configuration>

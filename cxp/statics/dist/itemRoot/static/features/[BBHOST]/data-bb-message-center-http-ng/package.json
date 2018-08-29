@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-message-center-http-ng@^1.1.0",
+        "scope": null,
+        "escapedName": "data-bb-message-center-http-ng",
+        "name": "data-bb-message-center-http-ng",
+        "rawSpec": "^1.1.0",
+        "spec": ">=1.1.0 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-messages-ng"
+    ]
+  ],
+  "_from": "data-bb-message-center-http-ng@>=1.1.0 <2.0.0",
+  "_id": "data-bb-message-center-http-ng@1.1.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-message-center-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-message-center-http-ng@^1.1.0",
+    "scope": null,
+    "escapedName": "data-bb-message-center-http-ng",
+    "name": "data-bb-message-center-http-ng",
+    "rawSpec": "^1.1.0",
+    "spec": ">=1.1.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-bb-messages-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-message-center-http-ng/-/data-bb-message-center-http-ng-1.1.0.tgz",
+  "_shasum": "ac3b0d4cbe51d09893cdd55ae369d51f7d76c0c0",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-message-center-http-ng@^1.1.0",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-messages-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-message-center-http-ng/-/data-bb-message-center-http-ng-1.1.0.tgz",
+    "shasum": "ac3b0d4cbe51d09893cdd55ae369d51f7d76c0c0"
+  },
+  "main": "scripts/data-bb-message-center-http-ng.js",
+  "name": "data-bb-message-center-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.1.0"
+}

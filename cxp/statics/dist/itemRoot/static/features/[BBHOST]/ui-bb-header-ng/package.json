@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-bb-header-ng@^1.4.2",
+        "scope": null,
+        "escapedName": "ui-bb-header-ng",
+        "name": "ui-bb-header-ng",
+        "rawSpec": "^1.4.2",
+        "spec": ">=1.4.2 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/ext-bus-headings-ng"
+    ]
+  ],
+  "_from": "ui-bb-header-ng@>=1.4.2 <2.0.0",
+  "_id": "ui-bb-header-ng@1.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bb-header-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-bb-header-ng@^1.4.2",
+    "scope": null,
+    "escapedName": "ui-bb-header-ng",
+    "name": "ui-bb-header-ng",
+    "rawSpec": "^1.4.2",
+    "spec": ">=1.4.2 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-bus-headings-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-header-ng/-/ui-bb-header-ng-1.5.1.tgz",
+  "_shasum": "78fe551952d4d30c71f2bc1bb685f2ae68f19034",
+  "_shrinkwrap": null,
+  "_spec": "ui-bb-header-ng@^1.4.2",
+  "_where": "/opt/jobs/release-pipeline-sdlc-business-collection/workspace/dist/node_modules/ext-bus-headings-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-bb-header-ng/-/ui-bb-header-ng-1.5.1.tgz",
+    "shasum": "78fe551952d4d30c71f2bc1bb685f2ae68f19034"
+  },
+  "main": "scripts/ui-bb-header-ng.js",
+  "name": "ui-bb-header-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.5.1"
+}

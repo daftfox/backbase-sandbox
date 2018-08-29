@@ -1,0 +1,52 @@
+{
+  "en-US": {
+    "payment.mode.single": "One time",
+    "payment.mode.recurring": "Recurring",
+
+    "label.loading": "Loading...",
+    "label.loadMore": "Load more",
+    "label.noItems.title": "No Payments",
+    "label.noItems.description": "You don't have any new payments to display yet.<br>Try creating a new payment using the \"New Payment\" button.",
+
+    "header.account.number": "Account Number / IBAN",
+    "header.indicative.amount": "Indicative Amount",
+    "header.indicative.rate": "Indicative Rate",
+    "header.reference": "Reference",
+    "header.description": "Description",
+    "header.recurring.start.date": "Start Date",
+    "header.recurring.end.date": "End Date",
+    "header.recurring.frequency": "Recurring Frequency",
+    "header.recurring.occurances": "Number of Occurances",
+    "payment.frequency.daily": "Daily",
+    "payment.frequency.weekly": "Weekly",
+    "payment.frequency.monthly": "Monthly",
+    "payment.frequency.quarterly": "Quarterly",
+    "payment.frequency.yearly": "Yearly",
+
+    "error.auth": "You are not authorised to perform this action.",
+    "error.user": "There is a problem with the action you are trying to perform.",
+    "error.connectivity": "Connection Error",
+    "error.unexpected": "An unexpected error occurred, we apologise for the inconvenience. Please try again later.",
+
+    "date.label.tomorrow": "Tomorrow",
+    "date.label.now": "Now",
+    "date.label.today": "Today",
+    "date.label.yesterday": "Yesterday",
+
+    "form.credit.placeholder": "Select account",
+    "form.label.noAccounts": "No accounts",
+
+    "action.edit.payment": "Edit payment",
+    "action.cancel.payment": "Cancel payment",
+
+    "notification.edit.payment.fail": "Sorry, something went wrong while updating your payment. Please try again later.",
+    "notification.edit.payment.success": "Your payment was successfully updated",
+    "notification.cancel.payment.fail": "Sorry, unexpected error occurred while processing your request",
+    "notification.cancel.payment.success": "Your payment was successfully cancelled",
+
+    "dialog.cancel.title": "Cancel payment",
+    "dialog.cancel.body": "Your are going to cancel the payment and all its future occurrences.</br> This operation cannot be undone.",
+    "dialog.cancel.yes": "Yes, Cancel",
+    "dialog.cancel.no": "No, Continue"
+  }
+}

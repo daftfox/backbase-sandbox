@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-transactions-http-ng@^3.5.1",
+        "scope": null,
+        "escapedName": "data-bb-transactions-http-ng",
+        "name": "data-bb-transactions-http-ng",
+        "rawSpec": "^3.5.1",
+        "spec": ">=3.5.1 <4.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-budget-ng"
+    ]
+  ],
+  "_from": "data-bb-transactions-http-ng@>=3.5.1 <4.0.0",
+  "_id": "data-bb-transactions-http-ng@3.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-transactions-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-transactions-http-ng@^3.5.1",
+    "scope": null,
+    "escapedName": "data-bb-transactions-http-ng",
+    "name": "data-bb-transactions-http-ng",
+    "rawSpec": "^3.5.1",
+    "spec": ">=3.5.1 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-bb-budget-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-transactions-http-ng/-/data-bb-transactions-http-ng-3.5.1.tgz",
+  "_shasum": "4adb4e0a12146c2400d3e468eec70206a1a3a767",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-transactions-http-ng@^3.5.1",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/model-bb-budget-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-transactions-http-ng/-/data-bb-transactions-http-ng-3.5.1.tgz",
+    "shasum": "4adb4e0a12146c2400d3e468eec70206a1a3a767"
+  },
+  "main": "scripts/data-bb-transactions-http-ng.js",
+  "name": "data-bb-transactions-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "3.5.1"
+}

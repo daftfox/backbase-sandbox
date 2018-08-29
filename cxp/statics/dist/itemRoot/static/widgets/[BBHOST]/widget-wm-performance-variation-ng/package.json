@@ -1,0 +1,61 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "widget-wm-performance-variation-ng@~1.15.2",
+        "scope": null,
+        "escapedName": "widget-wm-performance-variation-ng",
+        "name": "widget-wm-performance-variation-ng",
+        "rawSpec": "~1.15.2",
+        "spec": ">=1.15.2 <1.16.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist"
+    ]
+  ],
+  "_from": "widget-wm-performance-variation-ng@>=1.15.2 <1.16.0",
+  "_id": "widget-wm-performance-variation-ng@1.15.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/widget-wm-performance-variation-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "widget-wm-performance-variation-ng@~1.15.2",
+    "scope": null,
+    "escapedName": "widget-wm-performance-variation-ng",
+    "name": "widget-wm-performance-variation-ng",
+    "rawSpec": "~1.15.2",
+    "spec": ">=1.15.2 <1.16.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-wm-performance-variation-ng/-/widget-wm-performance-variation-ng-1.15.2.tgz",
+  "_shasum": "b08967ad92ce74ef1b34654364bb8465c607fe4b",
+  "_shrinkwrap": null,
+  "_spec": "widget-wm-performance-variation-ng@~1.15.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist",
+  "dependencies": {
+    "config-bb-module-loader": "^1.1.69",
+    "ext-wm-performance-variation-ng": "^2.12.2",
+    "lib-bb-start": "^2.0.69",
+    "lib-bb-state-container-ng": "^1.0.22",
+    "lib-bb-widget-extension-ng": "^1.1.51",
+    "lib-wm-portfolio-view-model-helper": "^1.15.2",
+    "model-wm-portfolio-summary-ng": "^1.34.2",
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-systemjs": "0.19.38-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/widget-wm-performance-variation-ng/-/widget-wm-performance-variation-ng-1.15.2.tgz",
+    "shasum": "b08967ad92ce74ef1b34654364bb8465c607fe4b"
+  },
+  "main": "scripts/widget-wm-performance-variation-ng.js",
+  "name": "widget-wm-performance-variation-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.15.2"
+}

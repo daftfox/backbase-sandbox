@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "lib-bb-user-data-ng@^1.3.2",
+        "scope": null,
+        "escapedName": "lib-bb-user-data-ng",
+        "name": "lib-bb-user-data-ng",
+        "rawSpec": "^1.3.2",
+        "spec": ">=1.3.2 <2.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-messages-ng"
+    ]
+  ],
+  "_from": "lib-bb-user-data-ng@>=1.3.2 <2.0.0",
+  "_id": "lib-bb-user-data-ng@1.5.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/lib-bb-user-data-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "lib-bb-user-data-ng@^1.3.2",
+    "scope": null,
+    "escapedName": "lib-bb-user-data-ng",
+    "name": "lib-bb-user-data-ng",
+    "rawSpec": "^1.3.2",
+    "spec": ">=1.3.2 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/widget-bb-messages-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-user-data-ng/-/lib-bb-user-data-ng-1.5.1.tgz",
+  "_shasum": "b6bf8fc637b7e7fe7dfafa0f305ccb4db222b954",
+  "_shrinkwrap": null,
+  "_spec": "lib-bb-user-data-ng@^1.3.2",
+  "_where": "/opt/jobs/collection-retail-banking-release/workspace/dist/node_modules/widget-bb-messages-ng",
+  "dependencies": {
+    "data-bb-cxp-authentication-http-ng": "^1.11.1",
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/lib-bb-user-data-ng/-/lib-bb-user-data-ng-1.5.1.tgz",
+    "shasum": "b6bf8fc637b7e7fe7dfafa0f305ccb4db222b954"
+  },
+  "main": "scripts/lib-bb-user-data-ng.js",
+  "name": "lib-bb-user-data-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.5.1"
+}

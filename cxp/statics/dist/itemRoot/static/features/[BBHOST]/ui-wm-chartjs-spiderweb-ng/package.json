@@ -1,0 +1,53 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "ui-wm-chartjs-spiderweb-ng@^2.12.2",
+        "scope": null,
+        "escapedName": "ui-wm-chartjs-spiderweb-ng",
+        "name": "ui-wm-chartjs-spiderweb-ng",
+        "rawSpec": "^2.12.2",
+        "spec": ">=2.12.2 <3.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/ext-wm-allocations-chart-ng"
+    ]
+  ],
+  "_from": "ui-wm-chartjs-spiderweb-ng@>=2.12.2 <3.0.0",
+  "_id": "ui-wm-chartjs-spiderweb-ng@2.12.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-wm-chartjs-spiderweb-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "ui-wm-chartjs-spiderweb-ng@^2.12.2",
+    "scope": null,
+    "escapedName": "ui-wm-chartjs-spiderweb-ng",
+    "name": "ui-wm-chartjs-spiderweb-ng",
+    "rawSpec": "^2.12.2",
+    "spec": ">=2.12.2 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/ext-wm-allocations-chart-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-wm-chartjs-spiderweb-ng/-/ui-wm-chartjs-spiderweb-ng-2.12.2.tgz",
+  "_shasum": "20b7872da96e99477462646cdaefe790b6ee907d",
+  "_shrinkwrap": null,
+  "_spec": "ui-wm-chartjs-spiderweb-ng@^2.12.2",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/ext-wm-allocations-chart-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1",
+    "vendor-bb-chartjs": "2.6.0-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/ui-wm-chartjs-spiderweb-ng/-/ui-wm-chartjs-spiderweb-ng-2.12.2.tgz",
+    "shasum": "20b7872da96e99477462646cdaefe790b6ee907d"
+  },
+  "main": "scripts/ui-wm-chartjs-spiderweb-ng.js",
+  "name": "ui-wm-chartjs-spiderweb-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "2.12.2"
+}

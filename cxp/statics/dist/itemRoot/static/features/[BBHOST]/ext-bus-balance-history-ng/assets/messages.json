@@ -1,0 +1,46 @@
+{
+  "en-US": {
+    "accounts.label.empty.accounts.title": "No Accounts",
+    "accounts.label.empty.accounts.subtitle": "There are no accounts to display",
+    "accounts.label.empty.accounts.history.title": "No balance history",
+    "accounts.label.empty.accounts.history.subtitle": "There is no balance history to display for this account",
+    "accounts.label.button.back.to.accounts.overview": "Back to Accounts Overview",
+
+    "accounts.header.date": "Date",
+    "accounts.header.currency": "CCY",
+    "accounts.header.balance": "Balance",
+
+    "accounts.detail.button.export": "Export",
+    "accounts.button.filter.day": "1D",
+    "accounts.button.filter.week": "1W",
+    "accounts.button.filter.month": "1M",
+    "accounts.button.filter.year": "1Y",
+    "accounts.button.filter.all": "All",
+
+    "accounts.button.filter.clear": "Clear Date",
+    "accounts.button.filter.apply": "Apply Date",
+
+    "accounts.card.chart.label.no.data": "No chart data available",
+    "accounts.chart.label.legend.max": "Max:",
+    "accounts.chart.label.legend.min": "Min:",
+
+    "message.loading": "Loading",
+
+    "label.loadMore": "Load More",
+    "label.first": "First",
+    "label.last": "Last",
+    "label.next": "Next",
+    "label.prev": "Previous",
+    "label.page_navigation": "Page navigation",
+
+    "model.error.auth": "You are not authorized to perform this action",
+    "model.error.connectivity": "There was a connection problem, please try again",
+    "model.error.user": "There is a problem with the action you are trying to perform",
+    "model.error.unexpected": "An unexpected error occurred while performing this action",
+
+    "account.error.arrangement.empty.arrangementsids": "Arrangements ids are empty",
+    "account.error.arrangement.invalid.period.range": "Invalid combination of range/period",
+    "account.error.arrangement.invalid.from.to.date": "Invalid combination of from and to date",
+    "account.error.arrangement.invalid.from.date": "From date shouldn't be less than 2 years from now"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "data-bb-portfolio-summary-http-ng@^6.1.1",
+        "scope": null,
+        "escapedName": "data-bb-portfolio-summary-http-ng",
+        "name": "data-bb-portfolio-summary-http-ng",
+        "rawSpec": "^6.1.1",
+        "spec": ">=6.1.1 <7.0.0",
+        "type": "range"
+      },
+      "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/model-wm-portfolio-summary-ng"
+    ]
+  ],
+  "_from": "data-bb-portfolio-summary-http-ng@>=6.1.1 <7.0.0",
+  "_id": "data-bb-portfolio-summary-http-ng@6.1.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/data-bb-portfolio-summary-http-ng",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "data-bb-portfolio-summary-http-ng@^6.1.1",
+    "scope": null,
+    "escapedName": "data-bb-portfolio-summary-http-ng",
+    "name": "data-bb-portfolio-summary-http-ng",
+    "rawSpec": "^6.1.1",
+    "spec": ">=6.1.1 <7.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/model-wm-portfolio-summary-ng"
+  ],
+  "_resolved": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-portfolio-summary-http-ng/-/data-bb-portfolio-summary-http-ng-6.1.1.tgz",
+  "_shasum": "bf3aec37c6d52750e448416a35a189e6676da9a7",
+  "_shrinkwrap": null,
+  "_spec": "data-bb-portfolio-summary-http-ng@^6.1.1",
+  "_where": "/opt/jobs/collection-wealth-management-release-pipeline/workspace/dist/node_modules/model-wm-portfolio-summary-ng",
+  "dependencies": {
+    "vendor-bb-angular": "1.6.7-bb.1"
+  },
+  "devDependencies": {},
+  "dist": {
+    "tarball": "https://artifacts.backbase.com/api/npm/npm-backbase/data-bb-portfolio-summary-http-ng/-/data-bb-portfolio-summary-http-ng-6.1.1.tgz",
+    "shasum": "bf3aec37c6d52750e448416a35a189e6676da9a7"
+  },
+  "main": "scripts/data-bb-portfolio-summary-http-ng.js",
+  "name": "data-bb-portfolio-summary-http-ng",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "6.1.1"
+}
